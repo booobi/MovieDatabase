@@ -220,11 +220,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	<?php
-		if($_SESSION["userloggedin"] == TRUE){
-			echo "$('.entrance-btn').hide();
-				$('#log-out').show();
-				$('#profile').show();";
-		}
+        if(isset($_SESSION["userloggedin"])  && $_SESSION["userloggedin"] == TRUE) {
+            echo "$('.entrance-btn').hide();
+                $('#log-out').show();
+                $('#profile').show();";
+    }
 	?>
 	/** NOTE: Maybe after the Backend is ready, this code could be reused to load certain parts of the design! **/
     // jQuery('.entrance-btn').click(function () {

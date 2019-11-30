@@ -1,0 +1,567 @@
+
+body {
+    margin: 0;
+    background-color: rgba(138, 51, 27, 0.51);
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.navigation {
+    overflow: hidden;
+    background-color: #462929;
+}
+
+.logo{
+    margin-top: 60px;
+    margin-left: 40px;
+    font-family: "Monoton", cursive;
+    font-size: 42px;
+    color: rgba(130, 143, 176, 0.85);
+}
+
+.search {
+    margin-top: 40px;
+    margin-left: 325px;
+    margin-bottom: 28px;
+    padding: 7px;
+    float: left;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.search a {
+    padding: 14px 16px;
+    display: block;
+    float: right;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+}
+
+#search-box{
+  display: inline-block;
+}
+
+.search input[type=text] {
+    margin-left: 5px;
+    margin-bottom: 10px;
+    padding: 6px;
+    width: 490px;
+    display: inline-block;
+    font-size: 18px;
+    border: none;
+    background-color: rgba(123, 139, 168, 0.85);
+}
+
+.search button{
+    margin: -50px 10px 5px 10px;
+    padding: 10px 12px;
+    width: 75px;
+    height: 44px;
+    display: inline-block;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    background-color: rgba(123, 139, 168, 0.85);
+}
+
+::placeholder{
+    font-family: "Arial";
+    font-size: 18px;
+    color: rgba(28, 28, 28, 0.92);
+}
+
+.advanced-search{
+    margin-top: 7px;
+    margin-left: 10px;
+    display: inline-block;
+    font-family: "Candara";
+    font-size: 21px;
+    z-index: 5;
+    color: rgba(200, 165, 143, 0.9);
+}
+
+.menu{
+    margin-top: 20px;
+    margin-right: 40px;
+    float: right;
+}
+
+.menu a{
+    text-decoration: none;
+    color: rgb(168, 138, 143);
+}
+
+.menu a:hover{
+    color: #c9c8c8;
+}
+
+.movies-btn{
+    padding: 8px 45px;
+    float: left;
+    font-family: "Berlin Sans FB";
+    font-size: 25px;
+    border-style: none;
+    z-index: 1;
+    outline: none;
+    background-color: transparent;
+}
+
+#home, #add-a-movie, #movies, #movie-festivals{
+    display: inline-block;
+    float: left;
+    overflow: hidden;
+}
+
+.user-buttons{
+    margin-top: 145px;
+    float: right;
+}
+
+.entrance-btn{
+    padding: 15px;
+    float: left;
+    font-family: "Berlin Sans FB";
+    font-size: 21px;
+    border-style: none;
+    z-index: 1;
+    outline: none;
+    color: #c1c1c1;
+    background-color: transparent;
+}
+
+#sign-in, #log-in, #admin-log-in{
+    display: inline-block;
+    float: left;
+    overflow: hidden;
+}
+
+.profile-btn{
+    padding: 15px;
+    float: left;
+    font-family: "Berlin Sans FB";
+    font-size: 21px;
+    border-style: none;
+    z-index: 1;
+    outline: none;
+    color: #c1c1c1;
+    background-color: transparent;
+}
+
+#admin, #profile, #log-out {
+    display: none;
+    float: left;
+    overflow: hidden;
+}
+
+.entrance-btn,.profile-btn{
+    background-color: rgba(128, 106, 109, 0.82);
+}
+
+.desktop-headings{
+    position: absolute;
+}
+
+.mobile-headings{
+    display: none;
+}
+
+.mobile-headings button{
+    outline: none;
+}
+
+.tables{
+    margin-top: 190px;
+}
+
+.top-week, .shared-movies, .projections, .festivals{
+    position: absolute;
+    margin-left: 25px;
+    padding-top: 10px;
+    width: 420px;
+    height: 34px;
+    font-family: "Lato", sans-serif;
+    font-size: 17px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 8px;
+    color: rgb(213, 213, 213);
+    background-color: rgba(100, 34, 37, 0.4);
+}
+
+.top-week{
+    margin-top: 80px;
+    margin-left: 25px;
+    margin-bottom: 0px;
+    float: left;
+}
+
+.shared-movies{
+    margin-top: 530px;
+    margin-left: 25px;
+}
+
+.projections{
+    margin-top: 530px;
+    margin-left: 550px;
+}
+
+.festivals{
+    margin-top: 530px;
+    margin-left: 1075px;
+}
+
+.watch-later{
+    position: absolute;
+    margin-top: 146px;
+    margin-left: 1074px;
+    padding-top: 9px;
+    width: 370px;
+    height: 35px;
+    display: none;
+    font-family: "Lato", sans-serif;
+    font-size: 17px;
+    font-weight: bold;
+    text-align: center;
+    color: rgba(247, 247, 247, 0.87);
+    background-color: rgba(57, 70, 102, 0.61);
+}
+
+.top-week-tbl{
+    position: absolute;
+    margin-left: 25px;
+    width: 951px;
+    border-collapse: collapse;
+}
+
+.top-week-tbl th {
+    padding: 5px 12px;
+    height: 60px;
+    font-family: "Lato", sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: rgba(34, 4, 8, 0.73);
+    background-color: rgba(162, 42, 29, 0.23);
+}
+
+.top-week-tbl td{
+    padding: 18px;
+    font-family: "Lato", sans-serif;
+    font-size: 19px;
+}
+
+.top-week-tbl th, td{
+    text-align: left;
+}
+
+i{
+    border: solid #253365;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+.arrow-down {
+    margin-top: -1px;
+    margin-left: 3px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.arrow-up {
+    margin-top: 5px;
+    margin-left: 6px;
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+.down-tables th {
+    padding-left: 2px;
+    height: 60px;
+    font-family: "Lato", sans-serif;
+    background-color: rgba(204, 106, 106, 0.47);
+}
+
+.down-tables td {
+    padding-top: 3px;
+    padding-left: 1px;
+    font-family: "Lato", sans-serif;
+    background-color: rgba(140, 143, 169, 0.41);
+}
+
+.down-tables th, td{
+    text-align: left;
+}
+
+.title{
+    font-size: 20px;
+}
+
+.description{
+    font-size: 19px;
+}
+
+.shared-movies-tbl, .projections-tbl, .festivals-tbl, .watch-later-tbl{
+    position: absolute;
+    width: 420px;
+    border-collapse: collapse;
+}
+
+.shared-movies-tbl{
+    margin-top: 450px;
+    margin-left: 25px;
+}
+
+.projections-tbl{
+    margin-top: 450px;
+    margin-left: 550px;
+}
+
+.festivals-tbl{
+    margin-top: 450px;
+    margin-left: 1076px;
+}
+
+.watch-later-tbl{
+    position: absolute;
+    margin-left: 1074px;
+    width: 370px;
+    display: none;
+    background-color: rgba(93, 101, 127, 0.61);
+}
+
+.watch-later-tbl th {
+    padding-left: 2px;
+    height: 60px;
+    font-family: Lato, sans-serif;
+}
+
+.watch-later-tbl td {
+    padding-top: 3px;
+    font-family: Lato, sans-serif;
+    text-align: center;
+}
+
+.watch-later-tbl th, td{
+    text-align: left;
+}
+
+@media screen and (max-width: 500px) {
+
+    .navigation.responsive {
+        position: relative;
+    }
+
+    .logo {
+        position: relative;
+        margin-left: 0px;
+        width: 100%;
+        display: block;
+        text-align: center;
+        color: rgba(147, 173, 223, 0.87);
+    }
+
+    .search {
+        margin-top: 220px;
+        margin-left: 0px;
+        margin-bottom: 0px;
+        padding: 0px;
+        width: 100%;
+        display: block;
+    }
+
+    #search-box{
+        display: block;
+    }
+
+    .search input[type=text] {
+        margin-left: 0px;
+        margin-bottom: 4px;
+        padding: 10px;
+        width: 100%;
+        display: block;
+        background-color: rgba(180, 160, 159, 0.9);
+    }
+
+    .search button {
+        margin-top: 0px;
+        margin-right: 0px;
+        width: 90%;
+        float: right;
+        background-color: rgba(130, 157, 215, 0.57);
+    }
+
+    .advanced-search {
+        margin-top: 25px;
+        margin-bottom: 20px;
+        padding: 0px 10px;
+        display: block;
+        float: right;
+        text-align: right;
+    }
+
+    .advanced-search input[type=checkbox]{
+        margin-top: 8px;
+        float: right;
+    }
+
+    .entrance-btn, .user-btn:hover {
+        background-color: transparent;
+    }
+
+    .user-buttons {
+        margin-top: -380px;
+        padding: 0px;
+        float: right;
+    }
+
+    #sign-in, #log-in, #admin-log-in {
+        width: 95%;
+        display: block;
+        float: right;
+        text-align: right;
+    }
+
+    #admin, #profile, #log-out{
+        width: 100%;
+        display: none;
+        float: right;
+        text-align: right;
+    }
+
+    .menu{
+        margin: 0px;
+        padding: 0px;
+        float: right;
+    }
+
+    .movies-btn a{
+        font-size: 21px;
+    }
+
+    .movies-btn a:hover{
+        color: rgb(168, 138, 143);
+    }
+
+    #home, #add-a-movie, #movies, #movie-festivals{
+        padding: 15px;
+        width: 100%;
+        display: block;
+        float: right;
+        text-align: right;
+    }
+
+    .desktop-headings {
+        display: none;
+    }
+
+    .mobile-headings {
+        display: block;
+    }
+
+    .top-week-btn {
+        position: absolute;
+        margin-top: 50px;
+        display: block;
+    }
+
+    .shared-movies-btn {
+        position: absolute;
+        margin-top: 120px;
+    }
+
+    .projections-btn {
+        position: absolute;
+        margin-top: 190px;
+    }
+
+    .festivals-btn {
+        position: absolute;
+        margin-top: 260px;
+    }
+
+    .watch-later-btn {
+        position: absolute;
+        margin-top: 330px;
+    }
+
+    .top-week-btn, .shared-movies-btn, .projections-btn, .festivals-btn, .watch-later-btn {
+        margin-bottom: 25px;
+        margin-left: 10px;
+        padding-top: 2px;
+        width: 95%;
+        height: 42px;
+        font-family: Lato, sans-serif;
+        font-size: 16px;
+        text-align: center;
+        border-radius: 8px;
+        color: #dadada;
+    }
+
+    .top-week-btn, .shared-movies-btn, .projections-btn, .festivals-btn {
+        border-color: rgba(144, 107, 111, 0.88);
+        background-color: rgba(83,28,31,0.45);
+    }
+
+    .watch-later-btn {
+        display: none;
+        border-color: rgba(109, 118, 143, 0.87);
+        background-color: rgba(22, 72, 127, 0.5);
+    }
+
+    .top-week-tbl, .shared-movies-tbl, .projections-tbl, .festivals-tbl, .watch-later-tbl{
+        display: none;
+    }
+
+    .shared-movies-tbl, .projections-tbl, .festivals-tbl {
+        margin-left: 0px;
+        width: 100%;
+    }
+
+    .top-week-tbl {
+        margin-top: -70px;
+        margin-left: 0px;
+        width: 100%;
+        z-index: 5;
+    }
+
+    .top-week-tbl th, td, .down-tables td {
+        background-color: rgb(133, 90, 86);
+    }
+
+    .down-tables td{
+        text-align: center;
+    }
+
+    i{
+        position: relative;
+    }
+
+    .shared-movies-tbl {
+        margin-top: 0px;
+        z-index: 4;
+    }
+
+    .projections-tbl {
+        margin-top: 70px;
+        z-index: 3;
+    }
+
+    .festivals-tbl {
+        margin-top: 140px;
+        z-index: 2;
+    }
+
+    .watch-later-tbl {
+        margin-left: 38px;
+        margin-top: 212px;
+        width: 80%;
+        display: none;
+        z-index: 1;
+        background-color: rgba(22, 47, 93, 0.75);
+    }
+
+    .watch-later-tbl td{
+        background-color: rgba(114, 123, 149, 0.31);
+    }
+}

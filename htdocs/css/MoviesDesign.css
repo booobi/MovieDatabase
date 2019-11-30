@@ -1,0 +1,89 @@
+.movies{
+    position: absolute;
+    margin-top: 70px;
+    margin-left: 720px;
+    display: block;
+    float: left;
+    font-family: "Lato", sans-serif;
+    font-size: 35px;
+    text-align: center;
+    color: #3c4971;
+}
+
+.movies-tbl{
+    margin-top: 170px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.movies-tbl th {
+    padding: 5px 12px;
+    height: 60px;
+    font-family: "Lato", sans-serif;
+    font-size: 21px;
+    font-weight: bold;
+    color: rgba(20, 2, 5, 0.73);
+    background-color: rgba(101, 40, 41, 0.16);
+}
+
+.movies-tbl td{
+    padding-top: 40px;
+    font-family: "Lato", sans-serif;
+    font-size: 20px;
+    text-align: center;
+    color: rgba(9, 2, 0, 0.76);
+    background-color: rgba(119, 88, 75, 0.48);
+}
+
+input[type="number"]{
+    width: 120px;
+    height: 30px ;
+    font-size: 15px;
+    text-align: center;
+    border: none;
+    outline: none;
+    background-color: rgba(107, 67, 54, 0.36);
+}
+
+.change-movie-btn{
+    margin-top: 8px;
+    margin-left: 5px;
+    padding: 8px 18px;
+    font-family: "Lato", sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    color: rgb(22, 25, 83);
+    background-color: rgba(107, 67, 54, 0.36);
+}
+
+.change-movie-btn a{
+    font-family: "Lato", sans-serif;
+    font-size: 18px;
+    text-decoration: none;
+    color: rgb(22, 25, 83);
+}
+
+@media screen and (max-width: 500px) {
+    .movies-tbl {
+        width: 100%;
+    }
+
+    .movies-tbl td img {
+        display: none;
+    }
+
+    .movies-tbl td {
+        height: 80px;
+        font-size: 12px;
+    }
+
+    .to-hide {
+        display: none;
+    }
+}

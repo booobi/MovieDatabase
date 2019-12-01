@@ -47,7 +47,7 @@
             $sqlQuery->execute();
             $result = $sqlQuery->get_result();
 
-            $conn.close();
+            $conn->close();
 
             return $result;
         }

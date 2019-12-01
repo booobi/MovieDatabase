@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/HomeDesign.css">
+    <script src="js/home.js"></script>
 </head>
 
 <body>
@@ -34,8 +35,8 @@
     </div>
 
     <div class="user-buttons">
-        <button class="entrance-btn" onclick="showSignIn()" id="sign-in-btn">Sign In</button>
-        <button class="entrance-btn" onclick="showLogIn()" id="log-in-btn">Log In</button>
+        <button class="entrance-btn" onclick="login_show()" id="sign-in-btn">Sign In</button>
+        <button class="entrance-btn" onclick="signin_show()" id="log-in-btn">Log In</button>
         <button class="profile-btn" id="admin-btn">Administration</button>
         <button class="profile-btn" id="profile-btn">Profile</button>
         <button class="profile-btn" id="log-out-btn">Log-out</button>
@@ -193,200 +194,32 @@
 
 <div id="sign-in-box">
     <div id="popup-entrance">
-        <form action="#" id="popup-form" method="post" name="form">
-            <img id="close-btn" src="images/xbutton.png" onclick ="hideSignIn()">
+        <form action="#" id="popup-form" method="post" name="signup-form">
+            <img id="close-btn" src="images/xbutton.png" onclick ="signin_hide()">
             <h2>Sign In</h2>
             <hr>
-            <input id="sign-email" class="popup-field" placeholder="Email" type="text">
-            <input id="firstname" class="popup-field" placeholder="First Name" type="text">
-            <input id="lastname" class="popup-field" placeholder="Last Name" type="text">
-            <input id="sign-password" class="popup-field" placeholder="Password" type="password">
-            <input id="repeat" class="repeat" placeholder="Repeat Password" type="password">
-            <a href="javascript:%20validateSignIn()" id="submit">Send</a>
+            <input id="sign-email" name="email" class="popup-field" placeholder="Email" type="text">
+            <input id="firstname" name="first_name" class="popup-field" placeholder="First Name" type="text">
+            <input id="lastname" name="last_name" class="popup-field" placeholder="Last Name" type="text">
+            <input id="sign-password" name="password" class="popup-field" placeholder="Password" type="password">
+            <input id="repeat" name="confirm_password" class="repeat" placeholder="Repeat Password" type="password">
+            <a href="javascript:%20validate_signin()" id="submit">Send</a>
         </form>
     </div>
 </div>
 <div id="log-in-box">
     <div id="popup-entrance">
-        <form action="#" id="popup-form" method="post" name="form">
-            <img id="close-btn" src="/images/xbutton.png" onclick ="hideLogIn()">
+        <form action="#" id="popup-form" method="post" name="login-form">
+            <img id="close-btn" src="/images/xbutton.png" onclick ="login_hide()">
             <h2>Log In</h2>
             <hr>
-            <input id="log-email" class="popup-field" placeholder="Email" type="text">
-            <input id="log-password" class="repeat" placeholder="Password" type="password">
-            <a href="javascript:%20validateLogIn()" id="submit">Send</a>
+            <input name="email" id="log-email" class="popup-field" placeholder="Email" type="text">
+            <input name="password" id="log-password" class="repeat" placeholder="Password" type="password">
+            <a href="javascript:%20validate_login()" id="submit">Send</a>
         </form>
     </div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
-/*
-
-   jQuery('.entrance-btn').click(function () {
-        $('.entrance-btn').hide();
-
-        if (this.id === 'sign-in') {
-            $('#log-out').show();
-            $('#profile').show();
-        } else if (this.id === 'log-in') {
-            $('#profile').show();
-            $('#log-out').show();
-        } else if (this.id === 'admin-log-in') {
-            $('#admin').show();
-            $('#profile').show();
-            $('#log-out').show();
-        }
-
-        if ($('.mobile-headings').is(":hidden")) {
-            $('.watch-later').show();
-            $('.watch-later-tbl').show();
-        }else{
-            $('.watch-later-btn').show();
-        }
-    });
-
-    jQuery('.profile-btn').click(function () {
-
-        if (this.id === 'log-out')  {
-            $('.profile-btn').hide();
-
-            $('.watch-later').hide();
-            $('.watch-later-tbl').hide();
-            $('.watch-later-btn').hide();
-            $('.entrance-btn').show();
-        }
-    });
-*/
-
-/*
-function myFunction() {
-    let checkBox = document.getElementById("check-adv-search");
-    let text = document.getElementById("hid");
-    if (checkBox.checked === true) {
-        text.style.display = "block";
-    } else {
-        text.style.display = "none";
-    }
-}*/
-
-    jQuery('.top-week-btn').click(function () {
-        if($(this).text() === "This week top movies") {
-            $('.top-week-tbl').show();
-            $(this).text("Hide");
-            $(this).css('background-color', 'rgba(105, 52, 60, 0.48)');
-        }else {
-            $('.top-week-tbl').hide();
-            $(this).text("This week top movies");
-        }
-    });
-
-    jQuery('.shared-movies-btn').click(function () {
-        if($(this).text() === "Movies shared by the community") {
-            $('.shared-movies-tbl').show();
-            $(this).text("Hide");
-            $(this).css('background-color', 'rgba(105, 52, 60, 0.48)');
-        }else {
-            $('.shared-movies-tbl').hide();
-            $(this).text("Movies shared by the community");
-        }
-    });
-
-    jQuery('.projections-btn').click(function () {
-        if($(this).text() === "Movies projections this week") {
-            $('.projections-tbl').show();
-            $(this).text("Hide");
-            $(this).css('background-color', 'rgba(105, 52, 60, 0.48)');
-        }else {
-            $('.projections-tbl').hide();
-            $(this).text("Movies projections this week");
-        }
-    });
-
-    jQuery('.festivals-btn').click(function () {
-        if($(this).text() === "Movie festivals") {
-            $('.festivals-tbl').show();
-            $(this).text("Hide");
-            $(this).css('background-color', 'rgba(105, 52, 60, 0.48)');
-
-        }else {
-            $('.festivals-tbl').hide();
-            $(this).text("Movie festivals");
-        }
-    });
-
-    jQuery('.watch-later-btn').click(function () {
-        if($(this).text() === "Watch later") {
-            $('.watch-later-tbl').show();
-            $(this).text("Hide");
-            $(this).css('background-color', 'rgba(105, 52, 60, 0.48)');
-
-        }else {
-            $('.watch-later-tbl').hide();
-            $(this).text("Watch later");
-        }
-    });
-
-   function showLogIn() {
-       document.getElementById('log-in-box').style.display = "block";
-   }
-
-   function hideLogIn(){
-       document.getElementById('log-in-box').style.display = "none";
-   }
-
-   function showSignIn() {
-       document.getElementById('sign-in-box').style.display = "block";
-   }
-
-   function hideSignIn(){
-       document.getElementById('sign-in-box').style.display = "none";
-   }
-
-   function validateEmail(email) {
-       let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-       return re.test(String(email).toLowerCase());
-   }
-
-   function validateLogIn() {
-       if (document.getElementById('log-email').value === "" ||
-           document.getElementById('log-password').value === "") {
-           alert("Please fill all the fields!");
-       }
-       else if(!validateEmail(document.getElementById('log-email').value)){
-           alert("Please enter a valid email address!");
-       }
-       else{
-           document.getElementById('form').submit();
-           document.getElementById('log-in').style.display = "none";
-           //log-in or log-in-btn ??
-       }
-   }
-
-   function validateSignIn() {
-       if (document.getElementById('sign-email').value === "" ||
-           document.getElementById('firstname').value === "" ||
-           document.getElementById('lastname').value === "" ||
-           document.getElementById('sign-password').value === "" ||
-           document.getElementById('repeat').value === "") {
-           alert("Please fill all the fields!");
-       }
-       else if(!validateEmail(document.getElementById('sign-email').value)){
-           alert("Please enter a valid email address!");
-       }
-       else if(document.getElementById('sign-password').value.length < 6){
-           alert("Password should be at least 6 symbols!");
-       }
-       else if(document.getElementById('sign-password').value !== document.getElementById('repeat').value){
-           alert("Password and Repeat Password do not match!");
-       }
-       else{
-           document.getElementById('form').submit();
-           document.getElementById('sign-in').style.display = "none";
-           //the sign-in or sign-in-btn is none???
-       }
-   }
-
-</script>
 </body>
 </html>

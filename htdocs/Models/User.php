@@ -8,21 +8,24 @@
 		private $IsApprovedByAdmin;
 		private $IsMalicious;
 		private $Password;
-		private $ConfirmPassword;
 		private $Role;//standard, admin
 		
-		public function __construct ( $Username, $FirstName, $LastName, $Password, $ConfirmPassword ) {
+		public function __construct ( $Username, $FirstName, $LastName, $Password, $Role ) {
 			$this->Username = $Username;
 			$this->FirstName = $FirstName;
 			$this->LastName = $LastName;
 			$this->Password = $Password;
-			$this->ConfirmPassword = $ConfirmPassword;
+			$this->Role = $Role;
 		}
 
 		public function get($property) {
 			if (property_exists($this, $property)) {
 			  return $this->$property;
 			}
+		}
+
+		public function isAdmin() {
+			return $this->get('Role') == 'admin';
 		}
 		
 		public function jsonSerialize() {

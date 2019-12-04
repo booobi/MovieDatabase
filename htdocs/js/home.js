@@ -177,11 +177,13 @@ function login_show() {
 }
 //Function to Hide Popup
 function login_hide(){
+	$('form[name="login-form"]').trigger('reset');
 	$('#log-in-box').hide();
 }
 
 //Function To Display Popup
 function signin_show() {
+	$('form[name="signup-form"]').trigger('reset');
 	$('#sign-in-box').show();
 }
 //Function to Hide Popup

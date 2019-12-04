@@ -37,8 +37,8 @@
     </div>
 
     <div class="user-buttons">
-        <button class="entrance-btn" onclick="login_show()" id="sign-in-btn">Sign In</button>
-        <button class="entrance-btn" onclick="signin_show()" id="log-in-btn">Log In</button>
+        <button class="entrance-btn" onclick="signin_show()" id="sign-in-btn">Sign In</button>
+        <button class="entrance-btn" onclick="login_show()" id="log-in-btn">Log In</button>
         <button class="profile-btn" id="admin-btn">Administration</button>
         <button class="profile-btn" id="profile-btn">Profile</button>
         <button class="profile-btn" id="log-out-btn">Log-out</button>

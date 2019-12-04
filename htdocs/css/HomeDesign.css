@@ -1,7 +1,7 @@
 
 body {
     margin: 0;
-    background-color: rgba(138, 51, 27, 0.51);
+    background-color: rgba(142, 91, 75, 0.66);
     overflow-y: auto;
     overflow-x: auto;
 }
@@ -11,7 +11,7 @@ body {
     background-color: #462929;
 }
 
-.logo{
+.logo {
     margin-top: 60px;
     margin-left: 40px;
     font-family: "Monoton", cursive;
@@ -21,7 +21,7 @@ body {
 
 .search {
     margin-top: 40px;
-    margin-left: 325px;
+    margin-left: 370px;
     margin-bottom: 28px;
     padding: 7px;
     float: left;
@@ -36,70 +36,90 @@ body {
     text-align: center;
     text-decoration: none;
     color: black;
+    font-family: 'Ubuntu', sans-serif;
 }
 
-#search-box{
+#search-box {
   display: inline-block;
 }
 
 .search input[type=text] {
     margin-left: 5px;
     margin-bottom: 10px;
-    padding: 6px;
-    width: 490px;
+    padding: 6px 5px 5px;
+    width: 440px;
     display: inline-block;
     font-size: 18px;
     border: none;
     background-color: rgba(123, 139, 168, 0.85);
 }
 
-.search button{
-    margin: -50px 10px 5px 10px;
+.search button {
+    margin: -60px 10px 5px 10px;
     padding: 10px 12px;
     width: 75px;
-    height: 44px;
+    height: 55px;
     display: inline-block;
     font-size: 20px;
     border: none;
     cursor: pointer;
     background-color: rgba(123, 139, 168, 0.85);
+    font-family: Ubuntu, sans-serif;
+    color: #3d2a2a;
 }
 
-::placeholder{
-    font-family: "Arial";
-    font-size: 18px;
-    color: rgba(28, 28, 28, 0.92);
+
+.search ::placeholder {
+    font-size: 20px;
+    font-family: 'Lato', sans-serif;
+    color: rgba(54, 54, 73, 0.82);
 }
 
-.advanced-search{
+.search ::-moz-placeholder {
+    font-size: 20px;
+    font-family: 'Lato', sans-serif;
+    color: rgba(54, 54, 73, 0.82);
+    opacity:  1;
+}
+
+.advanced-search {
     margin-top: 7px;
     margin-left: 10px;
     display: inline-block;
-    font-family: "Candara";
+    font-family: "Ubuntu", sans-serif;
     font-size: 21px;
     z-index: 5;
-    color: rgba(200, 165, 143, 0.9);
+    color: rgba(175, 144, 134, 0.9);
 }
 
-.menu{
+#popup-advanced {
+    margin-top: -130px;
+    position: absolute;
+    display: none;
+}
+
+.menu {
     margin-top: 20px;
-    margin-right: 40px;
-    float: right;
+    margin-left: 328px;
+    float: left;
 }
 
-.menu a{
+.menu a {
     text-decoration: none;
+    font-family: "Ubuntu", sans-serif;
+    font-size: 23px;
     color: rgb(168, 138, 143);
 }
 
-.menu a:hover{
+.menu a:hover {
     color: #c9c8c8;
 }
 
-.movies-btn{
-    padding: 8px 45px;
+.menu-btn {
+    padding: 8px 62px;
     float: left;
-    font-family: "Berlin Sans FB";
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
     font-size: 25px;
     border-style: none;
     z-index: 1;
@@ -107,22 +127,23 @@ body {
     background-color: transparent;
 }
 
-#home, #add-a-movie, #movies, #movie-festivals{
+#home, #add-a-post, #movies, #movie-festivals {
     display: inline-block;
     float: left;
     overflow: hidden;
 }
 
-.user-buttons{
+.user-buttons {
     margin-top: 145px;
     float: right;
 }
 
-.entrance-btn{
-    padding: 15px;
+.entrance-btn {
+    padding: 17px 10px 11px 40px;
     float: left;
-    font-family: "Berlin Sans FB";
-    font-size: 21px;
+    font-family: "Ubuntu", sans-serif;
+    font-weight: bold;
+    font-size: 22px;
     border-style: none;
     z-index: 1;
     outline: none;
@@ -130,16 +151,17 @@ body {
     background-color: transparent;
 }
 
-#sign-in, #log-in, #admin-log-in{
+#sign-in-btn, #log-in-btn {
     display: inline-block;
     float: left;
     overflow: hidden;
 }
 
-.profile-btn{
+.profile-btn {
     padding: 15px;
     float: left;
-    font-family: "Berlin Sans FB";
+    font-family: "Ubuntu", sans-serif;
+    font-weight: bold;
     font-size: 21px;
     border-style: none;
     z-index: 1;
@@ -148,33 +170,134 @@ body {
     background-color: transparent;
 }
 
-#admin, #profile, #log-out {
+#admin-btn, #profile-btn, #log-out-btn {
     display: none;
     float: left;
     overflow: hidden;
 }
 
-.entrance-btn,.profile-btn{
+.entrance-btn,.profile-btn {
     background-color: rgba(128, 106, 109, 0.82);
 }
 
-.desktop-headings{
+#sign-in-box {
+    position: fixed;
+    top: 0;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    display: none;
+    overflow: hidden;
+    background-color: rgba(38, 38, 38, 0.86);
+}
+
+#log-in-box {
+    position: fixed;
+    top: 0;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    display: none;
+    overflow: hidden;
+    background-color: rgba(38, 38, 38, 0.86);
+}
+
+#popup-entrance {
+    position: absolute;
+    top: 17%;
+    left: 50%;
+    margin-left: -202px;
+    font-family: 'Lato',sans-serif;
+}
+
+#popup-form {
+    padding: 10px 50px;
+    width: 380px;
+    font-family: 'Lato', sans-serif;
+    border-radius: 10px;
+    background-color: #795b5b;
+}
+
+#popup-form h2 {
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    color: rgba(53, 37, 38, 0.92);
+}
+
+#popup-form hr {
+    margin: 10px -50px;
+    border: 0;
+    border-top: 1px solid #de9f97;
+}
+
+#popup-form input[type=text], #popup-form input[type=password] {
+    margin-top: 30px;
+    margin-left: 85px;
+    padding: 10px;
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    border: solid medium #685053;
+    background-color: rgba(222, 183, 171, 0.69);
+}
+
+#sign-password, #log-password, #sign-email, #log-email {
+    background-repeat: no-repeat;
+    background-position: 5px 7px;
+}
+
+.repeat {
+    margin-bottom: 30px;
+}
+
+#popup-form ::placeholder {
+    font-family: 'Lato', sans-serif;
+    color: #463030;
+}
+
+#popup-form ::-moz-placeholder {
+   opacity: 0.85;
+}
+
+#submit {
+    padding: 10px 0;
+    width: 100%;
+    display: block;
+    font-family: 'Lato', sans-serif;
+    font-size: 20px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    color: #dbb1a1;
+    border: 1px solid #685053;
+    background-color: #5f4345;
+}
+
+#close-btn {
+    position: absolute;
+    right: -14px;
+    top: -14px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.desktop-headings {
     position: absolute;
 }
 
-.mobile-headings{
+.mobile-headings {
     display: none;
 }
 
-.mobile-headings button{
+.mobile-headings button {
     outline: none;
 }
 
-.tables{
-    margin-top: 190px;
+.tables {
+    margin-top: 170px;
 }
 
-.top-week, .shared-movies, .projections, .festivals{
+.top-week, .shared-movies, .projections, .festivals {
     position: absolute;
     margin-left: 25px;
     padding-top: 10px;
@@ -186,32 +309,32 @@ body {
     text-align: center;
     border-radius: 8px;
     color: rgb(213, 213, 213);
-    background-color: rgba(100, 34, 37, 0.4);
+    background-color: rgba(100, 34, 37, 0.36);
 }
 
-.top-week{
+.top-week {
     margin-top: 80px;
     margin-left: 25px;
     margin-bottom: 0px;
     float: left;
 }
 
-.shared-movies{
+.shared-movies {
     margin-top: 530px;
     margin-left: 25px;
 }
 
-.projections{
+.projections {
     margin-top: 530px;
     margin-left: 550px;
 }
 
-.festivals{
+.festivals {
     margin-top: 530px;
     margin-left: 1075px;
 }
 
-.watch-later{
+.watch-later {
     position: absolute;
     margin-top: 146px;
     margin-left: 1074px;
@@ -227,7 +350,7 @@ body {
     background-color: rgba(57, 70, 102, 0.61);
 }
 
-.top-week-tbl{
+.top-week-tbl {
     position: absolute;
     margin-left: 25px;
     width: 951px;
@@ -241,21 +364,21 @@ body {
     font-size: 20px;
     font-weight: bold;
     color: rgba(34, 4, 8, 0.73);
-    background-color: rgba(162, 42, 29, 0.23);
+    background-color: rgba(101, 61, 51, 0.26);
 }
 
-.top-week-tbl td{
+.top-week-tbl td {
     padding: 18px;
     font-family: "Lato", sans-serif;
     font-size: 19px;
 }
 
-.top-week-tbl th, td{
+.top-week-tbl th, td {
     text-align: left;
 }
 
-i{
-    border: solid #253365;
+.top-week i {
+    border: solid #212d59;
     border-width: 0 3px 3px 0;
     display: inline-block;
     padding: 3px;
@@ -289,40 +412,40 @@ i{
     background-color: rgba(140, 143, 169, 0.41);
 }
 
-.down-tables th, td{
+.down-tables th, td {
     text-align: left;
 }
 
-.title{
+.title {
     font-size: 20px;
 }
 
-.description{
+.description {
     font-size: 19px;
 }
 
-.shared-movies-tbl, .projections-tbl, .festivals-tbl, .watch-later-tbl{
+.shared-movies-tbl, .projections-tbl, .festivals-tbl, .watch-later-tbl {
     position: absolute;
     width: 420px;
     border-collapse: collapse;
 }
 
-.shared-movies-tbl{
+.shared-movies-tbl {
     margin-top: 450px;
     margin-left: 25px;
 }
 
-.projections-tbl{
+.projections-tbl {
     margin-top: 450px;
     margin-left: 550px;
 }
 
-.festivals-tbl{
+.festivals-tbl {
     margin-top: 450px;
     margin-left: 1076px;
 }
 
-.watch-later-tbl{
+.watch-later-tbl {
     position: absolute;
     margin-left: 1074px;
     width: 370px;
@@ -342,27 +465,31 @@ i{
     text-align: center;
 }
 
-.watch-later-tbl th, td{
+.watch-later-tbl th, td {
     text-align: left;
 }
 
 @media screen and (max-width: 500px) {
 
     .navigation.responsive {
-        position: relative;
+       position: relative;
+    }
+
+    .navigation {
+        height: 748px;
     }
 
     .logo {
         position: relative;
         margin-left: 0px;
-        width: 100%;
+        width: 90%;
         display: block;
-        text-align: center;
+        text-align: right;
         color: rgba(147, 173, 223, 0.87);
     }
 
     .search {
-        margin-top: 220px;
+        margin-top: 170px;
         margin-left: 0px;
         margin-bottom: 0px;
         padding: 0px;
@@ -370,7 +497,7 @@ i{
         display: block;
     }
 
-    #search-box{
+    #search-box {
         display: block;
     }
 
@@ -380,75 +507,167 @@ i{
         padding: 10px;
         width: 100%;
         display: block;
-        background-color: rgba(180, 160, 159, 0.9);
+        background-color: rgba(183, 157, 148, 0.66);
+    }
+
+    .search ::placeholder{
+        font-size: 20px;
+        font-family: 'Lato', sans-serif;
+        color: rgba(71, 55, 51, 0.84);
+    }
+
+    .search ::-moz-placeholder {
+        opacity:  1;
     }
 
     .search button {
-        margin-top: 0px;
-        margin-right: 0px;
-        width: 90%;
-        float: right;
-        background-color: rgba(130, 157, 215, 0.57);
+        position: relative;
+        margin: auto;
+        width: 85%;
+        display: block;
+        text-align: center;
+        background-color: rgba(99, 106, 139, 0.64);
     }
 
     .advanced-search {
-        margin-top: 25px;
-        margin-bottom: 20px;
+        margin-top: 38px;
+        margin-bottom: 30px;
         padding: 0px 10px;
+        width: 85%;
         display: block;
-        float: right;
         text-align: right;
+        color: rgba(182, 150, 139, 0.9);
+        font-family: 'Ubuntu', sans-serif;
+        font-weight: normal;
+        font-size: 18px;
     }
 
-    .advanced-search input[type=checkbox]{
+    .advanced-search input[type=checkbox] {
         margin-top: 8px;
-        float: right;
+    }
+
+    .user-buttons {
+        margin: -50px 0;
+        height: 500px;
+        float: none;
+    }
+
+    .entrance-btn, .profile-btn {
+        position: relative;
+        margin: auto;
+        display: block;
+        font-family: 'Ubuntu', sans-serif;
+        font-weight: bold;
+    }
+
+    #sign-in-btn, #log-in-btn, #admin-btn, #profile-btn, #log-out-btn {
+        top: -350px;
+        bottom: 0px;
+        margin-right: 60px;
+        margin-bottom: 8px;
+        padding: 15px 0px;
+        width: 90%;
+        display: block;
+        float: none;
+        text-align: right;
+        font-size: 18px;
+        color: rgba(223, 213, 219, 0.85);
+    }
+
+    #admin-btn, #profile-btn, #log-out-btn {
+        display: none;
     }
 
     .entrance-btn, .user-btn:hover {
         background-color: transparent;
     }
 
-    .user-buttons {
-        margin-top: -380px;
-        padding: 0px;
-        float: right;
-    }
-
-    #sign-in, #log-in, #admin-log-in {
-        width: 95%;
-        display: block;
-        float: right;
-        text-align: right;
-    }
-
-    #admin, #profile, #log-out{
+    #sign-in-box, #log-in-box {
+        margin: auto;
         width: 100%;
-        display: none;
-        float: right;
-        text-align: right;
+        float: none;
+        z-index: 5;
     }
 
-    .menu{
-        margin: 0px;
+    #popup-entrance {
+        position: unset;
+        left: 0;
+        margin-top: 90px;
+        margin-left: 0;
+        z-index: 5;
+    }
+
+    #popup-form {
+        margin: auto;
+        padding: 10px 0px 0px;
+        width: 90%;
+        float: none;
+    }
+
+    #popup-form hr {
+        margin: 10px auto;
+    }
+
+    #popup-form input[type=text], #popup-form input[type=password] {
+        margin-left: auto;
+        width: 86%;
+    }
+
+    .popup-field, .repeat, #submit {
+        margin: auto;
+        display: block;
+        float: none;
+    }
+
+    .repeat {
+        margin-bottom: 30px;
+    }
+
+    #submit {
+        width: 99.4%;
+    }
+
+    #close-btn {
+       margin-top: 80px;
+       right: 1px;
+    }
+
+    .menu {
+        margin: auto;
+        padding: 10px 0px;
+        width: 85%;
+        height: 200px;
+        display: block;
+        float: none;
+        border: solid medium rgba(177, 155, 151, 0.82);
+    }
+
+    .menu-btn {
+        position: relative;
+        margin: auto;
         padding: 0px;
-        float: right;
+        width: 85%;
+        display: block;
+        float: none;
+        text-align: center;
     }
 
-    .movies-btn a{
+    .menu-btn a {
         font-size: 21px;
+        color: rgba(133, 144, 175, 0.63);
     }
 
-    .movies-btn a:hover{
+    .menu-btn a:hover {
         color: rgb(168, 138, 143);
     }
 
-    #home, #add-a-movie, #movies, #movie-festivals{
-        padding: 15px;
+    #home, #add-a-post, #movies, #movie-festivals {
+        margin-bottom: 15px;
+        padding: 9px 0px 0px 0px;
         width: 100%;
         display: block;
         float: right;
-        text-align: right;
+        text-align: center;
     }
 
     .desktop-headings {
@@ -467,40 +686,41 @@ i{
 
     .shared-movies-btn {
         position: absolute;
-        margin-top: 120px;
+        margin-top: 130px;
     }
 
     .projections-btn {
         position: absolute;
-        margin-top: 190px;
+        margin-top: 210px;
     }
 
     .festivals-btn {
         position: absolute;
-        margin-top: 260px;
+        margin-top: 290px;
     }
 
     .watch-later-btn {
         position: absolute;
-        margin-top: 330px;
+        margin-top: 360px;
     }
 
     .top-week-btn, .shared-movies-btn, .projections-btn, .festivals-btn, .watch-later-btn {
-        margin-bottom: 25px;
-        margin-left: 10px;
         padding-top: 2px;
+        margin-left: 10px;
+        margin-bottom: 25px;
         width: 95%;
-        height: 42px;
+        height: 48px;
         font-family: Lato, sans-serif;
-        font-size: 16px;
+        font-size: 18px;
+        font-weight: bold;
         text-align: center;
         border-radius: 8px;
-        color: #dadada;
+        color: rgba(226, 199, 204, 0.99);
     }
 
     .top-week-btn, .shared-movies-btn, .projections-btn, .festivals-btn {
-        border-color: rgba(144, 107, 111, 0.88);
-        background-color: rgba(83,28,31,0.45);
+        border: medium rgba(165, 123, 121, 0.88);
+        background-color: rgba(105, 52, 60, 0.48);
     }
 
     .watch-later-btn {
@@ -509,7 +729,7 @@ i{
         background-color: rgba(22, 72, 127, 0.5);
     }
 
-    .top-week-tbl, .shared-movies-tbl, .projections-tbl, .festivals-tbl, .watch-later-tbl{
+    .top-week-tbl, .shared-movies-tbl, .projections-tbl, .festivals-tbl, .watch-later-tbl {
         display: none;
     }
 
@@ -519,42 +739,75 @@ i{
     }
 
     .top-week-tbl {
-        margin-top: -70px;
+        margin-top: -40px;
         margin-left: 0px;
         width: 100%;
         z-index: 5;
     }
 
-    .top-week-tbl th, td, .down-tables td {
-        background-color: rgb(133, 90, 86);
+    .top-week-tbl th, .top-week-tbl td, .down-tables td {
+        background-color: rgb(156, 105, 104);
     }
 
-    .down-tables td{
+    .top-week-tbl th {
+        padding: 5px 10px;
+        font-size: 17px;
+    }
+
+    .top-week-tbl td {
+        padding: 28px 10px 12px;
+        font-size: 16px;
+    }
+
+    .top-week-tbl i{
+        position: absolute;
+        padding: 5px;
+    }
+
+    .arrow-up{
+        margin-top: 20px;
+        margin-left: 3px;
+        position: absolute;
+        display: block;
+    }
+
+    .arrow-down{
+        margin-top: 20px;
+        margin-left: 23px;
+        position: absolute;
+        display: block;
+    }
+
+    .down-tables td {
         text-align: center;
     }
 
-    i{
-        position: relative;
+    .title{
+        font-size: 17px;
+    }
+
+    .description{
+        font-size: 16px;
     }
 
     .shared-movies-tbl {
-        margin-top: 0px;
+        margin-top: 40px;
         z-index: 4;
     }
 
     .projections-tbl {
-        margin-top: 70px;
+        margin-top: 120px;
         z-index: 3;
     }
 
     .festivals-tbl {
-        margin-top: 140px;
+        margin-top: 200px;
         z-index: 2;
     }
 
     .watch-later-tbl {
-        margin-left: 38px;
         margin-top: 212px;
+        margin-left: 38px;
         width: 80%;
         display: none;
         z-index: 1;
@@ -565,3 +818,23 @@ i{
         background-color: rgba(114, 123, 149, 0.31);
     }
 }
+
+
+
+/*
+#popup-form h2:nth-child(1) {
+    margin: -10px -50px;
+    padding: 20px 85px;
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+    background-color: rgba(181, 160, 170, 0.71);
+}
+
+#popup-form hr:first-of-type {
+    margin: 10px -50px;
+    font-family: 'Lato', sans-serif;
+    border: 0;
+    border-top: 1px solid #de9f97
+}
+*/

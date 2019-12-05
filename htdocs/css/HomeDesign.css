@@ -100,7 +100,8 @@ body {
 
 .menu {
     margin-top: 20px;
-    margin-left: 328px;
+    /* When Administration button shows the styling breaks */
+    /* margin-left: 328px; */
     float: left;
 }
 
@@ -171,7 +172,7 @@ body {
 }
 
 #admin-btn, #profile-btn, #log-out-btn {
-    display: none;
+    /* display: none; */
     float: left;
     overflow: hidden;
 }
@@ -572,10 +573,6 @@ body {
         text-align: right;
         font-size: 18px;
         color: rgba(223, 213, 219, 0.85);
-    }
-
-    #admin-btn, #profile-btn, #log-out-btn {
-        display: none;
     }
 
     .entrance-btn, .user-btn:hover {

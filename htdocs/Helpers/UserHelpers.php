@@ -31,7 +31,7 @@ include '../includes/DBOperations.php';
                 $resRow['FirstName'],
                 $resRow['LastName'],
                 $resRow['Password'],
-                $resRow['Password']);
+                $resRow['Role']);
                 return $objUser;
         }
 

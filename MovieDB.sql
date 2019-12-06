@@ -145,7 +145,9 @@ CREATE TABLE IF NOT EXISTS `movies` (
   `IsActive` bit(1) NOT NULL,
   `Duration` time NOT NULL,
   `Tags` varchar(150) NOT NULL,
-  `Rewards` varchar(250) DEFAULT NULL
+  `Rewards` varchar(250) DEFAULT NULL,
+  `UpdatedOn` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+  `CreatedOn` TIMESTAMP NOT NULL DEFAULT NOW()
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --

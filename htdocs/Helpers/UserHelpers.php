@@ -1,6 +1,6 @@
 <?php
-include '../Models/User.php';
-include '../includes/DBOperations.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Models/User.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 
  class UserHelpers {
 

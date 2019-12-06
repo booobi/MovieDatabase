@@ -1,5 +1,5 @@
 <?php
-	include '../Helpers/UserHelpers.php';
+	include $_SERVER['DOCUMENT_ROOT'] . '/Helpers/UserHelpers.php';
 	
 	session_start();
 	

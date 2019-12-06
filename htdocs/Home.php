@@ -18,7 +18,7 @@
 
 <body>
 <?php
-    include './header.php';
+    include $_SERVER['DOCUMENT_ROOT'] . '/header.php';
 ?>
 
 <div class="desktop-headings">
@@ -53,7 +53,31 @@
                 <i class="arrow-down"></i><i class = "arrow-up"> </i>
             </th>
         </tr>
-        <tr>
+
+        <?php
+            include $_SERVER['DOCUMENT_ROOT'] . '/Helpers/MovieHelpers.php';
+
+            $moviesThisWeek = MovieHelpers::getHomePageMovies();
+            if(count($moviesThisWeek) > 0) {
+            
+                foreach ($moviesThisWeek as $movie) {
+                echo "
+                    <tr>
+                        <td>" . $movie->get('Name') . "</td>
+                        <td>" . $movie->get('Category') . "</td>
+                        <td>" . $movie->get('Rating') . "</td>
+                        <td>" . $movie->get('ReleaseDate') . "</td>
+                    </tr>
+                    ";
+            }
+        }
+
+
+
+        ?>
+
+
+        <!-- <tr>
             <td>Titanic</td>
             <td>Drama</td>
             <td>4.9</td>
@@ -76,7 +100,7 @@
             <td>Musical</td>
             <td>4.7</td>
             <td>18 May 2015</td>
-        </tr>
+        </tr> -->
     </table>
 
     <table class="watch-later-tbl">

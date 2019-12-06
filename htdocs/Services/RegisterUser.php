@@ -1,5 +1,5 @@
 <?php
-	include '../Helpers/UserHelpers.php';
+	include $_SERVER['DOCUMENT_ROOT'] . '/Helpers/UserHelpers.php';
 
 	header('Cache-Control: no-cache, must-revalidate');
 	header('Access-Control-Allow-Origin: *');

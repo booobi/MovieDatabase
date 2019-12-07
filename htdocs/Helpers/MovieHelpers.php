@@ -54,7 +54,22 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 		// DBOperations::prepareAndExecute("DELETE FROM movieevents WHERE MovieId = {$movieId};");
 		DBOperations::prepareAndExecute("DELETE FROM movies WHERE MovieId = {$movieId};");
 
-		return TRUE;
+	}
+
+	public static function rateMovie($userId, $movieId, $rating) {
+		
+		$existingRatingRes = 
+	DBOperations::prepareAndExecute("SELECT UserId FROM userratings WHERE UserId = {$userId} AND MovieID = {$movieId}");
+
+		//if rating for this movie from this user exists -> update the rating
+		if ($existingRatingRes->num_rows > 0) {
+			DBOperations::prepareAndExecute("
+			UPDATE `userratings` SET `MovieRating`= {$rating} WHERE UserId = {$userId} AND MovieID={$movieId}");
+		} else {
+			DBOperations::prepareAndExecute("
+			INSERT INTO `userratings`(`UserId`, `MovieID`, `MovieRating`) VALUES ({$userId},{$movieId},{$rating});");
+		}
+		
 	}
 
     public static function getHomeRecentMovies() {

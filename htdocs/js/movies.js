@@ -16,3 +16,27 @@ function deleteMovie(id) {
 			});
 	}
 }
+
+function openRatingModal(movieId) {
+	$('#rating_modal').show();
+	$('#rating_modal').data('movieId', movieId);
+}
+
+$('#rateSubmitBtn').click((e) => {
+	e.preventDefault();
+	movieId = $('#rating_modal').data('movieId');
+	rating = $('#rateSelect').val();
+	$.ajax({
+		url: '/api/Movies/Rate.php',
+		type: 'POST',
+		dataType: 'json',
+		data: {rating, movieId},
+		success: function(data) {
+				alert(data["description"]);
+				if(data["status"]=="success") {
+					location.reload();
+				}
+			}
+		});
+	$('#rating_modal').hide();
+});

@@ -6,7 +6,6 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Monoton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/MoviesDesign.css">
-    <script src="/js/movies.js"></script>
 </head>
 
 <body>
@@ -75,13 +74,8 @@
                 '. $movie->get('Category') .'
                 </td>
                 <td class = "hide-content">
-                    <select type="number">
-                        <option ' . ($movie->get("Rating")==1 ? "selected":"") .'>1</option>
-                        <option ' . ($movie->get("Rating")==2 ? "selected":"") .'>2</option>
-                        <option ' . ($movie->get("Rating")==3 ? "selected":"") .'>3</option>
-                        <option ' . ($movie->get("Rating")==4 ? "selected":"") .'>4</option>
-                        <option ' . ($movie->get("Rating")==5 ? "selected":"") .'>5</option>
-                    </select>
+                   '. $movie->get('Rating') . '
+                   <button class="edit_rating_button" onclick="openRatingModal('.$movie->get('Id').')">Rate</button><br>
                 </td>
                 <td class = "hide-content">
                 '. $movie->get('IMDBRating') .'
@@ -114,6 +108,33 @@
             }
         ?>
         </table>
-    </div>    
+    </div>
+
+    <button id="myBtn">Open Modal</button>
+
+<!-- Rating Modal -->
+<div id="rating_modal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close" onclick="$(this).parent().parent().hide();">&times;</span>
+    <h1>Rate the movie:</h1>
+    <select class="rateSelect" id="rateSelect" form="rateForm">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+    </select>
+    <br>
+    <br>
+    <form id="rateForm">
+        <button type="submit" id="rateSubmitBtn">Submit</button>
+    </form>
+    
+  </div>
+</div>  
+
+<script src="/js/movies.js"></script>
 </body>
 </html>

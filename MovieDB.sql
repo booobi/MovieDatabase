@@ -247,8 +247,8 @@ CREATE TABLE IF NOT EXISTS `userratings` (
   `UserId` int(11) NOT NULL,
   `MovieID` int(11) NOT NULL,
   `MovieRating` float NOT NULL,
-  `PostRating` float NOT NULL,
-  `PostId` int(11) NOT NULL
+  `PostRating` float,
+  `PostId` int(11)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -541,10 +541,10 @@ ADD CONSTRAINT `OwnerIdP` FOREIGN KEY (`OwnerId`) REFERENCES `users` (`UserId`) 
 --
 -- Constraints for table `userratings`
 --
-ALTER TABLE `userratings`
-ADD CONSTRAINT `MovieIdR` FOREIGN KEY (`MovieID`) REFERENCES `movies` (`MovieId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `PostIdR` FOREIGN KEY (`PostId`) REFERENCES `posts` (`PostId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `UserIdR` FOREIGN KEY (`UserId`) REFERENCES `users` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ALTER TABLE `userratings`
+-- ADD CONSTRAINT `MovieIdR` FOREIGN KEY (`MovieID`) REFERENCES `movies` (`MovieId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+-- ADD CONSTRAINT `PostIdR` FOREIGN KEY (`PostId`) REFERENCES `posts` (`PostId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+-- ADD CONSTRAINT `UserIdR` FOREIGN KEY (`UserId`) REFERENCES `users` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `user_owned_movies`

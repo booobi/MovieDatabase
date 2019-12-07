@@ -4,6 +4,12 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 
  class UserHelpers {
 
+    public static function getUserIdByUsername($username) {
+        $result = DBOperations::prepareAndExecute("SELECT UserId FROM users WHERE Email = '{$username}'");
+
+        return $result->fetch_assoc()['UserId'];
+    }
+
     public static function getUserOwnedMovies($username) {
         $result = $result = DBOperations::prepareAndExecute(
             "SELECT user_owned_movies.MovieId from `user_owned_movies`

@@ -29,7 +29,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 
 		if ($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {
-				$movieList [] = new Movie( $row["MovieName"], $row["CategoryName"], $row["MovieRating"], $row["ReleaseDate"], $row['CreatedOn'] );
+				$movieList [] = new Movie( $row["MovieName"], $row["CategoryName"], NULL , $row["MovieRating"], $row["ReleaseDate"], $row['CreatedOn'] );
 			}
         }
         
@@ -46,11 +46,33 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 
 		if ($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {
-				$movieList [] = new Movie( $row["MovieName"], NULL, NULL, NULL, NULL);
+				$movieList [] = new Movie( $row["MovieName"], NULL, NULL, NULL, NULL, NULL);
 			}
         }
         
         return $movieList;
 	}
+
+	public static function getSharedMovies() {
+		$result = DBOperations::prepareAndExecute(
+			"SELECT movies.Name as MovieName, movies.Description as MovieDescription
+			FROM movies 
+			INNER JOIN movieexchanges 
+			WHERE movies.MovieId = movieexchanges.MovieToShare AND movieexchanges.IsApproved = 0 
+			ORDER BY movies.UpdatedOn DESC 
+			LIMIT 10;");
+
+			$movies = [];
+
+			if ($result->num_rows > 0) {
+				while($row = $result->fetch_assoc()) {
+					$movieList [] = new Movie( $row["MovieName"], $row["MovieDescription"], NULL, NULL, NULL, NULL);
+				}
+			}
+
+			return $movieList;
+	}
+
+
  }
 ?>

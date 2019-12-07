@@ -100,6 +100,14 @@ CREATE TABLE IF NOT EXISTS `movieexchanges` (
   `IsApproved` bit(1) NOT NULL DEFAULT b'0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `movieexchanges` 
+(`Movie_ExchangesId`, `ExchangeRequestBy`, `ExchangeRequestTo`, 
+`MovieToShare`, `RequesterRating`, `ApprovalRating`, `IsApproved`) VALUES 
+(1, 1, 4, 1, 5, 6, 0), (2, 4, 1, 2, 6, 5, 0), (5, 6, 4, 5, 5, 6, 0);
 -- --------------------------------------------------------
 
 --

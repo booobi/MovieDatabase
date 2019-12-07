@@ -105,7 +105,27 @@
     </table>
 
     <table class="shared-movies-tbl down-tables">
-        <tr>
+    <tbody>
+            <?php
+                $sharedMovies = MovieHelpers::getSharedMovies();
+                if(count($sharedMovies) > 0) {
+                    foreach ($sharedMovies as $movie) {
+                        echo '
+                        <tr>
+                            <td>
+                                <p class="title">' . $movie->get("Name") . '</p>
+                                <p class="description">' . substr($movie->get("Description"),0,25) .'</p>
+                            </td>
+                        </tr>
+                        ';
+                    }
+                }
+
+            
+            ?>
+                
+    </tbody>
+        <!-- <tr>
             <td>
                 <p class="title"> Armageddon </p>
                 <p class="description">The humanity is in danger...</p>
@@ -122,7 +142,7 @@
                 <p class="title"> White chicks </p>
                 <p class="description">Two policemen...</p>
             </td>
-        </tr>
+        </tr> -->
     </table>
 
     <table class="projections-tbl down-tables">

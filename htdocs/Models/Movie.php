@@ -5,13 +5,15 @@
 		private $Rating;
 		private $ReleaseDate;
 		private $createdOn;
+		private $Description;
 		
-		public function __construct ( $Name, $Category, $Rating, $ReleaseDate, $CreatedOn ) {
+		public function __construct ( $Name, $Category, $Description, $Rating, $ReleaseDate, $CreatedOn ) {
 			$this->Name = $Name;
 			$this->Category = $Category;
 			$this->Rating = $Rating;
 			$this->ReleaseDate = $ReleaseDate;
 			$this->CreatedOn = $CreatedOn;
+			$this->Description = $Description;
 		}
 		
 		public function get($property) {

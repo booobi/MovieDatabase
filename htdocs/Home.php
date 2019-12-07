@@ -2,18 +2,7 @@
 <html>
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Monoton&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Krona+One&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Righteous&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Comfortaa:400,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Share:400,700,700i&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-    <link rel="stylesheet" href="css/HomeDesign.css">
-    <script src="js/home.js"></script>
+<link rel="stylesheet" href="css/HomeDesign.css">
 </head>
 
 <body>
@@ -160,34 +149,6 @@
      
        ?>
     </table>
-</div>
-
-<div id="sign-in-box">
-    <div id="popup-entrance">
-        <form action="#" id="popup-form" method="post" name="signup-form">
-            <img id="close-btn" src="images/xbutton.png" onclick ="signin_hide()">
-            <h2>Sign In</h2>
-            <hr>
-            <input id="sign-email" name="email" class="popup-field" placeholder="Email" type="text">
-            <input id="firstname" name="first_name" class="popup-field" placeholder="First Name" type="text">
-            <input id="lastname" name="last_name" class="popup-field" placeholder="Last Name" type="text">
-            <input id="sign-password" name="password" class="popup-field" placeholder="Password" type="password">
-            <input id="repeat" name="confirm_password" class="repeat" placeholder="Repeat Password" type="password">
-            <a href="javascript:%20validate_signin()" id="submit">Send</a>
-        </form>
-    </div>
-</div>
-<div id="log-in-box">
-    <div id="popup-entrance">
-        <form action="#" id="popup-form" method="post" name="login-form">
-            <img id="close-btn" src="/images/xbutton.png" onclick ="login_hide()">
-            <h2>Log In</h2>
-            <hr>
-            <input name="email" id="log-email" class="popup-field" placeholder="Email" type="text">
-            <input name="password" id="log-password" class="repeat" placeholder="Password" type="password">
-            <a href="javascript:%20validate_login()" id="submit">Send</a>
-        </form>
-    </div>
 </div>
 
 </body>

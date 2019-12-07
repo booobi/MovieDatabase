@@ -102,7 +102,7 @@
                         <tr>
                             <td>
                                 <p class="title">' . $movie->get("Name") . '</p>
-                                <p class="description">' . substr($movie->get("Description"),0,25) .'</p>
+                                <p class="description">' . substr($movie->get("Description"),0,25) .'...</p>
                             </td>
                         </tr>
                         ';

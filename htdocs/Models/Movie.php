@@ -1,25 +1,29 @@
 <?php
 	class Movie implements JsonSerializable {
+		private $Id;
 		private $Name;
 		private $Category;
 		private $Rating;
+		private $IMDBRating;
 		private $ReleaseDate;
-		private $createdOn;
 		private $Description;
-		
-		public function __construct ( $Name, $Category, $Description, $Rating, $ReleaseDate, $CreatedOn ) {
-			$this->Name = $Name;
-			$this->Category = $Category;
-			$this->Rating = $Rating;
-			$this->ReleaseDate = $ReleaseDate;
-			$this->CreatedOn = $CreatedOn;
-			$this->Description = $Description;
-		}
+		private $Country;
+		private $Language;
+		private $Duration;
+		private $PosterSrc;
+		private $createdOn;
+		private $UpdatedOn;
 		
 		public function get($property) {
 			if (property_exists($this, $property)) {
 			  return $this->$property;
 			}
+		}
+
+		public function set($property, $val) {
+			if (property_exists($this, $property)) {
+				$this->$property = $val;
+			  }
 		}
 		
 		public function jsonSerialize() {

@@ -108,7 +108,6 @@
     <tbody>
             <?php
                 $sharedMovies = MovieHelpers::getSharedMovies();
-                if(count($sharedMovies) > 0) {
                     foreach ($sharedMovies as $movie) {
                         echo '
                         <tr>
@@ -118,10 +117,7 @@
                             </td>
                         </tr>
                         ';
-                    }
                 }
-
-            
             ?>
                 
     </tbody>    
@@ -150,24 +146,19 @@
     </table>
 
     <table class = "festivals-tbl down-tables">
-        <tr>
-            <td class>
-                <p class = "title"> Cannes  </p>
-                <p class = "description">... </p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p class = "title"> Sundance </p>
-                <p class = "description">...</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p class = "title"> <it>Tribeca </p>
-                <p class = "description">...</p>
-            </td>
-        </tr>
+       <?php
+        $festivals = MovieHelpers::getMovieFestivals();
+        foreach($festivals as $festival) {
+            echo '
+            <tr>
+                <td class>
+                    <p class = "title">' . $festival->get('Name') . '</p>
+                    <p class = "description">' . $festival->get('Description') . '</p>
+                </td>
+            </tr>';
+        }
+     
+       ?>
     </table>
 </div>
 

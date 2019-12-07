@@ -125,6 +125,13 @@ CREATE TABLE IF NOT EXISTS `moviefestivals` (
   `Description` varchar(250) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `moviefestivals`(`MovieFestivalId`, `Name`, `Description`) 
+VALUES 
+(1,'Arctic Film Festival','Arctic Film Festival is an annual film festival held in September in the Norwegian archipelago, Svalbard\'s town, Longyearbyen.'),
+(2,'British Urban Film Festival','The British Urban Film Festival (BUFF) was formed in July 2005 to showcase urban independent cinema in the absence of any such state-sponsored activity in the UK.'),
+(3,'Camerimage','The International Film Festival of the Art of Cinematography Camerimage is a festival dedicated to the celebration of cinematography and recognition of its creators, cinematographers.'),
+(4,'Cannes Film Festival','The Cannes Festival until 2002 called the International Film Festival (Festival international du film) and known in English as the Cannes Film Festival, is an annual film festival held in Cannes, France.');
+
 -- --------------------------------------------------------
 
 --

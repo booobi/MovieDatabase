@@ -57,7 +57,7 @@
         <?php
             include $_SERVER['DOCUMENT_ROOT'] . '/Helpers/MovieHelpers.php';
 
-            $moviesThisWeek = MovieHelpers::getHomePageMovies();
+            $moviesThisWeek = MovieHelpers::getHomeRecentMovies();
             if(count($moviesThisWeek) > 0) {
             
                 foreach ($moviesThisWeek as $movie) {
@@ -71,36 +71,8 @@
                     ";
             }
         }
-
-
-
         ?>
-
-
-        <!-- <tr>
-            <td>Titanic</td>
-            <td>Drama</td>
-            <td>4.9</td>
-            <td>12 Sep 2019</td>
-        </tr>
-        <tr>
-            <td>P.S. I Love You</td>
-            <td>Romance</td>
-            <td>4.0</td>
-            <td>1 Sep 2019</td>
-        </tr>
-        <tr>
-            <td>Wanted</td>
-            <td>Action</td>
-            <td>3.9</td>
-            <td>20 Jan 2010</td>
-        </tr>
-        <tr>
-            <td>Singin' In The Rain</td>
-            <td>Musical</td>
-            <td>4.7</td>
-            <td>18 May 2015</td>
-        </tr> -->
+        
     </table>
 
     <table class="watch-later-tbl">

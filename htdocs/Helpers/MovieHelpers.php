@@ -5,7 +5,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
  class MovieHelpers {
 
 
-    public static function getHomePageMovies() {
+    public static function getHomeRecentMovies() {
 
 		$lastWeekStart = Date("Y-m-d",time() - (7 * 24 * 60 * 60));
 		//+ 1 day to include today

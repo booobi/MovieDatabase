@@ -72,25 +72,36 @@
             }
         }
         ?>
-        
     </table>
 
     <table class="watch-later-tbl">
-        <tr>
-            <td>
-                <p class="title"> Going on 30 </p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p class="title"> It's A Wonderful Life </p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p class="title"> Never Backdown </p>
-            </td>
-        </tr>
+        <tbody>
+
+            <?php
+                if(!isset($_SESSION['userLoggedIn'])) {
+                    echo '
+                <tr>
+                    <td>
+                        <p class="title">' . "Log in to see your 'Watch Later' movies" . '</p>
+                    </td>
+                </tr>';
+                } else {
+                    $watchLaterMovies = MovieHelpers::getWatchLaterMoviesForUser($_SESSION['username']);
+                    
+                    if(count($watchLaterMovies) > 0) {
+                        foreach ($watchLaterMovies as $movie) {
+                            echo '
+                            <tr>
+                                <td>
+                                    <p class="title">' . $movie->get("Name") . '</p>
+                                </td>
+                            </tr>
+                            ';
+                        }
+                    }
+                } 
+            ?>
+        </tbody>
     </table>
 
     <table class="shared-movies-tbl down-tables">

@@ -35,5 +35,22 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
         
         return $movieList;
 	}
+
+	public static function getWatchLaterMoviesForUser($username) 
+	{
+		$result = DBOperations::prepareAndExecute(
+			"SELECT movies.Name AS MovieName FROM movies INNER JOIN watchlateritems 
+			WHERE movies.MovieId = watchlateritems.WatchLaterItemId");
+
+        $movieList = [];
+
+		if ($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
+				$movieList [] = new Movie( $row["MovieName"], NULL, NULL, NULL, NULL);
+			}
+        }
+        
+        return $movieList;
+	}
  }
 ?>

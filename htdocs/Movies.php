@@ -6,6 +6,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Monoton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/MoviesDesign.css">
+    <script src="/js/movies.js"></script>
 </head>
 
 <body>
@@ -105,7 +106,7 @@
                 (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'])
                 ) {
                     echo '<button class = "change-movie-btn"><a href = "Edit.php">Edit</a></button><br>';
-                    echo '<button class = "change-movie-btn" id="delete">Delete</button>';
+                    echo '<button class = "change-movie-btn" id="delete" onclick="deleteMovie('.$movie->get("Id").')">Delete</button>';
                 }
                     
                 '</td>

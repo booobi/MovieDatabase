@@ -506,7 +506,7 @@ ADD CONSTRAINT `ParticipantIdE` FOREIGN KEY (`ParticipantId`) REFERENCES `users`
 -- Constraints for table `movieevents`
 --
 ALTER TABLE `movieevents`
-ADD CONSTRAINT `MovieIdE` FOREIGN KEY (`MovieId`) REFERENCES `movies` (`MovieId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+ADD CONSTRAINT `MovieIdE` FOREIGN KEY (`MovieId`) REFERENCES `movies` (`MovieId`) ON DELETE CASCADE ON UPDATE NO ACTION,
 ADD CONSTRAINT `OwnerIdE` FOREIGN KEY (`OwnerId`) REFERENCES `users` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
@@ -515,14 +515,14 @@ ADD CONSTRAINT `OwnerIdE` FOREIGN KEY (`OwnerId`) REFERENCES `users` (`UserId`) 
 ALTER TABLE `movieexchanges`
 ADD CONSTRAINT `ExchangeRequestedBy` FOREIGN KEY (`ExchangeRequestBy`) REFERENCES `users` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
 ADD CONSTRAINT `ExchangeRequestedTo` FOREIGN KEY (`ExchangeRequestTo`) REFERENCES `users` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `MovieToShare` FOREIGN KEY (`MovieToShare`) REFERENCES `movies` (`MovieId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ADD CONSTRAINT `MovieToShare` FOREIGN KEY (`MovieToShare`) REFERENCES `movies` (`MovieId`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `movies_categories`
 --
 ALTER TABLE `movies_categories`
 ADD CONSTRAINT `CategoryId` FOREIGN KEY (`CategoryId`) REFERENCES `categories` (`CategoryId`),
-ADD CONSTRAINT `MovieId` FOREIGN KEY (`MovieId`) REFERENCES `movies` (`MovieId`);
+ADD CONSTRAINT `MovieId` FOREIGN KEY (`MovieId`) REFERENCES `movies` (`MovieId`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `movies_participants`

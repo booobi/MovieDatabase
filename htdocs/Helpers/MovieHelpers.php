@@ -1,9 +1,10 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/Models/Movie.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/Models/Festival.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Models/Movie.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Models/Festival.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 
  class MovieHelpers {
+
 	public static function getMovies($size=20, $orderByColumn="UpdatedOn") {
 		$result = DBOperations::prepareAndExecute(
 			"SELECT movies.MovieId as MovieId,
@@ -46,6 +47,15 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 		return $movieList;
 	}
 
+
+	public static function deleteMovie($movieId) { 
+		
+		// DBOperations::prepareAndExecute("DELETE FROM movies_categories WHERE MovieId = {$movieId};");
+		// DBOperations::prepareAndExecute("DELETE FROM movieevents WHERE MovieId = {$movieId};");
+		DBOperations::prepareAndExecute("DELETE FROM movies WHERE MovieId = {$movieId};");
+
+		return TRUE;
+	}
 
     public static function getHomeRecentMovies() {
 

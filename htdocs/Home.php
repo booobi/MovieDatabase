@@ -124,46 +124,29 @@
             
             ?>
                 
-    </tbody>
-        <!-- <tr>
-            <td>
-                <p class="title"> Armageddon </p>
-                <p class="description">The humanity is in danger...</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p class="title"> Pride </p>
-                <p class="description">Segregation in the 60s...</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p class="title"> White chicks </p>
-                <p class="description">Two policemen...</p>
-            </td>
-        </tr> -->
+    </tbody>    
     </table>
 
     <table class="projections-tbl down-tables">
-        <tr>
-            <td class>
-                <p class="title"> Mr.Nobody </p>
-                <p class="description"> <b>22:30 Arena Cinema</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p class = "title"> Norbit </p>
-                <p class = "description"> <b>18:00  Cultural Center</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p class = "title"> The Shawshank Redemption </p>
-                <p class = "description"> <b>17:30 Cinema City</p>
-            </td>
-        </tr>
+
+        <?php
+            $dateToday = Date("Y-m-d",time());
+            $dateWeekAhead = Date("Y-m-d",time() + (7 * 24 * 60 * 60));
+            $movieProjectionsMap = MovieHelpers::getMovieProjectionsBetween($dateToday, $dateWeekAhead);
+
+            foreach($movieProjectionsMap as $key=>$val) {
+                
+                $movieTime = $val[0];
+                $movieLocation = $val[1];
+                echo "
+                <tr>
+                    <td>
+                        <p class=\"title\"> {$key} </p>
+                        <p class=\"description\"> <b>{$movieTime} {$movieLocation}</p>
+                    </td>
+                </tr>";
+            }
+        ?>
     </table>
 
     <table class = "festivals-tbl down-tables">

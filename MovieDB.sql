@@ -84,6 +84,11 @@ CREATE TABLE IF NOT EXISTS `movieevents` (
   `Location` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `movieevents`(`MovieEventId`, `MovieId`, `OwnerId`, `Time`, `Location`) VALUES 
+(1,4,4,date_format(DATE_ADD(NOW() ,  INTERVAL 3 HOUR),'%Y-%m-%d %H'),'Mladost Kino Arena'),
+(2,2,4,date_format(DATE_ADD(NOW() ,  INTERVAL 1 Day),'%Y-%m-%d %H'),'Lulin Kino Cinemax'),
+(3,3,4,date_format(DATE_ADD(NOW() ,  INTERVAL 2 Day),'%Y-%m-%d %H'),'Arena Armeec');
+
 -- --------------------------------------------------------
 
 --

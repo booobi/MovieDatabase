@@ -73,6 +73,26 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 			return $movieList;
 	}
 
+	public static function getMovieProjectionsBetween($dateStart, $dateEnd) {
+		$result = DBOperations::prepareAndExecute(
+			"SELECT movieevents.Time as Time,
+			movieevents.Location as Location,
+			movies.Name as MovieName
+			FROM movieevents INNER JOIN movies
+			WHERE movieevents.MovieEventId = movies.MovieId AND movieevents.Time BETWEEN '{$dateStart}' AND '{$dateEnd}'
+			LIMIT 10;");
+
+
+		$movieProjMap = [];
+		if ($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
+				$movieProjMap[$row['MovieName']] = [$row['Time'], $row['Location']];
+			}
+		}
+
+		return $movieProjMap;
+	}
+
 
  }
 ?>

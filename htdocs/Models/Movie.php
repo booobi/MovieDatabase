@@ -10,7 +10,7 @@
 		private $Country;
 		private $Language;
 		private $Duration;
-		private $PosterSrc;
+		private $PosterImgSrc;
 		private $createdOn;
 		private $UpdatedOn;
 		

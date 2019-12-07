@@ -1,11 +1,32 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/Models/User.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Models/User.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 
  class UserHelpers {
 
-    public static function getUser($userName) {
+    public static function getUserOwnedMovies($username) {
+        $result = $result = DBOperations::prepareAndExecute(
+            "SELECT user_owned_movies.MovieId from `user_owned_movies`
+            INNER JOIN `users` 
+            WHERE users.UserId = user_owned_movies.UserId
+            AND
+            users.Email = ?;", 
+			
+			's', 
+            [$username]);
 
+        $userOwnedMovieIds = [];
+        if($result->num_rows > 0) {
+            while($resRow = $result->fetch_assoc()) {
+                $userOwnedMovieIds[] = $resRow['MovieId'];
+            }
+            return $userOwnedMovieIds;
+        }
+
+        return [];
+    }
+
+    public static function getUser($userName) {
         $result = DBOperations::prepareAndExecute(
             "SELECT users.UserId AS UserId
 			, users.FirstName AS FirstName
@@ -23,19 +44,19 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 			's', 
 			[$userName]);
 
-        if($result->num_rows > 0) {
-            $resRow = $result->fetch_assoc();
-
-            $objUser = new User(
-                $resRow['Email'],
-                $resRow['FirstName'],
-                $resRow['LastName'],
-                $resRow['Password'],
-                $resRow['Role']);
-                return $objUser;
-        }
-
-        return NULL;
+            if($result->num_rows > 0) {
+                $resRow = $result->fetch_assoc();
+    
+                $objUser = new User(
+                    $resRow['Email'],
+                    $resRow['FirstName'],
+                    $resRow['LastName'],
+                    $resRow['Password'],
+                    $resRow['Role']);
+                    return $objUser;
+            }
+    
+            return NULL;
     }
     
     public static function checkUserExistence($userName) {

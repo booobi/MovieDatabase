@@ -28,6 +28,8 @@
         * @return mysqli_result
         */
         static function prepareAndExecute($query, $paramTypesString = null, $paramArray = null) {
+            
+            
             $conn = DBOperations::createConnection();
 	
             $sqlQuery = $conn->prepare($query);
@@ -46,7 +48,6 @@
 
             $sqlQuery->execute();
             $result = $sqlQuery->get_result();
-
             $conn->close();
 
             return $result;

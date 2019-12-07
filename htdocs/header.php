@@ -30,7 +30,6 @@
         <div class="user-buttons">
             <?php
                 session_start();
-                
                 if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']) {
                     echo '<button class="profile-btn" id="admin-btn">Administration</button>';
                 }
@@ -83,4 +82,4 @@
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="js/home.js"></script>
+<script src="js/header.js"></script>

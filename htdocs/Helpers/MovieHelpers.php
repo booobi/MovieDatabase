@@ -4,24 +4,46 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Models/Festival.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 
  class MovieHelpers {
-
-	public static function getMovies($size, $orderByColumn) {
+	public static function getMovies($size=20, $orderByColumn="UpdatedOn") {
 		$result = DBOperations::prepareAndExecute(
-			"SELECT movies.Name AS MovieName,
+			"SELECT movies.MovieId as MovieId,
+			movies.Name AS MovieName,
 			c.Name AS CategoryName,
 			movies.MovieRating AS MovieRating,
 			movies.IMDBRating As MovieIMDBRating,
 			CAST(movies.ReleaseDate AS DATE) AS ReleaseDate,
-			movies.Country as MovieCountry
+			movies.Country as MovieCountry,
 			movies.Language as MovieLanguage,
-			movies.Duration as MovieDuration
+			movies.Duration as MovieDuration,
+			movies.PosterImgSrc as MoviePosterImgSrc
 			FROM movies
 			INNER JOIN movies_categories mc
 			ON mc.MovieId = movies.MovieId
 			INNER JOIN categories c
 			ON c.CategoryId = mc.CategoryId
-			WHERE movies.CreatedOn BETWEEN '" . $lastWeekStart . "' AND '" . $today .
-			"' ORDER BY IMDBRating DESC LIMIT 10;");
+			ORDER BY movies." . $orderByColumn . " LIMIT " . $size);
+
+		$movieList = [];
+
+		if ($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
+				$movie = new Movie();
+				$movie->set('Id', $row["MovieId"]);
+				$movie->set('Name', $row["MovieName"]);
+				$movie->set('Category', $row["CategoryName"]);
+				$movie->set('Rating', $row["MovieRating"]);
+				$movie->set('IMDBRating', $row["MovieIMDBRating"]);
+				$movie->set('ReleaseDate', $row["ReleaseDate"]);
+				$movie->set('Country', $row["MovieCountry"]);
+				$movie->set('Language', $row["MovieLanguage"]);
+				$movie->set('Duration', $row["MovieDuration"]);
+				$movie->set('PosterImgSrc', $row["MoviePosterImgSrc"]);
+			
+				$movieList[] = $movie;
+			}
+		}
+
+		return $movieList;
 	}
 
 

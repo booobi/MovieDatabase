@@ -84,6 +84,11 @@ CREATE TABLE IF NOT EXISTS `movieevents` (
   `Location` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `movieevents`(`MovieEventId`, `MovieId`, `OwnerId`, `Time`, `Location`) VALUES 
+(1,4,4,date_format(DATE_ADD(NOW() ,  INTERVAL 3 HOUR),'%Y-%m-%d %H'),'Mladost Kino Arena'),
+(2,2,4,date_format(DATE_ADD(NOW() ,  INTERVAL 1 Day),'%Y-%m-%d %H'),'Lulin Kino Cinemax'),
+(3,3,4,date_format(DATE_ADD(NOW() ,  INTERVAL 2 Day),'%Y-%m-%d %H'),'Arena Armeec');
+
 -- --------------------------------------------------------
 
 --
@@ -100,6 +105,14 @@ CREATE TABLE IF NOT EXISTS `movieexchanges` (
   `IsApproved` bit(1) NOT NULL DEFAULT b'0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `movieexchanges` 
+(`Movie_ExchangesId`, `ExchangeRequestBy`, `ExchangeRequestTo`, 
+`MovieToShare`, `RequesterRating`, `ApprovalRating`, `IsApproved`) VALUES 
+(1, 1, 4, 1, 5, 6, 0), (2, 4, 1, 2, 6, 5, 0), (5, 6, 4, 5, 5, 6, 0);
 -- --------------------------------------------------------
 
 --
@@ -111,6 +124,13 @@ CREATE TABLE IF NOT EXISTS `moviefestivals` (
   `Name` varchar(150) NOT NULL,
   `Description` varchar(250) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `moviefestivals`(`MovieFestivalId`, `Name`, `Description`) 
+VALUES 
+(1,'Arctic Film Festival','Arctic Film Festival is an annual film festival held in September in the Norwegian archipelago, Svalbard\'s town, Longyearbyen.'),
+(2,'British Urban Film Festival','The British Urban Film Festival (BUFF) was formed in July 2005 to showcase urban independent cinema in the absence of any such state-sponsored activity in the UK.'),
+(3,'Camerimage','The International Film Festival of the Art of Cinematography Camerimage is a festival dedicated to the celebration of cinematography and recognition of its creators, cinematographers.'),
+(4,'Cannes Film Festival','The Cannes Festival until 2002 called the International Film Festival (Festival international du film) and known in English as the Cannes Film Festival, is an annual film festival held in Cannes, France.');
 
 -- --------------------------------------------------------
 
@@ -145,7 +165,9 @@ CREATE TABLE IF NOT EXISTS `movies` (
   `IsActive` bit(1) NOT NULL,
   `Duration` time NOT NULL,
   `Tags` varchar(150) NOT NULL,
-  `Rewards` varchar(250) DEFAULT NULL
+  `Rewards` varchar(250) DEFAULT NULL,
+  `UpdatedOn` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+  `CreatedOn` TIMESTAMP NOT NULL DEFAULT NOW()
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --

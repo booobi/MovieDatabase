@@ -18,7 +18,7 @@
 
 <body>
 <?php
-    include './header.php';
+    include $_SERVER['DOCUMENT_ROOT'] . '/header.php';
 ?>
 
 <div class="desktop-headings">
@@ -53,111 +53,112 @@
                 <i class="arrow-down"></i><i class = "arrow-up"> </i>
             </th>
         </tr>
-        <tr>
-            <td>Titanic</td>
-            <td>Drama</td>
-            <td>4.9</td>
-            <td>12 Sep 2019</td>
-        </tr>
-        <tr>
-            <td>P.S. I Love You</td>
-            <td>Romance</td>
-            <td>4.0</td>
-            <td>1 Sep 2019</td>
-        </tr>
-        <tr>
-            <td>Wanted</td>
-            <td>Action</td>
-            <td>3.9</td>
-            <td>20 Jan 2010</td>
-        </tr>
-        <tr>
-            <td>Singin' In The Rain</td>
-            <td>Musical</td>
-            <td>4.7</td>
-            <td>18 May 2015</td>
-        </tr>
+
+        <?php
+            include $_SERVER['DOCUMENT_ROOT'] . '/Helpers/MovieHelpers.php';
+
+            $moviesThisWeek = MovieHelpers::getHomeRecentMovies();
+            if(count($moviesThisWeek) > 0) {
+            
+                foreach ($moviesThisWeek as $movie) {
+                echo "
+                    <tr>
+                        <td>" . $movie->get('Name') . "</td>
+                        <td>" . $movie->get('Category') . "</td>
+                        <td>" . $movie->get('Rating') . "</td>
+                        <td>" . $movie->get('ReleaseDate') . "</td>
+                    </tr>
+                    ";
+            }
+        }
+        ?>
     </table>
 
     <table class="watch-later-tbl">
-        <tr>
-            <td>
-                <p class="title"> Going on 30 </p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p class="title"> It's A Wonderful Life </p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p class="title"> Never Backdown </p>
-            </td>
-        </tr>
+        <tbody>
+
+            <?php
+                if(!isset($_SESSION['userLoggedIn'])) {
+                    echo '
+                <tr>
+                    <td>
+                        <p class="title">' . "Log in to see your 'Watch Later' movies" . '</p>
+                    </td>
+                </tr>';
+                } else {
+                    $watchLaterMovies = MovieHelpers::getWatchLaterMoviesForUser($_SESSION['username']);
+                    
+                    if(count($watchLaterMovies) > 0) {
+                        foreach ($watchLaterMovies as $movie) {
+                            echo '
+                            <tr>
+                                <td>
+                                    <p class="title">' . $movie->get("Name") . '</p>
+                                </td>
+                            </tr>
+                            ';
+                        }
+                    }
+                } 
+            ?>
+        </tbody>
     </table>
 
     <table class="shared-movies-tbl down-tables">
-        <tr>
-            <td>
-                <p class="title"> Armageddon </p>
-                <p class="description">The humanity is in danger...</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p class="title"> Pride </p>
-                <p class="description">Segregation in the 60s...</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p class="title"> White chicks </p>
-                <p class="description">Two policemen...</p>
-            </td>
-        </tr>
+    <tbody>
+            <?php
+                $sharedMovies = MovieHelpers::getSharedMovies();
+                    foreach ($sharedMovies as $movie) {
+                        echo '
+                        <tr>
+                            <td>
+                                <p class="title">' . $movie->get("Name") . '</p>
+                                <p class="description">' . substr($movie->get("Description"),0,25) .'</p>
+                            </td>
+                        </tr>
+                        ';
+                }
+            ?>
+                
+    </tbody>    
     </table>
 
     <table class="projections-tbl down-tables">
-        <tr>
-            <td class>
-                <p class="title"> Mr.Nobody </p>
-                <p class="description"> <b>22:30 Arena Cinema</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p class = "title"> Norbit </p>
-                <p class = "description"> <b>18:00  Cultural Center</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p class = "title"> The Shawshank Redemption </p>
-                <p class = "description"> <b>17:30 Cinema City</p>
-            </td>
-        </tr>
+
+        <?php
+            $dateToday = Date("Y-m-d",time());
+            $dateWeekAhead = Date("Y-m-d",time() + (7 * 24 * 60 * 60));
+            $movieProjectionsMap = MovieHelpers::getMovieProjectionsBetween($dateToday, $dateWeekAhead);
+
+            foreach($movieProjectionsMap as $key=>$val) {
+                
+                $movieTime = $val[0];
+                $movieLocation = $val[1];
+                echo "
+                <tr>
+                    <td>
+                        <p class=\"title\"> {$key} </p>
+                        <p class=\"description\"> <b>{$movieTime} {$movieLocation}</p>
+                    </td>
+                </tr>";
+            }
+        ?>
     </table>
 
     <table class = "festivals-tbl down-tables">
-        <tr>
-            <td class>
-                <p class = "title"> Cannes  </p>
-                <p class = "description">... </p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p class = "title"> Sundance </p>
-                <p class = "description">...</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p class = "title"> <it>Tribeca </p>
-                <p class = "description">...</p>
-            </td>
-        </tr>
+       <?php
+        $festivals = MovieHelpers::getMovieFestivals();
+        foreach($festivals as $festival) {
+            echo '
+            <tr>
+                <td class>
+                    <p class = "title">' . $festival->get('Name') . '</p>
+                    <p class = "description">' . $festival->get('Description') . '</p>
+                </td>
+            </tr>';
+        }
+     
+       ?>
     </table>
 </div>
 

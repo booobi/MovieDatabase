@@ -5,7 +5,7 @@
     class DBOperations {
     
         public static function createConnection() {
-            include '../includes/DBCredentials.php';
+            include $_SERVER['DOCUMENT_ROOT'] . '/includes/DBCredentials.php';
             $conn = new mysqli($servername, $username, $password, $dbname);
         
             if ($conn->connect_error) {

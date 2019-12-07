@@ -1,6 +1,6 @@
 $('#log-out-btn').click(() => {
 	$.ajax({
-		url: '/Services/Logout.php',
+		url: '/api/Logout.php',
 		type: 'POST',
 		dataType: 'json',
 		success: (data) => {
@@ -21,7 +21,7 @@ function validate_login() {
 	}
 	else{
 		$.ajax({
-			url: '/Services/Login.php',
+			url: '/api/Login.php',
 			type: 'POST',
 			dataType: 'json',
 			data: $( "form[name='login-form']" ).serialize(),
@@ -55,7 +55,7 @@ function validate_signin() {
 	else{
 		//document.getElementsByName("signin").submit();
 		$.ajax({
-			url: '/Services/RegisterUser.php',
+			url: '/api/Register.php',
 			type: 'POST',
 			dataType: 'json',
 			data: $( "form[name='signup-form']" ).serialize(),

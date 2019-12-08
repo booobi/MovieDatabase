@@ -15,11 +15,18 @@
 
     $userId = UserHelpers::getUserIdByUsername($_SESSION["username"]);
 
-    MovieHelpers::rateMovie($userId, $_POST['movieId'], $_POST['rating']);
-
-    echo json_encode(
-        [
-            'status'=>'success',
-            'description'=>'You have successfully rated this movie!'
-        ]);
+    $operation = MovieHelpers::rateMovie($userId, $_POST['movieId'], $_POST['rating']);
+    if($operation == "create") {
+        echo json_encode(
+            [
+                'status'=>'success',
+                'description'=>'You have successfully rated this movie!'
+            ]);
+    } else {
+        echo json_encode(
+            [
+                'status'=>'success',
+                'description'=>'You have changed your rating for this movie!'
+            ]);
+    }
 ?>

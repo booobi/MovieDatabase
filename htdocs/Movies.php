@@ -74,7 +74,7 @@
                 '. $movie->get('Category') .'
                 </td>
                 <td class = "hide-content">
-                   '. $movie->get('Rating') . '
+                   '. ($movie->get('Rating') == "0" ? "No Rating Yet" : $movie->get('Rating')) . '
                    <button class="edit_rating_button" onclick="openRatingModal('.$movie->get('Id').')">Rate</button><br>
                 </td>
                 <td class = "hide-content">

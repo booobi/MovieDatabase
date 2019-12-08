@@ -61,15 +61,28 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 		$existingRatingRes = 
 	DBOperations::prepareAndExecute("SELECT UserId FROM userratings WHERE UserId = {$userId} AND MovieID = {$movieId}");
 
+		$operation;
 		//if rating for this movie from this user exists -> update the rating
 		if ($existingRatingRes->num_rows > 0) {
+			$operation = "update";
 			DBOperations::prepareAndExecute("
 			UPDATE `userratings` SET `MovieRating`= {$rating} WHERE UserId = {$userId} AND MovieID={$movieId}");
 		} else {
+			$operation = "create";
 			DBOperations::prepareAndExecute("
 			INSERT INTO `userratings`(`UserId`, `MovieID`, `MovieRating`) VALUES ({$userId},{$movieId},{$rating});");
 		}
+
+		//update global user rating with average
+		DBOperations::prepareAndExecute(
+			"UPDATE movies SET MovieRating = 
+				(SELECT AVG(userratings.MovieRating) 
+				FROM userratings 
+				WHERE userratings.MovieID = {$movieId}) 
+				WHERE MovieId={$movieId};");
+
 		
+		return $operation;
 	}
 
     public static function getHomeRecentMovies() {

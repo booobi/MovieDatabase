@@ -29,7 +29,7 @@
     <div id="user-menu-container">
         <div class="user-buttons">
             <?php
-                session_start();
+                //session_start();
                 if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']) {
                     echo '<button class="profile-btn" id="admin-btn">Administration</button>';
                 }

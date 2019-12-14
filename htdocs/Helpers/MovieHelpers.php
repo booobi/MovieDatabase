@@ -5,7 +5,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 
  class MovieHelpers {
 
-	public static function getMovies($size=20, $orderByColumn="UpdatedOn") {
+	public static function getMovies($size=20, $orderByColumn="Name") {
 		$result = DBOperations::prepareAndExecute(
 			"SELECT movies.MovieId as MovieId,
 			movies.Name AS MovieName,

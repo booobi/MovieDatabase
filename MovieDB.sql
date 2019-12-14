@@ -154,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `movieparticipants` (
 CREATE TABLE IF NOT EXISTS `movies` (
   `MovieId` int(11) NOT NULL,
   `Name` varchar(50) NOT NULL,
-  `ReleaseDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `ReleaseDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Description` varchar(250) DEFAULT NULL,
   `Link` varchar(200) DEFAULT NULL,
   `Country` varchar(150) NOT NULL,

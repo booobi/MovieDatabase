@@ -1,10 +1,89 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/Models/Movie.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/Models/Festival.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Models/Movie.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Models/Festival.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 
  class MovieHelpers {
 
+	public static function getMovies($size=20, $orderByColumn="Name") {
+		$result = DBOperations::prepareAndExecute(
+			"SELECT movies.MovieId as MovieId,
+			movies.Name AS MovieName,
+			c.Name AS CategoryName,
+			movies.MovieRating AS MovieRating,
+			movies.IMDBRating As MovieIMDBRating,
+			CAST(movies.ReleaseDate AS DATE) AS ReleaseDate,
+			movies.Country as MovieCountry,
+			movies.Language as MovieLanguage,
+			movies.Duration as MovieDuration,
+			movies.PosterImgSrc as MoviePosterImgSrc
+			FROM movies
+			INNER JOIN movies_categories mc
+			ON mc.MovieId = movies.MovieId
+			INNER JOIN categories c
+			ON c.CategoryId = mc.CategoryId
+			ORDER BY movies." . $orderByColumn . " LIMIT " . $size);
+
+		$movieList = [];
+
+		if ($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
+				$movie = new Movie();
+				$movie->set('Id', $row["MovieId"]);
+				$movie->set('Name', $row["MovieName"]);
+				$movie->set('Category', $row["CategoryName"]);
+				$movie->set('Rating', $row["MovieRating"]);
+				$movie->set('IMDBRating', $row["MovieIMDBRating"]);
+				$movie->set('ReleaseDate', $row["ReleaseDate"]);
+				$movie->set('Country', $row["MovieCountry"]);
+				$movie->set('Language', $row["MovieLanguage"]);
+				$movie->set('Duration', $row["MovieDuration"]);
+				$movie->set('PosterImgSrc', $row["MoviePosterImgSrc"]);
+			
+				$movieList[] = $movie;
+			}
+		}
+
+		return $movieList;
+	}
+
+
+	public static function deleteMovie($movieId) { 
+		
+		// DBOperations::prepareAndExecute("DELETE FROM movies_categories WHERE MovieId = {$movieId};");
+		// DBOperations::prepareAndExecute("DELETE FROM movieevents WHERE MovieId = {$movieId};");
+		DBOperations::prepareAndExecute("DELETE FROM movies WHERE MovieId = {$movieId};");
+
+	}
+
+	public static function rateMovie($userId, $movieId, $rating) {
+		
+		$existingRatingRes = 
+	DBOperations::prepareAndExecute("SELECT UserId FROM userratings WHERE UserId = {$userId} AND MovieID = {$movieId}");
+
+		$operation;
+		//if rating for this movie from this user exists -> update the rating
+		if ($existingRatingRes->num_rows > 0) {
+			$operation = "update";
+			DBOperations::prepareAndExecute("
+			UPDATE `userratings` SET `MovieRating`= {$rating} WHERE UserId = {$userId} AND MovieID={$movieId}");
+		} else {
+			$operation = "create";
+			DBOperations::prepareAndExecute("
+			INSERT INTO `userratings`(`UserId`, `MovieID`, `MovieRating`) VALUES ({$userId},{$movieId},{$rating});");
+		}
+
+		//update global user rating with average
+		DBOperations::prepareAndExecute(
+			"UPDATE movies SET MovieRating = 
+				(SELECT AVG(userratings.MovieRating) 
+				FROM userratings 
+				WHERE userratings.MovieID = {$movieId}) 
+				WHERE MovieId={$movieId};");
+
+		
+		return $operation;
+	}
 
     public static function getHomeRecentMovies() {
 
@@ -30,7 +109,14 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 
 		if ($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {
-				$movieList [] = new Movie( $row["MovieName"], $row["CategoryName"], NULL , $row["MovieRating"], $row["ReleaseDate"], $row['CreatedOn'] );
+				$movie = new Movie();
+				$movie->set('Name', $row["MovieName"]);
+				$movie->set('Category', $row["CategoryName"]);
+				$movie->set('Rating', $row["MovieRating"]);
+				$movie->set('ReleaseDate', $row["ReleaseDate"]);
+				$movie->set('CreatedOn', $row["CreatedOn"]);
+				// $movieList [] = new Movie( $row["MovieName"], $row["CategoryName"], NULL , $row["MovieRating"], $row["ReleaseDate"], $row['CreatedOn'] );
+				$movieList[] = $movie;
 			}
         }
         
@@ -47,7 +133,10 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 
 		if ($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {
-				$movieList [] = new Movie( $row["MovieName"], NULL, NULL, NULL, NULL, NULL);
+				$movie = new Movie();
+				$movie->set('Name', $row['MovieName']);
+				// $movieList [] = new Movie( $row["MovieName"], NULL, NULL, NULL, NULL, NULL);
+				$movieList[] = $movie;
 			}
         }
         
@@ -67,11 +156,16 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 
 			if ($result->num_rows > 0) {
 				while($row = $result->fetch_assoc()) {
-					$movieList [] = new Movie( $row["MovieName"], $row["MovieDescription"], NULL, NULL, NULL, NULL);
+					// $movies[] = new Movie( $row["MovieName"], $row["MovieDescription"], NULL, NULL, NULL, NULL);
+					$movie = new Movie();
+					$movie->set('Name', $row["MovieName"]);
+					$movie->set('Description', $row["MovieDescription"]);
+
+					$movies[] = $movie;
 				}
 			}
 
-			return $movieList;
+			return $movies;
 	}
 
 	public static function getMovieProjectionsBetween($dateStart, $dateEnd) {

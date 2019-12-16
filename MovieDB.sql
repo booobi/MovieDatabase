@@ -154,14 +154,14 @@ CREATE TABLE IF NOT EXISTS `movieparticipants` (
 CREATE TABLE IF NOT EXISTS `movies` (
   `MovieId` int(11) NOT NULL,
   `Name` varchar(50) NOT NULL,
-  `ReleaseDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `ReleaseDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Description` varchar(250) DEFAULT NULL,
   `Link` varchar(200) DEFAULT NULL,
   `Country` varchar(150) NOT NULL,
   `Language` varchar(150) NOT NULL,
   `MovieRating` float NOT NULL DEFAULT '0',
   `IMDBRating` float DEFAULT '0',
-  `Poster` varchar(150) NOT NULL,
+  `PosterImgSrc` varchar(150) NOT NULL,
   `IsActive` bit(1) NOT NULL,
   `Duration` time NOT NULL,
   `Tags` varchar(150) NOT NULL,
@@ -174,17 +174,17 @@ CREATE TABLE IF NOT EXISTS `movies` (
 -- Dumping data for table `movies`
 --
 
-INSERT INTO `movies` (`MovieId`, `Name`, `ReleaseDate`, `Description`, `Link`, `Country`, `Language`, `MovieRating`, `IMDBRating`, `Poster`, `IsActive`, `Duration`, `Tags`, `Rewards`) VALUES
-(1, 'The Shawshank Redemption', '1993-12-31 22:00:00', 'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.', 'https://www.imdb.com/title/tt0111161/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_1', 'USA', 'English', 9, 9.3, '', b'1', '02:22:00', '', NULL),
-(2, 'The Godfather', '1971-12-31 22:00:00', 'The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.', 'https://www.imdb.com/title/tt0068646/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_2', 'USA', 'English', 9, 9.2, '', b'1', '02:55:00', '', NULL),
-(3, 'The Godfather: Part II', '2019-11-22 22:29:37', 'The early life and career of Vito Corleone in 1920s New York City is portrayed, while his son, Michael, expands and tightens his grip on the family crime syndicate.', 'https://www.imdb.com/title/tt0071562/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_3', 'USA', 'English', 8.5, 9, '', b'1', '03:22:00', '', NULL),
-(4, 'The Dark Knight', '2019-11-22 22:34:32', 'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.', 'https://www.imdb.com/title/tt0468569/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_4', 'USA', 'English', 8.5, 9, '', b'1', '02:32:00', '', NULL),
-(5, '12 Angry Men', '0000-00-00 00:00:00', 'A jury holdout attempts to prevent a miscarriage of justice by forcing his colleagues to reconsider the evidence.', 'https://www.imdb.com/title/tt0050083/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_5', 'USA', 'English', 8.3, 8.9, '', b'1', '01:36:00', '', NULL),
-(6, 'Schindler''s List', '1992-12-31 22:00:00', 'In German-occupied Poland during World War II, industrialist Oskar Schindler gradually becomes concerned for his Jewish workforce after witnessing their persecution by the Nazis.', 'https://www.imdb.com/title/tt0108052/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_6', 'USA', 'English', 8.3, 8.9, '', b'1', '03:15:00', '', NULL),
-(7, 'The Lord of the Rings: The Return of the King', '2002-12-31 22:00:00', 'Gandalf and Aragorn lead the World of Men against Sauron''s army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring.', 'https://www.imdb.com/title/tt0167260/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_7', 'USA', 'English', 8.3, 8.9, '', b'1', '03:21:00', '', NULL),
-(8, 'Pulp Fiction', '1993-12-31 22:00:00', 'he lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.', 'https://www.imdb.com/title/tt0110912/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_8', 'USA', 'English', 8.9, 8.9, '', b'1', '02:34:00', '', NULL),
-(9, 'The Good, the Bad and the Ugly', '0000-00-00 00:00:00', 'A bounty hunting scam joins two men in an uneasy alliance against a third in a race to find a fortune in gold buried in a remote cemetery.', 'https://www.imdb.com/title/tt0060196/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_9', 'USA', 'English', 8, 8.8, '', b'1', '02:58:00', '', NULL),
-(10, 'Fight Club', '2019-11-22 22:41:51', 'An insomniac office worker and a devil-may-care soapmaker form an underground fight club that evolves into something much, much more.', 'https://www.imdb.com/title/tt0137523/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_10', 'USA', 'English', 8.8, 8.8, '', b'1', '02:19:00', '', NULL);
+INSERT INTO `movies` (`MovieId`, `Name`, `ReleaseDate`, `Description`, `Link`, `Country`, `Language`, `MovieRating`, `IMDBRating`, `PosterImgSrc`, `IsActive`, `Duration`, `Tags`, `Rewards`) VALUES
+(1, 'The Shawshank Redemption', '1993-12-31 22:00:00', 'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.', 'https://www.imdb.com/title/tt0111161/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_1', 'USA', 'English', 0, 9.3, 'https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg', b'1', '02:22:00', '', NULL),
+(2, 'The Godfather', '1971-12-31 22:00:00', 'The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.', 'https://www.imdb.com/title/tt0068646/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_2', 'USA', 'English', 0, 9.2, 'https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,704,1000_AL_.jpg', b'1', '02:55:00', '', NULL),
+(3, 'The Godfather: Part II', '2019-11-22 22:29:37', 'The early life and career of Vito Corleone in 1920s New York City is portrayed, while his son, Michael, expands and tightens his grip on the family crime syndicate.', 'https://www.imdb.com/title/tt0071562/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_3', 'USA', 'English', 0, 9, 'https://m.media-amazon.com/images/M/MV5BMWMwMGQzZTItY2JlNC00OWZiLWIyMDctNDk2ZDQ2YjRjMWQ0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,701,1000_AL_.jpg', b'1', '03:22:00', '', NULL),
+(4, 'The Dark Knight', '2019-11-22 22:34:32', 'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.', 'https://www.imdb.com/title/tt0468569/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_4', 'USA', 'English', 0, 9, 'https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SY1000_CR0,0,675,1000_AL_.jpg', b'1', '02:32:00', '', NULL),
+(5, '12 Angry Men', '0000-00-00 00:00:00', 'A jury holdout attempts to prevent a miscarriage of justice by forcing his colleagues to reconsider the evidence.', 'https://www.imdb.com/title/tt0050083/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_5', 'USA', 'English', 0, 8.9, 'https://m.media-amazon.com/images/M/MV5BMWU4N2FjNzYtNTVkNC00NzQ0LTg0MjAtYTJlMjFhNGUxZDFmXkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_SY1000_CR0,0,649,1000_AL_.jpg', b'1', '01:36:00', '', NULL),
+(6, 'Schindler''s List', '1992-12-31 22:00:00', 'In German-occupied Poland during World War II, industrialist Oskar Schindler gradually becomes concerned for his Jewish workforce after witnessing their persecution by the Nazis.', 'https://www.imdb.com/title/tt0108052/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_6', 'USA', 'English', 0, 8.9, 'https://m.media-amazon.com/images/M/MV5BNDE4OTMxMTctNmRhYy00NWE2LTg3YzItYTk3M2UwOTU5Njg4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SY1000_CR0,0,666,1000_AL_.jpg', b'1', '03:15:00', '', NULL),
+(7, 'The Lord of the Rings: The Return of the King', '2002-12-31 22:00:00', 'Gandalf and Aragorn lead the World of Men against Sauron''s army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring.', 'https://www.imdb.com/title/tt0167260/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_7', 'USA', 'English', 0, 8.9, 'https://m.media-amazon.com/images/M/MV5BNzA5ZDNlZWMtM2NhNS00NDJjLTk4NDItYTRmY2EwMWZlMTY3XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,675,1000_AL_.jpg', b'1', '03:21:00', '', NULL),
+(8, 'Pulp Fiction', '1993-12-31 22:00:00', 'he lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.', 'https://www.imdb.com/title/tt0110912/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_8', 'USA', 'English', 0, 8.9, 'https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,686,1000_AL_.jpg', b'1', '02:34:00', '', NULL),
+(9, 'The Good, the Bad and the Ugly', '0000-00-00 00:00:00', 'A bounty hunting scam joins two men in an uneasy alliance against a third in a race to find a fortune in gold buried in a remote cemetery.', 'https://www.imdb.com/title/tt0060196/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_9', 'USA', 'English', 0, 8.8, 'https://m.media-amazon.com/images/M/MV5BOTQ5NDI3MTI4MF5BMl5BanBnXkFtZTgwNDQ4ODE5MDE@._V1_SY1000_CR0,0,656,1000_AL_.jpg', b'1', '02:58:00', '', NULL),
+(10, 'Fight Club', '2019-11-22 22:41:51', 'An insomniac office worker and a devil-may-care soapmaker form an underground fight club that evolves into something much, much more.', 'https://www.imdb.com/title/tt0137523/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_10', 'USA', 'English', 0, 8.8, 'https://m.media-amazon.com/images/M/MV5BMmEzNTkxYjQtZTc0MC00YTVjLTg5ZTEtZWMwOWVlYzY0NWIwXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,666,1000_AL_.jpg', b'1', '02:19:00', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -247,8 +247,8 @@ CREATE TABLE IF NOT EXISTS `userratings` (
   `UserId` int(11) NOT NULL,
   `MovieID` int(11) NOT NULL,
   `MovieRating` float NOT NULL,
-  `PostRating` float NOT NULL,
-  `PostId` int(11) NOT NULL
+  `PostRating` float,
+  `PostId` int(11)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -506,7 +506,7 @@ ADD CONSTRAINT `ParticipantIdE` FOREIGN KEY (`ParticipantId`) REFERENCES `users`
 -- Constraints for table `movieevents`
 --
 ALTER TABLE `movieevents`
-ADD CONSTRAINT `MovieIdE` FOREIGN KEY (`MovieId`) REFERENCES `movies` (`MovieId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+ADD CONSTRAINT `MovieIdE` FOREIGN KEY (`MovieId`) REFERENCES `movies` (`MovieId`) ON DELETE CASCADE ON UPDATE NO ACTION,
 ADD CONSTRAINT `OwnerIdE` FOREIGN KEY (`OwnerId`) REFERENCES `users` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
@@ -515,14 +515,14 @@ ADD CONSTRAINT `OwnerIdE` FOREIGN KEY (`OwnerId`) REFERENCES `users` (`UserId`) 
 ALTER TABLE `movieexchanges`
 ADD CONSTRAINT `ExchangeRequestedBy` FOREIGN KEY (`ExchangeRequestBy`) REFERENCES `users` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
 ADD CONSTRAINT `ExchangeRequestedTo` FOREIGN KEY (`ExchangeRequestTo`) REFERENCES `users` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `MovieToShare` FOREIGN KEY (`MovieToShare`) REFERENCES `movies` (`MovieId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ADD CONSTRAINT `MovieToShare` FOREIGN KEY (`MovieToShare`) REFERENCES `movies` (`MovieId`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `movies_categories`
 --
 ALTER TABLE `movies_categories`
 ADD CONSTRAINT `CategoryId` FOREIGN KEY (`CategoryId`) REFERENCES `categories` (`CategoryId`),
-ADD CONSTRAINT `MovieId` FOREIGN KEY (`MovieId`) REFERENCES `movies` (`MovieId`);
+ADD CONSTRAINT `MovieId` FOREIGN KEY (`MovieId`) REFERENCES `movies` (`MovieId`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `movies_participants`
@@ -541,10 +541,10 @@ ADD CONSTRAINT `OwnerIdP` FOREIGN KEY (`OwnerId`) REFERENCES `users` (`UserId`) 
 --
 -- Constraints for table `userratings`
 --
-ALTER TABLE `userratings`
-ADD CONSTRAINT `MovieIdR` FOREIGN KEY (`MovieID`) REFERENCES `movies` (`MovieId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `PostIdR` FOREIGN KEY (`PostId`) REFERENCES `posts` (`PostId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `UserIdR` FOREIGN KEY (`UserId`) REFERENCES `users` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ALTER TABLE `userratings`
+-- ADD CONSTRAINT `MovieIdR` FOREIGN KEY (`MovieID`) REFERENCES `movies` (`MovieId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+-- ADD CONSTRAINT `PostIdR` FOREIGN KEY (`PostId`) REFERENCES `posts` (`PostId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+-- ADD CONSTRAINT `UserIdR` FOREIGN KEY (`UserId`) REFERENCES `users` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `user_owned_movies`

@@ -18,13 +18,13 @@ function deleteMovie(id) {
 }
 
 function openRatingModal(movieId) {
-	$('#rating_modal').show();
-	$('#rating_modal').data('movieId', movieId);
+	$('#rating-box').show();
+	$('#rating-box').data('movieId', movieId);
 }
 
 $('#rateSubmitBtn').click((e) => {
 	e.preventDefault();
-	movieId = $('#rating_modal').data('movieId');
+	movieId = $('#rating-box').data('movieId');
 	rating = $('#rateSelect').val();
 	$.ajax({
 		url: '/api/Movies/Rate.php',

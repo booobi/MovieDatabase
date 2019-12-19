@@ -75,7 +75,7 @@
                 </td>
                 <td class = "hide-content">
                    '. ($movie->get('Rating') == "0" ? "No Rating Yet" : $movie->get('Rating')) . '
-                   <button class = "rating-btn" onclick="openRatingModal('.$movie->get('Id').')">Give a rating</button>
+                   <button class = "rating-btn" onclick="showRatingModal('.$movie->get('Id').')">Give a rating</button>
                 </td>
                 <td class = "hide-content">
                 '. $movie->get('IMDBRating') .'
@@ -94,6 +94,8 @@
                 </td>
                 <td class = "hide-content">';
                 
+                echo '<button class = "more-btn" onclick="showInfoModal('.$movie->get('Id').')">More</button>';
+                
                 if(
                 (isset($_SESSION['username']) && in_array($movie->get('Id'), UserHelpers::getUserOwnedMovies($_SESSION['username'])))
                 || 
@@ -109,6 +111,76 @@
         ?>
         </table>
     </div>
+
+
+
+<div id = "info-container">
+    <img class = "close-btn" id="info-close-btn" src="/images/xbutton.png">
+    <div id="info-box">
+        <div class = "info-scroller">
+            <div id = "info">
+                <div>
+                    <label for="director">Director</label><br>
+                    <p id='directorText'></p>
+                    
+                </div>
+                <div>
+                    <label for="awards">Awards</label><br>
+                    <p id='awardsText'></p>
+                    
+                </div>
+                <div>
+                    <label for="music">Music</label><br>
+                    <p id='musicText'></p>
+                    
+                </div>
+                <div>
+                    <label for="company">Movie company</label><br>
+                    <p id='companyText'></p>
+                    
+                </div>
+                <div>
+                    <label for="language">Language</label><br>
+                    <p id='languageText'></p>
+                    
+                </div>
+                <div>
+                    <label for="date">Release Date</label><br>
+                    <p id='releaseDateText'></p>
+                    
+                </div>
+                <div>
+                    <label for="trailer">Trailer</label><br>
+                    <p id='trailerText'></p>
+                </div>
+                <div>
+                    <label for="duration">Duration</label><br>
+                    <p id='durationText'></p>
+                </div>
+                <div>
+                    <label for="country">Country</label><br>
+                    <p id='countryText'></p>
+                </div>
+                <div>
+                    <label for="imdb-rating">IMDB rating</label><br>
+                    <p id='imdbRatingText'></p>
+                </div>
+                <div id = "actors-text">
+                    <label for="actors">Actors</label><br>
+                    <p id='actorsText'></p>
+                </div>
+                <div id = "lead-actors-text">
+                    <label for="lead-actors">Lead actors</label><br>
+                    <p id='mainActorsText'></p>
+                </div>
+                <div id = "description-text">
+                    <label for="description">Description</label><br>
+                    <p id='descriptionText'></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <div id = "rating-box">

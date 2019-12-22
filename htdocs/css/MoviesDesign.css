@@ -205,6 +205,13 @@ select {
         color: rgba(48,24,33,0.87);
         background-color: rgba(129, 92, 85, 0.76);
     }
+
+    .rating-btn {
+        display: block;
+        margin: 22px auto;
+        padding: 10px 20px;
+        color: #3d2a1f;
+    }
 }
 
 /* ------------ MODAL ---------------- */
@@ -250,3 +257,161 @@ select {
       width: 150px;
   }
 /* --------- MODAL END --------- */
+
+
+.rating-btn {
+    margin-top: 20px;
+    padding: 8px;
+    border-radius: 8px;
+    font-family: Lato, sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    border: none;
+    color: #412c20;
+    background-color: rgba(129, 92, 85, 0.76);
+    display: block;
+}
+
+/* ------- Rating modal START ----------------*/
+#rating-box {
+    position: fixed;
+    top: 0;
+    margin: auto;
+    width: 1519px;
+    height: 100%;
+    display: none;
+    overflow: hidden;
+    z-index: 5;
+    background-color: rgba(92, 72, 64, 0.86);
+}
+
+#rating-box select {
+    -o-appearance: none;
+    -ms-appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 50px;
+    font-size: 20px;
+    border: none;
+    text-align: center;
+    background-color: rgba(137, 86, 83, 0.76);
+}
+
+#rating-box option {
+    font-size: 19px;
+    text-align: center;
+    border:  none;
+    background-color: rgba(153, 88, 83, 0.42);
+}
+
+#rating {
+    position: absolute;
+    margin: 200px 632px auto 632px;
+    padding: 30px 100px 160px 100px;
+    height: 10%;
+    font-family: Lato, sans-serif;
+    font-size: 18px;
+    text-align: center;
+    overflow: auto;
+    border: solid medium #b8a097;
+    color: rgba(9, 2, 0, 0.76);
+    background-color: rgb(165, 130, 118);
+}
+
+#rating-close-btn {
+    margin-top: 120px;
+    margin-right: 566px;
+    float: right;
+}
+
+/* ---------------RATING MODAL END ---------------- */
+
+/* ----- INFO MODAL START */
+#info-container {
+    position: fixed;
+    top: 0;
+    margin: auto;
+    width: 1519px;
+    height: 100%;
+    display: none;
+    overflow: hidden;
+    z-index: 5;
+    background-color: rgba(92, 72, 64, 0.86);
+}
+
+#info-box {
+    margin-top: 180px;
+    margin-left: 560px;
+    font-family: Lato, sans-serif;
+}
+
+.info-scroller {
+    width: 400px;
+    height: 400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-color: rgba(37, 38, 53, 0.85) #95766f;
+    scrollbar-width: thin;
+}
+
+#info {
+    margin: 0 auto auto -100px;
+    padding: 30px 100px 20px 100px;
+    width: 380px;
+    font-family: Lato, sans-serif;
+    font-size: 18px;
+    text-align: center;
+    color: rgba(9, 2, 0, 0.76);
+    background-color: rgb(165, 130, 118);
+}
+
+#info div {
+    margin: 15px auto auto auto;
+}
+
+#info label {
+    padding-left: 0;
+    width: 120px;
+    font-size: 22px;
+}
+
+#info a {
+    font-weight: bold;
+    text-decoration: none;
+    color: #3b2c2c;
+}
+
+#info-close-btn {
+    margin-top: 105px;
+    margin-right: 496px;
+    float: right;
+}
+/* -----INFO MODAL END -------- */
+
+/* MORE BUTTON START */
+.more-btn {
+    width: 120px;
+    color: #3d2a1f;
+    background-color: #78574c;
+}
+
+.more-btn, .change-movie-btn {
+    position: relative;
+    margin: 10px auto;
+}
+.more-btn, .change-movie-btn, .change-movie-btn a {
+    font-family: Lato, sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.more-btn, .change-movie-btn {
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    display: block;
+}
+
+/* MORE BUTTON END */

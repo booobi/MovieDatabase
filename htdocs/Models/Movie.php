@@ -11,7 +11,13 @@
 		private $Language;
 		private $Duration;
 		private $PosterImgSrc;
-		private $createdOn;
+		private $TrailerSrc;
+		private $Awards;
+		private $MovieStudio;
+		private $MusicStudio;
+		private $Actors;
+		private $Director;
+		private $CreatedOn;
 		private $UpdatedOn;
 		
 		public function get($property) {
@@ -28,11 +34,25 @@
 		
 		public function jsonSerialize() {
 			return [
+				'Id' => $this->Id,
 				'Name' => $this->Name,
 				'Category' => $this->Category,
 				'Rating' => $this->Rating,
+				'IMDBRating' => $this->IMDBRating,
 				'ReleaseDate' => $this->ReleaseDate,
-				'CreatedOn' => $this->CreatedOn
+				'Description' => $this->Description,
+				'Country' => $this->Country,
+				'Language' => $this->Language,
+				'Duration' => $this->Duration,
+				'PosterImgSrc' => $this->PosterImgSrc,
+				'TrailerSrc' => $this->TrailerSrc,
+				'Awards' => $this->Awards,
+				'MovieStudio' => $this->MovieStudio,
+				'MusicStudio' => $this->MusicStudio,
+				'Actors' => $this->Actors,
+				'Director' => $this->Director,
+				'CreatedOn' => $this->CreatedOn,
+				'UpdatedOn' => $this->UpdatedOn
 			];
 		}
 	}

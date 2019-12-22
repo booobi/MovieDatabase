@@ -148,6 +148,63 @@ CREATE TABLE IF NOT EXISTS `movieparticipants` (
 -- --------------------------------------------------------
 
 --
+-- DATA FOR MOVIEPARTICIPANTS
+--
+INSERT INTO `movieparticipants`(`MovieParticipantId`, `FirstName`, `LastName`, `Position`) VALUES 
+(1, "Tim", "Robbins","actor"),
+(2, "Morgan", "Freeman","actor"),
+(3, "Bob", "Gunton","actor"),
+(4, "William", "Sadler","actor"),
+(5, "Frank", "Darabont","director"),
+
+(6, "Marlon", "Brando","actor"),
+(7, "Al", "Pacino","actor"),
+(8, "Francis", "Coppola","director"),
+
+(9, "Marlon", "Brando","actor"),
+(10, "Al", "Pacino","actor"),
+(11, "Francis", "Coppola","director"),
+
+(12, "Christian", "Bale","actor"),
+(13, "Heath", "Ledger","actor"),
+(14, "Aaron", "Eckhart","actor"),
+(15, "Michael", "Caine","actor"),
+(16, "Christopher", "Nolan","director"),
+
+(17, "Martin", "Balsam","actor"),
+(18, "John", "Fiedler","actor"),
+(19, "Lee", "Cobb","actor"),
+(20, "Jack", "Klugman","actor"),
+(21, "Sidney", "Lumet","director"),
+
+(22, "Liam", "Neeson","actor"),
+(23, "Ben", "Kingsley","actor"),
+(24, "Ralph", "Fiennes","actor"),
+(25, "Caroline", "Goodall","actor"),
+(26, "Steven", " Spielberg","director"),
+
+(27, "Noel", "Appleby","actor"),
+(28, "Ali", "Astin","actor"),
+(29, "Sean", "Astin","actor"),
+(30, "Peter", "Jackson","director"),
+
+(31, "Tim", "Roth","actor"),
+(32, "Amanda", "Plummer","actor"),
+(33, "Laura", "Lovelace","actor"),
+(34, "Quentin", "Tarantino","director"),
+
+(35, "Eli", "Wallach","actor"),
+(36, "Clint", "Eastwood","actor"),
+(37, "Lee Van", "Cleef","actor"),
+(38, "Sergio", "Leone","director"),
+ 
+(39, "Edward", "Norton","actor"),
+(40, "Brad", "Pitt","actor"),
+(41, "Meat", "Loaf","actor"),
+(42, "David", "Fincher","director");
+
+
+--
 -- Table structure for table `movies`
 --
 
@@ -162,10 +219,13 @@ CREATE TABLE IF NOT EXISTS `movies` (
   `MovieRating` float NOT NULL DEFAULT '0',
   `IMDBRating` float DEFAULT '0',
   `PosterImgSrc` varchar(150) NOT NULL,
+  `TrailerSrc` varchar(150) DEFAULT NULL,
   `IsActive` bit(1) NOT NULL,
   `Duration` time NOT NULL,
   `Tags` varchar(150) NOT NULL,
   `Rewards` varchar(250) DEFAULT NULL,
+  `MovieStudio` varchar(250) DEFAULT NULL,
+  `MusicStudio` varchar(250) DEFAULT NULL,
   `UpdatedOn` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
   `CreatedOn` TIMESTAMP NOT NULL DEFAULT NOW()
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
@@ -222,6 +282,62 @@ CREATE TABLE IF NOT EXISTS `movies_participants` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
+
+--
+-- DATA FOR MOVIES_PARTICIPANTS
+--
+INSERT INTO `movies_participants`(`Movies_ParticipantsId`, `MovieId`, `ParticipantId`, `IsMainActor`) VALUES 
+(1,1,1,1),
+(2,1,2,1),
+(3,1,3,1),
+(4,1,4,0),
+(5,1,5,0),
+
+(6,2,6,1),
+(7,2,7,1),
+(8,2,8,0),
+
+(9,3,9,1),
+(10,3,10,1),
+(11,3,11,0),
+
+(12,4,12,1),
+(13,4,13,1),
+(14,4,14,0),
+(15,4,15,0),
+(16,4,16,0),
+
+(17,5,17,1),
+(18,5,18,1),
+(19,5,19,1),
+(20,5,20,1),
+(21,5,21,0),
+
+(22,6,22,1),
+(23,6,23,1),
+(24,6,24,1),
+(25,6,25,0),
+(26,6,26,0),
+
+(27,7,27,1),
+(28,7,28,1),
+(29,7,29,1),
+(30,7,30,0),
+
+(31,8,31,1),
+(32,8,32,1),
+(33,8,33,1),
+(34,8,34,0),
+
+(35,9,35,1),
+(36,9,36,1),
+(37,9,37,1),
+(38,9,38,0),
+
+(39,10,39,1),
+(40,10,40,1),
+(41,10,41,0),
+(42,10,42,0);
 
 --
 -- Table structure for table `posts`

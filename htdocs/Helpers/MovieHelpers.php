@@ -1,9 +1,12 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Models/Movie.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Models/Festival.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Models/MovieParticipant.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 
  class MovieHelpers {
+
+
 
 	public static function getMovies($size=20, $orderByColumn="Name") {
 		$result = DBOperations::prepareAndExecute(
@@ -47,6 +50,103 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 		return $movieList;
 	}
 
+	
+	public static function getMovieParticipants($movieId) {
+		$result = DBOperations::prepareAndExecute(
+			"SELECT FirstName, LastName, Position FROM `movies_participants` m_p 
+			INNER JOIN `movieparticipants` mp 
+			WHERE m_p.ParticipantId = mp.MovieParticipantId AND MovieId={$movieId}");
+
+		$participants = [];
+
+		if ($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
+				$participant = new MovieParticipant();
+				$participant->set('FirstName', $row["FirstName"]);
+				$participant->set('LastName', $row["LastName"]);
+				$participant->set('Position', $row["Position"]);
+				
+				$participants[] = $participant;
+			}
+		}
+
+		return $participants;	
+	}
+
+	public static function getMovie($movieId) {
+		//base movie data
+		$movieResult = DBOperations::prepareAndExecute(
+		"SELECT movies.MovieId, movies.Name as MovieName, ReleaseDate, movies.Description,
+		PosterImgSrc, Country, Language, MovieRating, IMDBRating, Duration, Rewards, 
+		CreatedOn, UpdatedOn, c.Name as CategoryName, MusicStudio, MovieStudio, TrailerSrc
+		from movies 
+		INNER JOIN movies_categories mc ON mc.MovieId = movies.MovieId 
+		INNER JOIN categories c ON c.CategoryId = mc.CategoryId 
+		WHERE movies.MovieId = {$movieId}");
+
+		$movie = new Movie();
+
+		if ($movieResult->num_rows > 0) {
+			$row = $movieResult->fetch_assoc();
+				
+				$movie->set('Id', $row["MovieId"]);
+				$movie->set('Name', $row["MovieName"]);
+				$movie->set('Category', $row["CategoryName"]);
+				$movie->set('MusicStudio', $row["MusicStudio"]);
+				$movie->set('MovieStudio', $row["MovieStudio"]);
+				$movie->set('Rating', $row["MovieRating"]);
+				$movie->set('IMDBRating', $row["IMDBRating"]);
+				$movie->set('ReleaseDate', $row["ReleaseDate"]);
+				$movie->set('Description', $row["Description"]);
+				$movie->set('Country', $row["Country"]);
+				$movie->set('Language', $row["Language"]);
+				$movie->set('Duration', $row["Duration"]);
+				$movie->set('Awards', $row["Rewards"]);
+				$movie->set('PosterImgSrc', $row["PosterImgSrc"]);
+				$movie->set('TrailerSrc', $row["TrailerSrc"]);
+	
+		}
+
+		//movie actors
+		$movieActorsRes = DBOperations::prepareAndExecute(
+			"SELECT FirstName, LastName, Position, isMainActor 
+			FROM `movieparticipants` INNER JOIN `movies_participants` 
+			ON movieparticipants.MovieParticipantId = movies_participants.Movies_ParticipantsId
+			WHERE movies_participants.MovieId = {$movieId}");
+
+		$movieActors = [];
+		if ($movieActorsRes->num_rows > 0) {
+			while($row = $movieActorsRes->fetch_assoc()) {
+				$actor = new MovieParticipant();
+				$actor->set("FirstName", $row['FirstName']);
+				$actor->set("LastName", $row['LastName']);
+				$actor->set("Position", $row['Position']);
+				$actor->set("isMainActor", $row['isMainActor']);
+
+				$movieActors[] = $actor;
+			}
+		}
+		$movie->set('Actors', $movieActors);
+		
+		//movie director
+		$movieDirectorRes = DBOperations::prepareAndExecute(
+			"SELECT FirstName, LastName, Position 
+			FROM `movieparticipants` INNER JOIN `movies_participants` 
+			ON movieparticipants.MovieParticipantId = movies_participants.Movies_ParticipantsId
+			WHERE movies_participants.MovieId = {$movieId} AND Position='director'");
+
+		if ($movieDirectorRes->num_rows > 0) {
+			$row = $movieDirectorRes->fetch_assoc();		
+			$director = new MovieParticipant();
+			$director->set("FirstName", $row['FirstName']);
+			$director->set("LastName", $row['LastName']);
+			$director->set("Position", $row['Position']);
+
+			$movie->set('Director', $director);
+		}
+
+		return $movie;
+	}
 
 	public static function deleteMovie($movieId) { 
 		

@@ -181,8 +181,25 @@
         </div>
     </div>
 </div>
-
-
+<div id="test">
+    <?php
+        $movie = new Movie();
+        $movie->set("Name", "AAAAAAA");
+        $movie->set("ReleaseDate", "1996-02-26");
+        $movie->set("Description", "asdasdasdasdasdasdasddsadsadasdadas");
+        $movie->set("Link", "http://google.bg");
+        $movie->set("Country", "Albania");
+        $movie->set("Language", "Albanian");
+        $movie->set("IMDBRating", 2);
+        $movie->set("PosterImgSrc", "http://google.bg");
+        $movie->set("TrailerSrc", "http://google.bg");
+        $movie->set("Duration", 120);
+        $movie->set("Awards", "Worst Movie EU");
+        $movie->set("MovieStudio", "Cargath Studios");
+        $movie->set("MusicStudio", "Reinkor Music Std");
+        $movies = MovieHelpers::addMovie($movie);
+    ?>
+</div>
 <div id = "rating-box">
     <img class="close-btn" id="rating-close-btn" src="/images/xbutton.png" onclick="$(this).parent().hide()">
     <div id = "rating">

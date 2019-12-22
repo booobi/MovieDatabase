@@ -10,6 +10,7 @@
 		private $Country;
 		private $Language;
 		private $Duration;
+		private $Link;
 		private $PosterImgSrc;
 		private $TrailerSrc;
 		private $Awards;
@@ -47,6 +48,7 @@
 				'PosterImgSrc' => $this->PosterImgSrc,
 				'TrailerSrc' => $this->TrailerSrc,
 				'Awards' => $this->Awards,
+				'Link' => $this->Link,
 				'MovieStudio' => $this->MovieStudio,
 				'MusicStudio' => $this->MusicStudio,
 				'Actors' => $this->Actors,

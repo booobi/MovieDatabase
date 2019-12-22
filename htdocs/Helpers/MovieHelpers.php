@@ -6,7 +6,27 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 
  class MovieHelpers {
 
+	public static function addMovie($movie) {
+		//insert in movies
+		DBOperations::prepareAndExecute(
+		"INSERT INTO 
+		`movies`
+		(`Name`, `ReleaseDate`, `Description`, `Link`, `Country`, `Language`, 
+		`MovieRating`, `IMDBRating`, `PosterImgSrc`, `TrailerSrc`, `IsActive`, 
+		`Duration`, `Rewards`, `MovieStudio`, `MusicStudio`) 
+		VALUES  " . " " . "
+		('" . $movie->get("Name") . "','" . $movie->get("ReleaseDate") . "','" . $movie->get("Description") . "',
+		'" . $movie->get("Link") . "','" . $movie->get("Country") . "','" . $movie->get("Language") . "'
+		,0," . $movie->get("IMDBRating") . ",'" . $movie->get("PosterImgSrc") . "','" . $movie->get("TrailerSrc") . "',1
+		,SEC_TO_TIME(" . $movie->get("Duration") . "*60),'" . $movie->get("Awards") . "','" . $movie->get("MovieStudio") . "',
+		'" . $movie->get("MusicStudio") . "')");
 
+		//get new movie Id
+		echo $movieID = MovieHelpers::getLastInsertedMovieId();
+
+		
+
+	}
 
 	public static function getMovies($size=20, $orderByColumn="Name") {
 		$result = DBOperations::prepareAndExecute(
@@ -304,6 +324,28 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 		}
 
 		return $festivals;
+	}
+
+	public static function getLastInsertedMovieId() {
+		$lastIdRes = DBOperations::prepareAndExecute(
+			"SELECT MovieId FROM `movies` ORDER BY CreatedOn DESC LIMIT 1");
+		
+			if ($lastIdRes->num_rows > 0) {
+			return ($lastIdRes->fetch_assoc())['MovieId'];
+		}
+
+		return NULL;
+	}
+
+	public static function getLastUpdatedMovieId() {
+		$lastIdRes = DBOperations::prepareAndExecute(
+			"SELECT MovieId FROM `movies` ORDER BY UpdatedOn DESC LIMIT 1");
+		
+			if ($lastIdRes->num_rows > 0) {
+			return ($lastIdRes->fetch_assoc())['MovieId'];
+		}
+
+		return NULL;
 	}
  }
 ?>

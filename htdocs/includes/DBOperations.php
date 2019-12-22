@@ -52,5 +52,10 @@
 
             return $result;
         }
+
+        static function getLastId() {
+            $conn = DBOperations::createConnection();
+            return $conn->insert_id; 
+        }
     }
 ?>

@@ -1,6 +1,6 @@
 <?php
 	class MovieParticipant implements JsonSerializable {
-        private $Movie;
+		private $Id;
 		private $FirstName;
         private $LastName;
 		private $Position;
@@ -23,6 +23,7 @@
         
         public function jsonSerialize() {
 			return [
+				'id' => $this->Id,
 				'firstName' => $this->FirstName,
 				'lastName' => $this->LastName,
 				'position' => $this->Position,

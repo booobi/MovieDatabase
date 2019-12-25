@@ -39,8 +39,12 @@ CREATE TABLE IF NOT EXISTS `categories` (
 
 INSERT INTO `categories` (`CategoryId`, `Name`, `IsActive`, `Description`) VALUES
 (1, 'Drama', b'1', 'Category drama'),
-(2, 'Action', b'1', 'Category drama'),
-(3, 'Thriller', b'1', 'qweqweqew');
+(2, 'Action', b'1', 'Category action'),
+(3, 'Thriller', b'1', 'Category thriller'),
+(4, 'Comedy', b'1', 'Category comedy'),
+(5, 'Horror', b'1', 'Category horror'),
+(6, 'Documentary', b'1', 'Category documentary'),
+(7, 'Mistery', b'1', 'Category mistery');
 
 -- --------------------------------------------------------
 
@@ -142,7 +146,9 @@ CREATE TABLE IF NOT EXISTS `movieparticipants` (
   `MovieParticipantId` int(11) NOT NULL,
   `FirstName` varchar(150) NOT NULL,
   `LastName` varchar(150) NOT NULL,
-  `Position` varchar(150) NOT NULL
+  `Position` varchar(150) NOT NULL,
+  `UpdatedOn` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+  `CreatedOn` TIMESTAMP NOT NULL DEFAULT NOW()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -222,7 +228,7 @@ CREATE TABLE IF NOT EXISTS `movies` (
   `TrailerSrc` varchar(150) DEFAULT NULL,
   `IsActive` bit(1) NOT NULL,
   `Duration` time NOT NULL,
-  `Tags` varchar(150) NOT NULL,
+  `Tags` varchar(150) NOT NULL DEFAULT '',
   `Rewards` varchar(250) DEFAULT NULL,
   `MovieStudio` varchar(250) DEFAULT NULL,
   `MusicStudio` varchar(250) DEFAULT NULL,

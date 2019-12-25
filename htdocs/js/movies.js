@@ -32,7 +32,7 @@ function showInfoModal(movieId) {
 		success: function(res) {
 			if(res.data) {
 				const movie = res.data;
-				$('#directorText').text(movie.Director.firstName + " " + movie.Director.lastName);
+				$('#directorText').text(movie.Director ? (movie.Director.firstName + " " + movie.Director.lastName) : "None");
 				
 				$('#awardsText').text(movie.Awards || "None");
 				

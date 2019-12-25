@@ -11,6 +11,7 @@
 <body>
     <?php
         include $_SERVER['DOCUMENT_ROOT'] . '/header.php';
+        include $_SERVER['DOCUMENT_ROOT'] . '/Models/MovieParticipant.php';
     ?>
 
     <button class="menu-btn" id="add-a-movie"> <a href = "AddAMovie.php">Add a movie </a></button>
@@ -68,11 +69,14 @@
                 </td>
                 <td class = "show-content">
                 '. $movie->get('Name') .'
-                    <button class = "more-btn">More</button>
                 </td>
-                <td class = "hide-content">
-                '. $movie->get('Category') .'
-                </td>
+                <td class = "hide-content">';
+                $movieCategories = $movie->get("Categories");
+                foreach($movieCategories as $category)
+                {
+                    echo $category->get("Name") . ',';
+                }
+                echo '</td>
                 <td class = "hide-content">
                    '. ($movie->get('Rating') == "0" ? "No Rating Yet" : $movie->get('Rating')) . '
                    <button class = "rating-btn" onclick="showRatingModal('.$movie->get('Id').')">Give a rating</button>
@@ -180,25 +184,6 @@
             </div>
         </div>
     </div>
-</div>
-<div id="test">
-    <?php
-        $movie = new Movie();
-        $movie->set("Name", "AAAAAAA");
-        $movie->set("ReleaseDate", "1996-02-26");
-        $movie->set("Description", "asdasdasdasdasdasdasddsadsadasdadas");
-        $movie->set("Link", "http://google.bg");
-        $movie->set("Country", "Albania");
-        $movie->set("Language", "Albanian");
-        $movie->set("IMDBRating", 2);
-        $movie->set("PosterImgSrc", "http://google.bg");
-        $movie->set("TrailerSrc", "http://google.bg");
-        $movie->set("Duration", 120);
-        $movie->set("Awards", "Worst Movie EU");
-        $movie->set("MovieStudio", "Cargath Studios");
-        $movie->set("MusicStudio", "Reinkor Music Std");
-        $movies = MovieHelpers::addMovie($movie);
-    ?>
 </div>
 <div id = "rating-box">
     <img class="close-btn" id="rating-close-btn" src="/images/xbutton.png" onclick="$(this).parent().hide()">

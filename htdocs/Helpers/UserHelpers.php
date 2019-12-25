@@ -90,5 +90,27 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
         
         return json_encode([ 'status' => 'success', 'description' => 'Registration was successful! \nPlease check your email for confirmation!']);
     }
+
+    public static function validateUserLoggedIn() {
+        if(!isset($_SESSION['userLoggedIn']) || !$_SESSION['userLoggedIn']) {
+            echo json_encode(
+            [
+                'status'=>'failure',
+                'description'=>'You are not logged in or do not have required privilages for this action'
+            ]);
+            die();
+        }
+    }
+
+    public static function checkUserIsAdmin() {
+        if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']) {
+            echo json_encode(
+                [
+                    'status'=>'failure',
+                    'description'=>'You need to be an admin to perform this action'
+                ]);
+            die();
+        }
+    }
 }
 ?>

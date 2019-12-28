@@ -10,12 +10,13 @@
 		private $Password;
 		private $Role;//standard, admin
 		
-		public function __construct ( $Username, $FirstName, $LastName, $Password, $Role ) {
-			$this->Username = $Username;
-			$this->FirstName = $FirstName;
-			$this->LastName = $LastName;
-			$this->Password = $Password;
-			$this->Role = $Role;
+		public function __construct () {
+		}
+
+		public function set($property, $val) {
+			if (property_exists($this, $property)) {
+				$this->$property = $val;
+			  }
 		}
 
 		public function get($property) {
@@ -30,9 +31,15 @@
 		
 		public function jsonSerialize() {
 			return [
-				'Username' => $this->Username,
-				'First Name' => $this->FirstName,
-				'Last Name' => $this->LastName,
+				'userId' => $this->UserId,
+				'username' => $this->Username,
+				'firstName' => $this->FirstName,
+				'lastName' => $this->LastName,
+				'isActive' => $this->IsActive,
+				'isApprovedByAdmin' => $this->IsApprovedByAdmin,
+				'isMalicious'=> $this->IsMalicious,
+				'password' => $this->Password,
+				'role' => $this->Role
 			];
 		}
 	}

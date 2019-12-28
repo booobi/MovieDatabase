@@ -4,8 +4,8 @@
 	session_start();
 	
 	if (isset($_POST['email']) &&  isset($_POST['password'])){
-		
-		$user = UserHelpers::getUser($_POST['email']);
+		$userId = UserHelpers::getUserIdByUsername($_POST['email']);
+		$user = UserHelpers::getUser($userId);
 
 		//check if user exists
 		if($user) {

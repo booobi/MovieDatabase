@@ -681,8 +681,8 @@ ADD CONSTRAINT `OwnerIdP` FOREIGN KEY (`OwnerId`) REFERENCES `users` (`UserId`) 
 -- Constraints for table `user_owned_movies`
 --
 ALTER TABLE `user_owned_movies`
-ADD CONSTRAINT `MovieIdOw` FOREIGN KEY (`MovieId`) REFERENCES `movies` (`MovieId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `UserIdOw` FOREIGN KEY (`UserId`) REFERENCES `users` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ADD CONSTRAINT `MovieIdOw` FOREIGN KEY (`MovieId`) REFERENCES `movies` (`MovieId`) ON DELETE CASCADE ON UPDATE NO ACTION,
+ADD CONSTRAINT `UserIdOw` FOREIGN KEY (`UserId`) REFERENCES `users` (`UserId`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `watchlateritems`

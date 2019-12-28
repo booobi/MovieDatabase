@@ -4,6 +4,14 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 
  class UserHelpers {
 
+    public static function alterUserStatus($userId, $status) {
+        DBOperations::prepareAndExecute("UPDATE users SET IsActive={$status} WHERE UserId = {$userId}");
+    }
+
+    public static function alterUserApproval($userId, $isApproved) {
+        DBOperations::prepareAndExecute("UPDATE users SET IsApprovedByAdmin={$isApproved} WHERE UserId = {$userId}");
+    }
+
     public static function getUserIdByUsername($username) {
         $result = DBOperations::prepareAndExecute("SELECT UserId FROM users WHERE Email = '{$username}'");
 
@@ -31,34 +39,50 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
         return $userOwnedMovieIds;
     }
 
-    public static function getUser($userName) {
+    public static function getUsers() {
+        $result = DBOperations::prepareAndExecute("SELECT * FROM users");
+
+        $users = [];
+        if($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $user = new User();
+                $user->set('UserId', $row['UserId']);
+                $user->set('Username', $row['Email']);
+                $user->set('FirstName', $row['FirstName']);
+                $user->set('LastName', $row['LastName']);
+                $user->set('IsActive', $row['IsActive']);
+                $user->set('IsMalicious', $row['IsMalicious']);
+                $user->set('IsApprovedByAdmin', $row['IsApprovedByAdmin']);
+                $user->set('Password', $row['Password']);
+                $user->set('Role', $row['Role']);
+                
+                $users[] = $user;
+            }
+            
+            return $users;
+        }
+    }
+
+    public static function getUser($userId) {
         $result = DBOperations::prepareAndExecute(
-            "SELECT users.UserId AS UserId
-			, users.FirstName AS FirstName
-			, users.LastName AS LastName
-			, users.Password AS Password
-			, users.Email AS Email
-			, users.Role AS Role
-			, users.IsActive AS IsActive
-			, users.IsMalicious AS IsMalicious
-			, users.IsMalicious AS IsApprovedByAdmin
+            "SELECT *
 			FROM users
-			WHERE users.Email = ?
-            LIMIT 1;", 
-			
-			's', 
-			[$userName]);
+			WHERE UserId = {$userId}");
 
             if($result->num_rows > 0) {
-                $resRow = $result->fetch_assoc();
+                $row = $result->fetch_assoc();
     
-                $objUser = new User(
-                    $resRow['Email'],
-                    $resRow['FirstName'],
-                    $resRow['LastName'],
-                    $resRow['Password'],
-                    $resRow['Role']);
-                    return $objUser;
+                $user = new User();
+                $user->set('UserId', $row['UserId']);
+                $user->set('Username', $row['Email']);
+                $user->set('FirstName', $row['FirstName']);
+                $user->set('LastName', $row['LastName']);
+                $user->set('IsActive', $row['IsActive']);
+                $user->set('IsMalicious', $row['IsMalicious']);
+                $user->set('IsApprovedByAdmin', $row['IsApprovedByAdmin']);
+                $user->set('Password', $row['Password']);
+                $user->set('Role', $row['Role']);
+                return $user;
             }
     
             return NULL;

@@ -1,7 +1,56 @@
 <?php
 class ValidatorHelpers {
-    public function validateMoviePostData($postArr) {
 
+    public function validateUserLoggedIn() {
+        if(!isset($_SESSION['userLoggedIn']) || !isset($_SESSION['username'])) {
+            echo json_encode(
+            [
+                'status'=>'error',
+                'description'=>'You need to be logged in to perform this action!'
+            ]);
+            die();
+        }
+    }
+
+    public function validateUserIsAdmin() {
+        ValidatorHelpers::validateUserLoggedIn();
+        if(!isset($_SESSION['isAdmin']) || !$_SESSION['isAdmin']) {
+            echo json_encode(
+            [
+                'status'=>'error',
+                'description'=>'You need to be an admin to perform this action!'
+            ]);
+            die();
+        }
+    }
+
+    public function validateUserApprovalFields() {
+        if(!isset($_POST['id'])
+        || !isset($_POST['isApproved'])
+        || ($_POST['isApproved'] != '0' && $_POST['isApproved'] != '1')) {
+            echo json_encode(
+            [
+                'status'=>'error',
+                'description'=>'You need to provide an id and a valid isApproved (0 or 1)!'
+            ]);
+            die();
+        }
+    }
+
+    public function validateUserAlterStatusFields() {
+        if(!isset($_POST['id'])
+        || !isset($_POST['isActive'])
+        || ($_POST['isActive'] != '0' && $_POST['isActive'] != '1')) {
+            echo json_encode(
+            [
+                'status'=>'error',
+                'description'=>'You need to provide an id and a valid isActive (0 or 1)!'
+            ]);
+            die();
+        }
+    }
+
+    public function validateMoviePostData($postArr) {
         //category length check
         if(!isset($postArr["categoryIds"])) {
             echo json_encode(

@@ -11,7 +11,6 @@
 <body>
     <?php
         include $_SERVER['DOCUMENT_ROOT'] . '/header.php';
-        include $_SERVER['DOCUMENT_ROOT'] . '/Models/MovieParticipant.php';
     ?>
 
     <button class="menu-btn" id="add-a-movie"> <a href = "AddAMovie.php">Add a movie </a></button>
@@ -74,7 +73,7 @@
                 $movieCategories = $movie->get("Categories");
                 foreach($movieCategories as $category)
                 {
-                    echo $category->get("Name") . ',';
+                    echo $category->get("Name") . ' ';
                 }
                 echo '</td>
                 <td class = "hide-content">
@@ -105,7 +104,7 @@
                 || 
                 (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'])
                 ) {
-                    echo '<button class = "change-movie-btn"><a href = "Edit.php">Edit</a></button><br>';
+                    echo '<button class = "change-movie-btn"><a href="EditMovie.php?id='. $movie->get("Id") .'">Edit</a></button><br>';
                     echo '<button class = "change-movie-btn" id="delete" onclick="deleteMovie('.$movie->get("Id").')">Delete</button>';
                 }
                     

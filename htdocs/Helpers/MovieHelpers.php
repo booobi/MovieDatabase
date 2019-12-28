@@ -1,7 +1,6 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Models/Movie.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Models/Festival.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/Models/MovieParticipant.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/CategoryHelpers.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/ParticipantHelpers.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
@@ -10,18 +9,6 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 
 	public static function editMovie($movieId, $movie) {
 		//update in movies
-		echo "UPDATE `movies` 
-		SET
-		`Name`='" . $movie->get("Name") . "',`ReleaseDate`='" . $movie->get("ReleaseDate") . "',
-		`Description`='" . $movie->get("Description") . "',`Link`='" . $movie->get("Link") . "',
-		`Country`='" . $movie->get("Country") . "',`Language`='" . $movie->get("Language") . "',
-		`IMDBRating`=" . $movie->get("IMDBRating") . ",
-		`PosterImgSrc`='" . $movie->get("PosterImgSrc") . "',
-		`TrailerSrc`='" . $movie->get("TrailerSrc") . "',
-		`IsActive`=" . $movie->get("IsActive") . ",`Duration`=SEC_TO_TIME(" . $movie->get("Duration") . "*60),
-		`Rewards`='" . $movie->get("Awards") . "',`MovieStudio`='" . $movie->get("MovieStudio") . "',
-		`MusicStudio`='" . $movie->get("MusicStudio") . "'
-		WHERE MovieId = {$movieId}";
 		DBOperations::prepareAndExecute(
 			"UPDATE `movies` 
 			SET
@@ -35,9 +22,15 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 			`Rewards`='" . $movie->get("Awards") . "',`MovieStudio`='" . $movie->get("MovieStudio") . "',
 			`MusicStudio`='" . $movie->get("MusicStudio") . "'
 			WHERE MovieId = {$movieId}");
+
+		//set main actors, actors and director
+		ParticipantHelpers::applyParticipantsToMovie($movieId, $movie->get("Actors"), $movie->get("Director"));
+
+		//set categories
+		CategoryHelpers::applyCategoriesToMovie($movieId, $movie->get("Categories"));
 	}
 
-	public static function addMovie($movie) {
+	public static function addMovie($movie, $userId) {
 		//insert in movies
 		DBOperations::prepareAndExecute(
 		"INSERT INTO 
@@ -55,6 +48,9 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 
 		//get new movie Id
 		$movieId = MovieHelpers::getLastUpdatedFromTable('movies');
+
+		//set movie owner
+		MovieHelpers::setMovieOwner($movieId, $userId);
 
 		//set main actors, actors and director
 		ParticipantHelpers::applyParticipantsToMovie($movieId, $movie->get("Actors"), $movie->get("Director"));
@@ -212,7 +208,27 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 		return $operation;
 	}
 
-    public static function getHomeRecentMovies() {
+	public static function setMovieOwner($movieId, $userId) {
+		
+		$existingOwnerRes = 
+		DBOperations::prepareAndExecute("SELECT * FROM `user_owned_movies` WHERE MovieId = {$movieId}");
+
+		$operation = "";
+		//if movie already has owner -> Update
+		if ($existingOwnerRes->num_rows > 0) {
+			$operation = "UPDATE";
+			DBOperations::prepareAndExecute("
+			UPDATE `user_owned_movies` SET `UserId`= {$userId} WHERE MovieId = {$movieId}");
+		} else {
+			$operation = "INSERT";
+			DBOperations::prepareAndExecute("
+			INSERT INTO `user_owned_movies`(`UserId`, `MovieId`) VALUES ({$userId},{$movieId})");
+		}
+	
+	return $operation;
+	}
+	
+	public static function getHomeRecentMovies() {
 
 		$lastWeekStart = Date("Y-m-d",time() - (7 * 24 * 60 * 60));
 		//+ 1 day to include today

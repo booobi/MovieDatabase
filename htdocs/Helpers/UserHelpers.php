@@ -26,10 +26,9 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
             while($resRow = $result->fetch_assoc()) {
                 $userOwnedMovieIds[] = $resRow['MovieId'];
             }
-            return $userOwnedMovieIds;
         }
 
-        return [];
+        return $userOwnedMovieIds;
     }
 
     public static function getUser($userName) {

@@ -5,55 +5,63 @@
     UserHelpers::validateUserLoggedIn();
 
     include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/MovieHelpers.php';
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/ValidatorHelpers.php';
   
-
-    // ------- MOCK DATA ------
+    ValidatorHelpers::validateMoviePostData($_POST);
+    
     $movie = new Movie();
-    $movie->set("Name", "RRRRRR");
-    $movie->set("ReleaseDate", "1996-02-26");
-    $movie->set("Description", "asdasdasdasdasdasdasddsadsadasdadas");
+    $movie->set("Name", $_POST["name"]);
+    $movie->set("ReleaseDate", $_POST["releaseDate"]);
+    $movie->set("Description", $_POST["description"]);
     $movie->set("Link", "http://google.bg");
-    $movie->set("Country", "Albania");
-    $movie->set("Language", "Albanian");
-    $movie->set("IMDBRating", 2);
-    $movie->set("PosterImgSrc", "http://google.bg");
-    $movie->set("TrailerSrc", "http://google.bg");
+    $movie->set("Country", $_POST["country"]);
+    $movie->set("Language", $_POST["language"]);
+    $movie->set("IMDBRating", $_POST["rating"]);
+    $movie->set("PosterImgSrc", $_POST["posterUrl"]);
+    $movie->set("TrailerSrc", $_POST["trailerUrl"]);
     $movie->set("IsActive", 1);
-    $movie->set("Duration", 120);
-    $movie->set("Awards", "Worst Movie EU");
-    $movie->set("MovieStudio", "Cargath Studios");
-    $movie->set("MusicStudio", "Reinkor Music Std");
+    $movie->set("Duration", $_POST["duration"]);
+    $movie->set("Awards", $_POST["awards"]);
+    $movie->set("MovieStudio", $_POST["movieCompany"]);
+    $movie->set("MusicStudio", $_POST["musicCompany"]);
 
-
-    $actors = [];
-    $actors[] = new MovieParticipant();
-    $actors[0]->set("Id", 7);
-    $actors[0]->set("isMainActor", 0);
-
-    $actors[] = new MovieParticipant();
-    $actors[1]->set("Id", 8);
-    $actors[1]->set("isMainActor", 1);
-
-    $actors[] = new MovieParticipant();
-    $actors[2]->set("Id", 9);
-    $actors[2]->set("isMainActor", 1);
-
+    //set director
     $director = new MovieParticipant();
-    $director->set("Id", 5);
-
-    $movie->set("Actors", $actors);
+    $director->set("Id", $_POST["directorIds"][0]);
     $movie->set("Director", $director);
+    
+    //set actors
+    $actors = [];  
+    foreach($_POST["actorIds"] as $actorId) {
+        $actor = new MovieParticipant();
+        $actor->set("Id", $actorId);
+        $actor->set("isMainActor", 0);
+        
+        $actors[] = $actor;
+    }    
+    //set main actors
+    foreach($_POST["mainActorIds"] as $mainActorId) {
+        $mainActor = new MovieParticipant();
+        $mainActor->set("Id", $mainActorId);
+        $mainActor->set("isMainActor", 1);
 
+        $actors[] = $mainActor;
+    }
+    $movie->set("Actors", $actors);
+
+    //set categories
     $categories = [];
-    $categories[] = new Category();
-    $categories[0]->set("Id", 3);
-    $categories[] = new Category();
-    $categories[1]->set("Id", 4);
-    $categories[] = new Category();
-    $categories[2]->set("Id", 5);
+    foreach($_POST["categoryIds"] as $categoryId) {
+        $category = new Category();
+        $category->set("Id", $categoryId);
+
+        $categories[] = $category;
+    }
     $movie->set("Categories", $categories);
 
-    $movies = MovieHelpers::addMovie($movie);
+
+    $userId = UserHelpers::getUserIdByUsername($_SESSION["username"]);
+    MovieHelpers::addMovie($movie, $userId);
     echo json_encode(
         [
             'status'=>'success',

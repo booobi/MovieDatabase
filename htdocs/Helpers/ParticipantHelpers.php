@@ -1,11 +1,12 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/models/MovieParticipant.php';
 
 class ParticipantHelpers {
 
     public static function getMovieActors($movieId) {
         $movieActorsRes = DBOperations::prepareAndExecute(
-			"SELECT FirstName, LastName, Position, isMainActor 
+			"SELECT MovieParticipantId, FirstName, LastName, Position, isMainActor 
 			FROM `movieparticipants` INNER JOIN `movies_participants` 
 			ON movieparticipants.MovieParticipantId = movies_participants.ParticipantId
 			WHERE movies_participants.MovieId = {$movieId} AND NOT Position='director'");
@@ -13,7 +14,8 @@ class ParticipantHelpers {
 		$movieActors = [];
 		if ($movieActorsRes->num_rows > 0) {
 			while($row = $movieActorsRes->fetch_assoc()) {
-				$actor = new MovieParticipant();
+                $actor = new MovieParticipant();
+                $actor->set("Id", $row['MovieParticipantId']);
 				$actor->set("FirstName", $row['FirstName']);
 				$actor->set("LastName", $row['LastName']);
 				$actor->set("Position", $row['Position']);
@@ -24,12 +26,11 @@ class ParticipantHelpers {
         }
 
         return $movieActors;
-    
     }
 
     public static function getMovieDirector($movieId) {
         $movieDirectorRes = DBOperations::prepareAndExecute(
-			"SELECT FirstName, LastName, Position 
+			"SELECT MovieParticipantId, FirstName, LastName, Position 
 			FROM `movieparticipants` INNER JOIN `movies_participants` 
 			ON movieparticipants.MovieParticipantId = movies_participants.ParticipantId
 			WHERE movies_participants.MovieId = {$movieId} AND Position='director'");
@@ -38,6 +39,7 @@ class ParticipantHelpers {
 		if ($movieDirectorRes->num_rows > 0) {
 			$row = $movieDirectorRes->fetch_assoc();		
 			$director = new MovieParticipant();
+			$director->set("Id", $row['MovieParticipantId']);
 			$director->set("FirstName", $row['FirstName']);
 			$director->set("LastName", $row['LastName']);
 			$director->set("Position", $row['Position']);
@@ -75,6 +77,26 @@ class ParticipantHelpers {
                 "INSERT INTO `movies_participants`(`MovieId`, `ParticipantId`, `IsMainActor`) 
             VALUES ({$movieId}, {$directorId}, 0)");
         }
+    }
+
+    public static function getAllParticipants() {
+        $participantsRes = DBOperations::prepareAndExecute(
+            "SELECT * FROM `movieparticipants`");
+
+        $participants = [];
+        if ($participantsRes->num_rows > 0) {
+            while($row = $participantsRes->fetch_assoc()) {
+                $participant = new MovieParticipant();
+                $participant->set("Id", $row["MovieParticipantId"]);
+                $participant->set("FirstName", $row['FirstName']);
+                $participant->set("LastName", $row['LastName']);
+                $participant->set("Position", $row['Position']);
+
+                $participants[] = $participant;
+            }
+        }
+
+        return $participants;
     }
 
  }

@@ -18,18 +18,15 @@
             <input type="checkbox" id="check-adv-search" value="check" >
             Advanced search
         </div>
-        <div id = "popup-advanced">
-            <p>this should</p>
-            <p>be</p>
-            <p>a pop-up</p>
-        </div>
+       
         <button type="submit">Go!</button>
     </div>
 
     <div id="user-menu-container">
         <div class="user-buttons">
             <?php
-                //session_start();
+                session_start();
+
                 if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']) {
                     echo '<button class="profile-btn" id="admin-btn">Administration</button>';
                 }

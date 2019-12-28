@@ -26,10 +26,9 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
             while($resRow = $result->fetch_assoc()) {
                 $userOwnedMovieIds[] = $resRow['MovieId'];
             }
-            return $userOwnedMovieIds;
         }
 
-        return [];
+        return $userOwnedMovieIds;
     }
 
     public static function getUser($userName) {
@@ -89,6 +88,28 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
             [$firstName, $lastName, $passwordHashed, $email]);
         
         return json_encode([ 'status' => 'success', 'description' => 'Registration was successful! \nPlease check your email for confirmation!']);
+    }
+
+    public static function validateUserLoggedIn() {
+        if(!isset($_SESSION['userLoggedIn']) || !$_SESSION['userLoggedIn']) {
+            echo json_encode(
+            [
+                'status'=>'failure',
+                'description'=>'You are not logged in or do not have required privilages for this action'
+            ]);
+            die();
+        }
+    }
+
+    public static function checkUserIsAdmin() {
+        if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']) {
+            echo json_encode(
+                [
+                    'status'=>'failure',
+                    'description'=>'You need to be an admin to perform this action'
+                ]);
+            die();
+        }
     }
 }
 ?>

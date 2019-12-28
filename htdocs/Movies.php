@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-<html>
+<?php
+    include $_SERVER['DOCUMENT_ROOT'] . '/header.php';
+?>
 
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Monoton&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/MoviesDesign.css">
-</head>
-
-<body>
-    <?php
-        include $_SERVER['DOCUMENT_ROOT'] . '/header.php';
-    ?>
+<link href="https://fonts.googleapis.com/css?family=Lato:400,700|Monoton&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/MoviesDesign.css">
 
     <button class="menu-btn" id="add-a-movie"> <a href = "AddAMovie.php">Add a movie </a></button>
 
@@ -68,11 +61,14 @@
                 </td>
                 <td class = "show-content">
                 '. $movie->get('Name') .'
-                    <button class = "more-btn">More</button>
                 </td>
-                <td class = "hide-content">
-                '. $movie->get('Category') .'
-                </td>
+                <td class = "hide-content">';
+                $movieCategories = $movie->get("Categories");
+                foreach($movieCategories as $category)
+                {
+                    echo $category->get("Name") . ' ';
+                }
+                echo '</td>
                 <td class = "hide-content">
                    '. ($movie->get('Rating') == "0" ? "No Rating Yet" : $movie->get('Rating')) . '
                    <button class = "rating-btn" onclick="showRatingModal('.$movie->get('Id').')">Give a rating</button>
@@ -101,7 +97,7 @@
                 || 
                 (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'])
                 ) {
-                    echo '<button class = "change-movie-btn"><a href = "Edit.php">Edit</a></button><br>';
+                    echo '<button class = "change-movie-btn"><a href="EditMovie.php?id='. $movie->get("Id") .'">Edit</a></button><br>';
                     echo '<button class = "change-movie-btn" id="delete" onclick="deleteMovie('.$movie->get("Id").')">Delete</button>';
                 }
                     
@@ -181,8 +177,6 @@
         </div>
     </div>
 </div>
-
-
 <div id = "rating-box">
     <img class="close-btn" id="rating-close-btn" src="/images/xbutton.png" onclick="$(this).parent().hide()">
     <div id = "rating">

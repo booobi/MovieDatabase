@@ -1,17 +1,8 @@
 <?php
-session_start();
-?>
-<!DOCTYPE html>
-<html>
-
-<head>
-<link rel="stylesheet" href="css/HomeDesign.css">
-</head>
-
-<body>
-<?php
     include $_SERVER['DOCUMENT_ROOT'] . '/header.php';
 ?>
+
+<link rel="stylesheet" href="css/HomeDesign.css">
 
 <div class="desktop-headings">
     <div class="top-week">This week top movies</div>
@@ -53,10 +44,14 @@ session_start();
             if(count($moviesThisWeek) > 0) {
             
                 foreach ($moviesThisWeek as $movie) {
+                $categoriesStr = "";
+                foreach($movie->get("Categories") as $category) {
+                    $categoriesStr .= $category->get("Name") . " ";
+                }
                 echo "
                     <tr>
                         <td>" . $movie->get('Name') . "</td>
-                        <td>" . $movie->get('Category') . "</td>
+                        <td>" . $categoriesStr . "</td>
                         <td>" . $movie->get('Rating') . "</td>
                         <td>" . $movie->get('ReleaseDate') . "</td>
                     </tr>

@@ -126,12 +126,16 @@
 
               <div id = "down-header">
                   <button class="movies-btn" id="add-a-movie" onclick="validateFields()">Add the movie</button>
+
+                  <button type="button" id="testButton">TEST</button>
               </div>
            </div>
+
      </form>
 
-     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+     <script src="/js/jquery-3.3.1.min.js"></script>
+     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
      <script src="multiselect.min.js"></script>
 
      <script>
@@ -229,6 +233,17 @@
                  this.val(arr);
              },
          });
+
+         $(document).ready(function () {
+            $("#testButton").click(()=>{
+                $.each($(".MultiCheckBoxDetailBody input"), (index, value) => {
+                    if($(value).is(":checked")) {
+                        console.log($(value));    
+                    }
+                })
+                // console.log($($(".MultiCheckBoxDetailBody input").get()).each);
+                });
+        });
      </script>
 </body>
 </html>

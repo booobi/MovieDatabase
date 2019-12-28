@@ -2,7 +2,7 @@
 	class Movie implements JsonSerializable {
 		private $Id;
 		private $Name;
-		private $Category;
+		private $Categories;
 		private $Rating;
 		private $IMDBRating;
 		private $ReleaseDate;
@@ -10,8 +10,10 @@
 		private $Country;
 		private $Language;
 		private $Duration;
+		private $Link;
 		private $PosterImgSrc;
 		private $TrailerSrc;
+		private $IsActive;
 		private $Awards;
 		private $MovieStudio;
 		private $MusicStudio;
@@ -19,6 +21,10 @@
 		private $Director;
 		private $CreatedOn;
 		private $UpdatedOn;
+
+		public function __construct () {
+			$this->Categories = [];
+		}
 		
 		public function get($property) {
 			if (property_exists($this, $property)) {
@@ -36,7 +42,7 @@
 			return [
 				'Id' => $this->Id,
 				'Name' => $this->Name,
-				'Category' => $this->Category,
+				'Categories' => $this->Categories,
 				'Rating' => $this->Rating,
 				'IMDBRating' => $this->IMDBRating,
 				'ReleaseDate' => $this->ReleaseDate,
@@ -46,7 +52,9 @@
 				'Duration' => $this->Duration,
 				'PosterImgSrc' => $this->PosterImgSrc,
 				'TrailerSrc' => $this->TrailerSrc,
+				'IsActive' => $this->IsActive,
 				'Awards' => $this->Awards,
+				'Link' => $this->Link,
 				'MovieStudio' => $this->MovieStudio,
 				'MusicStudio' => $this->MusicStudio,
 				'Actors' => $this->Actors,

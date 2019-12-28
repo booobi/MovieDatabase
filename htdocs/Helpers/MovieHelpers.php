@@ -1,30 +1,78 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Models/Movie.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Models/Festival.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/Models/MovieParticipant.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/CategoryHelpers.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/ParticipantHelpers.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 
  class MovieHelpers {
 
+	public static function editMovie($movieId, $movie) {
+		//update in movies
+		DBOperations::prepareAndExecute(
+			"UPDATE `movies` 
+			SET
+			`Name`='" . $movie->get("Name") . "',`ReleaseDate`='" . $movie->get("ReleaseDate") . "',
+			`Description`='" . $movie->get("Description") . "',`Link`='" . $movie->get("Link") . "',
+			`Country`='" . $movie->get("Country") . "',`Language`='" . $movie->get("Language") . "',
+			`IMDBRating`=" . $movie->get("IMDBRating") . ",
+			`PosterImgSrc`='" . $movie->get("PosterImgSrc") . "',
+			`TrailerSrc`='" . $movie->get("TrailerSrc") . "',
+			`IsActive`=" . $movie->get("IsActive") . ",`Duration`=SEC_TO_TIME(" . $movie->get("Duration") . "*60),
+			`Rewards`='" . $movie->get("Awards") . "',`MovieStudio`='" . $movie->get("MovieStudio") . "',
+			`MusicStudio`='" . $movie->get("MusicStudio") . "'
+			WHERE MovieId = {$movieId}");
 
+		//set main actors, actors and director
+		ParticipantHelpers::applyParticipantsToMovie($movieId, $movie->get("Actors"), $movie->get("Director"));
+
+		//set categories
+		CategoryHelpers::applyCategoriesToMovie($movieId, $movie->get("Categories"));
+	}
+
+	public static function addMovie($movie, $userId) {
+		//insert in movies
+		DBOperations::prepareAndExecute(
+		"INSERT INTO 
+		`movies`
+		(`Name`, `ReleaseDate`, `Description`, `Link`, `Country`, `Language`, 
+		`MovieRating`, `IMDBRating`, `PosterImgSrc`, `TrailerSrc`, `IsActive`, 
+		`Duration`, `Rewards`, `MovieStudio`, `MusicStudio`) 
+		VALUES  " . " " . "
+		('" . $movie->get("Name") . "','" . $movie->get("ReleaseDate") . "','" . $movie->get("Description") . "',
+		'" . $movie->get("Link") . "','" . $movie->get("Country") . "','" . $movie->get("Language") . "'
+		,0," . $movie->get("IMDBRating") . ",'" . $movie->get("PosterImgSrc") . "','" . $movie->get("TrailerSrc") . "',
+		" . $movie->get("IsActive") . ",
+		SEC_TO_TIME(" . $movie->get("Duration") . "*60),'" . $movie->get("Awards") . "','" . $movie->get("MovieStudio") . "',
+		'" . $movie->get("MusicStudio") . "')");
+
+		//get new movie Id
+		$movieId = MovieHelpers::getLastUpdatedFromTable('movies');
+
+		//set movie owner
+		MovieHelpers::setMovieOwner($movieId, $userId);
+
+		//set main actors, actors and director
+		ParticipantHelpers::applyParticipantsToMovie($movieId, $movie->get("Actors"), $movie->get("Director"));
+
+		//set categories
+		CategoryHelpers::applyCategoriesToMovie($movieId, $movie->get("Categories"));
+	}
 
 	public static function getMovies($size=20, $orderByColumn="Name") {
 		$result = DBOperations::prepareAndExecute(
 			"SELECT movies.MovieId as MovieId,
 			movies.Name AS MovieName,
-			c.Name AS CategoryName,
 			movies.MovieRating AS MovieRating,
 			movies.IMDBRating As MovieIMDBRating,
 			CAST(movies.ReleaseDate AS DATE) AS ReleaseDate,
 			movies.Country as MovieCountry,
 			movies.Language as MovieLanguage,
 			movies.Duration as MovieDuration,
-			movies.PosterImgSrc as MoviePosterImgSrc
+			movies.PosterImgSrc as MoviePosterImgSrc,
+			movies.UpdatedOn,
+			movies.CreatedOn
 			FROM movies
-			INNER JOIN movies_categories mc
-			ON mc.MovieId = movies.MovieId
-			INNER JOIN categories c
-			ON c.CategoryId = mc.CategoryId
 			ORDER BY movies." . $orderByColumn . " LIMIT " . $size);
 
 		$movieList = [];
@@ -34,7 +82,6 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 				$movie = new Movie();
 				$movie->set('Id', $row["MovieId"]);
 				$movie->set('Name', $row["MovieName"]);
-				$movie->set('Category', $row["CategoryName"]);
 				$movie->set('Rating', $row["MovieRating"]);
 				$movie->set('IMDBRating', $row["MovieIMDBRating"]);
 				$movie->set('ReleaseDate', $row["ReleaseDate"]);
@@ -42,6 +89,11 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 				$movie->set('Language', $row["MovieLanguage"]);
 				$movie->set('Duration', $row["MovieDuration"]);
 				$movie->set('PosterImgSrc', $row["MoviePosterImgSrc"]);
+				$movie->set('UpdatedOn', $row["UpdatedOn"]);
+				$movie->set('CreatedOn', $row["CreatedOn"]);
+
+				$movieCategories = CategoryHelpers::getMovieCategories($row["MovieId"]);
+				$movie->set('Categories', $movieCategories);
 			
 				$movieList[] = $movie;
 			}
@@ -78,10 +130,8 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 		$movieResult = DBOperations::prepareAndExecute(
 		"SELECT movies.MovieId, movies.Name as MovieName, ReleaseDate, movies.Description,
 		PosterImgSrc, Country, Language, MovieRating, IMDBRating, Duration, Rewards, 
-		CreatedOn, UpdatedOn, c.Name as CategoryName, MusicStudio, MovieStudio, TrailerSrc
+		CreatedOn, UpdatedOn, MusicStudio, MovieStudio, TrailerSrc
 		from movies 
-		INNER JOIN movies_categories mc ON mc.MovieId = movies.MovieId 
-		INNER JOIN categories c ON c.CategoryId = mc.CategoryId 
 		WHERE movies.MovieId = {$movieId}");
 
 		$movie = new Movie();
@@ -91,7 +141,6 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 				
 				$movie->set('Id', $row["MovieId"]);
 				$movie->set('Name', $row["MovieName"]);
-				$movie->set('Category', $row["CategoryName"]);
 				$movie->set('MusicStudio', $row["MusicStudio"]);
 				$movie->set('MovieStudio', $row["MovieStudio"]);
 				$movie->set('Rating', $row["MovieRating"]);
@@ -108,42 +157,16 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 		}
 
 		//movie actors
-		$movieActorsRes = DBOperations::prepareAndExecute(
-			"SELECT FirstName, LastName, Position, isMainActor 
-			FROM `movieparticipants` INNER JOIN `movies_participants` 
-			ON movieparticipants.MovieParticipantId = movies_participants.Movies_ParticipantsId
-			WHERE movies_participants.MovieId = {$movieId}");
-
-		$movieActors = [];
-		if ($movieActorsRes->num_rows > 0) {
-			while($row = $movieActorsRes->fetch_assoc()) {
-				$actor = new MovieParticipant();
-				$actor->set("FirstName", $row['FirstName']);
-				$actor->set("LastName", $row['LastName']);
-				$actor->set("Position", $row['Position']);
-				$actor->set("isMainActor", $row['isMainActor']);
-
-				$movieActors[] = $actor;
-			}
-		}
+		$movieActors = ParticipantHelpers::getMovieActors($movieId);
 		$movie->set('Actors', $movieActors);
 		
 		//movie director
-		$movieDirectorRes = DBOperations::prepareAndExecute(
-			"SELECT FirstName, LastName, Position 
-			FROM `movieparticipants` INNER JOIN `movies_participants` 
-			ON movieparticipants.MovieParticipantId = movies_participants.Movies_ParticipantsId
-			WHERE movies_participants.MovieId = {$movieId} AND Position='director'");
+		$director = ParticipantHelpers::getMovieDirector($movieId);
+		$movie->set('Director', $director);
 
-		if ($movieDirectorRes->num_rows > 0) {
-			$row = $movieDirectorRes->fetch_assoc();		
-			$director = new MovieParticipant();
-			$director->set("FirstName", $row['FirstName']);
-			$director->set("LastName", $row['LastName']);
-			$director->set("Position", $row['Position']);
-
-			$movie->set('Director', $director);
-		}
+		//movie categories
+		$movieCategories = CategoryHelpers::getMovieCategories($movieId);
+		$movie->set('Categories', $movieCategories);
 
 		return $movie;
 	}
@@ -185,25 +208,40 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 		return $operation;
 	}
 
-    public static function getHomeRecentMovies() {
+	public static function setMovieOwner($movieId, $userId) {
+		
+		$existingOwnerRes = 
+		DBOperations::prepareAndExecute("SELECT * FROM `user_owned_movies` WHERE MovieId = {$movieId}");
+
+		$operation = "";
+		//if movie already has owner -> Update
+		if ($existingOwnerRes->num_rows > 0) {
+			$operation = "UPDATE";
+			DBOperations::prepareAndExecute("
+			UPDATE `user_owned_movies` SET `UserId`= {$userId} WHERE MovieId = {$movieId}");
+		} else {
+			$operation = "INSERT";
+			DBOperations::prepareAndExecute("
+			INSERT INTO `user_owned_movies`(`UserId`, `MovieId`) VALUES ({$userId},{$movieId})");
+		}
+	
+	return $operation;
+	}
+	
+	public static function getHomeRecentMovies() {
 
 		$lastWeekStart = Date("Y-m-d",time() - (7 * 24 * 60 * 60));
 		//+ 1 day to include today
 		$today = Date("Y-m-d", time() + (24*60*60));
-
+		
 		$result = DBOperations::prepareAndExecute(
-			"SELECT movies.Name AS MovieName,
-			c.Name AS CategoryName,
+			"SELECT DISTINCT MovieId, movies.Name AS MovieName,
 			movies.MovieRating AS MovieRating,
 			CAST(movies.ReleaseDate AS DATE) AS ReleaseDate,
 			CAST(movies.CreatedOn AS DATE) AS CreatedOn
 			FROM movies
-			INNER JOIN movies_categories mc
-			ON mc.MovieId = movies.MovieId
-			INNER JOIN categories c
-			ON c.CategoryId = mc.CategoryId
 			WHERE movies.CreatedOn BETWEEN '" . $lastWeekStart . "' AND '" . $today .
-			"' ORDER BY IMDBRating DESC LIMIT 10;");
+			"' ORDER BY CreatedOn DESC LIMIT 4;");
 
         $movieList = [];
 
@@ -211,14 +249,13 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 			while($row = $result->fetch_assoc()) {
 				$movie = new Movie();
 				$movie->set('Name', $row["MovieName"]);
-				$movie->set('Category', $row["CategoryName"]);
+				$movie->set('Categories', CategoryHelpers::getMovieCategories($row['MovieId']));
 				$movie->set('Rating', $row["MovieRating"]);
 				$movie->set('ReleaseDate', $row["ReleaseDate"]);
 				$movie->set('CreatedOn', $row["CreatedOn"]);
-				// $movieList [] = new Movie( $row["MovieName"], $row["CategoryName"], NULL , $row["MovieRating"], $row["ReleaseDate"], $row['CreatedOn'] );
 				$movieList[] = $movie;
 			}
-        }
+		}
         
         return $movieList;
 	}
@@ -256,7 +293,6 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 
 			if ($result->num_rows > 0) {
 				while($row = $result->fetch_assoc()) {
-					// $movies[] = new Movie( $row["MovieName"], $row["MovieDescription"], NULL, NULL, NULL, NULL);
 					$movie = new Movie();
 					$movie->set('Name', $row["MovieName"]);
 					$movie->set('Description', $row["MovieDescription"]);
@@ -304,6 +340,22 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 		}
 
 		return $festivals;
+	}
+
+	/**
+	 * IMPORTANT: Table needs to have 'UpdatedOn' column.
+	 * Returns the id of the last modified tuple
+	 */
+	public static function getLastUpdatedFromTable($tableName) {
+		$lastIdRes = DBOperations::prepareAndExecute(
+			"SELECT * FROM `{$tableName}` ORDER BY UpdatedOn DESC LIMIT 1");
+		
+			if ($lastIdRes->num_rows > 0) {
+				$test = $lastIdRes->fetch_assoc();
+				return reset($test);
+		}
+
+		return NULL;
 	}
  }
 ?>

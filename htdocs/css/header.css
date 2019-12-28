@@ -26,7 +26,7 @@ body {
     margin-left: 370px;
     margin-bottom: 28px;
     padding: 7px;
-    float: left;
+    /* float: left; */
     overflow: hidden;
     z-index: 1;
 }
@@ -131,7 +131,7 @@ body {
 }
 
 .user-buttons {
-    margin-top: 145px;
+    /* margin-top: 145px; */
     float: right;
 }
 

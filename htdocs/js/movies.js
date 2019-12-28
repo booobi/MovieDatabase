@@ -32,7 +32,7 @@ function showInfoModal(movieId) {
 		success: function(res) {
 			if(res.data) {
 				const movie = res.data;
-				$('#directorText').text(movie.Director.firstName + " " + movie.Director.lastName);
+				$('#directorText').text(movie.Director ? (movie.Director.firstName + " " + movie.Director.lastName) : "None");
 				
 				$('#awardsText').text(movie.Awards || "None");
 				
@@ -52,14 +52,21 @@ function showInfoModal(movieId) {
 
 				$('#imdbRatingText').text(movie.IMDBRating);
 
-				movie.Actors.filter(actor => !actor.isMainActor).forEach(actor => {
-					$('#actorsText').append(actor.firstName + " " + actor.lastName + ", ");
-				});
+				const nonMainActors = movie.Actors.filter(actor => !actor.isMainActor);
+				const actorsText = nonMainActors.reduce((acc, val) => {
+					return acc + val.firstName + " " + val.lastName 
+					+ ((nonMainActors.indexOf(val) == nonMainActors.length - 1) ? "" : ", ")
+				}, "");
+				$('#actorsText').text(actorsText);
 
-				movie.Actors.filter(actor => actor.isMainActor).forEach(actor => {
-					$('#mainActorsText').append(actor.firstName + " " + actor.lastName + ", ");
-				})
-
+				const mainActors = movie.Actors.filter(actor => actor.isMainActor);
+				const mainActorsText = mainActors.reduce((acc, val) => {
+					return acc + val.firstName + " " + val.lastName 
+					+ ((mainActors.indexOf(val) == mainActors.length - 1) ? "" : ", ")
+				}, "");
+				
+				$('#mainActorsText').text(mainActorsText);
+				
 				$('#descriptionText').text(movie.Description);
 			} else {
 				alert(res.reason);

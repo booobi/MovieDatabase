@@ -1,12 +1,12 @@
-function multipleFunc() {
-    document.getElementById("mySelect").multiple = true;
-}
-
-
-function validateFields() {
+function submit(e) {
+    e.preventDefault();
+    console.log("TEEEEEEEST");
     //validation for Category
     /**/
 
+}
+
+function validateMovieFields() {
     if (document.getElementById('title-field').value === "" ||
         document.getElementById('poster-field').value === "" ||
         document.getElementById('director-field').value === "" ||
@@ -23,7 +23,7 @@ function validateFields() {
         document.getElementById('stars-field').value === "" ||
         document.getElementById('description-area').value === "" ) {
         alert("Please fill all the fields!");
-    }else {
+    } else {
         alert("cool");
     }
 }

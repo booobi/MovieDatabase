@@ -39,8 +39,12 @@ CREATE TABLE IF NOT EXISTS `categories` (
 
 INSERT INTO `categories` (`CategoryId`, `Name`, `IsActive`, `Description`) VALUES
 (1, 'Drama', b'1', 'Category drama'),
-(2, 'Action', b'1', 'Category drama'),
-(3, 'Thriller', b'1', 'qweqweqew');
+(2, 'Action', b'1', 'Category action'),
+(3, 'Thriller', b'1', 'Category thriller'),
+(4, 'Comedy', b'1', 'Category comedy'),
+(5, 'Horror', b'1', 'Category horror'),
+(6, 'Documentary', b'1', 'Category documentary'),
+(7, 'Mistery', b'1', 'Category mistery');
 
 -- --------------------------------------------------------
 
@@ -142,7 +146,9 @@ CREATE TABLE IF NOT EXISTS `movieparticipants` (
   `MovieParticipantId` int(11) NOT NULL,
   `FirstName` varchar(150) NOT NULL,
   `LastName` varchar(150) NOT NULL,
-  `Position` varchar(150) NOT NULL
+  `Position` varchar(150) NOT NULL,
+  `UpdatedOn` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+  `CreatedOn` TIMESTAMP NOT NULL DEFAULT NOW()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -222,7 +228,7 @@ CREATE TABLE IF NOT EXISTS `movies` (
   `TrailerSrc` varchar(150) DEFAULT NULL,
   `IsActive` bit(1) NOT NULL,
   `Duration` time NOT NULL,
-  `Tags` varchar(150) NOT NULL,
+  `Tags` varchar(150) NOT NULL DEFAULT '',
   `Rewards` varchar(250) DEFAULT NULL,
   `MovieStudio` varchar(250) DEFAULT NULL,
   `MusicStudio` varchar(250) DEFAULT NULL,
@@ -234,17 +240,17 @@ CREATE TABLE IF NOT EXISTS `movies` (
 -- Dumping data for table `movies`
 --
 
-INSERT INTO `movies` (`MovieId`, `Name`, `ReleaseDate`, `Description`, `Link`, `Country`, `Language`, `MovieRating`, `IMDBRating`, `PosterImgSrc`, `IsActive`, `Duration`, `Tags`, `Rewards`) VALUES
-(1, 'The Shawshank Redemption', '1993-12-31 22:00:00', 'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.', 'https://www.imdb.com/title/tt0111161/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_1', 'USA', 'English', 0, 9.3, 'https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg', b'1', '02:22:00', '', NULL),
-(2, 'The Godfather', '1971-12-31 22:00:00', 'The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.', 'https://www.imdb.com/title/tt0068646/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_2', 'USA', 'English', 0, 9.2, 'https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,704,1000_AL_.jpg', b'1', '02:55:00', '', NULL),
-(3, 'The Godfather: Part II', '2019-11-22 22:29:37', 'The early life and career of Vito Corleone in 1920s New York City is portrayed, while his son, Michael, expands and tightens his grip on the family crime syndicate.', 'https://www.imdb.com/title/tt0071562/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_3', 'USA', 'English', 0, 9, 'https://m.media-amazon.com/images/M/MV5BMWMwMGQzZTItY2JlNC00OWZiLWIyMDctNDk2ZDQ2YjRjMWQ0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,701,1000_AL_.jpg', b'1', '03:22:00', '', NULL),
-(4, 'The Dark Knight', '2019-11-22 22:34:32', 'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.', 'https://www.imdb.com/title/tt0468569/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_4', 'USA', 'English', 0, 9, 'https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SY1000_CR0,0,675,1000_AL_.jpg', b'1', '02:32:00', '', NULL),
-(5, '12 Angry Men', '0000-00-00 00:00:00', 'A jury holdout attempts to prevent a miscarriage of justice by forcing his colleagues to reconsider the evidence.', 'https://www.imdb.com/title/tt0050083/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_5', 'USA', 'English', 0, 8.9, 'https://m.media-amazon.com/images/M/MV5BMWU4N2FjNzYtNTVkNC00NzQ0LTg0MjAtYTJlMjFhNGUxZDFmXkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_SY1000_CR0,0,649,1000_AL_.jpg', b'1', '01:36:00', '', NULL),
-(6, 'Schindler''s List', '1992-12-31 22:00:00', 'In German-occupied Poland during World War II, industrialist Oskar Schindler gradually becomes concerned for his Jewish workforce after witnessing their persecution by the Nazis.', 'https://www.imdb.com/title/tt0108052/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_6', 'USA', 'English', 0, 8.9, 'https://m.media-amazon.com/images/M/MV5BNDE4OTMxMTctNmRhYy00NWE2LTg3YzItYTk3M2UwOTU5Njg4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SY1000_CR0,0,666,1000_AL_.jpg', b'1', '03:15:00', '', NULL),
-(7, 'The Lord of the Rings: The Return of the King', '2002-12-31 22:00:00', 'Gandalf and Aragorn lead the World of Men against Sauron''s army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring.', 'https://www.imdb.com/title/tt0167260/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_7', 'USA', 'English', 0, 8.9, 'https://m.media-amazon.com/images/M/MV5BNzA5ZDNlZWMtM2NhNS00NDJjLTk4NDItYTRmY2EwMWZlMTY3XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,675,1000_AL_.jpg', b'1', '03:21:00', '', NULL),
-(8, 'Pulp Fiction', '1993-12-31 22:00:00', 'he lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.', 'https://www.imdb.com/title/tt0110912/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_8', 'USA', 'English', 0, 8.9, 'https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,686,1000_AL_.jpg', b'1', '02:34:00', '', NULL),
-(9, 'The Good, the Bad and the Ugly', '0000-00-00 00:00:00', 'A bounty hunting scam joins two men in an uneasy alliance against a third in a race to find a fortune in gold buried in a remote cemetery.', 'https://www.imdb.com/title/tt0060196/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_9', 'USA', 'English', 0, 8.8, 'https://m.media-amazon.com/images/M/MV5BOTQ5NDI3MTI4MF5BMl5BanBnXkFtZTgwNDQ4ODE5MDE@._V1_SY1000_CR0,0,656,1000_AL_.jpg', b'1', '02:58:00', '', NULL),
-(10, 'Fight Club', '2019-11-22 22:41:51', 'An insomniac office worker and a devil-may-care soapmaker form an underground fight club that evolves into something much, much more.', 'https://www.imdb.com/title/tt0137523/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_10', 'USA', 'English', 0, 8.8, 'https://m.media-amazon.com/images/M/MV5BMmEzNTkxYjQtZTc0MC00YTVjLTg5ZTEtZWMwOWVlYzY0NWIwXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,666,1000_AL_.jpg', b'1', '02:19:00', '', NULL);
+INSERT INTO `movies` (`MovieId`, `Name`, `ReleaseDate`, `Description`, `Link`, `Country`, `Language`, `MovieRating`, `IMDBRating`, `PosterImgSrc`, `TrailerSrc`, `IsActive`, `Duration`, `Tags`, `Rewards`) VALUES
+(1, 'The Shawshank Redemption', '1993-12-31', 'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.', 'https://www.imdb.com/title/tt0111161/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_1', 'USA', 'English', 0, 9.3, 'https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg', 'https://www.youtube.com/watch?v=6hB3S9bIaco', b'1', '02:22:00', '', '20/20 Awards - Best Adapted Screenplay'),
+(2, 'The Godfather', '1971-12-31', 'The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.', 'https://www.imdb.com/title/tt0068646/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_2', 'USA', 'English', 0, 9.2, 'https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,704,1000_AL_.jpg', 'https://www.youtube.com/watch?v=sY1S34973zA', b'1', '02:55:00', '', 'Academy Award for Best Actor'),
+(3, 'The Godfather: Part II', '1974-12-12', 'The early life and career of Vito Corleone in 1920s New York City is portrayed, while his son, Michael, expands and tightens his grip on the family crime syndicate.', 'https://www.imdb.com/title/tt0071562/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_3', 'USA', 'English', 0, 9, 'https://m.media-amazon.com/images/M/MV5BMWMwMGQzZTItY2JlNC00OWZiLWIyMDctNDk2ZDQ2YjRjMWQ0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,701,1000_AL_.jpg', 'https://www.youtube.com/watch?v=9O1Iy9od7-A', b'1', '03:22:00', '', 'Academy Award for Best Picture'),
+(4, 'The Dark Knight', '2008-07-25', 'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.', 'https://www.imdb.com/title/tt0468569/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_4', 'USA', 'English', 0, 9, 'https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SY1000_CR0,0,675,1000_AL_.jpg', 'https://www.youtube.com/watch?v=EXeTwQWrcwY', b'1', '02:32:00', '', 'Academy Award for Best Actor in a Supporting Role'),
+(5, '12 Angry Men', '1957-04-10', 'A jury holdout attempts to prevent a miscarriage of justice by forcing his colleagues to reconsider the evidence.', 'https://www.imdb.com/title/tt0050083/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_5', 'USA', 'English', 0, 8.9, 'https://m.media-amazon.com/images/M/MV5BMWU4N2FjNzYtNTVkNC00NzQ0LTg0MjAtYTJlMjFhNGUxZDFmXkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_SY1000_CR0,0,649,1000_AL_.jpg', 'https://www.youtube.com/watch?v=Z4Ym5vBfk50', b'1', '01:36:00', '', 'Writers Guild of America Award for Best Written Drama'),
+(6, 'Schindler''s List', '1992-12-31', 'In German-occupied Poland during World War II, industrialist Oskar Schindler gradually becomes concerned for his Jewish workforce after witnessing their persecution by the Nazis.', 'https://www.imdb.com/title/tt0108052/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_6', 'USA', 'English', 0, 8.9, 'https://m.media-amazon.com/images/M/MV5BNDE4OTMxMTctNmRhYy00NWE2LTg3YzItYTk3M2UwOTU5Njg4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SY1000_CR0,0,666,1000_AL_.jpg', 'https://www.youtube.com/watch?v=gG22XNhtnoY', b'1', '03:15:00', '', 'Academy Award for Best Picture'),
+(7, 'The Lord of the Rings: The Return of the King', '2002-12-31', 'Gandalf and Aragorn lead the World of Men against Sauron''s army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring.', 'https://www.imdb.com/title/tt0167260/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_7', 'USA', 'English', 0, 8.9, 'https://m.media-amazon.com/images/M/MV5BNzA5ZDNlZWMtM2NhNS00NDJjLTk4NDItYTRmY2EwMWZlMTY3XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,675,1000_AL_.jpg', 'https://www.youtube.com/results?search_query=The+Lord+of+the+Rings%3A+The+Return+of+the+King', b'1', '03:21:00', '', 'Academy Award for Best Visual Effects'),
+(8, 'Pulp Fiction', '1993-12-31', 'he lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.', 'https://www.imdb.com/title/tt0110912/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_8', 'USA', 'English', 0, 8.9, 'https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,686,1000_AL_.jpg', 'https://www.youtube.com/watch?v=s7EdQ4FqbhY', b'1', '02:34:00', '', 'Palme dOr'),
+(9, 'The Good, the Bad and the Ugly', '1966-12-23', 'A bounty hunting scam joins two men in an uneasy alliance against a third in a race to find a fortune in gold buried in a remote cemetery.', 'https://www.imdb.com/title/tt0060196/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_9', 'USA', 'English', 0, 8.8, 'https://m.media-amazon.com/images/M/MV5BOTQ5NDI3MTI4MF5BMl5BanBnXkFtZTgwNDQ4ODE5MDE@._V1_SY1000_CR0,0,656,1000_AL_.jpg', 'https://www.youtube.com/watch?v=WCN5JJY_wiA', b'1', '02:58:00', '', 'None'),
+(10, 'Fight Club', '1999-09-10', 'An insomniac office worker and a devil-may-care soapmaker form an underground fight club that evolves into something much, much more.', 'https://www.imdb.com/title/tt0137523/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=2B0KGJBCJ189MC86XCHS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_10', 'USA', 'English', 0, 8.8, 'https://m.media-amazon.com/images/M/MV5BMmEzNTkxYjQtZTc0MC00YTVjLTg5ZTEtZWMwOWVlYzY0NWIwXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,666,1000_AL_.jpg', 'https://www.youtube.com/watch?v=qtRKdVHc-cE', b'1', '02:19:00', '', 'Best Effects, Sound Effects Editing');
 
 -- --------------------------------------------------------
 
@@ -266,7 +272,16 @@ INSERT INTO `movies_categories` (`Movies_CategoriesId`, `MovieId`, `CategoryId`)
 (1, 1, 1),
 (2, 2, 1),
 (3, 3, 3),
-(4, 4, 2);
+(4, 4, 2),
+(5, 10, 2),
+(6, 10, 3),
+(7, 8, 2),
+(8, 8, 3),
+(9, 6, 1),
+(10, 9, 2),
+(11, 7, 2),
+(12, 7, 3),
+(13, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -644,8 +659,8 @@ ADD CONSTRAINT `MovieId` FOREIGN KEY (`MovieId`) REFERENCES `movies` (`MovieId`)
 -- Constraints for table `movies_participants`
 --
 ALTER TABLE `movies_participants`
-ADD CONSTRAINT `MovieIdP` FOREIGN KEY (`MovieId`) REFERENCES `movies` (`MovieId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `ParticipantId` FOREIGN KEY (`ParticipantId`) REFERENCES `movieparticipants` (`MovieParticipantId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ADD CONSTRAINT `MovieIdP` FOREIGN KEY (`MovieId`) REFERENCES `movies` (`MovieId`) ON DELETE CASCADE ON UPDATE NO ACTION,
+ADD CONSTRAINT `ParticipantId` FOREIGN KEY (`ParticipantId`) REFERENCES `movieparticipants` (`MovieParticipantId`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `posts`

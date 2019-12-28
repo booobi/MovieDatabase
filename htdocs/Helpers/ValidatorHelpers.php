@@ -45,5 +45,35 @@ class ValidatorHelpers {
 
 
     }
+
+    public static function validateCategoryEditFields() {
+        ValidatorHelpers::validateCategoryAddFields();
+        ValidatorHelpers::validateCategoryDeleteFields();
+    }
+
+    public static function validateCategoryAddFields() {
+        if(!isset($_POST['name']) || $_POST['name']==''
+        || !isset($_POST['isActive']) || ($_POST['isActive']!='0' && $_POST['isActive']!='1')
+        || !isset($_POST['description']) || $_POST['description']=='') {
+            echo json_encode(
+                [
+                    'status'=>'failure',
+                    'description'=>'You need to provide name, isActive(0 or 1) and description parameters'
+                ]);
+
+            die();
+        }
+    }
+
+    public static function validateCategoryDeleteFields() {
+        if(!isset($_POST['id'])) {
+            echo json_encode(
+                [
+                    'status'=>'failure',
+                    'description'=>'You need to provide id parameter'
+                ]);
+            die();
+        }
+    }
 }
 ?>

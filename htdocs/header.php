@@ -1,3 +1,9 @@
+<?php
+    session_start();
+?>
+<!DOCTYPE html>
+<html>
+<body>
 <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Monoton&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Krona+One&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Righteous&display=swap" rel="stylesheet">
@@ -25,7 +31,6 @@
     <div id="user-menu-container">
         <div class="user-buttons">
             <?php
-                session_start();
 
                 if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']) {
                     echo '<button class="profile-btn" id="admin-btn">Administration</button>';

@@ -1,18 +1,12 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<?php
+    include $_SERVER['DOCUMENT_ROOT'] . '/header.php';
+?>
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Monoton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/HomeDesign.css">
     <link rel="stylesheet" href="/css/AddAMovieDesign.css">
 
-</head>
-
-<body>
     <?php
-        include $_SERVER['DOCUMENT_ROOT'] . '/header.php';
         echo '
         <script>
             const action = "add";

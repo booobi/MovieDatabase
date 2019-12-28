@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-<link rel="stylesheet" href="css/HomeDesign.css">
-</head>
-
-<body>
 <?php
     include $_SERVER['DOCUMENT_ROOT'] . '/header.php';
 ?>
+
+<link rel="stylesheet" href="css/HomeDesign.css">
 
 <div class="desktop-headings">
     <div class="top-week">This week top movies</div>

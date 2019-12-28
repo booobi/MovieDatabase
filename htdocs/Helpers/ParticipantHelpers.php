@@ -1,6 +1,6 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/models/MovieParticipant.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Models/MovieParticipant.php';
 
 class ParticipantHelpers {
 

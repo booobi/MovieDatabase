@@ -3,7 +3,7 @@ function deleteMovie(id) {
 	
 	if(answer) {
 		$.ajax({
-			url: '/api/Movies/Delete.php',
+			url: '/api/movies/delete.php',
 			type: 'POST',
 			dataType: 'json',
 			data: {movieId: id},
@@ -25,7 +25,7 @@ function showRatingModal(movieId) {
 function showInfoModal(movieId) {
 	$('#info-container').show();
 	$.ajax({
-		url: '/api/Movies/Get.php',
+		url: '/api/movies/get.php',
 		type: 'POST',
 		dataType: 'json',
 		data: {movieId},
@@ -98,7 +98,7 @@ $('#rateSubmitBtn').click((e) => {
 	movieId = $('#rating-box').data('movieId');
 	rating = $('#rateSelect').val();
 	$.ajax({
-		url: '/api/Movies/Rate.php',
+		url: '/api/movies/rate.php',
 		type: 'POST',
 		dataType: 'json',
 		data: {rating, movieId},

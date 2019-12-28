@@ -154,7 +154,7 @@ function submitMovie(e) {
         }
         
         $.ajax({
-            url: action == 'edit' ? '/api/Movies/Edit.php' : '/api/Movies/Add.php',
+            url: action == 'edit' ? '/api/movies/edit.php' : '/api/movies/add.php',
 			type: 'POST',
 			dataType: 'json',
 			data: action == 'edit' ? { ...movieData, movieId } : movieData,

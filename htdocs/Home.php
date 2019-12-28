@@ -44,10 +44,14 @@
             if(count($moviesThisWeek) > 0) {
             
                 foreach ($moviesThisWeek as $movie) {
+                $categoriesStr = "";
+                foreach($movie->get("Categories") as $category) {
+                    $categoriesStr .= $category->get("Name") . " ";
+                }
                 echo "
                     <tr>
                         <td>" . $movie->get('Name') . "</td>
-                        <td>" . $movie->get('Category') . "</td>
+                        <td>" . $categoriesStr . "</td>
                         <td>" . $movie->get('Rating') . "</td>
                         <td>" . $movie->get('ReleaseDate') . "</td>
                     </tr>

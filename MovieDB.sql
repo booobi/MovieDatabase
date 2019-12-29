@@ -631,7 +631,7 @@ ADD CONSTRAINT `ParentPostId` FOREIGN KEY (`ParentPostId`) REFERENCES `posts` (`
 --
 ALTER TABLE `events_participants`
 ADD CONSTRAINT `EventIdE` FOREIGN KEY (`EventId`) REFERENCES `movieevents` (`MovieEventId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `ParticipantIdE` FOREIGN KEY (`ParticipantId`) REFERENCES `users` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ADD CONSTRAINT `ParticipantIdE` FOREIGN KEY (`ParticipantId`) REFERENCES `users` (`UserId`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `movieevents`

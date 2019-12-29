@@ -137,6 +137,38 @@ class ValidatorHelpers {
         ValidatorHelpers::validatePostFields(['id']);
     }
 
+    public static function validateParticipantAddFields() {
+        ValidatorHelpers::validatePostFields(['name', 'role']);
+        $nameArr = explode(" ", $_POST['name']);
+
+        if(count($nameArr) < 2) {
+            echo json_encode(
+                [
+                'status'=>'failure',
+                'description'=>'You need to provide both a first and a last name!'
+                ]);
+            die();
+        }
+    }
+
+    public static function validateParticipantEditFields() {
+        ValidatorHelpers::validatePostFields(['id', 'name', 'role']);
+        $nameArr = explode(" ", $_POST['name']);
+        
+        if(count($nameArr) < 2) {
+            echo json_encode(
+                [
+                'status'=>'failure',
+                'description'=>'You need to provide both a first and a last name!'
+                ]);
+            die();
+        }
+    }
+
+    public static function validateParticipantDeleteFields() {
+        ValidatorHelpers::validatePostFields(['id']);
+    }
+
     private static function validatePostFields($fields) {
         $invalidFields = [];
         foreach($fields as $field) {
@@ -144,7 +176,6 @@ class ValidatorHelpers {
                 $invalidFields[] = $field;
             }
         }
-
 
         if(count($invalidFields)) {
             echo json_encode(

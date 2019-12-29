@@ -26,7 +26,7 @@
                     <select id="directorSelect" style="display:none;">
                         <?php
                             include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/ParticipantHelpers.php';
-                            $participants = ParticipantHelpers::getAllParticipants();
+                            $participants = ParticipantHelpers::getParticipants();
                             $participants = array_filter($participants, function($v, $k) {
                                 return $v->get("Position") == "director";
                             }, ARRAY_FILTER_USE_BOTH);
@@ -67,7 +67,7 @@
                         <select id="actorsSelect" style="display:none;">
                             <?php
                                 include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/ParticipantHelpers.php';
-                                $participants = ParticipantHelpers::getAllParticipants();
+                                $participants = ParticipantHelpers::getParticipants();
 
                                 foreach($participants as $participant) {
                                     echo '<option value="' . $participant->get("Id") .'">'
@@ -120,7 +120,7 @@
                         <select id="mainActorsSelect" style="display:none;">
                             <?php
                                 include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/ParticipantHelpers.php';
-                                $participants = ParticipantHelpers::getAllParticipants();
+                                $participants = ParticipantHelpers::getParticipants();
 
                                 foreach($participants as $participant) {
                                     echo '<option value="' . $participant->get("Id") .'">'

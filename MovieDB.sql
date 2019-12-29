@@ -82,16 +82,17 @@ CREATE TABLE IF NOT EXISTS `events_participants` (
 
 CREATE TABLE IF NOT EXISTS `movieevents` (
   `MovieEventId` int(11) NOT NULL,
+  `Name` varchar(150),
   `MovieId` int(11) NOT NULL,
   `OwnerId` int(11) NOT NULL,
   `Time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `Location` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `movieevents`(`MovieEventId`, `MovieId`, `OwnerId`, `Time`, `Location`) VALUES 
-(1,4,4,date_format(DATE_ADD(NOW() ,  INTERVAL 3 HOUR),'%Y-%m-%d %H'),'Mladost Kino Arena'),
-(2,2,4,date_format(DATE_ADD(NOW() ,  INTERVAL 1 Day),'%Y-%m-%d %H'),'Lulin Kino Cinemax'),
-(3,3,4,date_format(DATE_ADD(NOW() ,  INTERVAL 2 Day),'%Y-%m-%d %H'),'Arena Armeec');
+INSERT INTO `movieevents`(`MovieEventId`,`Name`,`MovieId`, `OwnerId`, `Time`, `Location`) VALUES 
+(1,'Mladost Party',4,4,date_format(DATE_ADD(NOW() ,  INTERVAL 3 HOUR),'%Y-%m-%d %H'),'Mladost Kino Arena'),
+(2,'Lulin Party',2,4,date_format(DATE_ADD(NOW() ,  INTERVAL 1 Day),'%Y-%m-%d %H'),'Lulin Kino Cinemax'),
+(3,'Arena Armeec Party',3,4,date_format(DATE_ADD(NOW() ,  INTERVAL 2 Day),'%Y-%m-%d %H'),'Arena Armeec');
 
 -- --------------------------------------------------------
 

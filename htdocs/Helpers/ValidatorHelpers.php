@@ -177,6 +177,18 @@ class ValidatorHelpers {
         ValidatorHelpers::validatePostFields(['firstName', 'lastName', 'email']);
     }
 
+    public static function validateProjectionAddFields() {
+        ValidatorHelpers::validatePostFields(['name', 'location', 'date', 'movieId']);
+    }
+
+    public static function validateProjectionEditFields() {
+        ValidatorHelpers::validatePostFields(['id','name', 'location', 'date', 'movieId']);
+    }
+
+    public static function validateProjectionDeleteFields() {
+        ValidatorHelpers::validatePostFields(['id']);
+    }
+
     private static function validatePostFields($fields) {
         $invalidFields = [];
         foreach($fields as $field) {

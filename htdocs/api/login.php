@@ -5,7 +5,7 @@
 	
 	if (isset($_POST['email']) &&  isset($_POST['password'])){
 		$userId = UserHelpers::getUserIdByUsername($_POST['email']);
-		$user = UserHelpers::getUser($userId);
+		$user = $userId ? UserHelpers::getUser($userId) : NULL;
 
 		//check if user exists
 		if($user) {

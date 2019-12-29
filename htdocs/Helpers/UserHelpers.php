@@ -18,8 +18,31 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
         return $result->fetch_assoc()['UserId'];
     }
 
+    public static function changeUserPassword($userId, $newPassword) {
+        $newPassword = md5($newPassword);
+        DBOperations::prepareAndExecute("UPDATE `users` SET `Password`='{$newPassword}' WHERE UserId={$userId}");
+    }
+
+    public static function changeUserDetails($userId, $firstName, $lastName, $email) {
+        //check if same user email exists
+        $existingUser = UserHelpers::checkUserExistence($email);
+        if($existingUser) {
+            echo json_encode(
+            [
+                'status'=>'failure',
+                'description'=>'Another user has this email!'
+            ]);
+            die(); 
+        }
+        
+        DBOperations::prepareAndExecute(
+        "UPDATE `users` SET `FirstName`='{$firstName}',`LastName`='{$lastName}',`Email`='{$email}' 
+        WHERE UserId={$userId}");
+
+    }
+
     public static function getUserOwnedMovies($username) {
-        $result = $result = DBOperations::prepareAndExecute(
+        $result = DBOperations::prepareAndExecute(
             "SELECT user_owned_movies.MovieId from `user_owned_movies`
             INNER JOIN `users` 
             WHERE users.UserId = user_owned_movies.UserId

@@ -169,6 +169,14 @@ class ValidatorHelpers {
         ValidatorHelpers::validatePostFields(['id']);
     }
 
+    public static function validateUserChangePasswordFields() {
+        ValidatorHelpers::validatePostFields(['newPassword']);
+    }
+
+    public static function validateUserChangeDetailsFields() {
+        ValidatorHelpers::validatePostFields(['firstName', 'lastName', 'email']);
+    }
+
     private static function validatePostFields($fields) {
         $invalidFields = [];
         foreach($fields as $field) {

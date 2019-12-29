@@ -134,7 +134,8 @@
 
     <table class = "festivals-tbl down-tables">
        <?php
-        $festivals = MovieHelpers::getMovieFestivals();
+       include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/FestivalHelpers.php';
+        $festivals = FestivalHelpers::getFestivals();
         foreach($festivals as $festival) {
             echo '
             <tr>

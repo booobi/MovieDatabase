@@ -124,5 +124,38 @@ class ValidatorHelpers {
             die();
         }
     }
+
+    public static function validateFestivalAddFields() {
+        ValidatorHelpers::validatePostFields(['name', 'description']);
+    }
+
+    public static function validateFestivalEditFields() {
+        ValidatorHelpers::validatePostFields(['id', 'name', 'description']);
+    }
+
+    public static function validateFestivalDeleteFields() {
+        ValidatorHelpers::validatePostFields(['id']);
+    }
+
+    private static function validatePostFields($fields) {
+        $invalidFields = [];
+        foreach($fields as $field) {
+            if(!isset($_POST[$field]) || !$_POST[$field]) {
+                $invalidFields[] = $field;
+            }
+        }
+
+
+        if(count($invalidFields)) {
+            echo json_encode(
+                [
+                'status'=>'failure',
+                'description'=>'You need to provide valid ' 
+                . implode(', ', $invalidFields) 
+                . (count($invalidFields) > 1 ? ' fields' : ' field')
+                ]);
+            die();
+        }
+    }
 }
 ?>

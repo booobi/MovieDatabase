@@ -1,6 +1,5 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Models/Movie.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/Models/Festival.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/CategoryHelpers.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/ParticipantHelpers.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
@@ -322,24 +321,6 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 		}
 
 		return $movieProjMap;
-	}
-
-	public static function getMovieFestivals() {
-		$result = DBOperations::prepareAndExecute(
-			"SELECT moviefestivals.Name as FestivalName,
-			moviefestivals.Description as FestivalDescription
-			FROM moviefestivals
-			LIMIT 10;");
-
-
-		$festivals = [];
-		if ($result->num_rows > 0) {
-			while($row = $result->fetch_assoc()) {
-				$festivals[] = new Festival($row['FestivalName'], $row['FestivalDescription']);
-			}
-		}
-
-		return $festivals;
 	}
 
 	/**

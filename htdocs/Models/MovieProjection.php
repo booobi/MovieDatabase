@@ -1,7 +1,8 @@
 <?php
 	class MovieProjection implements JsonSerializable {
 		private $Id;
-        private $Name;
+		private $Name;
+		private $Duration;
         private $Location;
         private $MovieId;
         private $OwnerId;
@@ -26,6 +27,7 @@
 			return [
 				'id' => $this->Id,
 				'name' => $this->Name,
+				'duration' => $this->Duration,
                 'location' => $this->Location,
                 'movieId' => $this->MovieId,
                 'ownerId' => $this->OwnerId,

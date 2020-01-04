@@ -162,9 +162,9 @@ body {
     border-style: none;
     z-index: 1;
     outline: none;
-   // color: #c1c1c1;
+    color: #c1c1c1;
     color: rgb(174, 158, 149);
-//    background-color: rgba(159, 173, 208, 0.43);
+    /* background-color: rgba(159, 173, 208, 0.43); */
    background-color: rgba(170, 196, 224, 0.33);
 }
 
@@ -542,7 +542,7 @@ body ::-webkit-scrollbar-thumb:hover {
     }
 
     .navigation {
-   //    height: 744px;
+       /* height: 744px; */
     }
 
 

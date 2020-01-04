@@ -170,7 +170,7 @@ class ValidatorHelpers {
     }
 
     public static function validateUserChangePasswordFields() {
-        ValidatorHelpers::validatePostFields(['newPassword']);
+        ValidatorHelpers::validatePostFields(['oldPassword', 'newPassword']);
     }
 
     public static function validateUserChangeDetailsFields() {
@@ -178,11 +178,11 @@ class ValidatorHelpers {
     }
 
     public static function validateProjectionAddFields() {
-        ValidatorHelpers::validatePostFields(['name', 'location', 'date', 'movieId']);
+        ValidatorHelpers::validatePostFields(['name', 'duration', 'location', 'date', 'movieId']);
     }
 
     public static function validateProjectionEditFields() {
-        ValidatorHelpers::validatePostFields(['id','name', 'location', 'date', 'movieId']);
+        ValidatorHelpers::validatePostFields(['id','name', 'duration', 'location', 'date', 'movieId']);
     }
 
     public static function validateProjectionDeleteFields() {

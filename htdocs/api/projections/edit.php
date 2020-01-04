@@ -7,7 +7,7 @@
     ValidatorHelpers::validateProjectionEditFields();
 
     $userId = UserHelpers::getUserIdByUsername($_SESSION['username']);
-    MovieProjectionHelpers::editMovieProjection($_POST['id'], $userId, $_POST['name'], $_POST['movieId'], $_POST['date'], $_POST['location']);
+    MovieProjectionHelpers::editMovieProjection($_POST['id'], $userId, $_POST['name'], $_POST['duration'],$_POST['movieId'], $_POST['date'], $_POST['location']);
     
     echo json_encode(
         [

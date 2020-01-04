@@ -3,16 +3,20 @@
 ?>
 <!DOCTYPE html>
 <html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Monoton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Krona+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Righteous&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Share:400,700,700i&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="/css/header.css">
+</head>
 <body>
-<link href="https://fonts.googleapis.com/css?family=Lato:400,700|Monoton&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Krona+One&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Righteous&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Comfortaa:400,700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Share:400,700,700i&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="/css/header.css">
+
 <div class="navigation">
     <div class="logo"> Movie Time</div>
 
@@ -21,14 +25,16 @@
             <input type="text" placeholder="Search movie, actor, director...">
         </form>
         <div class="advanced-search">
-            <input type="checkbox" id="check-adv-search" value="check" >
-            Advanced search
+               <label class="checkbox-box">
+                   Advanced search
+                   <input type="checkbox">
+                   <span class="check-mark"></span>
+               </label>
         </div>
        
         <button type="submit">Go!</button>
     </div>
 
-    <div id="user-menu-container">
         <div class="user-buttons">
             <?php
 
@@ -52,7 +58,6 @@
             <button class="menu-btn" id="movies"><a href = "Movies.php">Movies </a></button>
             <button class="menu-btn" id="movie-festivals"><a href = "Festivals.php">Festivals </a></button>
         </div>
-    </div>
 </div>
 
 <div id="sign-in-box">

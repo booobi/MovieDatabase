@@ -10,6 +10,10 @@ $('#log-out-btn').click(() => {
 		});
 })
 
+$('#profile-btn').click(
+	() => window.location.href = "Profile.php"
+);
+
 // Validating Empty Field
 function validate_login() {
 	if (document.getElementById('log-email').value == "" ||

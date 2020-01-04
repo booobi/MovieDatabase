@@ -32,7 +32,8 @@ class MovieProjectionHelpers {
 			while($row = $res->fetch_assoc()) {
 				$projection = new MovieProjection();
 				$projection->set('Id', $row["MovieEventId"]);
-				$projection->set('Name', $row["Name"]);
+                $projection->set('Name', $row["Name"]);
+                $projection->set('Duration', $row["Duration"]);
 				$projection->set('Location', $row["Location"]);
                 $projection->set('MovieId', $row["MovieId"]);
                 $projection->set('OwnerId', $row["OwnerId"]);
@@ -45,16 +46,17 @@ class MovieProjectionHelpers {
 		return $movieProjections;	
     }
 
-    public static function addMovieProjection($ownerId, $name, $movieId, $date, $location) {
+    public static function addMovieProjection($ownerId, $name, $duration ,$movieId, $date, $location) {
        DBOperations::prepareAndExecute("
-        INSERT INTO `movieevents`(`MovieId`, `Name`, `OwnerId`, `Time`, `Location`) 
-        VALUES ({$movieId},'{$name}',{$ownerId},STR_TO_DATE('{$date}', '%Y-%m-%d'),'{$location}')
+        INSERT INTO `movieevents`(`MovieId`, `Name`, `Duration` ,`OwnerId`, `Time`, `Location`) 
+        VALUES ({$movieId},'{$name}', {$duration} ,{$ownerId},STR_TO_DATE('{$date}', '%Y-%m-%d'),'{$location}')
         ");
     }
 
-    public static function editMovieProjection($projectionId, $ownerId, $name, $movieId, $date, $location) {
+    public static function editMovieProjection($projectionId, $ownerId, $name, $duration,$movieId, $date, $location) {
         DBOperations::prepareAndExecute("UPDATE `movieevents` 
         SET `Name`='{$name}',`MovieId`={$movieId},
+        `Duration`={$duration},
         `OwnerId`={$ownerId},`Time`=STR_TO_DATE('{$date}', '%Y-%m-%d'),
         `Location`='{$location}'
         WHERE MovieEventId = {$projectionId}");

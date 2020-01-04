@@ -189,6 +189,22 @@ class ValidatorHelpers {
         ValidatorHelpers::validatePostFields(['id']);
     }
 
+    public static function validatePostAddFields()
+    {
+        ValidatorHelpers::validatePostFields(['description']);
+    }
+
+    public static function validatePostEditFields()
+    {
+        ValidatorHelpers::validatePostFields(['id', 'description']);
+    }
+
+    public static function validatePostDeleteFields()
+    {
+        ValidatorHelpers::validatePostFields(['id']);
+    }
+
+
     private static function validatePostFields($fields) {
         $invalidFields = [];
         foreach($fields as $field) {

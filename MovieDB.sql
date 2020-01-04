@@ -363,7 +363,7 @@ INSERT INTO `movies_participants`(`Movies_ParticipantsId`, `MovieId`, `Participa
 CREATE TABLE IF NOT EXISTS `posts` (
   `PostId` int(11) NOT NULL,
   `OwnerId` int(11) NOT NULL,
-  `MovieId` int(11) NOT NULL,
+  `MovieId` int(11) DEFAULT NULL,
   `Rating` float NOT NULL,
   `Content` varchar(250) DEFAULT NULL,
   `IsActive` bit(1) NOT NULL
@@ -669,7 +669,7 @@ ADD CONSTRAINT `ParticipantId` FOREIGN KEY (`ParticipantId`) REFERENCES `moviepa
 --
 ALTER TABLE `posts`
 ADD CONSTRAINT `MovieIdPosts` FOREIGN KEY (`MovieId`) REFERENCES `movies` (`MovieId`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `OwnerIdP` FOREIGN KEY (`OwnerId`) REFERENCES `users` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ADD CONSTRAINT `OwnerIdP` FOREIGN KEY (`OwnerId`) REFERENCES `users` (`UserId`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `userratings`

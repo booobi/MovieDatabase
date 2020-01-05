@@ -2,6 +2,9 @@
 include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Models/Comment.php';
 
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/PostHelpers.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/UserHelpers.php';
+
 
 class CommentHelpers {
 
@@ -14,10 +17,17 @@ class CommentHelpers {
 
                 $comment = new Comment();
                 $comment->set("Id", $row["CommentId"]);
+                $comment->set("UserId", $row['OwnerId']);
                 $comment->set("PostId", $row['ParentPostId']);
                 $comment->set("ParentCommentId", $row['AnswerToCommentId']);
                 $comment->set("Content", $row['Content']);
                 $comment->set("IsActive", $row['IsActive']);
+
+                $user = UserHelpers::getUser($row['OwnerId']);
+                $comment->set("User", $user);
+                $ratingForPost = PostHelpers::getPostRatingForUser($row['PostId'], $row['OwnerId']);
+                $comment->set("RatingForPost", $ratingForPost);
+
 
                 return $comment;
         }
@@ -37,6 +47,11 @@ class CommentHelpers {
                 $comment->set("ParentCommentId", $row['AnswerToCommentId']);
                 $comment->set("Content", $row['Content']);
                 $comment->set("IsActive", $row['IsActive']);
+
+                $user = UserHelpers::getUser($row['OwnerId']);
+                $comment->set("User", $user);
+                $ratingForPost = PostHelpers::getPostRatingForUser($row['ParentPostId'], $row['OwnerId']);
+                $comment->set("RatingForPost", $ratingForPost);
 
                 $comments[] = $comment;
             }

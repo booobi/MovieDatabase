@@ -1,10 +1,14 @@
 <?php
 	class Comment implements JsonSerializable {
 		private $Id;
+		private $UserId;
         private $PostId;
         private $ParentCommentId;
         private $Content;
-        private $IsActive;
+		private $IsActive;
+		
+		private $User;
+		private $RatingForPost;
 		
 		public function __construct () {
 		}
@@ -24,10 +28,12 @@
 		public function jsonSerialize() {
 			return [
 				'id' => $this->Id,
+				'userId' => $this->UserId,
 				'postId' => $this->PostId,
 				'parentCommentId' => $this->ParentCommentId,
                 'content' => $this->Content,
-                'isActive' => $this->IsActive
+				'isActive' => $this->IsActive,
+				'ratingForPost' => $this->RatingForPost
 			];
 		}
 	}

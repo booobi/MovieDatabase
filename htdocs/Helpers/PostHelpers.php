@@ -91,5 +91,13 @@ class PostHelpers {
     public static function deletePost($postId) {
         DBOperations::prepareAndExecute("DELETE FROM `posts` WHERE PostId={$postId}");
     }
+
+    public static function getPostRatingForUser($postId, $userId) {
+        $res = DBOperations::prepareAndExecute("SELECT PostRating FROM `userratings` WHERE UserId={$userId} AND PostId={$postId}");
+        if ($res->num_rows > 0) {
+            $row = $res->fetch_assoc();
+            return $row['PostRating'];    
+        }
+    }
 }
 ?>

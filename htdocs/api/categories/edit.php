@@ -5,7 +5,7 @@
 
     ValidatorHelpers::validateCategoryEditFields();
     
-    CategoryHelpers::editCategory($_POST['id'], $_POST['name'], $_POST['description'], $_POST['isActive']);
+    CategoryHelpers::editCategory($_POST['categoryId'], $_POST['name'], $_POST['description'], $_POST['isActive']);
     
     echo json_encode(
         [

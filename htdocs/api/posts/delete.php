@@ -7,7 +7,7 @@
     ValidatorHelpers::validatePostDeleteFields();
 
     $userId = UserHelpers::getUserIdByUsername($_SESSION['username']);
-    PostHelpers::deletePost($_POST['id']);
+    PostHelpers::deletePost($_POST['postId']);
     
     echo json_encode(
         [

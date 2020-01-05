@@ -6,7 +6,7 @@
     ValidatorHelpers::validateUserLoggedIn();
     ValidatorHelpers::validateProjectionDeleteFields();
 
-    MovieProjectionHelpers::deleteMovieProjection($_POST['id']);
+    MovieProjectionHelpers::deleteMovieProjection($_POST['projectionId']);
     
     echo json_encode(
         [

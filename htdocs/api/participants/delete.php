@@ -5,7 +5,7 @@
     ValidatorHelpers::validateUserIsAdmin();
     ValidatorHelpers::validateParticipantDeleteFields();
 
-    ParticipantHelpers::deleteParticipant($_POST['id']);
+    ParticipantHelpers::deleteParticipant($_POST['participantId']);
     
     echo json_encode(
         [

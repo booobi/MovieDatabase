@@ -77,10 +77,23 @@ class CommentHelpers {
         ");
     }
 
+    public static function editComment($commendId, $content) {
+        DBOperations::prepareAndExecute("
+        UPDATE `comments` SET `Content`='{$content}' WHERE CommentId={$commendId}
+        ");
+    }
+
+    public static function deleteComment($commendId) {
+        DBOperations::prepareAndExecute("
+        DELETE FROM `comments` WHERE CommentId={$commendId}
+        ");
+    }
+
     public static function setIsActiveState($commentId, $isActive) {
         DBOperations::prepareAndExecute("
         UPDATE `comments` SET `IsActive`={$isActive} WHERE CommentId={$commentId}
         ");
     }
+    
 }
 ?>

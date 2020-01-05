@@ -378,9 +378,9 @@ CREATE TABLE IF NOT EXISTS `posts` (
 CREATE TABLE IF NOT EXISTS `userratings` (
   `UserRatingId` int(11) NOT NULL,
   `UserId` int(11) NOT NULL,
-  `MovieID` int(11) NOT NULL,
+  `MovieID` int(11) DEFAULT NULL,
   `MovieRating` float NOT NULL,
-  `PostRating` float,
+  `PostRating` float DEFAULT NULL,
   `PostId` int(11)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

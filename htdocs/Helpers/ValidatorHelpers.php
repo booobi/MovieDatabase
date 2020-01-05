@@ -25,7 +25,7 @@ class ValidatorHelpers {
     }
 
     public function validateUserApprovalFields() {
-        if(!isset($_POST['id'])
+        if(!isset($_POST['userId'])
         || !isset($_POST['isApproved'])
         || ($_POST['isApproved'] != '0' && $_POST['isApproved'] != '1')) {
             echo json_encode(
@@ -38,7 +38,7 @@ class ValidatorHelpers {
     }
 
     public function validateUserAlterStatusFields() {
-        if(!isset($_POST['id'])
+        if(!isset($_POST['userId'])
         || !isset($_POST['isActive'])
         || ($_POST['isActive'] != '0' && $_POST['isActive'] != '1')) {
             echo json_encode(
@@ -115,14 +115,7 @@ class ValidatorHelpers {
     }
 
     public static function validateCategoryDeleteFields() {
-        if(!isset($_POST['id'])) {
-            echo json_encode(
-                [
-                    'status'=>'failure',
-                    'description'=>'You need to provide id parameter'
-                ]);
-            die();
-        }
+        ValidatorHelpers::validatePostFields(['categoryId']);
     }
 
     public static function validateFestivalAddFields() {
@@ -130,11 +123,11 @@ class ValidatorHelpers {
     }
 
     public static function validateFestivalEditFields() {
-        ValidatorHelpers::validatePostFields(['id', 'name', 'description']);
+        ValidatorHelpers::validatePostFields(['festivalId', 'name', 'description']);
     }
 
     public static function validateFestivalDeleteFields() {
-        ValidatorHelpers::validatePostFields(['id']);
+        ValidatorHelpers::validatePostFields(['festivalId']);
     }
 
     public static function validateParticipantAddFields() {
@@ -152,7 +145,7 @@ class ValidatorHelpers {
     }
 
     public static function validateParticipantEditFields() {
-        ValidatorHelpers::validatePostFields(['id', 'name', 'role']);
+        ValidatorHelpers::validatePostFields(['participantId', 'name', 'role']);
         $nameArr = explode(" ", $_POST['name']);
         
         if(count($nameArr) < 2) {
@@ -166,7 +159,7 @@ class ValidatorHelpers {
     }
 
     public static function validateParticipantDeleteFields() {
-        ValidatorHelpers::validatePostFields(['id']);
+        ValidatorHelpers::validatePostFields(['participantId']);
     }
 
     public static function validateUserChangePasswordFields() {
@@ -182,11 +175,11 @@ class ValidatorHelpers {
     }
 
     public static function validateProjectionEditFields() {
-        ValidatorHelpers::validatePostFields(['id','name', 'duration', 'location', 'date', 'movieId']);
+        ValidatorHelpers::validatePostFields(['projectionId','name', 'duration', 'location', 'date', 'movieId']);
     }
 
     public static function validateProjectionDeleteFields() {
-        ValidatorHelpers::validatePostFields(['id']);
+        ValidatorHelpers::validatePostFields(['projectionId']);
     }
 
     public static function validatePostAddFields()
@@ -196,17 +189,17 @@ class ValidatorHelpers {
 
     public static function validatePostEditFields()
     {
-        ValidatorHelpers::validatePostFields(['id', 'description']);
+        ValidatorHelpers::validatePostFields(['postId', 'description']);
     }
 
     public static function validatePostRateFields()
     {
-        ValidatorHelpers::validatePostFields(['id', 'rating']);
+        ValidatorHelpers::validatePostFields(['postId', 'rating']);
     }
 
     public static function validatePostDeleteFields()
     {
-        ValidatorHelpers::validatePostFields(['id']);
+        ValidatorHelpers::validatePostFields(['postId']);
     }
 
     public static function validateCommentAddFields()
@@ -216,17 +209,17 @@ class ValidatorHelpers {
 
     public static function validateCommentEditFields()
     {
-        ValidatorHelpers::validatePostFields(['id', 'content']);
+        ValidatorHelpers::validatePostFields(['commentId', 'content']);
     }
 
     public static function validateCommentDeleteFields()
     {
-        ValidatorHelpers::validatePostFields(['id']);
+        ValidatorHelpers::validatePostFields(['commentId']);
     }
 
     public static function validateCommentAlterIsActiveFields()
     {
-        ValidatorHelpers::validatePostFields(['id', 'isActive']);
+        ValidatorHelpers::validatePostFields(['commentId', 'isActive']);
         if($_POST['isActive'] != '0' && $_POST['isActive'] != '1') {
             echo json_encode(
             [

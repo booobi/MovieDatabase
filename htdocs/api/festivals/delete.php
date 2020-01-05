@@ -5,7 +5,7 @@
     ValidatorHelpers::validateUserIsAdmin();
     ValidatorHelpers::validateFestivalDeleteFields();
     
-    FestivalHelpers::deleteFestival($_POST['id']);
+    FestivalHelpers::deleteFestival($_POST['festivalId']);
     
     echo json_encode(
         [

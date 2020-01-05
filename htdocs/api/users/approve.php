@@ -5,7 +5,7 @@
     ValidatorHelpers::validateUserApprovalFields();
     include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/UserHelpers.php';
     
-    UserHelpers::alterUserApproval($_POST['id'], $_POST['isApproved']);
+    UserHelpers::alterUserApproval($_POST['userId'], $_POST['isApproved']);
     
     echo json_encode(
         [

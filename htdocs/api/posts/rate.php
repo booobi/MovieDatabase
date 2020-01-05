@@ -8,7 +8,7 @@
 
     $userId = UserHelpers::getUserIdByUsername($_SESSION['username']);
 
-    $operation = PostHelpers::ratePost($userId, $_POST['id'], $_POST['rating']);
+    $operation = PostHelpers::ratePost($userId, $_POST['postId'], $_POST['rating']);
     
     if($operation == "create") {
         echo json_encode(

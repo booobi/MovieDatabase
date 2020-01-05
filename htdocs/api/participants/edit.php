@@ -8,7 +8,7 @@
     $nameArr = explode(" ", $_POST['name']);
     $firstName = explode(" ", $_POST['name'])[0];
     $lastName = explode(" ", $_POST['name'])[1];
-    ParticipantHelpers::editParticipant($_POST['id'], $firstName, $lastName, $_POST['role']);
+    ParticipantHelpers::editParticipant($_POST['participantId'], $firstName, $lastName, $_POST['role']);
     
     echo json_encode(
         [

@@ -4,14 +4,14 @@
     include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/UserHelpers.php';
     include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/ValidatorHelpers.php';
     ValidatorHelpers::validateUserLoggedIn();
-    ValidatorHelpers::validateCommentAlterisActiveFields();
+    ValidatorHelpers::validateCommentEditFields();
 
-    CommentHelpers::setIsActiveState($_POST['commentId'], $_POST['isActive']);
-    
+    CommentHelpers::editComment($_POST['commentId'], $_POST['content']);
+
     echo json_encode(
         [
             'status'=>'success',
-            'description'=>'Comment status edited successfully!'
+            'description'=>'Comment edited successfully!'
         ]);
     
 ?>

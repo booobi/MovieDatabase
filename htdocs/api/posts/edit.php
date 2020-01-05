@@ -6,7 +6,7 @@
     ValidatorHelpers::validateUserLoggedIn();
     ValidatorHelpers::validatePostEditFields();
     
-    PostHelpers::editPost($_POST['id'], $_POST['description']);
+    PostHelpers::editPost($_POST['postId'], $_POST['description']);
     if(isset($_POST['movieId'])) {
         PostHelpers::setPostMovieId($_POST['movieId']);
     }

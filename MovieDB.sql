@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `CommentId` int(11) NOT NULL,
   `OwnerId` int(11) NOT NULL,
   `ParentPostId` int(11) NOT NULL,
-  `AnswerToCommentId` int(11) NOT NULL,
+  `AnswerToCommentId` int(11) DEFAULT NULL,
   `Content` varchar(250) NOT NULL,
   `IsActive` bit(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -366,7 +366,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `MovieId` int(11) DEFAULT NULL,
   `Rating` float NOT NULL,
   `Content` varchar(250) DEFAULT NULL,
-  `IsActive` bit(1) NOT NULL
+  `IsActive` bit(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -624,9 +624,9 @@ ALTER TABLE `watchlateritems`
 -- Constraints for table `comments`
 --
 ALTER TABLE `comments`
-ADD CONSTRAINT `AnswerToCommentId` FOREIGN KEY (`AnswerToCommentId`) REFERENCES `comments` (`CommentId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `OwnerId` FOREIGN KEY (`OwnerId`) REFERENCES `users` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `ParentPostId` FOREIGN KEY (`ParentPostId`) REFERENCES `posts` (`PostId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ADD CONSTRAINT `AnswerToCommentId` FOREIGN KEY (`AnswerToCommentId`) REFERENCES `comments` (`CommentId`) ON DELETE CASCADE ON UPDATE NO ACTION,
+ADD CONSTRAINT `OwnerId` FOREIGN KEY (`OwnerId`) REFERENCES `users` (`UserId`) ON DELETE CASCADE ON UPDATE NO ACTION,
+ADD CONSTRAINT `ParentPostId` FOREIGN KEY (`ParentPostId`) REFERENCES `posts` (`PostId`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `events_participants`

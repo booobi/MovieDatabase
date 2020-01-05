@@ -1,5 +1,5 @@
 <?php
-	class MovieParticipant implements JsonSerializable {
+	class Post implements JsonSerializable {
 		private $Id;
         private $OwnerId;
         private $MovieId;

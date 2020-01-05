@@ -199,11 +199,44 @@ class ValidatorHelpers {
         ValidatorHelpers::validatePostFields(['id', 'description']);
     }
 
+    public static function validatePostRateFields()
+    {
+        ValidatorHelpers::validatePostFields(['id', 'rating']);
+    }
+
     public static function validatePostDeleteFields()
     {
         ValidatorHelpers::validatePostFields(['id']);
     }
 
+    public static function validateCommentAddFields()
+    {
+        ValidatorHelpers::validatePostFields(['content', 'postId']);
+    }
+
+    public static function validateCommentEditFields()
+    {
+        ValidatorHelpers::validatePostFields(['id', 'content']);
+    }
+
+    public static function validateCommentDeleteFields()
+    {
+        ValidatorHelpers::validatePostFields(['id']);
+    }
+
+    public static function validateCommentAlterIsActiveFields()
+    {
+        ValidatorHelpers::validatePostFields(['id', 'isActive']);
+        if($_POST['isActive'] != '0' && $_POST['isActive'] != '1') {
+            echo json_encode(
+            [
+                'status'=>'error',
+                'description'=>'You need to provide a valid isActive (0 or 1)!'
+            ]);
+            die();
+        }
+
+    }
 
     private static function validatePostFields($fields) {
         $invalidFields = [];

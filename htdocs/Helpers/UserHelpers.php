@@ -18,6 +18,13 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
         return $result->fetch_assoc()['UserId'];
     }
 
+    public static function getCurrentUser() {
+        if(isset($_SESSION['username'])) {
+            $userId = UserHelpers::getUserIdByUsername($_SESSION['username']);
+            return UserHelpers::getUser($userId);
+        }
+    }
+
     public static function changeUserPassword($userId, $newPassword) {
         $newPassword = md5($newPassword);
         DBOperations::prepareAndExecute("UPDATE `users` SET `Password`='{$newPassword}' WHERE UserId={$userId}");
@@ -90,8 +97,8 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
         $result = DBOperations::prepareAndExecute(
             "SELECT *
 			FROM users
-			WHERE UserId = {$userId}");
-
+            WHERE UserId = {$userId}");
+            
             if($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
     

@@ -9,6 +9,8 @@
         private $IsApproved;
 		
 		private $Status;
+		private $Movie;
+		private $Owner;
 
 		public function __construct () {
 		}
@@ -29,12 +31,14 @@
 			return [
 				'id' => $this->Id,
 				'requestBy' => $this->RequestBy,
-				'RequestTo' => $this->RequestTo,
+				'requestTo' => $this->RequestTo,
 				'movieId' => $this->MovieId,
                 'requesterRating' => $this->RequesterRating,
 				'approvalRating' => $this->ApprovalRating,
 				'isApproved' => $this->IsApproved,
-				'status' => $this->Status
+				'status' => $this->Status,
+				'movie' => $this->Movie,
+				'owner' => $this->Owner
 			];
 		}
 	}

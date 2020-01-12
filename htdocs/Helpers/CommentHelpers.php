@@ -61,9 +61,6 @@ class CommentHelpers {
     }
 
     public static function addComment($userId, $postId, $content) {
-        echo "INSERT INTO `comments`(`OwnerId`, `ParentPostId`, `Content`) 
-        VALUES ({$userId},{$postId}, '{$content}')
-        ";
         DBOperations::prepareAndExecute("
         INSERT INTO `comments`(`OwnerId`, `ParentPostId`, `Content`) 
         VALUES ({$userId},{$postId}, '{$content}')

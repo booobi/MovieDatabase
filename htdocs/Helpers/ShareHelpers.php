@@ -1,6 +1,8 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Models/Share.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/MovieHelpers.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/UserHelpers.php';
 
 class ShareHelpers {
 
@@ -13,8 +15,14 @@ class ShareHelpers {
     public static function editShare($shareId, $movieId) {
         $share = ShareHelpers::getShare($shareId);
         $prevMovie = $share->get("MovieId");
-        $shareOwner = $share->get("ExchangeRequestBy");
+        $shareOwner = $share->get("RequestBy");
         
+        if($movieId == $prevMovie) return;
+
+        if(ShareHelpers::mainShareByUserForMovieExists($shareOwner, $movieId)) {
+            return 'exists';
+        }
+
         //remove all requests for the prevous movie share
         DBOperations::prepareAndExecute(
             "DELETE FROM `movieexchanges` WHERE ExchangeRequestTo={$shareOwner} AND MovieToShare={$prevMovie}"
@@ -29,7 +37,7 @@ class ShareHelpers {
     public static function deleteShare($shareId) {
         $share = ShareHelpers::getShare($shareId);
         $movieId = $share->get("MovieId");
-        $shareOwner = $share->get("ExchangeRequestBy");
+        $shareOwner = $share->get("RequestBy");
 
         //remove all requests for the movie share
         DBOperations::prepareAndExecute(
@@ -58,6 +66,14 @@ class ShareHelpers {
             $share->set("ApprovalRating", $row['ApprovalRating']);
             $share->set("IsApproved", $row['IsApproved']);
 
+            //movie
+            $movie = MovieHelpers::getMovie($row['MovieToShare']);
+            $share->set('Movie', $movie);
+
+            //owner
+            $owner = UserHelpers::getUser($row['ExchangeRequestBy']);
+            $share->set("Owner", $owner);
+
             return $share;
         }
     }
@@ -78,6 +94,16 @@ class ShareHelpers {
                 $share->set("RequesterRating", $row['RequesterRating']);
                 $share->set("ApprovalRating", $row['ApprovalRating']);
                 $share->set("IsApproved", $row['IsApproved']);
+
+                //movie
+                $movie = MovieHelpers::getMovie($row['MovieToShare']);
+                $share->set('Movie', $movie);
+
+                //owner
+                $owner = UserHelpers::getUser($row['ExchangeRequestBy']);
+                $share->set("Owner", $owner);
+
+
                 $shares[] = $share;
             }
         }
@@ -97,14 +123,19 @@ class ShareHelpers {
              //get requests for this user and movie combination (share):
             $shareOwnerId = $mainShare->get("RequestBy");
             $movieId = $mainShare->get("MovieId");
-            $statusRes = DBOperations::prepareAndExecute(
-                "SELECT * FROM `movieexchanges` WHERE ExchangeRequestTo={$shareOwnerId} AND MovieToShare={$movieId}"
+
+            $isApprovedRes= DBOperations::prepareAndExecute(
+                "SELECT * FROM `movieexchanges` WHERE ExchangeRequestTo={$shareOwnerId} AND MovieToShare={$movieId} AND isApproved=1"
             );
 
             $status="";
-            if($mainShare->get("IsApproved") == 1) {
+            if($isApprovedRes->num_rows > 0) {
                 $status = "Shared";
             } else {
+                $statusRes = DBOperations::prepareAndExecute(
+                    "SELECT * FROM `movieexchanges` WHERE ExchangeRequestTo={$shareOwnerId} AND MovieToShare={$movieId}"
+                );
+    
                 $status = $statusRes->num_rows > 0 ? "Requested" : "New";
             }
             
@@ -151,18 +182,47 @@ class ShareHelpers {
         );
     }
 
-    public static function cancelRequest($byUserId, $toUserId, $forMovieId) {
+    public static function getRequestsForShare($shareId) {
+        $share = ShareHelpers::getShare($shareId);
+        $shareOwnerId = $share->get("RequestBy");
+        $shareMovieId = $share->get("MovieId");
+        
+        $shareRequestIdsRes = DBOperations::prepareAndExecute(
+            "SELECT Movie_ExchangesId FROM `movieexchanges` WHERE ExchangeRequestTo={$shareOwnerId} AND MovieToShare={$shareMovieId}
+            "
+        );
+
+        $shareRequests = [];
+        if ($shareRequestIdsRes->num_rows > 0) {
+			while($row = $shareRequestIdsRes->fetch_assoc()) {
+                $shareRequests[] = ShareHelpers::getShare($row['Movie_ExchangesId']);
+            }
+        }
+		
+        return $shareRequests;
+        
+    }
+    public static function userHasRequestToShare($userId, $shareId) {
+        $shareRequests = ShareHelpers::getRequestsForShare($shareId);
+        
+        return count($shareRequests) > 0;
+     }
+
+    public static function cancelRequest($ofUserId, $forShareId) {
+        $share = ShareHelpers::getShare($forShareId);
+        $ownerId = $share->get("RequestBy");
+        $forMovieId = $share->get("MovieId");
         DBOperations::prepareAndExecute(
             "DELETE FROM `movieexchanges` 
-            WHERE `ExchangeRequestBy`={$byUserId} AND `ExchangeRequestTo`={$toUserId}, `MovieToShare`={$forMovieId}) 
+            WHERE `ExchangeRequestBy`={$ofUserId} AND `ExchangeRequestTo`={$ownerId} AND `MovieToShare`={$forMovieId} 
             "
         );
     }
 
-    public static function alterRequestStatus($shareOwner, $byUserId, $forMovieId, $isApproved) {
+    public static function alterRequestStatus($shareId, $isApproved) {
         DBOperations::prepareAndExecute(
             "UPDATE `movieexchanges` SET `IsApproved`={$isApproved} 
-            WHERE ExchangeRequestBy={$byUserId} AND ExchangeRequestTo={$shareOwner} AND MovieToShare={$forMovieId}"
+            WHERE Movie_ExchangesId={$shareId}"
         );
     }
     

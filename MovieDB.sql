@@ -104,7 +104,7 @@ INSERT INTO `movieevents`(`MovieEventId`,`Name`,`Duration`,`MovieId`, `OwnerId`,
 CREATE TABLE IF NOT EXISTS `movieexchanges` (
   `Movie_ExchangesId` int(11) NOT NULL,
   `ExchangeRequestBy` int(11) NOT NULL,
-  `ExchangeRequestTo` int(11) NOT NULL,
+  `ExchangeRequestTo` int(11) DEFAULT NULL,
   `MovieToShare` int(11) NOT NULL,
   `RequesterRating` float DEFAULT NULL,
   `ApprovalRating` float DEFAULT NULL,

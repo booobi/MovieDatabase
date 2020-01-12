@@ -217,6 +217,21 @@ class ValidatorHelpers {
         ValidatorHelpers::validatePostFields(['commentId']);
     }
 
+    public static function validateShareAddFields()
+    {
+        ValidatorHelpers::validatePostFields(['movieId']);
+    }
+
+    public static function validateShareEditFields()
+    {
+        ValidatorHelpers::validatePostFields(['shareId', 'movieId']);
+    }
+
+    public static function validateShareRequestJoinFields()
+    {
+        ValidatorHelpers::validatePostFields(['shareId']);
+    }
+
     public static function validateCommentAlterIsActiveFields()
     {
         ValidatorHelpers::validatePostFields(['commentId', 'isActive']);

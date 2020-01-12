@@ -11,7 +11,7 @@
     echo json_encode(
         [
             'status'=>'success',
-            'description'=>'Comment edited successfully!'
+            'description'=>'Comment deleted successfully!'
         ]);
     
 ?>

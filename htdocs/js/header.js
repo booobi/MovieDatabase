@@ -10,10 +10,6 @@ $('#log-out-btn').click(() => {
 		});
 })
 
-$('#profile-btn').click(
-	() => window.location.href = "Profile.php"
-);
-
 // Validating Empty Field
 function validate_login() {
 	if (document.getElementById('log-email').value == "" ||
@@ -79,7 +75,7 @@ function validate_signin() {
 
 //Function To Display Popup
 function login_show() {
-	$('#log-in-box').show();
+	$('#log-in-container').show();
 }
 //Function to Hide Popup
 function login_hide(){
@@ -90,7 +86,7 @@ function login_hide(){
 //Function To Display Popup
 function signin_show() {
 	$('form[name="signup-form"]').trigger('reset');
-	$('#sign-in-box').show();
+	$('#sign-in-container').show();
 }
 //Function to Hide Popup
 function signin_hide(){

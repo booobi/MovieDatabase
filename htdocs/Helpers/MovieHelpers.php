@@ -237,7 +237,8 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 			"SELECT DISTINCT MovieId, movies.Name AS MovieName,
 			movies.MovieRating AS MovieRating,
 			CAST(movies.ReleaseDate AS DATE) AS ReleaseDate,
-			CAST(movies.CreatedOn AS DATE) AS CreatedOn
+			CAST(movies.CreatedOn AS DATE) AS CreatedOn,
+			PosterImgSrc
 			FROM movies
 			WHERE movies.CreatedOn BETWEEN '" . $lastWeekStart . "' AND '" . $today .
 			"' ORDER BY CreatedOn DESC LIMIT 4;");
@@ -252,6 +253,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 				$movie->set('Rating', $row["MovieRating"]);
 				$movie->set('ReleaseDate', $row["ReleaseDate"]);
 				$movie->set('CreatedOn', $row["CreatedOn"]);
+				$movie->set("PosterImgSrc", $row["PosterImgSrc"]);
 				$movieList[] = $movie;
 			}
 		}

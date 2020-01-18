@@ -209,12 +209,12 @@ body {
 #popup-form input[type=text],
 #popup-form input[type=password] {
     margin-top: 30px;
-    margin-left: 35px;
+    margin-left: 40px;
     padding: 10px;
     font-family: Lato, sans-serif;
     font-size: 16px;
     border: solid medium #685053;
-    background-color: rgba(222, 183, 171, 0.69);
+    background-color: rgba(217, 186, 177, 0.53);
 }
 
 #sign-password,
@@ -235,6 +235,8 @@ body {
 }
 
 #submit {
+    margin-left: 0px;
+    margin-right: 0px;
     padding: 10px 0;
     width: 100%;
     display: block;
@@ -246,7 +248,7 @@ body {
     border-radius: 5px;
     color: #dbb1a1;
     border: 1px solid #685053;
-    background-color: #5f4345;
+    background-color: #5f4843;
 }
 
 #sign-close-btn,

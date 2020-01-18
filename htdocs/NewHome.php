@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Monoton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/DuplicatedDesign.css">
+    <link rel="stylesheet" href="css/NewDuplicatedDesign.css">
     <link rel="stylesheet" href="css/NewHomeDesign.css">
 </head>
 

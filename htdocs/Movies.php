@@ -24,6 +24,25 @@ session_start();
     <div class="movies-tbl-scroller">
         <div class="movies-container">
             <table class="movies-tbl">
+            <tr>
+                <th class = "movie-id"></th>
+                <th class = "col-category">
+                    Category
+                    <br><i class = "arrow-down"></i><i class = "arrow-up"></i>
+                </th>
+                <th class = "col-rating">
+                    Rating
+                    <br><i class = "arrow-down"></i><i class = "arrow-up"></i>
+                </th>
+                <th class = "col-poster"></th>
+                <th class = "col-name">
+                    Movie name
+                    <br><i class = "arrow-down"></i><i class = "arrow-up"></i>
+                </th>
+                <th class = "col-options">
+                    Options
+                </th>
+            </tr>
                 <?php
                 include $_SERVER['DOCUMENT_ROOT'] . '/Helpers/MovieHelpers.php';
                 include $_SERVER['DOCUMENT_ROOT'] . '/Helpers/UserHelpers.php';

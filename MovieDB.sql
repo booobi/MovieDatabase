@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `ParentPostId` int(11) NOT NULL,
   `AnswerToCommentId` int(11) DEFAULT NULL,
   `Content` varchar(250) NOT NULL,
-  `IsActive` bit(1) NOT NULL
+  `IsActive` bit(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -382,7 +382,7 @@ CREATE TABLE IF NOT EXISTS `userratings` (
   `UserRatingId` int(11) NOT NULL,
   `UserId` int(11) NOT NULL,
   `MovieID` int(11) DEFAULT NULL,
-  `MovieRating` float NOT NULL,
+  `MovieRating` float DEFAULT NULL,
   `PostRating` float DEFAULT NULL,
   `PostId` int(11)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

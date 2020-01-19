@@ -25,7 +25,7 @@ class CommentHelpers {
 
                 $user = UserHelpers::getUser($row['OwnerId']);
                 $comment->set("User", $user);
-                $ratingForPost = PostHelpers::getPostRatingForUser($row['PostId'], $row['OwnerId']);
+                $ratingForPost = PostHelpers::getPostRatingForUser($row['ParentPostId'], $row['OwnerId']);
                 $comment->set("RatingForPost", $ratingForPost);
 
 

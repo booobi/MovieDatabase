@@ -61,7 +61,7 @@ session_start();
                         </td>
                         <td class = "row-public-options">
                             <button class = "add-rating-btn" onclick="showRatingForm(' . ($post->get("Id")) . ')">Give a rating</button>
-                            <button class = "details-post-btn"><a href = "PostDetails.php">Details </a></button>
+                            <button class = "details-post-btn"><a href = "/PostDetails.php?id='. $post->get("Id") .'">Details </a></button>
                             <button class = "edit-post-btn" onclick="showEditPostForm(' . ($post->get("Id")) . ')">Edit</button>
                             <button onclick="deletePost(' . ($post->get("Id")) . ')" class = "delete-post-btn">Delete</button>
                         </td>

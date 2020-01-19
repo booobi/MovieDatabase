@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `movieevents` (
   `Duration` int(11) NOT NULL,
   `MovieId` int(11) NOT NULL,
   `OwnerId` int(11) NOT NULL,
-  `Time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `Time` timestamp NOT NULL,
   `Location` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -132,12 +132,12 @@ CREATE TABLE IF NOT EXISTS `moviefestivals` (
   `PosterSrc` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `moviefestivals`(`MovieFestivalId`, `Name`, `Description`) 
+INSERT INTO `moviefestivals`(`MovieFestivalId`, `Name`, `Description`, `PosterSrc`) 
 VALUES 
-(1,'Arctic Film Festival','Arctic Film Festival is an annual film festival held in September in the Norwegian archipelago, Svalbard\'s town, Longyearbyen.'),
-(2,'British Urban Film Festival','The British Urban Film Festival (BUFF) was formed in July 2005 to showcase urban independent cinema in the absence of any such state-sponsored activity in the UK.'),
-(3,'Camerimage','The International Film Festival of the Art of Cinematography Camerimage is a festival dedicated to the celebration of cinematography and recognition of its creators, cinematographers.'),
-(4,'Cannes Film Festival','The Cannes Festival until 2002 called the International Film Festival (Festival international du film) and known in English as the Cannes Film Festival, is an annual film festival held in Cannes, France.');
+(1,'Arctic Film Festival','Arctic Film Festival is an annual film festival held in September in the Norwegian archipelago, Svalbard\'s town, Longyearbyen.','https://storage.googleapis.com/ff-storage-p01/festivals/logos/000/047/220/large/logo.jpg?1552037683'),
+(2,'British Urban Film Festival','The British Urban Film Festival (BUFF) was formed in July 2005 to showcase urban independent cinema in the absence of any such state-sponsored activity in the UK.', 'https://633987.smushcdn.com/907311/wp-content/uploads/2017/06/buff-british-urban-film-festival-1300x804.jpg?lossy=1&strip=1&webp=1'),
+(3,'Camerimage','The International Film Festival of the Art of Cinematography Camerimage is a festival dedicated to the celebration of cinematography and recognition of its creators, cinematographers.', 'https://camerimage.pl/assets/uploads/2017/10/CAMERIMAGE-POSTER_strona_good.jpg'),
+(4,'Cannes Film Festival','The Cannes Festival until 2002 called the International Film Festival (Festival international du film) and known in English as the Cannes Film Festival, is an annual film festival held in Cannes, France.', 'https://upload.wikimedia.org/wikipedia/en/thumb/d/d8/Festival_de_Cannes_logo.svg/1200px-Festival_de_Cannes_logo.svg.png');
 
 -- --------------------------------------------------------
 

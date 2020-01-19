@@ -72,7 +72,7 @@ function showEditProjForm(projectionId) {
 
 function deleteShare(shareId) {
     $.ajax({
-        url: '/api/projections/delete.php',
+        url: '/api/shares/delete.php',
         type: 'POST',
         dataType: 'json',
         data: { shareId },

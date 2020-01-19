@@ -1,0 +1,374 @@
+
+.festival-title {
+    margin: 80px 0 0 667px;
+    padding: 8px 30px;
+    width: 95px;
+    font-family: Lato, sans-serif;
+    font-size: 24px;
+    text-align: center;
+    border-radius: 8px;
+    outline: none;
+    border: medium solid #4c4f69;
+    color: rgba(77, 82, 106, 0.85);
+    background-color: transparent;
+}
+
+.add-festival-btn {
+    margin-top: 14px;
+    margin-left: 659px;
+    padding: 12px 25px;
+    font-size: 24px;
+    border: none;
+    color: rgba(195, 165, 157, 0.75);
+    background-color: rgba(49, 66, 90, 0.71);
+}
+
+.fest-scroller {
+    margin-top: 32px;
+    margin-bottom: 40px;
+    width: 1152px;
+}
+
+.fest-info-scroller {
+    width: 366px;
+    height: 400px;
+    margin-top: 20px;
+    margin-left: 33px;
+}
+
+#new-fest-container,
+#edit-fest-container {
+    position: fixed;
+    top: 0;
+    margin: auto;
+    width: 1519px;
+    height: 100%;
+    display: none;
+    overflow: hidden;
+    z-index: 5;
+    background-color: rgba(71, 56, 51, 0.86);
+}
+
+#festival-box {
+    margin-top: 0;
+    margin-left: 358px;
+    height: 650px;
+}
+
+#new-fest-box,
+#edit-fest-box {
+    margin-top: 90px;
+    margin-left: 540px;
+}
+
+.fest-info {
+    position: relative;
+    margin-left: 8px;
+    margin-right: 0;
+    width: 91%;
+    float: none;
+}
+
+#fest-description-text,
+#edit-fest-description-text {
+    margin-left: auto;
+    margin-right: auto;
+    width: 88%;
+    height: 1240px;
+}
+
+#edit-fest-description-text {
+    color: rgba(14, 10, 13, 0.71);
+    background-color: rgba(179, 154, 147, 0.55);
+}
+
+#new-fest-form, #edit-fest-form {
+    padding-right: 40px;
+    width: 400px;
+    height: 622px;
+    border-radius: 8px;
+}
+
+#new-fest-form {
+    background-color: #ac8a83;
+}
+
+#edit-fest-form {
+    background-color: #8e6e66;
+}
+
+[id*="fest"][id*="form"] input {
+    margin-left: 115px;
+    margin-top: 20px;
+}
+
+#new-fest-form input[type=text],
+#edit-fest-form input[type=text],
+input[type=url] {
+    margin-left: 115px;
+    margin-top: 20px;
+    border: solid medium rgba(105, 81, 81, 0.92);
+    background-color: rgba(216, 207, 203, 0.55);
+    width: 181px;
+}
+
+table td {
+    padding: 0 18px 18px 18px;
+    font-family: Lato, sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    text-align: center;
+    color: rgba(57, 42, 45, 0.96);
+}
+
+.fest-tbl {
+    border-collapse: collapse;
+}
+
+.fest-tbl th {
+    display: none;
+}
+
+.fest-tbl td {
+    width: 750px;
+    display: block;
+    background-color: rgba(66, 37, 26, 0.2);
+}
+
+.row-fest-poster {
+    padding-top: 40px;
+}
+
+.row-fest-poster img {
+    padding-left: 10px;
+    width: 300px;
+    height: 300px;
+}
+
+.row-fest-name {
+    padding-left: 22px;
+    padding-bottom: 0;
+    font-size: 24px;
+    color: #354761;
+}
+
+.fest-text {
+    padding: 10px 80px 0;
+}
+
+.row-fest-options {
+    padding-left: 22px;
+}
+
+.row-fest-options button {
+    margin-bottom: 5px;
+    font-family: Maven Pro, sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+}
+
+.edit-fest-btn,
+.delete-fest-btn {
+    margin-top: 8px;
+    padding: 10px 23px;
+    display: inline-block;
+    background-color: rgba(73, 79, 96, 0.4);
+}
+
+.edit-fest-btn {
+    margin-left: 10px;
+    margin-right: 3px;
+    color: rgba(42, 44, 65, 0.71);
+    background-color: rgba(73, 79, 96, 0.26);
+}
+
+.delete-fest-btn {
+    margin-left: 10px;
+    color: rgba(42, 44, 65, 0.71);
+    background-color: rgba(73, 79, 96, 0.26);
+}
+
+#new-fest-close-btn,
+#edit-fest-close-btn {
+    margin-top: 20px;
+    margin-right: 475px;
+    float: right;
+}
+
+[id*="submit"] {
+    margin-left: 20px;
+    color: rgba(34, 5, 10, 0.76);
+    background-color: #7b635e;
+}
+
+@media screen and (max-width: 500px) {
+
+    .festival-title {
+        position: relative;
+        margin-top: 70px;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        float: none;
+    }
+
+    .add-festival-btn {
+        margin: 20px auto auto;
+        padding: 8px 13px;
+        width: 110px;
+        display: block;
+        float: none;
+        font-size: 22px;
+    }
+
+    .fest-scroller {
+        margin: 32px auto 40px auto;
+        width: 90%;
+        height: 350px;
+    }
+
+    .fest-info-scroller {
+        margin-top: 20px;
+        margin-left: 0;
+        width: 95%;
+        height: 300px;
+    }
+
+    #new-comment-container,
+    #edit-comment-container,
+    #new-fest-container,
+    #edit-fest-container {
+        margin: auto;
+        width: 100%;
+        float: none;
+        z-index: 5;
+    }
+
+    #fest-box {
+        position: relative;
+        margin: 0 auto auto auto;
+        padding: 0;
+        width: 100%;
+        height: 370px;
+        float: none;
+        display: block;
+        text-align: center;
+        z-index: 5;
+    }
+
+    #festival-box {
+        margin: 0 auto auto auto;
+        height: 290px;
+    }
+
+    #new-fest-box,
+    #edit-fest-box {
+        margin: 300px auto;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 90%;
+        z-index: 5;
+    }
+
+    .fest-info {
+        position: relative;
+        margin-left: auto;
+        margin-right: 0;
+        width: 95%;
+        float: none;
+    }
+
+    #new-fest-form,
+    #edit-fest-form {
+        position: relative;
+        margin: auto;
+        width: 100%;
+        height: 522px;
+        padding-right: 0;
+        text-align: center;
+    }
+
+    #new-fest-form input[type="text"],
+    #edit-fest-form input[type="text"],
+    input[type="url"] {
+        position: relative;
+        margin: 20px auto;
+        width: 76%;
+        float: none;
+    }
+
+    [id*="fest"][id*="form"] input {
+        margin-left: 0;
+        margin-top: 0;
+    }
+
+    #fest-description-text,
+    #edit-fest-description-text {
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 20px;
+        padding-right: 20px;
+        width: 88%;
+        height: 1240px;
+        text-align: left;
+    }
+
+    #edit-fest-description-text {
+        color: rgba(14, 10, 13, 0.71);
+        background-color: rgba(179, 154, 147, 0.55);
+    }
+
+    .fest-tbl {
+        margin: auto;
+        width: 100%;
+        display: table;
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    .fest-tbl td {
+        position: relative;
+        margin: auto;
+        padding: 20px 0 10px;
+        width: 100%;
+        float: none;
+        text-align: center;
+        font-size: 21px;
+    }
+
+    .row-fest-poster img {
+        padding-top: 30px;
+        padding-left: 0;
+        width: 250px;
+        height: 250px;
+    }
+
+    .row-fest-name {
+        padding-top: 550px;
+    }
+
+    .fest-text {
+        padding: 0 15px;
+    }
+
+    .row-fest-options button {
+        margin: 8px auto 5px;
+        display: block;
+    }
+
+    .row-festival-options button {
+        margin: 10px auto;
+        display: block;
+        text-align: center;
+        font-size: 21px;
+    }
+
+    #new-fest-close-btn,
+    #edit-fest-close-btn {
+        margin: 280px auto auto auto;
+    }
+}

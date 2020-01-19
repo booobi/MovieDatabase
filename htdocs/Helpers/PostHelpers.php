@@ -5,7 +5,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Models/Post.php';
 
 class PostHelpers {
 
-    public static function getPost($postsId) {
+    public static function getPost($postId) {
         $res = DBOperations::prepareAndExecute(
         "SELECT * FROM `posts` WHERE PostId={$postId}");
 

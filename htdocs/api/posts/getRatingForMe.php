@@ -4,18 +4,13 @@
     include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/UserHelpers.php';
     include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/ValidatorHelpers.php';
     ValidatorHelpers::validateUserLoggedIn();
-    ValidatorHelpers::validatePostEditFields();
-    
-    if(isset($_POST['movieId'])) {
-        ValidatorHelpers::validateUserIsAdmin();
-        PostHelpers::setPostMovieId($_POST['postId'], $_POST['movieId']);
-    }
-    PostHelpers::editPost($_POST['postId'], $_POST['description']);
+
+    $userId = UserHelpers::getCurrentUser()->get("UserId");
     
     echo json_encode(
         [
             'status'=>'success',
-            'description'=>'Post edited successfully!'
+            'data'=>PostHelpers::getPostRatingForUser($_GET['postId'], $userId)
         ]);
     
 ?>

@@ -326,7 +326,7 @@ session_start()
                             </td>
                             <td class="row-prj-options">
                                 <button onclick="showEditProjForm(' . $projection->get('Id') . ')">Edit</button>
-                                <button>Delete</button>
+                                <button onclick="deleteProjection(' . $projection->get('Id') . ')">Delete</button>
                             </td>
                         </tr>
                             ';
@@ -429,7 +429,7 @@ session_start()
                         <span class="check-mark"></span>
                     </label>
                 </div>
-                <a href="javascript:%20validateLogIn()" id="submit-projection-changes">Submit</a>
+                <a id="submit-projection-changes">Submit</a>
             </form>
         </div>
     </div>
@@ -453,35 +453,11 @@ session_start()
                 <select id="editShareMovie"></select>
                 <p>List of users, wanting the movie</p>
                 <div id="shareParticipants" class="users-scroller">
-                    <label class="checkbox-box">
-                        4ver
-                        <input type="checkbox">
-                        <span class="check-mark"></span>
-                    </label>
-                    <label class="checkbox-box">
-                        lvr
-                        <input type="checkbox">
-                        <span class="check-mark"></span>
-                    </label>
-                    <label class="checkbox-box">
-                        maria5
-                        <input type="checkbox">
-                        <span class="check-mark"></span>
-                    </label>
-                    <label class="checkbox-box">
-                        flower_34
-                        <input type="checkbox">
-                        <span class="check-mark"></span>
-                    </label>
                 </div>
-                <a href="javascript:%20validateLogIn()" id="submit-share-changes">Submit</a>
+                <button id="submit-share-changes">Submit</button>
             </form>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <!-- <script src="multiselect.min.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
     <script src="/js/profile.js"></script>
 </body>
 

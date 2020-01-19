@@ -3,15 +3,15 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/models/Festival.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 class FestivalHelpers {
 
-    public static function editFestival($festivalId, $name, $description) {
+    public static function editFestival($festivalId, $name, $description, $posterSrc) {
         DBOperations::prepareAndExecute(
-        "UPDATE `moviefestivals` SET `Name`='{$name}',`Description`='{$description}' WHERE MovieFestivalId={$festivalId}"
+        "UPDATE `moviefestivals` SET `Name`='{$name}',`Description`='{$description}', `PosterSrc`='{$posterSrc}' WHERE MovieFestivalId={$festivalId}"
         );
     }
     
-    public static function addFestival($name, $description) {
+    public static function addFestival($name, $description, $posterSrc) {
         DBOperations::prepareAndExecute(
-        "INSERT INTO `moviefestivals`(`Name`, `Description`) VALUES ('{$name}','{$description}')"
+        "INSERT INTO `moviefestivals`(`Name`, `Description`, `PosterSrc`) VALUES ('{$name}','{$description}', '{$posterSrc}')"
         );
     }
 
@@ -23,7 +23,7 @@ class FestivalHelpers {
 
     public static function getFestival($festivalId) {
         $result = DBOperations::prepareAndExecute(
-            "SELECT MovieFestivalId, Name, Description
+            "SELECT MovieFestivalId, Name, Description, PosterSrc
             FROM moviefestivals WHERE MovieFestivalId={$festivalId}");
 
         $festival = NULL;
@@ -33,6 +33,7 @@ class FestivalHelpers {
             $festival->set("Id", $row['MovieFestivalId']);
             $festival->set("Name", $row['Name']);
             $festival->set("Description",$row['Description']);
+            $festival->set("PosterSrc",$row['PosterSrc']);
         }
 
         return $festival;
@@ -40,7 +41,7 @@ class FestivalHelpers {
 
     public static function getFestivals() {
         $result = DBOperations::prepareAndExecute(
-            "SELECT MovieFestivalId, Name, Description
+            "SELECT MovieFestivalId, Name, Description, PosterSrc
             FROM moviefestivals");
 
 
@@ -51,6 +52,7 @@ class FestivalHelpers {
                 $festival->set("Id", $row['MovieFestivalId']);
                 $festival->set("Name", $row['Name']);
                 $festival->set("Description",$row['Description']);
+                $festival->set("PosterSrc",$row['PosterSrc']);
                 $festivals[] = $festival;
             }
         }

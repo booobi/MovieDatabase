@@ -9,6 +9,7 @@
     
     echo json_encode(
         [
-            'status'=>'success'
+            'status'=>'success',
+            'description'=>'User approved successfully!'
         ]); 
 ?>

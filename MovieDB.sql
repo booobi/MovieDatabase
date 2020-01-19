@@ -128,7 +128,8 @@ INSERT INTO `movieexchanges`
 CREATE TABLE IF NOT EXISTS `moviefestivals` (
   `MovieFestivalId` int(11) NOT NULL,
   `Name` varchar(150) NOT NULL,
-  `Description` varchar(250) DEFAULT NULL
+  `Description` varchar(250) DEFAULT NULL,
+  `PosterSrc` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `moviefestivals`(`MovieFestivalId`, `Name`, `Description`) 

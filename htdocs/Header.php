@@ -24,11 +24,11 @@
         <?php
 
         if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']) {
-            echo '<button class="profile-btn" id="admin-btn">Administration</button>';
+            echo '<button class="profile-btn" onclick="window.location.href=\'Administration.php\'" id="admin-btn">Administration</button>';
         }
 
         if(isset($_SESSION['userLoggedIn']) && $_SESSION['userLoggedIn']) {
-            echo '<button class="profile-btn" onclick="window.location="/Profile.php" id="profile-btn">Profile</button>';
+            echo '<button class="profile-btn" onclick="window.location.href=\'Profile.php\'" id="profile-btn">Profile</button>';
             echo '<button class="profile-btn" onclick="logout()" id="log-out-btn">Log-out</button>';
         } else {
             echo '<button class="entrance-btn" onclick="signin_show()" id="sign-in-btn">Sign In</button>';
@@ -79,5 +79,6 @@
         </form>
     </div>
 </div>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 <script src="/js/header.js"></script>

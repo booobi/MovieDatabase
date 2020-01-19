@@ -44,7 +44,7 @@ class ValidatorHelpers {
             echo json_encode(
             [
                 'status'=>'error',
-                'description'=>'You need to provide an id and a valid isActive (0 or 1)!'
+                'description'=>'You need to provide an valid userId and a valid isActive (0 or 1)!'
             ]);
             die();
         }
@@ -119,11 +119,11 @@ class ValidatorHelpers {
     }
 
     public static function validateFestivalAddFields() {
-        ValidatorHelpers::validatePostFields(['name', 'description']);
+        ValidatorHelpers::validatePostFields(['name', 'description', 'posterUrl']);
     }
 
     public static function validateFestivalEditFields() {
-        ValidatorHelpers::validatePostFields(['festivalId', 'name', 'description']);
+        ValidatorHelpers::validatePostFields(['festivalId', 'name', 'description', 'posterUrl']);
     }
 
     public static function validateFestivalDeleteFields() {

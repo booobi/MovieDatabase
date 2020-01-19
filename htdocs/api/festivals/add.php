@@ -5,7 +5,7 @@
     ValidatorHelpers::validateUserIsAdmin();
     ValidatorHelpers::validateFestivalAddFields();
     
-    FestivalHelpers::addFestival($_POST['name'], $_POST['description']);
+    FestivalHelpers::addFestival($_POST['name'], $_POST['description'], $_POST['posterUrl']);
     
     echo json_encode(
         [

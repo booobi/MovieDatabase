@@ -3,6 +3,7 @@
 		private $Id;
 		private $Name;
 		private $Description;
+		private $PosterSrc;
 		
 		public function __construct () {
 		}
@@ -23,7 +24,8 @@
 			return [
 				'id' => $this->Id,
 				'name' => $this->Name,
-				'description' => $this->Description
+				'description' => $this->Description,
+				'posterSrc' => $this->PosterSrc
 			];
 		}
 	}

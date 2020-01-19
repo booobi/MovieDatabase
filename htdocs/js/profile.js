@@ -68,10 +68,21 @@ function showEditProjForm(projectionId) {
         })
         
     });
-    
-    
-
 }
+
+function deleteShare(shareId) {
+    $.ajax({
+        url: '/api/projections/delete.php',
+        type: 'POST',
+        dataType: 'json',
+        data: { shareId },
+        success: (data) => {
+                alert(data["description"]);
+                location.reload();
+        }
+    });
+}
+
 function showShareForm() {
     $('.checkbox-box, .check-mark').off();
     document.getElementById("new-share-container").style.display = "block";
@@ -86,6 +97,7 @@ function showShareForm() {
 }
 
 function showEditShareForm(shareId) {
+    $('#edit-share-container').data('shareId', shareId);
     $('.checkbox-box, .check-mark').off();
     document.getElementById("edit-share-container").style.display = "block";
     getShare(shareId, (shareResponse) => {
@@ -167,6 +179,23 @@ $("#new-share-form").validate({
     }   
 });
 
+$("#submit-share-changes").click(()=>{
+    let shareId = $('#edit-share-container').data('shareId');
+    $.ajax({
+        url: '/api/shares/edit.php',
+        type: 'POST',
+        dataType: 'json',
+        data: { 
+            shareId,
+            movieId: $('#editShareMovie').val()
+        },
+        success: (data) => {
+                alert(data["description"]);
+                location.reload();
+                }
+        });
+})
+
 $("#new-projection-form").validate({
     submitHandler: function() {
         $.ajax({
@@ -188,6 +217,41 @@ $("#new-projection-form").validate({
             });
     }
   });
+
+  $('#submit-projection-changes').click(()=>{
+    let projectionId = $("#edit-projection-container").data('projectionid');
+    $.ajax({
+        url: '/api/projections/edit.php',
+        type: 'POST',
+        dataType: 'json',
+        data: { 
+            projectionId,
+            name: $('#edit-projection-name').val(),
+            duration: $('#edit-projection-duration').val(),
+            location: $('#edit-projection-location').val(),
+            date: $('#edit-projection-time').val(),
+            movieId: $('#edit-projection-movieId').val()
+        },
+        success: (data) => {
+                alert(data["description"]);
+                $("#new-projection-form").trigger('reset');
+                location.reload();
+                }
+        });
+  });
+
+  deleteProjection = (projectionId) => {
+    $.ajax({
+        url: '/api/projections/delete.php',
+        type: 'POST',
+        dataType: 'json',
+        data: { projectionId },
+        success: (data) => {
+                alert(data["description"]);
+                location.reload();
+            }
+        });
+  }
 
   $("#details-form").validate({
     submitHandler: function() {

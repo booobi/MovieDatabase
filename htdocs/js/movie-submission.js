@@ -1,9 +1,9 @@
 $(document).ready(()=>{
     //create dropdowns
-    $("#directorSelect").CreateMultiCheckBox({ width: '190px', defaultText : 'Director . . . ', height:'350px' });
-    $("#categorySelect").CreateMultiCheckBox({ width: '190px', defaultText : 'Category . . . ', height:'350px' });
-    $("#actorsSelect").CreateMultiCheckBox({ width: '190px', defaultText : 'Actors . . . ', height:'350px' });
-    $("#mainActorsSelect").CreateMultiCheckBox({ width: '190px', defaultText : 'Main Actors . . . ', height:'350px' });
+    $("#directorSelect").CreateMultiCheckBox({ width: '177px', defaultText : 'Director . . . ', height:'350px' });
+    $("#categorySelect").CreateMultiCheckBox({ width: '177px', defaultText : 'Category . . . ', height:'350px' });
+    $("#actorsSelect").CreateMultiCheckBox({ width: '177px', defaultText : 'Actors . . . ', height:'350px' });
+    $("#mainActorsSelect").CreateMultiCheckBox({ width: '177px', defaultText : 'Main Actors . . . ', height:'350px' });
 
     //release date changes
     $("#release-field").change(()=> {

@@ -1,6 +1,5 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Models/Movie.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/Models/Festival.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/CategoryHelpers.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/ParticipantHelpers.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
@@ -238,7 +237,8 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 			"SELECT DISTINCT MovieId, movies.Name AS MovieName,
 			movies.MovieRating AS MovieRating,
 			CAST(movies.ReleaseDate AS DATE) AS ReleaseDate,
-			CAST(movies.CreatedOn AS DATE) AS CreatedOn
+			CAST(movies.CreatedOn AS DATE) AS CreatedOn,
+			PosterImgSrc
 			FROM movies
 			WHERE movies.CreatedOn BETWEEN '" . $lastWeekStart . "' AND '" . $today .
 			"' ORDER BY CreatedOn DESC LIMIT 4;");
@@ -253,6 +253,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 				$movie->set('Rating', $row["MovieRating"]);
 				$movie->set('ReleaseDate', $row["ReleaseDate"]);
 				$movie->set('CreatedOn', $row["CreatedOn"]);
+				$movie->set("PosterImgSrc", $row["PosterImgSrc"]);
 				$movieList[] = $movie;
 			}
 		}
@@ -322,24 +323,6 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 		}
 
 		return $movieProjMap;
-	}
-
-	public static function getMovieFestivals() {
-		$result = DBOperations::prepareAndExecute(
-			"SELECT moviefestivals.Name as FestivalName,
-			moviefestivals.Description as FestivalDescription
-			FROM moviefestivals
-			LIMIT 10;");
-
-
-		$festivals = [];
-		if ($result->num_rows > 0) {
-			while($row = $result->fetch_assoc()) {
-				$festivals[] = new Festival($row['FestivalName'], $row['FestivalDescription']);
-			}
-		}
-
-		return $festivals;
 	}
 
 	/**

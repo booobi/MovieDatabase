@@ -4,6 +4,25 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Models/MovieParticipant.php';
 
 class ParticipantHelpers {
 
+    public static function addParticipant($firstName, $lastName, $role) {
+        DBOperations::prepareAndExecute(
+            "INSERT INTO `movieparticipants`(`FirstName`, `LastName`, `Position`) 
+            VALUES ('{$firstName}', '{$lastName}', '{$role}')"
+        );
+    }
+    
+    public static function editParticipant($participantId, $firstName, $lastName, $role) {
+        DBOperations::prepareAndExecute(
+        "UPDATE `movieparticipants` SET `FirstName`='{$firstName}',`LastName`='{$lastName}',`Position`='{$role}' 
+        WHERE MovieParticipantId={$participantId}"
+        );
+    }
+    
+    public static function deleteParticipant($participantId) {
+        DBOperations::prepareAndExecute(
+        "DELETE FROM `movieparticipants` WHERE MovieParticipantId={$participantId}"
+        );
+    }
     public static function getMovieActors($movieId) {
         $movieActorsRes = DBOperations::prepareAndExecute(
 			"SELECT MovieParticipantId, FirstName, LastName, Position, isMainActor 
@@ -79,24 +98,56 @@ class ParticipantHelpers {
         }
     }
 
-    public static function getAllParticipants() {
-        $participantsRes = DBOperations::prepareAndExecute(
+    public static function getParticipants() {
+        $res = DBOperations::prepareAndExecute(
             "SELECT * FROM `movieparticipants`");
 
         $participants = [];
-        if ($participantsRes->num_rows > 0) {
-            while($row = $participantsRes->fetch_assoc()) {
+        if ($res->num_rows > 0) {
+            while($row = $res->fetch_assoc()) {
                 $participant = new MovieParticipant();
                 $participant->set("Id", $row["MovieParticipantId"]);
                 $participant->set("FirstName", $row['FirstName']);
                 $participant->set("LastName", $row['LastName']);
                 $participant->set("Position", $row['Position']);
+                
+                $isMainActor = ParticipantHelpers::isMainActorAnywhere($participant->get("Id"));
+                $participant->set("isMainActor", $isMainActor);
 
                 $participants[] = $participant;
             }
         }
 
         return $participants;
+    }
+
+    public static function getParticipant($participantId) {
+        $res = DBOperations::prepareAndExecute(
+        "SELECT * FROM `movieparticipants` WHERE MovieParticipantId={$participantId}");
+
+        $participant =  NULL;
+        if ($res->num_rows > 0) {
+            $row = $res->fetch_assoc();
+            $participant = new MovieParticipant();
+            $participant->set("Id", $row["MovieParticipantId"]);
+            $participant->set("FirstName", $row['FirstName']);
+            $participant->set("LastName", $row['LastName']);
+            $participant->set("Position", $row['Position']);
+            
+            $isMainActor = ParticipantHelpers::isMainActorAnywhere($participant->get("Id"));
+            $participant->set("isMainActor", $isMainActor);
+        }
+
+        return $participant;
+    }
+
+    public static function isMainActorAnywhere($participantId) {
+        $res = DBOperations::prepareAndExecute(
+            "SELECT * FROM `movies_participants` WHERE ParticipantId={$participantId} AND IsMainActor=1");
+        if ($res->num_rows > 0) {
+            return TRUE;
+        }
+        return FALSE;
     }
 
  }

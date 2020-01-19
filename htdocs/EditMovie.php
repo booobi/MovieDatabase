@@ -1,57 +1,67 @@
 <?php
-        include $_SERVER['DOCUMENT_ROOT'] . '/header.php';
+    session_start();
 ?>
-<link href="https://fonts.googleapis.com/css?family=Lato:400,700|Monoton&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/HomeDesign.css">
-<link rel="stylesheet" href="/css/AddAMovieDesign.css">
-   
-    <?php
-        if(!isset($_GET['id']))
-        {
-            echo "You need to provide a movie id in order to edit!!";
-            die();
-        } else {
-            $movieId = $_GET['id'];
-        }
-    
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/ParticipantHelpers.php';
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/CategoryHelpers.php';
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/MovieHelpers.php';
-            
-    $movie = MovieHelpers::getMovie($movieId);
-    $movieActors = $movie->get("Actors");
-    $movieDirector = $movie->get("Director");
-    $movieCategories = $movie->get("Categories");
+<!DOCTYPE html>
+<html>
 
-    echo '
-    <script>
-        const movieActors = ' . json_encode($movieActors) . ';
-        const movieDirector = ' . json_encode($movieDirector) . ';
-        const movieCategories = ' . json_encode($movieCategories) . ';
-        const action = "edit";
-        const movieId = '. $_GET['id'] .';
-    </script>
-    ';
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Monoton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/add-movie.css">
+    <link rel="stylesheet" href="css/duplicated.css">
+
+</head>
+
+<body>
+    <?php
+            include $_SERVER['DOCUMENT_ROOT'] . '/Header.php';
+            if(!isset($_GET['id']))
+            {
+                echo "You need to provide a movie id in order to edit!!";
+                die();
+            } else {
+                $movieId = $_GET['id'];
+            }
+        
+        include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/ParticipantHelpers.php';
+        include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/CategoryHelpers.php';
+        include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/MovieHelpers.php';
+                
+        $movie = MovieHelpers::getMovie($movieId);
+        $movieActors = $movie->get("Actors");
+        $movieDirector = $movie->get("Director");
+        $movieCategories = $movie->get("Categories");
+
+        echo '
+        <script>
+            const movieActors = ' . json_encode($movieActors) . ';
+            const movieDirector = ' . json_encode($movieDirector) . ';
+            const movieCategories = ' . json_encode($movieCategories) . ';
+            const action = "edit";
+            const movieId = '. $_GET['id'] .';
+        </script>
+        ';
     ?>
 
-     <form>
-          <div class = "movie-content">
+    <form action="/action_page.php">
+        <div class="movie-content">
             <div class="fields" id="up-header">
-                <?php
-                    echo '
-                    <input type="text" id="title-field" value="'. $movie->get("Name") .'">
-                    <input type="url" id="poster-field" value="'. $movie->get("PosterImgSrc") .'">
-                    '
-                ?>
-            </div>
 
-              <div class = "first-column">
-                  <div class="fields" id="movie-director">
+            </div>
+                <?php
+                echo '
+                <input type="text" id="title-field" value="'. $movie->get("Name") .'">
+                <input type="url" id="poster-field" value="'. $movie->get("PosterImgSrc") .'">
+                '
+                ?>
+            <div class="first-column">
+                <div class="fields" id="movie-director">
                     <select id="directorSelect" style="display:none;">
                         <?php
                             
-                            $participants = ParticipantHelpers::getAllParticipants();
+                            $participants = ParticipantHelpers::getParticipants();
                             $participants = array_filter($participants, function($v, $k) {
                                 return $v->get("Position") == "director";
                             }, ARRAY_FILTER_USE_BOTH);
@@ -62,9 +72,9 @@
                             }
                         ?>
                     </select>
-                   </div>
+                </div>
 
-                  <div class="fields" id="movie-awards">
+                <div class="fields" id="movie-awards">
                     <?php
                         echo 
                         '
@@ -105,7 +115,7 @@
                    <div class="fields" id="movie-actors">
                         <select id="actorsSelect" style="display:none;">
                             <?php
-                                $participants = ParticipantHelpers::getAllParticipants();
+                                $participants = ParticipantHelpers::getParticipants();
 
                                 foreach($participants as $participant) {
                                     echo '<option value="' . $participant->get("Id") .'">'
@@ -138,17 +148,19 @@
                     ?>
                    </div>
 
-                   <div class="fields" id="movie-description">
-                   <?php
+                <div class="fields" id="movie-description">
+                    <div class="description-scroller">
+                    <?php
                         echo 
                         '
                         <textarea maxlength="540" id = "description-area">'. $movie->get("Description") .'</textarea>
                         '
                     ?>
-                   </div>
-              </div>
+                    </div>
+                </div>
+            </div>
 
-              <div class="third-column">
+            <div class="third-column">
                    <div class="fields" id="movie-trailer">
                    <?php
                         echo 
@@ -201,7 +213,7 @@
                     <div class="fields" id="movie-stars">
                         <select id="mainActorsSelect" style="display:none;">
                             <?php
-                                $participants = ParticipantHelpers::getAllParticipants();
+                                $participants = ParticipantHelpers::getParticipants();
 
                                 foreach($participants as $participant) {
                                     echo '<option value="' . $participant->get("Id") .'">'
@@ -213,45 +225,45 @@
                     </div>
               </div>
 
-              <div id = "down-header">
-                  <button class="movies-btn" id="add-a-movie" onclick="submitMovie(event)">Edit movie</button>
-              </div>
-           </div>
+            <div id="down-header">
+                <button class="movies-btn" id="add-a-movie" onclick="submitMovie(event)">Edit the movie</button>
+            </div>
+        </div>
+    </form>
 
-     </form>
+    <script type="text/javascript" src="/js/movie-submission.js"></script>
+    <script>
+    $(document).ready(function () {
 
-     <script type="text/javascript" src="/js/movie-submission.js"></script>
-     <script>
-        $(document).ready(function () {
+//check assigned director, actors and categories
 
-            //check assigned director, actors and categories
-
-            $("#movie-stars input[type='checkbox']").each((index, val) => {
-                if(movieActors.filter(actor => actor.isMainActor).map(actor => actor.id.toString()).includes($(val).attr("value"))) {
-                    $(val).prop("checked", true);
-                }
-            });
-
-            $("#movie-actors input[type='checkbox']").each((index, val) => {
-                if(movieActors.filter(actor => !actor.isMainActor).map(actor => actor.id.toString()).includes($(val).attr("value"))) {
-                    $(val).prop("checked", true);
-                }
-            });
-
-            $("#movie-director input[type='checkbox']").each((index, val) => {
-                if(movieDirector.id.toString() === $(val).attr("value")) {
-                    $(val).prop("checked", true);
-                }
-            });
-
-            $("#movie-category input[type='checkbox']").each((index, val) => {
-                if(movieCategories.map(category => category.id.toString()).includes($(val).attr("value"))) {
-                    $(val).prop("checked", true);
-                }
-            });
-
-            $("input[type='checkbox']").trigger("change");
+        $("#movie-stars input[type='checkbox']").each((index, val) => {
+            if(movieActors.filter(actor => actor.isMainActor).map(actor => actor.id.toString()).includes($(val).attr("value"))) {
+                $(val).prop("checked", true);
+            }
         });
-     </script>
+
+        $("#movie-actors input[type='checkbox']").each((index, val) => {
+            if(movieActors.filter(actor => !actor.isMainActor).map(actor => actor.id.toString()).includes($(val).attr("value"))) {
+                $(val).prop("checked", true);
+            }
+        });
+
+        $("#movie-director input[type='checkbox']").each((index, val) => {
+            if(movieDirector.id.toString() === $(val).attr("value")) {
+                $(val).prop("checked", true);
+            }
+        });
+
+        $("#movie-category input[type='checkbox']").each((index, val) => {
+            if(movieCategories.map(category => category.id.toString()).includes($(val).attr("value"))) {
+                $(val).prop("checked", true);
+            }
+        });
+
+        $("input[type='checkbox']").trigger("change");
+    });
+    </script>
 </body>
+
 </html>

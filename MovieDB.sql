@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `CommentId` int(11) NOT NULL,
   `OwnerId` int(11) NOT NULL,
   `ParentPostId` int(11) NOT NULL,
-  `AnswerToCommentId` int(11) NOT NULL,
+  `AnswerToCommentId` int(11) DEFAULT NULL,
   `Content` varchar(250) NOT NULL,
   `IsActive` bit(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -82,16 +82,18 @@ CREATE TABLE IF NOT EXISTS `events_participants` (
 
 CREATE TABLE IF NOT EXISTS `movieevents` (
   `MovieEventId` int(11) NOT NULL,
+  `Name` varchar(150),
+  `Duration` int(11) NOT NULL,
   `MovieId` int(11) NOT NULL,
   `OwnerId` int(11) NOT NULL,
-  `Time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `Time` timestamp NOT NULL,
   `Location` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `movieevents`(`MovieEventId`, `MovieId`, `OwnerId`, `Time`, `Location`) VALUES 
-(1,4,4,date_format(DATE_ADD(NOW() ,  INTERVAL 3 HOUR),'%Y-%m-%d %H'),'Mladost Kino Arena'),
-(2,2,4,date_format(DATE_ADD(NOW() ,  INTERVAL 1 Day),'%Y-%m-%d %H'),'Lulin Kino Cinemax'),
-(3,3,4,date_format(DATE_ADD(NOW() ,  INTERVAL 2 Day),'%Y-%m-%d %H'),'Arena Armeec');
+INSERT INTO `movieevents`(`MovieEventId`,`Name`,`Duration`,`MovieId`, `OwnerId`, `Time`, `Location`) VALUES 
+(1,'Mladost Party',66,4,4,date_format(DATE_ADD(NOW() ,  INTERVAL 3 HOUR),'%Y-%m-%d %H'),'Mladost Kino Arena'),
+(2,'Lulin Party',70,2,4,date_format(DATE_ADD(NOW() ,  INTERVAL 1 Day),'%Y-%m-%d %H'),'Lulin Kino Cinemax'),
+(3,'Arena Armeec Party',120,3,4,date_format(DATE_ADD(NOW() ,  INTERVAL 2 Day),'%Y-%m-%d %H'),'Arena Armeec');
 
 -- --------------------------------------------------------
 
@@ -102,7 +104,7 @@ INSERT INTO `movieevents`(`MovieEventId`, `MovieId`, `OwnerId`, `Time`, `Locatio
 CREATE TABLE IF NOT EXISTS `movieexchanges` (
   `Movie_ExchangesId` int(11) NOT NULL,
   `ExchangeRequestBy` int(11) NOT NULL,
-  `ExchangeRequestTo` int(11) NOT NULL,
+  `ExchangeRequestTo` int(11) DEFAULT NULL,
   `MovieToShare` int(11) NOT NULL,
   `RequesterRating` float DEFAULT NULL,
   `ApprovalRating` float DEFAULT NULL,
@@ -126,15 +128,16 @@ INSERT INTO `movieexchanges`
 CREATE TABLE IF NOT EXISTS `moviefestivals` (
   `MovieFestivalId` int(11) NOT NULL,
   `Name` varchar(150) NOT NULL,
-  `Description` varchar(250) DEFAULT NULL
+  `Description` varchar(250) DEFAULT NULL,
+  `PosterSrc` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `moviefestivals`(`MovieFestivalId`, `Name`, `Description`) 
+INSERT INTO `moviefestivals`(`MovieFestivalId`, `Name`, `Description`, `PosterSrc`) 
 VALUES 
-(1,'Arctic Film Festival','Arctic Film Festival is an annual film festival held in September in the Norwegian archipelago, Svalbard\'s town, Longyearbyen.'),
-(2,'British Urban Film Festival','The British Urban Film Festival (BUFF) was formed in July 2005 to showcase urban independent cinema in the absence of any such state-sponsored activity in the UK.'),
-(3,'Camerimage','The International Film Festival of the Art of Cinematography Camerimage is a festival dedicated to the celebration of cinematography and recognition of its creators, cinematographers.'),
-(4,'Cannes Film Festival','The Cannes Festival until 2002 called the International Film Festival (Festival international du film) and known in English as the Cannes Film Festival, is an annual film festival held in Cannes, France.');
+(1,'Arctic Film Festival','Arctic Film Festival is an annual film festival held in September in the Norwegian archipelago, Svalbard\'s town, Longyearbyen.','https://storage.googleapis.com/ff-storage-p01/festivals/logos/000/047/220/large/logo.jpg?1552037683'),
+(2,'British Urban Film Festival','The British Urban Film Festival (BUFF) was formed in July 2005 to showcase urban independent cinema in the absence of any such state-sponsored activity in the UK.', 'https://633987.smushcdn.com/907311/wp-content/uploads/2017/06/buff-british-urban-film-festival-1300x804.jpg?lossy=1&strip=1&webp=1'),
+(3,'Camerimage','The International Film Festival of the Art of Cinematography Camerimage is a festival dedicated to the celebration of cinematography and recognition of its creators, cinematographers.', 'https://camerimage.pl/assets/uploads/2017/10/CAMERIMAGE-POSTER_strona_good.jpg'),
+(4,'Cannes Film Festival','The Cannes Festival until 2002 called the International Film Festival (Festival international du film) and known in English as the Cannes Film Festival, is an annual film festival held in Cannes, France.', 'https://upload.wikimedia.org/wikipedia/en/thumb/d/d8/Festival_de_Cannes_logo.svg/1200px-Festival_de_Cannes_logo.svg.png');
 
 -- --------------------------------------------------------
 
@@ -361,10 +364,12 @@ INSERT INTO `movies_participants`(`Movies_ParticipantsId`, `MovieId`, `Participa
 CREATE TABLE IF NOT EXISTS `posts` (
   `PostId` int(11) NOT NULL,
   `OwnerId` int(11) NOT NULL,
-  `MovieId` int(11) NOT NULL,
-  `Rating` float NOT NULL,
+  `MovieId` int(11) DEFAULT NULL,
+  `Rating` float DEFAULT NULL,
   `Content` varchar(250) DEFAULT NULL,
-  `IsActive` bit(1) NOT NULL
+  `IsActive` bit(1) DEFAULT 1,
+  `UpdatedOn` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+  `CreatedOn` TIMESTAMP NOT NULL DEFAULT NOW()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -376,9 +381,9 @@ CREATE TABLE IF NOT EXISTS `posts` (
 CREATE TABLE IF NOT EXISTS `userratings` (
   `UserRatingId` int(11) NOT NULL,
   `UserId` int(11) NOT NULL,
-  `MovieID` int(11) NOT NULL,
+  `MovieID` int(11) DEFAULT NULL,
   `MovieRating` float NOT NULL,
-  `PostRating` float,
+  `PostRating` float DEFAULT NULL,
   `PostId` int(11)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -622,16 +627,16 @@ ALTER TABLE `watchlateritems`
 -- Constraints for table `comments`
 --
 ALTER TABLE `comments`
-ADD CONSTRAINT `AnswerToCommentId` FOREIGN KEY (`AnswerToCommentId`) REFERENCES `comments` (`CommentId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `OwnerId` FOREIGN KEY (`OwnerId`) REFERENCES `users` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `ParentPostId` FOREIGN KEY (`ParentPostId`) REFERENCES `posts` (`PostId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ADD CONSTRAINT `AnswerToCommentId` FOREIGN KEY (`AnswerToCommentId`) REFERENCES `comments` (`CommentId`) ON DELETE CASCADE ON UPDATE NO ACTION,
+ADD CONSTRAINT `OwnerId` FOREIGN KEY (`OwnerId`) REFERENCES `users` (`UserId`) ON DELETE CASCADE ON UPDATE NO ACTION,
+ADD CONSTRAINT `ParentPostId` FOREIGN KEY (`ParentPostId`) REFERENCES `posts` (`PostId`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `events_participants`
 --
 ALTER TABLE `events_participants`
 ADD CONSTRAINT `EventIdE` FOREIGN KEY (`EventId`) REFERENCES `movieevents` (`MovieEventId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `ParticipantIdE` FOREIGN KEY (`ParticipantId`) REFERENCES `users` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ADD CONSTRAINT `ParticipantIdE` FOREIGN KEY (`ParticipantId`) REFERENCES `users` (`UserId`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `movieevents`
@@ -667,7 +672,7 @@ ADD CONSTRAINT `ParticipantId` FOREIGN KEY (`ParticipantId`) REFERENCES `moviepa
 --
 ALTER TABLE `posts`
 ADD CONSTRAINT `MovieIdPosts` FOREIGN KEY (`MovieId`) REFERENCES `movies` (`MovieId`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `OwnerIdP` FOREIGN KEY (`OwnerId`) REFERENCES `users` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ADD CONSTRAINT `OwnerIdP` FOREIGN KEY (`OwnerId`) REFERENCES `users` (`UserId`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `userratings`
@@ -681,8 +686,8 @@ ADD CONSTRAINT `OwnerIdP` FOREIGN KEY (`OwnerId`) REFERENCES `users` (`UserId`) 
 -- Constraints for table `user_owned_movies`
 --
 ALTER TABLE `user_owned_movies`
-ADD CONSTRAINT `MovieIdOw` FOREIGN KEY (`MovieId`) REFERENCES `movies` (`MovieId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `UserIdOw` FOREIGN KEY (`UserId`) REFERENCES `users` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ADD CONSTRAINT `MovieIdOw` FOREIGN KEY (`MovieId`) REFERENCES `movies` (`MovieId`) ON DELETE CASCADE ON UPDATE NO ACTION,
+ADD CONSTRAINT `UserIdOw` FOREIGN KEY (`UserId`) REFERENCES `users` (`UserId`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `watchlateritems`

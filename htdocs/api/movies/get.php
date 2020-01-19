@@ -14,8 +14,8 @@
     } else {
         echo json_encode(
             [
-                'status'=>'failure',
-                'description'=>"You need to pass movieId parameter"
+                'status'=>'success',
+                'description'=> MovieHelpers::getMovies()
             ]); 
     }
     

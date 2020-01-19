@@ -19,7 +19,7 @@ function login() {
 			success: function (data) {
 				alert(data["description"]);
 				if (data["status"] == "success") {
-					window.location.href = "NewHome.php";
+					window.location.href = "Home.php";
 				}
 			}
 		});
@@ -49,7 +49,7 @@ function signup() {
 					alert(data["description"]);
 				} else if (data["status"] == "success") {
 					alert(data["description"]);
-					window.location.href = "NewHome.php";
+					window.location.href = "Home.php";
 				}
 			}
 		});
@@ -63,7 +63,7 @@ function logout() {
 		dataType: 'json',
 		success: (data) => {
 			alert(data["description"]);
-			window.location.href = "NewHome.php";
+			window.location.href = "Home.php";
 		}
 	});
 }

@@ -364,9 +364,11 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `PostId` int(11) NOT NULL,
   `OwnerId` int(11) NOT NULL,
   `MovieId` int(11) DEFAULT NULL,
-  `Rating` float NOT NULL,
+  `Rating` float DEFAULT NULL,
   `Content` varchar(250) DEFAULT NULL,
-  `IsActive` bit(1) DEFAULT 1
+  `IsActive` bit(1) DEFAULT 1,
+  `UpdatedOn` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+  `CreatedOn` TIMESTAMP NOT NULL DEFAULT NOW()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------

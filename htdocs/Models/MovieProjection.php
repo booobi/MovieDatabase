@@ -6,7 +6,9 @@
         private $Location;
         private $MovieId;
         private $OwnerId;
-        private $Date;
+		private $Date;
+		
+        private $Participants;
 
 		public function __construct () {
 		}
@@ -31,7 +33,8 @@
                 'location' => $this->Location,
                 'movieId' => $this->MovieId,
                 'ownerId' => $this->OwnerId,
-                'date' => $this->Date
+				'date' => $this->Date,
+				'participants'=>$this->Participants
 			];
 		}
 	}

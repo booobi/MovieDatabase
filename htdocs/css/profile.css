@@ -2,11 +2,17 @@
 /*elements, grouped by types */
 
 [class *= "title"] {
+    position: relative;
+}
+
+.watchlater-title {
     margin: 80px 0 0 664px;
 }
 
 .posts-title {
-    margin: 80px 0 0 675px;
+    margin: 80px 0 0 678px;
+    padding-left: 25px;
+    padding-right: 25px;
     width: 95px;
 }
 
@@ -16,13 +22,14 @@
 }
 
 .exchanges-title {
-    margin: -130px 0 0 1030px;
+    margin: -130px 0 0 1045px;
 }
 
 .projection-btn,
 .exchange-btn {
+    position: relative;
     margin-top: 10px;
-    margin-left: 320px;
+    margin-left: 325px;
     padding: 8px 12px;
     font-size: 21px;
     border: none;
@@ -31,7 +38,7 @@
 }
 
 .exchange-btn {
-    margin: 10px 0 0 1040px;
+    margin: 10px 0 0 1055px;
 }
 
 .watchlater-scroller {
@@ -47,19 +54,22 @@
     height: 370px;
 }
 
-.projections-scroller {
-    width: 751px;
+.projections-scroller,
+.exchanges-scroller {
+    margin-top: 32px;
+    padding-top: 0;
+    padding-right: 0;
+    padding-left: 0;
+    height: 300px;
+}
+
+.exchanges-scroller {
+    margin-left: 49px;
 }
 
 .users-scroller {
     width: 217px;
     height: 100px;
-}
-
-.exchanges-scroller {
-    margin-top: -300px;
-    width: 1486px;
-    height: 300px;
 }
 
 [id *= "container"]:not(#users-watchlater-container):not(#posts-container):not(#projections-exchanges-container) {
@@ -78,7 +88,7 @@
     margin-top: 27px;
 }
 
-#users-watchlater-container ::placeholder {
+#users-watchlater-container::placeholder {
     color: #3b4954;
 }
 
@@ -87,8 +97,12 @@
 }
 
 #projections-exchanges-container {
-    margin-top: 30px;
+    display: flex;
     margin-bottom: 40px;
+}
+
+#projections-exchanges-container > div {
+    display: inline-block;
 }
 
 #posts-container button,
@@ -167,7 +181,7 @@
 
 #projections-box {
     margin-left: 32px;
-    width: 712px;
+    width: 717px;
     height: 300px;
 }
 
@@ -182,7 +196,7 @@
 }
 
 #exchanges-box {
-    margin-left: 800px;
+    width: 678px;
 }
 
 #new-share-box {
@@ -198,15 +212,19 @@
 div:not(.advanced-search) > .checkbox-box > .check-mark, input[type=checkbox] {
      position: unset;
      margin-top: 4px;
-     margin-right: 12px;
-     width: 16px;
-     height: 16px;
+     width: 23px;
+     height: 23px;
      float: right;
+}
+
+.advanced-search input[type=checkbox] {
+    position: absolute;
 }
 
 div:not(.advanced-search) > .checkbox-box > input:checked ~ .check-mark::after {
     position: unset;
-    margin-right: 4px;
+    margin-top: 4px;
+    margin-right: 8px;
     display: block;
     float: right;
 }
@@ -245,7 +263,9 @@ div:not(.advanced-search) > .checkbox-box > input:checked ~ .check-mark::after {
     margin: 10px auto 10px 43px;
 }
 
-#users-watchlater-container input {
+#users-watchlater-container input,
+#users-watchlater-container ::placeholder {
+    color: #3f485b;
     border: solid medium #505868;
 }
 
@@ -261,8 +281,9 @@ table:not(.watch-later-tbl) {
 table th {
     padding: 18px;
     height: 60px;
+    width: 180px;
     font-family: Lato, sans-serif;
-    font-size: 20px;
+    font-size: 21px;
     font-weight: bold;
     color: #213648;
     background-color: rgba(64, 28, 28, 0.34);
@@ -276,6 +297,7 @@ table td {
 }
 
 .new-line {
+    margin-left: 7px;
     display: inline-block;
 }
 
@@ -296,9 +318,20 @@ table td {
 
 .watch-later-tbl td {
     padding-top: 20px;
+    padding-left: 5px;
     height: 50px;
     color: #23394c;
     background-color: rgba(78, 43, 40, 0.1);
+}
+
+.posts-tbl td {
+  text-align: left;
+}
+
+.my-projections-tbl .new-line,
+.my-exchanges-tbl .new-line{
+   display: block;
+    margin: 0;
 }
 
 [class *= "col-posts"] {
@@ -339,22 +372,25 @@ table td {
     padding-left: 0;
 }
 
-[class *= "col-prj"]{
+[class *= "col-prj"] {
     width: 80px;
     color: #213648;
     background-color: rgba(64, 28, 28, 0.34);
 }
 
 .col-prj-name {
+    padding-top: 43px;
     width: 160px;
 }
 
 .col-prj-duration {
+    padding-top: 43px;
+    padding-left: 13px;
     width: 130px;
 }
 
 .col-prj-options {
-    padding-top: 0;
+    padding-top: 18px;
     padding-right: 30px;
 }
 
@@ -364,12 +400,16 @@ table td {
     background-color: rgba(64, 28, 28, 0.34);
 }
 
+.col-exchanges-movies,
+.col-exchanges-rating {
+    padding-top: 43px;
+}
+
 .col-exchanges-rating {
     width: 191px;
 }
 
 .col-exchanges-options {
-    padding-top: 0;
     width: 87px;
 }
 
@@ -405,7 +445,6 @@ table td {
 
 .comments-tbl .row-post-comment {
     width: 500px;
-    text-align: left;
 }
 
 .comments-tbl .row-post-post {
@@ -501,6 +540,7 @@ table td {
     }
 
     .projections-title {
+        position: relative;
         margin: 30px auto auto;
         width: 108px;
     }
@@ -513,15 +553,16 @@ table td {
     .projection-btn,
     .exchange-btn {
         margin: 20px auto auto;
+        width: 119px;
         display: block;
         font-size: 22px;
-        width: 119px;
     }
 
-    .watchlater-scroller,
-    .posts-scroller,
-    .projections-scroller,
-    .exchanges-scroller {
+    .exchange-btn {
+        z-index: 5;
+    }
+
+    [class *= "scroller"]:not(.comments-scroller):not(.users-scroller) {
         width: 90%;
         height: 300px;
     }
@@ -544,11 +585,11 @@ table td {
     }
 
     .projections-scroller {
-        margin-top: -510px;
+        margin-top: -494px;
     }
 
     .exchanges-scroller {
-        margin: 231px auto auto auto;
+        margin: 32px auto auto auto;
     }
 
     [id *= "container"]:not(#users-watchlater-container):not(#posts-container):not(#projections-exchanges-container) {
@@ -559,7 +600,7 @@ table td {
     }
 
     #users-watchlater-container {
-        margin-top: -690px;
+        margin-top: -685px;
     }
 
     #posts-container,
@@ -569,6 +610,7 @@ table td {
     }
 
     #projections-exchanges-container {
+        display: grid;
         margin-bottom: 40px;
     }
 
@@ -600,7 +642,7 @@ table td {
     }
 
     #edit-password-box {
-        margin-top: -700px;
+        margin-top: -705px;
     }
 
     #watchlater-box {
@@ -608,11 +650,17 @@ table td {
     }
 
     #comments-box {
-        margin: 180px auto auto auto;
-        width: 100%;
-        height: 370px;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        padding-right: 0;
+        width: 90%;
         float: none;
-        z-index: 5;
+        text-align: center;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
     }
 
     #new-projection-box,
@@ -626,20 +674,9 @@ table td {
         z-index: 5;
     }
 
-    #edit-projection-box {
-        margin-top: 87px;
-    }
-
-    #new-share-box {
-        margin-top: 270px;
-    }
-
-    input[type=text] {
-        margin-left: auto;
-        margin-right: auto;
-        width: 80%;
-        padding-left: 0;
-        padding-right: 0;
+    #details-form,
+    #password-form {
+        transform: none;
     }
 
     #details-form h2,
@@ -647,22 +684,35 @@ table td {
         margin-left: auto;
     }
 
-    .new-line {
+    #edit-projection-form {
+        top: 48%;
+    }
+
+    #new-share-box {
+        margin-top: 270px;
+    }
+
+    .posts-tbl .new-line,
+    .my-projections-tbl .new-line,
+    .my-exchanges-tbl .new-line {
         display: block;
         margin: -13px auto auto -18px;
+        padding-top: 4px;
         height: 21px;
     }
 
     table:not(.watch-later-tbl) {
         margin: auto;
         width: 100%;
-        display: revert;
+        display: inline-table;
         border-collapse: collapse;
         border-spacing: 0;
     }
 
     table th {
         font-size: 21px;
+        padding-top: 14px;
+        padding-bottom: 5px;
     }
 
     table td {
@@ -680,6 +730,11 @@ table td {
 
     .posts-tbl {
         display: block;
+        text-align: center;
+    }
+
+    .posts-tbl td {
+        text-align: center;
     }
 
     .comments-tbl {
@@ -711,10 +766,11 @@ table td {
     }
 
     .col-posts-posts {
-        padding: 18px 0 0;
+        padding: 14px 0 5px;
     }
 
-    .col-post-comment, .row-post-comment {
+    .col-post-comment,
+    .row-post-comment {
         width: 25%;
         margin: auto;
         text-align: center;
@@ -722,6 +778,7 @@ table td {
     }
 
     .col-prj-name {
+        padding-top: 14px;
         padding-bottom: 0;
     }
 
@@ -729,11 +786,14 @@ table td {
         padding-top: 5px;
     }
 
-    [class *= "col-posts"], [class *= "row-posts"],
+    [class *= "col-posts"],
     .comments-tbl [class *= "col-post"],
+    [class *= "col-prj"],
+    [class *= "col-exhanges"],
+    [class *= "row-posts"],
     .comments-tbl [class *= "row-post"],
-    [class *= "col-prj"], [class *= "row-prj"],
-    [class *= "col-exhanges"], [class *= "row-exchanges"] {
+    [class *= "row-prj"],
+    [class *= "row-exchanges"] {
         display: block;
         float: none;
         text-align: center;
@@ -777,11 +837,6 @@ table td {
         padding: 10px 0;
     }
 
-    .row-prj-options,
-    .row-exchanges-options {
-        padding: 1px 0;
-    }
-
     [class *= "col-posts"]:not(.col-posts-posts), .col-comments-btn,
     [class *= "row-posts"]:not(.row-posts-posts):not(.row-comments-btn),
     .comments-tbl [class *= "col-post"]:not(.col-post-comment),
@@ -793,33 +848,34 @@ table td {
         display: none;
     }
 
-    #comments-close-btn,
-    #new-projection-close-btn,
-    #new-share-close-btn,
-    #edit-projection-close-btn {
-        margin: 600px auto auto auto;
-        top: 0;
-        bottom: 0;
-        left: 0;
+    #comments-close-btn{
+        margin-top: 240px;
+        margin-right: auto;
         right: 0;
+        top: 50%;
+        margin-left: auto;
+    }
+
+    #new-projection-close-btn {
+        margin: 260px auto auto auto;
     }
 
     #edit-projection-close-btn {
-        margin: 690px auto auto auto;
+        margin: 320px auto auto auto;
     }
 
     #new-share-close-btn {
-        margin: 455px auto auto auto;
+        margin: 132px auto auto auto;
     }
 
     #edit-share-close-btn {
-        margin: 525px auto auto auto;
+        margin: 228px auto auto auto;
         left: 0;
         right: 0;
     }
 
-    #submit-details, #submit-password {
+    #submit-details,
+    #submit-password {
         font-size: 22px;
     }
-
 }

@@ -6,6 +6,8 @@
         private $Content;
 		private $Rating;
 		private $IsActive;
+		private $CreatedOn;
+		private $UpdatedOn;
 		
 		public function __construct () {
 		}
@@ -29,7 +31,9 @@
 				'movieId' => $this->MovieId,
 				'content' => $this->Content,
                 'rating' => $this->Rating,
-                'isActive' => $this->IsActive
+				'isActive' => $this->IsActive,
+				'createdOn' => $this->CreatedOn,
+				'updatedOn' => $this->UpdatedOn
 			];
 		}
 	}

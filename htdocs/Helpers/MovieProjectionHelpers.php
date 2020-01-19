@@ -1,5 +1,6 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Models/MovieProjection.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/UserHelpers.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 
 class MovieProjectionHelpers {
@@ -15,9 +16,11 @@ class MovieProjectionHelpers {
             $projection->set('Id', $row["MovieEventId"]);
             $projection->set('Name', $row["Name"]);
             $projection->set('Location', $row["Location"]);
+            $projection->set('Duration', $row["Duration"]);
             $projection->set('MovieId', $row["MovieId"]);
             $projection->set('OwnerId', $row["OwnerId"]);
             $projection->set('Date', $row["Time"]);
+            $projection->set('Participants', MovieProjectionHelpers::getProjectionParticipants($row["MovieEventId"]));
 		}
         
         return $projection;
@@ -38,12 +41,35 @@ class MovieProjectionHelpers {
                 $projection->set('MovieId', $row["MovieId"]);
                 $projection->set('OwnerId', $row["OwnerId"]);
                 $projection->set('Date', $row["Time"]);
+                $projection->set('Participants', MovieProjectionHelpers::getProjectionParticipants($row["MovieEventId"]));
                 
 				$movieProjections[] = $projection;
 			}
 		}
 
 		return $movieProjections;	
+    }
+
+    public static function getProjectionsByUser($userId) {
+        $allProj = MovieProjectionHelpers::getMovieProjections();
+        return array_values(array_filter($allProj, function($v, $k) use ($userId) {
+            return $v->get("OwnerId") == $userId;
+        }, ARRAY_FILTER_USE_BOTH));
+    }
+
+    public static function getProjectionParticipants($projectionId) {
+
+        $res = DBOperations::prepareAndExecute("
+        SELECT * FROM `events_participants` WHERE EventId={$projectionId}
+        ");
+        $participantsMap = [];
+        if ($res->num_rows > 0) {
+			while($row = $res->fetch_assoc()) {
+                $user = UserHelpers::getUser($row['ParticipantId']);
+                $participantsMap[] = [$user->get("UserId"), $user->get('Username'), $row['IsApproved']];
+            }
+        }
+        return $participantsMap;
     }
 
     public static function addMovieProjection($ownerId, $name, $duration ,$movieId, $date, $location) {
@@ -68,5 +94,9 @@ class MovieProjectionHelpers {
         WHERE MovieEventId = {$projectionId}");
     }
 
+    public static function alterParticipantStatus($projectionId, $participantId, $status) {
+        DBOperations::prepareAndExecute("
+        UPDATE `events_participants` SET `IsApproved`={$status} WHERE `ParticipantId`={$participantId} AND `EventId`={$projectionId}");    
+    }
 }
 ?>

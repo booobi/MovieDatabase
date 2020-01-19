@@ -60,6 +60,13 @@ class CommentHelpers {
         return $comments;
     }
 
+    public static function getCommentsForPost($postId) {
+        $allComments = CommentHelpers::getComments();
+        return array_values(array_filter($allComments, function($v, $k) use ($postId) {
+            return $v->get("PostId") == $postId;
+        }, ARRAY_FILTER_USE_BOTH));
+    }
+
     public static function addComment($userId, $postId, $content) {
         DBOperations::prepareAndExecute("
         INSERT INTO `comments`(`OwnerId`, `ParentPostId`, `Content`) 

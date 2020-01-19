@@ -19,6 +19,8 @@ class PostHelpers {
                 $post->set("Rating", $row['Rating']);
                 $post->set("Content", $row['Content']);
                 $post->set("IsActive", $row['IsActive']);
+                $post->set("CreatedOn", $row['CreatedOn']);
+                $post->set("UpdatedOn", $row['UpdatedOn']);
 
                 return $post;
         }
@@ -39,6 +41,8 @@ class PostHelpers {
                 $post->set("Rating", $row['Rating']);
                 $post->set("Content", $row['Content']);
                 $post->set("IsActive", $row['IsActive']);
+                $post->set("CreatedOn", $row['CreatedOn']);
+                $post->set("UpdatedOn", $row['UpdatedOn']);
 
                 $posts[] = $post;
             }
@@ -46,6 +50,13 @@ class PostHelpers {
 
         return $posts;
     }
+
+    public static function getPostsByUser($userId) {
+        $allPosts = PostHelpers::getPosts();
+        return array_values(array_filter($allPosts, function($v, $k) use ($userId) {
+            return $v->get("OwnerId") == $userId;
+        }, ARRAY_FILTER_USE_BOTH));
+    } 
 
     public static function addPost($ownerId, $content) {
         DBOperations::prepareAndExecute("INSERT INTO `posts`(`OwnerId`, `Content`) VALUES ('{$ownerId}', '{$content}')");

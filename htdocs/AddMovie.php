@@ -8,15 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Monoton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css//NewHomeDesign.css">
-    <link rel="stylesheet" href="css/NewAddAMovieDesign.css">
-    <link rel="stylesheet" href="css/NewDuplicatedDesign.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/add-movie.css">
+    <link rel="stylesheet" href="css/duplicated.css">
 
 </head>
 
 <body>
     <?php
-            include $_SERVER['DOCUMENT_ROOT'] . '/NewHeader.php';
+            include $_SERVER['DOCUMENT_ROOT'] . '/Header.php';
             echo '
             <script>
                 const action = "add";

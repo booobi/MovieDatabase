@@ -1,5 +1,5 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . '/models/Festival.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Models/Festival.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 class FestivalHelpers {
 

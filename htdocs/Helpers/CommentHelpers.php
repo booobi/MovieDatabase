@@ -98,6 +98,20 @@ class CommentHelpers {
         UPDATE `comments` SET `IsActive`={$isActive} WHERE CommentId={$commentId}
         ");
     }
+
+    public static function getCommentsContaining($searchString) {
+		$comments = CommentHelpers::getComments();
+        $matchingComments = array_values(array_filter($comments, function($v, $k) use ($searchString) {
+            $commentContent = strtolower($v->get("Content"));
+            return (strpos($commentContent, $searchString) !== false);
+        }, ARRAY_FILTER_USE_BOTH));
+
+        if(count($matchingComments) > 0) {
+           return $matchingComments;
+		}
+		
+		return [];
+	}
     
 }
 ?>

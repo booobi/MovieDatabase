@@ -110,5 +110,19 @@ class PostHelpers {
             return $row['PostRating'];    
         }
     }
+
+    public static function getPostsContaining($searchString) {
+		$posts = PostHelpers::getPosts();
+        $matchingPosts = array_values(array_filter($posts, function($v, $k) use ($searchString) {
+            $postContent = strtolower($v->get("Content"));
+            return (strpos($postContent, $searchString) !== false);
+        }, ARRAY_FILTER_USE_BOTH));
+
+        if(count($matchingPosts) > 0) {
+           return $matchingPosts;
+		}
+		
+		return [];
+	}
 }
 ?>

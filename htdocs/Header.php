@@ -3,21 +3,16 @@
 
     <div class="search">
         <form action="/action_page.php" id="search-box">
-            <input type="text" placeholder="Search movie, actor, director...">
+            <input id="searchInput" type="text" placeholder="Search movie, actor, director...">
         </form>
         <div class="advanced-search">
-            <label class="checkbox-box">
+            <label id="advancedSearchLabel" class="checkbox-box">
                 Advanced search
-                <input type="checkbox">
-                <span class="check-mark"></span>
+                <input id="advancedSearchCheckbox" type="checkbox">
+                <span id="advancedSearchSpan" class="check-mark"></span>
             </label>
         </div>
-        <div id="popup-advanced">
-            <p>this should</p>
-            <p>be</p>
-            <p>a pop-up</p>
-        </div>
-        <button type="submit">Go!</button>
+        <button id="searchBtn" type="submit">Go!</button>
     </div>
 
     <div class="user-buttons">

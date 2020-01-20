@@ -236,6 +236,10 @@ class ValidatorHelpers {
         ValidatorHelpers::validatePostFields(['shareId']);
     }
 
+    public static function validateSearchFields() {
+        ValidatorHelpers::validatePostFields(['searchString']);
+    }
+
     public static function validateCommentAlterIsActiveFields()
     {
         ValidatorHelpers::validatePostFields(['commentId', 'isActive']);

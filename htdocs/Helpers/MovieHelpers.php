@@ -340,5 +340,19 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 
 		return NULL;
 	}
+
+	public static function getMoviesContaining($searchString) {
+		$movies = MovieHelpers::getMovies();
+        $matchingMovies = array_values(array_filter($movies, function($v, $k) use ($searchString) {
+            $movieName = strtolower($v->get("Name"));
+            return (strpos($movieName, $searchString) !== false);
+        }, ARRAY_FILTER_USE_BOTH));
+
+        if(count($matchingMovies) > 0) {
+           return $matchingMovies;
+		}
+		
+		return [];
+	}
  }
 ?>

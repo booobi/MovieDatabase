@@ -2,7 +2,7 @@
     <div class="logo"> Movie Time</div>
 
     <div class="search">
-        <form action="/action_page.php" id="search-box">
+        <form id="search-box">
             <input id="searchInput" type="text" placeholder="Search movie, actor, director...">
         </form>
         <div class="advanced-search">

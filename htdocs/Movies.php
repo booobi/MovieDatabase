@@ -49,7 +49,7 @@ session_start();
                 
                 $movies = [];
                 //if movie search
-                if(isset($_GET['q'])) {
+                if(isset($_GET['q']) && $_GET['q']) {
                     $movies = MovieHelpers::getMoviesContaining($_GET['q']);
                 }
                 else {

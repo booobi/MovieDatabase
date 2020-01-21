@@ -54,7 +54,6 @@ class ShareHelpers {
         $sharesRes = DBOperations::prepareAndExecute(
             "SELECT * FROM `movieexchanges` WHERE Movie_ExchangesId={$shareId}"
         );
-
 		if ($sharesRes->num_rows > 0) {
 			$row = $sharesRes->fetch_assoc();
             $share = new Share();

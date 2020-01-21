@@ -10,16 +10,18 @@ session_start();
     <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Maven+Pro:400,600,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/home.css">
-    <link rel="stylesheet" href="/newMovies.css">
+    <link rel="stylesheet" href="/css/movies.css">
     <link rel="stylesheet" href="css/duplicated.css">
 </head>
 
 <body>
     <?php
         include $_SERVER['DOCUMENT_ROOT'] . '/Header.php';
+    
+        if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']) {
+            echo '<button class="menu-btn" id="add-a-movie"> <a href="AddMovie.php">Add a movie </a></button>';
+        }
     ?>
-
-    <button class="menu-btn" id="add-a-movie"> <a href="AddMovie.php">Add a movie </a></button>
 
     <div class="movies-tbl-scroller">
         <div class="movies-container">
@@ -85,8 +87,8 @@ session_start();
                             
 
                         if(
-                            (isset($_SESSION['username']) && in_array($movie->get('Id'), UserHelpers::getUserOwnedMovies($_SESSION['username'])))
-                            || 
+                            // (isset($_SESSION['username']) && in_array($movie->get('Id'), UserHelpers::getUserOwnedMovies($_SESSION['username'])))
+                            // || 
                             (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'])
                             ) {
                                 echo '<button class = "change-movie-btn"><a href="EditMovie.php?id='. $movie->get("Id") .'">Edit</a></button><br>';
@@ -246,66 +248,6 @@ session_start();
                     ';
                 }
                 ?>
-                   <tr>
-                       <td class = "row-prj-name">
-                           "Avatar" projection
-                       </td>
-                       <td class = "row-prj-location">
-                           Serdika Center
-                       </td>
-                       <td class = "row-prj-duration">
-                           123 min
-                       </td>
-                       <td class = "row-prj-date">
-                           2 Sep 2019
-                       </td>
-                       <td class = "row-prj-options">
-                           <button class = "join-btn" onclick="showJoinProjForm()">Join</button>
-                           <button class = "cancel-btn">Cancel</button>
-                           <br><button class = "edit-btn" onclick="showEditProjectionForm()">Edit</button>
-                           <button class = "delete-btn">Delete</button>
-                       </td>
-                   </tr>
-                   <tr>
-                       <td class = "row-prj-name">
-                           "Going On 30" projection
-                       </td>
-                       <td class = "row-prj-location">
-                           Paradise Center
-                       </td>
-                       <td class = "row-prj-duration">
-                           220 min
-                       </td>
-                       <td class = "row-prj-date">
-                           21 Sep 2010
-                       </td>
-                       <td class = "row-prj-options">
-                           <button class = "join-btn" onclick="showJoinProjForm()">Join</button>
-                           <button class = "cancel-btn">Cancel</button>
-                           <br><button class = "edit-btn" onclick="showEditProjectionForm()">Edit</button>
-                           <button class = "delete-btn">Delete</button>
-                       </td>
-                   </tr>
-                   <tr>
-                       <td class = "row-prj-name">
-                           "Wanted" projection <!-- max length = ?-->
-                       </td>
-                       <td class = "row-prj-location">
-                           Vitoshka
-                       </td>
-                       <td class = "row-prj-duration">
-                           152 min
-                       </td>
-                       <td class = "row-prj-date">
-                           5 Jan 2015
-                       </td>
-                       <td class = "row-prj-options">
-                           <button class = "join-btn" onclick="showJoinProjForm()">Join</button>
-                           <button class = "cancel-btn">Cancel</button>
-                           <br><button class = "edit-btn" onclick="showEditProjectionForm()">Edit</button>
-                           <button class = "delete-btn">Delete</button>
-                       </td>
-                   </tr>
                </table>
            </div>
        </div>
@@ -327,73 +269,48 @@ session_start();
                        <th class = "col-exchanges-add-rating">
                        </th>
                        <th class = "col-exchanges-rating">
-                           Share rating
+                           User
                            <p class = "new-line"><i class="arrow-down"></i><i class = "arrow-up"> </i></p>
                        </th>
                        <th class = "col-exchanges-options">
                            Options
                        </th>
                    </tr>
-                   <tr>
-                       <td class = "row-exchanges-movies">
-                           Fast and Furious
-                       </td>
-                       <td class = "row-exchanges-status">
-                           Shared
-                       </td>
-                       <td class = "row-add-rating">
-                           <button class = "add-rating-btn" onclick="showShareRating()">Add a rating</button>
-                       </td>
-                       <td class = "row-exchanges-rating">
-                           4
-                       </td>
-                       <td class = "row-exchanges-options">
-                           <button class = "request-btn">Request</button>
-                           <button class = "cancel-btn">Cancel</button>
-                           <br><button class = "edit-btn" onclick="showEditShareForm()">Edit</button>
-                           <button class = "delete-btn">Delete</button>
-                       </td>
-                   </tr>
-                   <tr>
-                       <td class = "row-exchanges-movies">
-                           Fame
-                       </td>
-                       <td class = "row-exchanges-status">
-                           Not shared
-                       </td>
-                       <td class = "row-add-rating">
-                           <button class = "add-rating-btn" onclick="showShareRating()">Add a rating</button>
-                       </td>
-                       <td class = "row-exchanges-rating">
-                           5
-                       </td>
-                       <td class = "row-exchanges-options">
-                           <button class = "request-btn">Request</button>
-                           <button class = "cancel-btn">Cancel</button>
-                           <br><button class = "edit-btn" onclick="showEditShareForm()">Edit</button>
-                           <button class = "delete-btn">Delete</button>
-                       </td>
-                   </tr>
-                   <tr>
-                       <td class = "row-exchanges-movies">
-                           Titanic
-                       </td>
-                       <td class = "row-exchanges-status">
-                           Shared
-                       </td>
-                       <td class = "row-add-rating">
-                           <button class = "add-rating-btn" onclick="showShareRating()">Add a rating</button>
-                       </td>
-                       <td class = "row-exchanges-rating">
-                           3
-                       </td>
-                       <td class = "row-exchanges-options">
-                           <button class = "request-btn">Request</button>
-                           <button class = "cancel-btn">Cancel</button>
-                           <br><button class = "edit-btn" onclick="showEditShareForm()">Edit</button>
-                           <button class = "delete-btn">Delete</button>
-                       </td>
-                   </tr>
+                   <?php
+            include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/ShareHelpers.php';
+            include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/UserHelpers.php';
+            $mainShares = ShareHelpers::getMainShares();
+            foreach($mainShares as $mainShare) {
+                echo '
+                <tr>
+                    <td class = "row-exchanges-movies">
+                    ' . $mainShare->get("Movie")->get('Name') . '
+                    </td>
+                    <td class = "row-exchanges-status">
+                    ' . $mainShare->get("Status") . '
+                    </td>
+                    <td class = "row-add-rating">
+                    ' . $mainShare->get("ApprovalRating") . '
+                    </td>
+                    <td class = "row-exchanges-rating">
+                        ' . $mainShare->get("Owner")->get("Username") . '
+                    </td>
+                    <td class = "row-exchanges-options">';
+                    
+                    if (!(UserHelpers::getCurrentUser()->get("UserId") == $mainShare->get("RequestBy"))) {
+                        echo ShareHelpers::userHasRequestToShare(UserHelpers::getCurrentUser()->get("UserId"), $mainShare->get("Id")) ? 
+                        '<button class="cancel-btn cancel-request-share" data-shareId="' . $mainShare->get("Id") . '">Cancel</buttton>' : 
+                        '<button class="request-btn request-share" data-shareId="' . $mainShare->get("Id") . '">Request</buttton>' ;
+                        
+                    }
+                    
+                    if($_SESSION['isAdmin'] || UserHelpers::getCurrentUser()->get("UserId") == $mainShare->get("RequestBy"))
+                    {
+                        echo '<button onclick="editShare(' . $mainShare->get("Id") .')" class="edit-btn edit-share" data-shareId="' . $mainShare->get("Id") .'" data-shareId="' . $mainShare->get("Id") . '">Edit</button>';
+                        echo '<button class="delete-btn delete-share" data-shareId="' . $mainShare->get("Id") . '">Delete</button>';
+                    }
+            }
+          ?>
                </table>
            </div>
        </div>
@@ -603,18 +520,19 @@ session_start();
                             </label>
                         </div>
                    </div>
-                   <a href="javascript:%20validateLogIn()" id="submit-projection-changes">Submit</a>
+                   <button onclick="editProjection(); return;" id="submit-projection-changes">Submit</button>
                </form>
            </div>
        </div>
 
        <div id = "edit-share-container">
-           <img class = "close-btn" id="edit-share-close-btn" src="xbutton.png">
+           <img class="close-btn" id="edit-share-close-btn" onclick="parentNode.style.display='none'" src="/images/xbutton.png">
            <div id = "edit-share-box">
                <form action="#" id="edit-share-form">
-                   <input type="text" id="projection-movie" class="details-field" placeholder="Movie name . . . ">
+                   <select id="share-movies"></select>
                    <p>List of users, wanting the movie</p>
                    <div class = "users-scroller">
+                    <div id="share-requests">
                        <label class="checkbox-box">
                            4ver
                            <input type="checkbox">
@@ -635,6 +553,7 @@ session_start();
                            <input type="checkbox">
                            <span class="check-mark"></span>
                        </label>
+                    </div>
                    </div>
                    <a href="javascript:%20validateLogIn()" id="submit-share-changes">Submit</a>
                </form>

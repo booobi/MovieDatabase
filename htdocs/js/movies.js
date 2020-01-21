@@ -179,6 +179,16 @@ getProjection = (projectionId, successCb) => {
     });
 }
 
+getShare = (shareId) => successCb => {
+	$.ajax({
+        url: '/api/shares/get.php',
+        type: 'GET',
+        dataType: 'json',
+        data: {id: shareId},
+        success: successCb
+    });
+}
+
 // const showEditProjectionForm = (projectionId) => {
 // 	$('#edit-projection-container').show();
 // }
@@ -231,6 +241,123 @@ function showEditProjectionForm(projectionId) {
                         $('input[data-participantId='+ $(event.target).attr('data-participantid') + ']').removeAttr('checked');
                     } else {
                         $('input[data-participantId='+ $(event.target).attr('data-participantid') + ']').attr('checked','');
+                    }
+                    alert(data.description); 
+                }
+            });
+        })
+        
+    });
+}
+
+const editProjection = () => {
+	$.ajax({
+		url: '/api/projections/edit.php',
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			projectionId: $("#edit-projection-container").data('projectionid'),
+            name: $('#projection-name').val(),
+            duration: $('#projection-duration').val(),
+            location: $('#projection-location').val(),
+            date: $('#projection-time').val(),
+            movieId: $('#projection-movies').val()
+		},
+		success: (data) => {
+			alert(data.description);
+			location.reload();
+		}
+	});
+
+	$('#edit-projection-container').show();
+}
+
+$('.delete-share').click((event) => {
+	$.ajax({
+	  url: '/api/shares/delete.php',
+	  type: 'POST',
+	  dataType: 'json',
+	  data: {shareId: $(event.target).data("shareid")},
+	  success: function(data) {
+		alert(data["description"]);
+		location.reload();
+	  }
+	});
+})
+
+$('.request-share').click((event) => {
+	$.ajax({
+	  url: '/api/shares/requestJoin.php',
+	  type: 'POST',
+	  dataType: 'json',
+	  data: {shareId: $(event.target).data("shareid")},
+	  success: function(data) {
+		alert(data["description"]);
+		location.reload();
+	  }
+	});
+  });
+
+
+  $('.cancel-request-share').click((event) => {
+	$.ajax({
+	  url: '/api/shares/cancelRequest.php',
+	  type: 'POST',
+	  dataType: 'json',
+	  data: {shareId: $(event.target).data("shareid")},
+	  success: function(data) {
+		alert(data["description"]);
+		location.reload();
+	  }
+	});
+  });
+
+  const editShare = (shareId) => {
+	$('.checkbox-box, .check-mark').off();
+    $("#edit-share-container").show();
+    $("#edit-share-container").data('shareId', shareId);
+	$('#share-movies').empty();
+
+	
+
+    getShare(shareId)(shareResponse => {
+        let requests = shareResponse.data.requests;
+		$('#share-requests').empty();
+		
+		getMovies((data) => {
+			data.description.forEach(movie => {
+				$('#share-movies').append(
+					'<option ' + (shareResponse.data.movieId == movie.Id ? 'selected ' : '') +'value=' + movie.Id + '>' + movie.Name + '</option>'
+				)
+			});
+		});
+
+        requests.forEach( request => {
+            $('#share-requests').append(
+                '<label data-requestId="' + request.id + '" class="checkbox-box">' + request.owner.username + 
+                '<input' + (request.isApproved == 1 ? ' checked ' : '')  + ' data-requestId="' + request.id + '"'
+                + 'type="checkbox"><span data-requestId="' + request.id + '" class="check-mark"></span></label>'
+            );    
+        });
+        
+        $('.checkbox-box, .check-mark').click((event)=> {
+            if(event.target != event.currentTarget) {
+                return;
+            }
+            event.stopPropagation();
+            $.ajax({
+                url: '/api/shares/alterRequestStatus.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    shareId: $(event.target).attr('data-requestId'),
+                    isApproved: $('input[data-requestId='+ $(event.target).attr('data-requestId') + ']').attr('checked') ? 0 : 1
+                },
+                success: (data) => {
+                    if($('input[data-requestId='+ $(event.target).attr('data-requestId') + ']').attr('checked')) {
+                        $('input[data-requestId='+ $(event.target).attr('data-requestId') + ']').removeAttr('checked');
+                    } else {
+                        $('input[data-requestId='+ $(event.target).attr('data-requestId') + ']').attr('checked','');
                     }
                     alert(data.description); 
                 }

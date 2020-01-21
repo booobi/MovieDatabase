@@ -1,10 +1,11 @@
 <?php
     session_start();
     include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/ShareHelpers.php';
-
     $res = NULL;
     if(isset($_GET['id'])) {
         $res = ShareHelpers::getShare($_GET['id']);
+        $requests = ShareHelpers::getRequestsForShare($_GET['id']);
+        $res->set('Requests', $requests);
     } else {
         $res = ShareHelpers::getMainShares();
     }

@@ -11,6 +11,7 @@
 		private $Status;
 		private $Movie;
 		private $Owner;
+		private $Requests;
 
 		public function __construct () {
 		}
@@ -38,7 +39,8 @@
 				'isApproved' => $this->IsApproved,
 				'status' => $this->Status,
 				'movie' => $this->Movie,
-				'owner' => $this->Owner
+				'owner' => $this->Owner,
+				'requests' => $this->Requests
 			];
 		}
 	}

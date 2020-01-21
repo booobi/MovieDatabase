@@ -11,8 +11,9 @@
 		if($user) {
 			//&& $row["IsActive"] == 1){ -- this rule should apply when email confirmation is complete
 			if($user->get("Password") == md5($_POST['password']) 
-			&& $user->get("IsMalicious") == 0 
-			&& $user->get("IsApprovedByAdmin") == 1){ 
+			&& !$user->get("IsMalicious")
+			&& $user->get("IsApprovedByAdmin")
+			&& $user->get("IsActive")){ 
 				$_SESSION['userLoggedIn'] = true;
 				$_SESSION['username'] = $_POST['email'];
 				$_SESSION['isAdmin'] = $user->isAdmin();

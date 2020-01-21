@@ -311,7 +311,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 			movieevents.Location as Location,
 			movies.Name as MovieName
 			FROM movieevents INNER JOIN movies
-			WHERE movieevents.MovieEventId = movies.MovieId AND movieevents.Time BETWEEN '{$dateStart}' AND '{$dateEnd}'
+			WHERE movieevents.MovieId = movies.MovieId AND movieevents.Time BETWEEN '{$dateStart}' AND '{$dateEnd}'
 			LIMIT 10;");
 
 

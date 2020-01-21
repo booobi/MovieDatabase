@@ -9,7 +9,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
     }
 
     public static function alterUserApproval($userId, $isApproved) {
-        DBOperations::prepareAndExecute("UPDATE users SET IsApprovedByAdmin={$isApproved} WHERE UserId = {$userId}");
+        DBOperations::prepareAndExecute("UPDATE users SET IsApprovedByAdmin={$isApproved}, IsActive=1 WHERE UserId = {$userId}");
     }
 
     public static function getUserIdByUsername($username) {

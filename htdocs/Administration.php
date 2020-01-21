@@ -84,7 +84,7 @@ session_start();
         </div>
     </div>
     <div id="awaiting-users-box">
-        <p>Users awaiting email approval</p>
+        <p>Users awaiting approval</p>
         <div class = "awaiting-users-scroller">
         <?php
             include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/UserHelpers.php';

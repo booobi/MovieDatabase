@@ -78,35 +78,40 @@ $('#advancedSearchCheckbox').click(()=>{
 });
 
 $('#searchBtn').click(()=>{
-	$.ajax({
-		url: '/api/search.php',
-		type: 'POST',
-		dataType: 'json',
-		data: {
-			searchString: $('#searchInput').val(),
-			advancedSearch: $('#advancedSearchSpan').attr('checked') ? 1 : 0
-		},
-		success: (data) => {
-			
-			if(data.description.movie) {
-				alert("Matching movie found! Redirecting ...")
-				window.location = "/EditMovie.php?id=" + data.description.movie.Id;
-			}
 
-			else if(data.description.post) {
-				alert("Matching post found! Redirecting ...")
-				window.location = "/PostDetails.php?id=" + data.description.post.id;
+	if(!$('#advancedSearchSpan').attr('checked')) {
+		window.location = "/Movies.php?q=" + $('#searchInput').val();
+	}
+	else {
+		$.ajax({
+			url: '/api/search.php',
+			type: 'POST',
+			dataType: 'json',
+			data: {
+				searchString: $('#searchInput').val(),
+				advancedSearch: $('#advancedSearchSpan').attr('checked') ? 1 : 0
+			},
+			success: (data) => {
+				
+				if(data.description.movie) {
+					window.location = "/Movies.php?q=" + data.description.movie.Id;
+				}
+	
+				else if(data.description.post) {
+					alert("Matching post found! Redirecting ...")
+					window.location = "/PostDetails.php?id=" + data.description.post.id;
+				}
+	
+				else if(data.description.comment) {
+					alert("Matching comment found! Redirecting ...")
+					window.location = "/PostDetails.php?id=" + data.description.comment.postId;
+				}
+	
+				else {
+					alert(data.description);
+				}
+	
 			}
-
-			else if(data.description.comment) {
-				alert("Matching comment found! Redirecting ...")
-				window.location = "/PostDetails.php?id=" + data.description.comment.postId;
-			}
-
-			else {
-				alert(data.description);
-			}
-
-		}
-	});
+		});
+	}
 });

@@ -47,7 +47,15 @@ session_start();
                 include $_SERVER['DOCUMENT_ROOT'] . '/Helpers/MovieHelpers.php';
                 include $_SERVER['DOCUMENT_ROOT'] . '/Helpers/UserHelpers.php';
                 
-                $movies = MovieHelpers::getMovies();
+                $movies = [];
+                //if movie search
+                if(isset($_GET['q'])) {
+                    $movies = MovieHelpers::getMoviesContaining($_GET['q']);
+                }
+                else {
+                    $movies = MovieHelpers::getMovies();
+                }
+               
                 
                 foreach($movies as $movie) {
                     

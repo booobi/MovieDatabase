@@ -58,7 +58,9 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `ParentPostId` int(11) NOT NULL,
   `AnswerToCommentId` int(11) DEFAULT NULL,
   `Content` varchar(250) NOT NULL,
-  `IsActive` bit(1) DEFAULT 1
+  `IsActive` bit(1) DEFAULT 1,
+  `UpdatedOn` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+  `CreatedOn` TIMESTAMP NOT NULL DEFAULT NOW()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------

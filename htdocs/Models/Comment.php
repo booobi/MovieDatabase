@@ -6,8 +6,10 @@
         private $ParentCommentId;
         private $Content;
 		private $IsActive;
-		
+		private $CreatedOn;
+
 		private $User;
+		private $Post;
 		private $RatingForPost;
 		
 		public function __construct () {
@@ -33,7 +35,10 @@
 				'parentCommentId' => $this->ParentCommentId,
                 'content' => $this->Content,
 				'isActive' => $this->IsActive,
-				'ratingForPost' => $this->RatingForPost
+				'ratingForPost' => $this->RatingForPost,
+				'user' => $this->User->get("Username"),
+				'post' => $this->Post->get("Content"),
+				'createdOn' => $this->CreatedOn
 			];
 		}
 	}

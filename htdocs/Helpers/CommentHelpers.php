@@ -47,11 +47,18 @@ class CommentHelpers {
                 $comment->set("ParentCommentId", $row['AnswerToCommentId']);
                 $comment->set("Content", $row['Content']);
                 $comment->set("IsActive", $row['IsActive']);
+                $comment->set("CreatedOn", $row['CreatedOn']);
 
                 $user = UserHelpers::getUser($row['OwnerId']);
                 $comment->set("User", $user);
                 $ratingForPost = PostHelpers::getPostRatingForUser($row['ParentPostId'], $row['OwnerId']);
                 $comment->set("RatingForPost", $ratingForPost);
+
+                $post = PostHelpers::getPost($row['ParentPostId']);
+                $comment->set("Post", $post);
+
+
+
 
                 $comments[] = $comment;
             }

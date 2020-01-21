@@ -134,93 +134,22 @@ session_start()
                                 ' . ($post->get('CreatedOn')) . '
                             </td>
                             <td class="row-comments-btn">
-                                <button onclick="showComments()">Comments</button>
+                                <button onclick="showComments( ' . ($post->get('Id')) . ')">Comments</button>
                             </td>
                         </tr>
                             ';
                         }
                     ?>
-
-
-                    <tr>
-                        <td class="row-posts-posts">
-                            Please, add "Avatar"
-                        </td>
-                        <td class="row-posts-comments">
-                            10
-                        </td>
-                        <td class="row-posts-rating">
-                            9
-                        </td>
-                        <td class="row-posts-date">
-                            2 Sep 2019
-                        </td>
-                        <td class="row-comments-btn">
-                            <button onclick="showComments()">Comments</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="row-posts-posts">
-                            I really want to watch "Casablanca"!
-                        </td>
-                        <td class="row-posts-comments">
-                            12
-                        </td>
-                        <td class="row-posts-rating">
-                            8
-                        </td>
-                        <td class="row-posts-date">
-                            21 Sep 2010
-                        </td>
-                        <td class="row-comments-btn">
-                            <button>Comments</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="row-posts-posts">
-                            Add the ,,Shutter Island", it's worth it>
-                            <!-- max length = 40-->
-                        </td>
-                        <td class="row-posts-comments">
-                            7
-                        </td>
-                        <td class="row-posts-rating">
-                            5
-                        </td>
-                        <td class="row-posts-date">
-                            5 Jan 2015
-                        </td>
-                        <td class="row-comments-btn">
-                            <button>Comments</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="row-posts-posts">
-                            Add the ,,Shutter Island", it's worth it>
-                            <!-- max length = 40-->
-                        </td>
-                        <td class="row-posts-comments">
-                            7
-                        </td>
-                        <td class="row-posts-rating">
-                            5
-                        </td>
-                        <td class="row-posts-date">
-                            5 Jan 2015
-                        </td>
-                        <td class="row-comments-btn">
-                            <button>Comments</button>
-                        </td>
-                    </tr>
                 </table>
             </div>
         </div>
     </div>
     <div id="comments-container">
-        <img class="close-btn" id="comments-close-btn" src="xbutton.png" onclick="hideComments()">
+        <img class="close-btn" id="comments-close-btn" src="/images/xbutton.png" onclick="parentNode.style.display='none'">
         <div id="comments-box">
             <div class="comments-scroller">
                 <table class="comments-tbl">
+                <thead>
                     <tr>
                         <th class="col-post-comment">
                             Comment
@@ -239,42 +168,45 @@ session_start()
                         <th class="col-post-date">
                             Date
                         </th>
-                    </tr>
-                    <tr>
-                        <td class="row-post-comment">Yes, it's an awesome movie!</td>
-                        <td class="row-post-post">Please, add "Avatar"!</td>
-                        <td class="row-post-username">deina_89</td>
-                        <td class="row-post-rating">9</td>
-                        <td class="row-post-date">2 Sep 2019</td>
-                    </tr>
-                    <tr>
-                        <td class="row-post-comment">I don't like it!I haven't watched such a crappy movie, sly.</td>
-                        <td class="row-post-post">Please, add "Avatar"!</td>
-                        <td class="row-post-username">4ever</td>
-                        <td class="row-post-rating">2</td>
-                        <td class="row-post-date">21 Jan 2019</td>
-                    </tr>
-                    <tr>
-                        <td class="row-post-comment">Yes, it's a nice sci-fi</td>
-                        <td class="row-post-post">Please, add "Avatar"!</td>
-                        <td class="row-post-username">lvr</td>
-                        <td class="row-post-rating">5</td>
-                        <td class="row-post-date">8 Sep 2018</td>
-                    </tr>
-                    <tr>
-                        <td class="row-post-comment">Don't</td>
-                        <td class="row-post-post">Please, add "Avatar"!</td>
-                        <td class="row-post-username">flower34</td>
-                        <td class="row-post-rating">1</td>
-                        <td class="row-post-date">12 Jun 2010</td>
-                    </tr>
-                    <tr>
-                        <td class="row-post-comment">No need</td>
-                        <td class="row-post-post">Please, add "Avatar"!</td>
-                        <td class="row-post-username">maria5</td>
-                        <td class="row-post-rating">1</td>
-                        <td class="row-post-date">17 Jun 2010</td>
-                    </tr>
+                </tr>
+                </thead>    
+                    <div>
+                        <tr>
+                            <td class="row-post-comment">Yes, it's an awesome movie!</td>
+                            <td class="row-post-post">Please, add "Avatar"!</td>
+                            <td class="row-post-username">deina_89</td>
+                            <td class="row-post-rating">9</td>
+                            <td class="row-post-date">2 Sep 2019</td>
+                        </tr>
+                        <tr>
+                            <td class="row-post-comment">I don't like it!I haven't watched such a crappy movie, sly.</td>
+                            <td class="row-post-post">Please, add "Avatar"!</td>
+                            <td class="row-post-username">4ever</td>
+                            <td class="row-post-rating">2</td>
+                            <td class="row-post-date">21 Jan 2019</td>
+                        </tr>
+                        <tr>
+                            <td class="row-post-comment">Yes, it's a nice sci-fi</td>
+                            <td class="row-post-post">Please, add "Avatar"!</td>
+                            <td class="row-post-username">lvr</td>
+                            <td class="row-post-rating">5</td>
+                            <td class="row-post-date">8 Sep 2018</td>
+                        </tr>
+                        <tr>
+                            <td class="row-post-comment">Don't</td>
+                            <td class="row-post-post">Please, add "Avatar"!</td>
+                            <td class="row-post-username">flower34</td>
+                            <td class="row-post-rating">1</td>
+                            <td class="row-post-date">12 Jun 2010</td>
+                        </tr>
+                        <tr>
+                            <td class="row-post-comment">No need</td>
+                            <td class="row-post-post">Please, add "Avatar"!</td>
+                            <td class="row-post-username">maria5</td>
+                            <td class="row-post-rating">1</td>
+                            <td class="row-post-date">17 Jun 2010</td>
+                        </tr>
+                    </div>
                 </table>
             </div>
         </div>

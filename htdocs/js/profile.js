@@ -1,5 +1,18 @@
-function showComments() {
-    document.getElementById("comments-container").style.display = "block";
+function showComments(postId) {
+    $("#comments-container").show();
+    $(".comments-tbl tbody").empty();
+
+    getComments(data => {
+        commentsForPost = data.data.filter(comment => comment.postId = postId);
+        commentsForPost.forEach(comment => {
+            $('.comments-tbl tbody').append(
+             '<tr> <td class="row-post-comment">' + comment.content + '</td> <td class="row-post-post">' + comment.post + '</td> <td class="row-post-username">'+ comment.user + '</td> <td class="row-post-rating"></td> <td class="row-post-date">' + comment.createdOn + '</td> </tr>'   
+                );
+        })
+        
+    });
+
+    
 }
 function showProjectionForm() {
     $('.checkbox-box, .check-mark').off();
@@ -303,6 +316,15 @@ $("#password-form").validate({
 getMovies = (successCb) => {
     $.ajax({
         url: '/api/movies/get.php',
+        type: 'GET',
+        dataType: 'json',
+        success: successCb
+    });
+}
+
+getComments = (successCb) => {
+    $.ajax({
+        url: '/api/comments/get.php',
         type: 'GET',
         dataType: 'json',
         success: successCb

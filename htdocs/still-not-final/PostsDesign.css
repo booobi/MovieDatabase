@@ -1,0 +1,453 @@
+
+.public-posts-title {
+    margin: 80px 0 0 665px;
+    width: 95px;
+    border-radius: 8px;
+}
+
+.add-post-btn {
+    margin-top: 14px;
+    margin-left: 687px;
+    padding: 8px 10px;
+    font-size: 24px;
+    border: none;
+    color: rgba(195, 165, 157, 0.75);
+    background-color: rgba(49, 66, 90, 0.71);
+}
+
+.public-posts-scroller {
+    width: 1506px;
+}
+
+.movies-scroller {
+    width: 352px;
+    height: 90px;
+}
+
+[id *= "container"]:not(#public-posts-container) {
+    position: fixed;
+    top: 0;
+    margin: auto;
+    width: 1519px;
+    height: 100%;
+    display: none;
+    overflow: hidden;
+    z-index: 5;
+    background-color: rgba(71, 56, 51, 0.86);
+}
+
+#public-posts-container {
+    margin-top: 30px;
+    margin-bottom: 40px;
+    width: 100%;
+    float: none;
+    z-index: 5;
+}
+
+#edit-post-container p {
+    margin-left: 50px;
+    text-align: center;
+}
+
+#edit-post-container ul {
+    margin-top: 0;
+    padding-left: 29px;
+    list-style-type: none;
+    font-size: 17px;
+}
+
+#edit-post-container li {
+    margin-bottom: 7px;
+    text-align: center;
+}
+
+#public-posts-box {
+    height: 500px;
+    margin-left: 12px;
+}
+
+#new-post-box,
+#edit-post-box {
+    margin: 240px auto  auto 555px;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 5;
+}
+
+#edit-post-box {
+    margin: 190px auto  auto 555px;
+}
+
+#add-rating-box {
+    position: absolute;
+    margin: 250px 632px auto 618px;
+    padding: 30px 100px 160px 100px;
+    height: 10%;
+    font-family: Lato, sans-serif;
+    font-size: 18px;
+    text-align: center;
+    overflow: auto;
+    border: solid medium #b8a097;
+    color: rgba(9, 2, 0, 0.76);
+    background-color: rgb(165, 130, 118);
+}
+
+#add-rating-box select {
+    -o-appearance: none;
+    -ms-appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 50px;
+    font-family: Lato, sans-serif;
+    font-size: 20px;
+    border: none;
+    text-align: center;
+    background-color: rgba(137, 86, 83, 0.76);
+    color: rgba(9, 2, 0, 0.76);
+}
+
+#add-rating-box option {
+    font-size: 19px;
+    text-align: center;
+    border: none;
+    background-color: rgba(153, 88, 83, 0.42);
+}
+
+#new-post-form,
+#edit-post-form {
+    padding-right: 40px;
+    width: 340px;
+    height: 252px;
+    border-radius: 8px;
+    font-family: Lato, sans-serif;
+    font-size: 20px;
+    color: rgba(2, 1, 1, 0.99);
+    background-color: #ac8a83;
+}
+
+#edit-post-form {
+    height: 443px;
+    background-color: #8e6e66;
+}
+
+::placeholder {
+    color: #3d2a1fde;
+}
+
+#edit-post-text {
+    background-color: rgba(179, 154, 147, 0.55);
+}
+
+.public-posts-tbl {
+    display: inline-block;
+    border-collapse: collapse;
+}
+
+table th {
+    width: 200px;
+    height: 60px;
+    font-family: Lato, sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    color: #213648;
+    background-color: rgba(66, 37, 26, 0.2)
+}
+
+[class *= "col"] {
+    padding: 5px;
+    color: rgba(34, 18, 20, 0.73);
+}
+
+.col-public-post {
+    padding-left: 332px;
+    padding-right: 0;
+}
+
+.col-public-movie {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.col-public-rating {
+    padding-left: 18px;
+    padding-right: 0;
+}
+
+.col-public-options {
+    padding-left: 1px;
+    padding-right: 360px;
+}
+
+table td {
+    padding: 0 18px 18px 18px;
+    font-family: Lato, sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    text-align: center;
+    color: rgb(62, 72, 84);
+    background-color: rgba(66, 37, 26, 0.2);
+}
+
+.row-public-post {
+    padding-left: 350px;
+}
+
+.row-public-rating {
+    padding-left: 35px;
+}
+
+.row-public-option {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.row-public-options button {
+    margin-bottom: 5px;
+    font-family: Maven Pro, sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+}
+
+.add-rating-btn {
+    margin-top: 96px;
+    margin-left: 0;
+    padding: 13px 18px;
+    display: block;
+    color: rgba(68, 53, 44, 0.86);
+    background-color: rgba(85, 55, 55, 0.2);
+}
+
+.details-post-btn {
+    margin-top: 10px;
+    margin-left: 30px;
+    margin-bottom: 0;
+    padding: 12px 15px;
+    display: block;
+    color: rgba(68, 53, 44, 0.86);
+    background-color: rgba(85, 55, 55, 0.2);
+}
+
+.details-post-btn a {
+    text-decoration: none;
+    color: rgba(68, 53, 44, 0.86);
+}
+
+.edit-post-btn,
+.delete-post-btn {
+    margin-top: 8px;
+}
+
+.edit-post-btn {
+    margin-left: -342px;
+    margin-right: 3px;
+    padding: 10px 14px;
+    background-color: rgba(73, 79, 96, 0.26);
+    color: rgba(42, 44, 65, 0.71);
+}
+
+.delete-post-btn {
+    margin-top: 5px;
+    margin-left: 5px;
+    padding: 10px 11px;
+    color: rgba(42, 44, 65, 0.71);
+    background-color: rgba(73, 79, 96, 0.26);
+}
+
+#add-rating-close-btn {
+    margin-top: 178px;
+    margin-right: 582px;
+    float: right;
+}
+
+#new-post-close-btn,
+#edit-post-close-btn {
+    margin-top: 165px;
+    margin-right: 520px;
+    float: right;
+}
+
+#edit-post-close-btn {
+    margin-top: 120px;
+}
+
+@media screen and (max-width: 500px) {
+
+    .public-posts-title {
+        margin-top: 70px;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        position: relative;
+        float: none;
+    }
+
+    .add-post-btn {
+        margin: 20px auto auto;
+        padding: 8px 12px;
+        display: block;
+        width: 110px;
+        font-size: 22px;
+        float: none;
+    }
+
+    .public-posts-scroller {
+        margin: 30px auto auto auto;
+        width: 85%;
+        height: 350px;
+    }
+
+    .movies-scroller {
+        width: 90%;
+        height: 80px;
+    }
+
+    #public-posts-container {
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 40px;
+        right: 0;
+        left: 0;
+        display: block;
+        float: none;
+    }
+
+    [id *= "container"]:not(#public-posts-container) {
+        margin: auto;
+        width: 100%;
+        float: none;
+        z-index: 5;
+    }
+
+    #edit-post-container p {
+        margin: 20px auto;
+    }
+
+    #edit-post-container ul {
+        padding-left: 0;
+    }
+
+    #public-posts-box {
+        position: relative;
+        margin: 0 auto auto auto;
+        padding: 0;
+        width: 100%;
+        height: 370px;
+        display: block;
+        float: none;
+        text-align: center;
+        z-index: 5;
+    }
+
+    #edit-post-box {
+        margin: 120px auto auto auto;
+    }
+
+    #add-rating-box {
+        float: none;
+        z-index: 5;
+        margin: 220px auto auto auto;
+        padding: 30px 0 0;
+        width: 54%;
+        height: 230px;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        border: none;
+    }
+
+    #new-post-form,
+    #edit-post-form {
+        margin: auto;
+        padding: 10px 0;
+        width: 90%;
+        height: 250px;
+        float: none;
+        text-align: center;
+    }
+
+    #edit-post-form {
+        height: 425px;
+    }
+
+    .public-posts-tbl {
+        margin: 0;
+        width: 100%;
+        display: table;
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    [class *= "col"]:not(.col-public-post) {
+        display: none;
+    }
+
+    .col-public-post,
+    [class *= "row"] {
+        position: relative;
+        margin-left: auto;
+        padding: 0;
+        width: unset;
+        display: block;
+        float: none;
+        font-size: 21px;
+        text-align: center;
+    }
+
+    .col-public-post {
+        padding-top: 20px;
+        font-size: 23px;
+    }
+
+    .row-public-post {
+       padding-top: 20px;
+    }
+
+    .row-public-movie {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .row-public-options {
+        padding: 2px 2px 5px 2px;
+    }
+
+    .row-public-options button {
+        margin: 10px auto;
+        display: block;
+        font-size: 21px;
+        text-align: center;
+    }
+
+    #new-post-text,
+    #edit-post-text {
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+    }
+
+    #new-post-close-btn {
+        margin: 200px auto auto auto;
+    }
+
+    #edit-post-close-btn {
+        margin: 290px auto auto auto;
+    }
+
+    #add-rating-close-btn {
+        margin: 190px auto auto auto;
+    }
+
+    #submit-new-post,
+    #submit-post-changes {
+        margin: 10px auto auto auto;
+        width: 87%;
+    }
+}

@@ -231,7 +231,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 
 		$lastWeekStart = Date("Y-m-d",time() - (7 * 24 * 60 * 60));
 		//+ 1 day to include today
-		$today = Date("Y-m-d", time() + (24*60*60));
+		$today = Date("Y-m-d", time() + (48*60*60));
 		
 		$result = DBOperations::prepareAndExecute(
 			"SELECT DISTINCT MovieId, movies.Name AS MovieName,

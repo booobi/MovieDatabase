@@ -186,6 +186,7 @@ class ValidatorHelpers {
         ValidatorHelpers::validatePostFields(['projectionId', 'participantId']);
     }
 
+
     public static function validatePostAddFields()
     {
         ValidatorHelpers::validatePostFields(['description']);

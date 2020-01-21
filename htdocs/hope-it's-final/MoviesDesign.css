@@ -1,0 +1,1031 @@
+
+#add-a-movie {
+    margin: 80px 0 0 590px;
+    padding: 15px 50px 15px 60px; !important;
+}
+
+.users-watchlater-title,
+.similar-movies-title {
+    margin-left: 90px;
+    width: 150px;
+    font-size: 19px;
+    background-color: rgb(165, 130, 118);
+}
+
+.similar-movies-title {
+    margin-top: 30px;
+}
+
+#add-a-movie a {
+    padding: 8px 30px;
+    font-family: Lato, sans-serif;
+    font-size: 24px;
+    text-decoration: none;
+    border-radius: 8px;
+    outline: none;
+    border: medium solid #4c4f69;
+    color: rgba(77, 82, 106, 0.85);
+    background-color: transparent;
+}
+
+.movie-projections-title,
+.movie-exchanges-title {
+    margin-left: 663px;
+}
+
+.movie-exchanges-title {
+    margin-top: 42px;
+}
+
+.movies-tbl-scroller {
+    margin-top: 42px;
+    margin-bottom: 40px;
+    height: 500px;
+}
+
+.info-scroller {
+    width: 400px;
+    height: 400px;
+}
+
+.users-tbl-scroller,
+.similar-tbl-scroller {
+    margin-top: 8px;
+    width: 370px;
+    height: 120px;
+}
+
+.similar-tbl-scroller {
+    margin-bottom: 20px;
+}
+
+.projections-scroller,
+.exchanges-scroller {
+    margin-top: 32px;
+    padding-top: 0;
+    padding-right: 0;
+    padding-left: 0;
+    height: 300px;
+}
+
+.projections-scroller {
+    width: 1488px;
+}
+
+.exchanges-scroller {
+    width: 1470px;
+    margin-bottom: 40px;
+}
+
+.users-scroller {
+    width: 217px;
+    height: 100px;
+}
+
+#info-container,
+#rating-box,
+#rating-share-box {
+    position: fixed;
+    top: 0;
+    margin: auto;
+    width: 1519px;
+    height: 100%;
+    display: none;
+    overflow: hidden;
+    z-index: 5;
+    background-color: rgba(92, 72, 64, 0.86);
+}
+
+#edit-projection-container,
+#edit-share-container {
+    position: fixed;
+    top: 0;
+    margin: auto;
+    width: 1519px;
+    height: 100%;
+    display: none;
+    overflow: hidden;
+    z-index: 5;
+    background-color: rgba(71, 56, 51, 0.86);
+}
+
+#edit-projection-container p,
+#edit-share-container p {
+    margin-left: 50px;
+    font-size: 20px;
+    text-align: center;
+}
+
+#edit-projection-container ul,
+#edit-share-container ul {
+    margin-top: 0;
+    padding-left: 25px;
+    font-size: 19px;
+    list-style-type: none;
+}
+
+#edit-projection-container li,
+#edit-share-container li {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+#rating-box select,
+#rating-share-box select {
+    -o-appearance: none;
+    -ms-appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 50px;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    text-align: center;
+    background-color: rgba(137, 86, 83, 0.76);
+}
+
+#rating-box option,
+#rating-share-box select {
+    font-size: 19px;
+    text-align: center;
+    outline: none;
+    border:  none;
+    background-color: rgba(153, 88, 83, 0.42);
+}
+
+#info-box {
+    margin-top: 180px;
+    margin-left: 545px;
+    width: 400px;
+    font-family: Lato, sans-serif;
+    background-color: rgb(165, 130, 118);
+}
+
+#edit-projection-box {
+    margin-top: 100px;
+    margin-left: 650px;
+}
+
+#edit-share-box {
+    margin-top: 220px;
+    margin-left: 650px;
+}
+
+.movies {
+    position: absolute;
+    margin-top: 50px;
+    margin-left: 720px;
+    display: block;
+    float: left;
+    font-family: Lato, sans-serif;
+    font-size: 35px;
+    text-align: center;
+    color: rgba(34, 45, 99, 0.93);
+}
+
+#rating,
+#share-rating {
+    position: absolute;
+    margin: 250px 632px auto 618px;
+    padding: 30px 100px 160px 100px;
+    height: 10%;
+    font-family: Lato, sans-serif;
+    font-size: 18px;
+    text-align: center;
+    overflow: auto;
+    outline: none;
+    border: solid medium #b8a097;
+    color: rgba(9, 2, 0, 0.76);
+    background-color: rgb(165, 130, 118);
+}
+
+#info {
+    margin: 0 auto auto -100px;
+    padding: 30px 100px 20px 100px;
+    width: 380px;
+    font-family: Lato, sans-serif;
+    font-size: 18px;
+    text-align: center;
+    color: rgba(9, 2, 0, 0.76);
+    background-color: rgb(165, 130, 118);
+}
+
+#info div {
+    margin: 15px auto auto auto;
+}
+
+#info label {
+    padding-left: 0;
+    width: 120px;
+    font-size: 22px;
+}
+
+#info a {
+    font-weight: bold;
+    text-decoration: none;
+    color: #3b2c2c;
+}
+
+#projections-box {
+    margin-left: 32px;
+    width: 717px;
+    height: 300px;
+}
+
+#exchanges-box {
+   margin-left: 50px;
+}
+
+#projections-exchanges button {
+    color: rgba(26, 17, 13, 0.64);
+}
+
+[id *= "edit"][id *= "form"] {
+    background-color: #8e6e66;
+}
+
+input {
+    border: solid medium rgba(105, 81, 81, 0.92);
+}
+
+div:not(.advanced-search) > .checkbox-box > .check-mark, input[type=checkbox] {
+    position: unset;
+    margin-top: 4px;
+    width: 23px;
+    height: 23px;
+    float: right;
+}
+
+.advanced-search input[type=checkbox] {
+    position: absolute;
+}
+
+div:not(.advanced-search) > .checkbox-box > input:checked ~ .check-mark::after {
+    position: unset;
+    margin-top: 4px;
+    margin-right: 8px;
+    display: block;
+    float: right;
+}
+
+.my-projections-tbl td,
+.my-exchanges-tbl td {
+    padding-top: 20px;
+    padding-bottom: 18px;
+    font-family: Lato, sans-serif;
+    font-size: 20px;
+    text-align: center;
+    background-color: rgba(125, 79, 68, 0.19);
+}
+
+.tables select {
+    width: 42px;
+    height: 30px;
+    font-size: 20px;
+    text-align: center;
+    outline: none;
+    border: none;
+    background-color: rgba(107, 67, 54, 0.36);
+}
+
+.movies-tbl {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.my-projections-tbl .new-line,
+.my-exchanges-tbl .new-line{
+    display: block;
+    margin: 0;
+}
+
+.movie-id {
+    display: none;
+}
+
+.col-name,
+.row-name {
+    padding-left: 100px;
+    width: 15%;
+}
+
+.col-rating,
+.row-rating {
+    padding-left: 210px;
+    width: 20%;
+}
+
+.col-category,
+.row-category {
+    width: 24%;
+}
+
+[class *= "col"] {
+    padding-top: 15px;
+    padding-bottom: 10px;
+    height: 60px;
+    font-family: Lato, sans-serif;
+    font-size: 23px;
+    font-weight: bold;
+    color: rgba(20, 2, 5, 0.68);
+    background-color: rgba(125, 79, 68, 0.19);
+}
+
+.col-category {
+    padding-left: 180px;
+}
+
+.col-rating {
+    padding-left: 0;
+    padding-right: 110px;
+}
+
+.col-name {
+    padding-left: 0;
+    padding-right: 82px;
+}
+
+.col-options {
+    padding: 0 228px 21px 5px;
+}
+
+
+[class *= "col-prj"] {
+    width: 80px;
+    color: rgb(68, 44, 43);
+}
+
+.col-prj-name {
+    padding-top: 15px;
+    padding-left: 210px;
+    padding-right: 20px;
+    width: 160px;
+}
+
+.col-prj-location {
+    padding: 0 30px 22px 72px;
+}
+
+.col-prj-duration {
+    padding: 5px 60px 0 187px;
+    width: 130px;
+}
+
+.col-prj-date {
+    padding: 0 40px 21px 165px;
+}
+
+.col-prj-options {
+    padding: 0 200px 21px 87px;
+}
+
+[class *= "col-exchanges"] {
+    width: 128px;
+    color: rgb(68, 44, 43);
+}
+
+.col-exchanges-movies {
+    padding-top: 15px;
+    padding-left: 174px;
+}
+
+.col-exchanges-status {
+    padding: 0 0 21px 25px;
+}
+
+.col-exchanges-add-rating {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.col-exchanges-rating {
+    padding-right: 0;
+    padding-left: 190px;
+    padding-top: 15px
+}
+
+.col-exchanges-options {
+    padding: 0 158px 21px 58px;
+}
+
+.row-category,
+.row-rating,
+.row-poster,
+.row-name,
+.row-options {
+    padding-top: 30px;
+    font-family: Lato, sans-serif;
+    font-size: 21px;
+    text-align: center;
+    color: rgba(9, 2, 0, 0.76);
+    background-color: rgba(66, 37, 26, 0.2);
+}
+
+.row-category {
+    padding-left: 190px;
+    padding-right: 0;
+}
+
+.row-poster {
+    padding-top: 40px;
+    padding-right: 117px;
+}
+
+.row-poster img {
+    width: 230px;
+}
+
+.row-rating {
+    padding-top: 123px;
+    padding-left: 0;
+    padding-right: 102px;
+}
+
+.row-name {
+    padding-left: 0;
+    padding-right: 68px;
+}
+
+.row-options {
+    padding-right: 145px;
+}
+
+.username,
+.moviename {
+    padding-top: 20px;
+    padding-left: 155px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.moviename {
+    padding-left: 145px;
+}
+
+[class *= "row-prj"] {
+    color: #213648;
+}
+
+.row-prj-name {
+    padding-left: 200px;
+    padding-right: 0;
+}
+
+.row-prj-location {
+    padding-right: 0;
+    padding-left: 55px;
+}
+
+.row-prj-duration {
+    padding-left: 130px;
+}
+
+.row-prj-date {
+    padding-right: 0;
+    padding-left: 130px;
+}
+
+.row-prj-options {
+    padding-right: 0;
+}
+
+.row-prj-options button,
+.row-exchanges-options button {
+    padding: 10px 17px;
+    font-family: Maven Pro, sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.row-prj-options .join-btn,
+.row-prj-options .cancel-btn,
+.row-exchanges-options .request-btn,
+.row-exchanges-options .cancel-btn{
+    color: rgba(65, 44, 42, 0.71);
+    background-color: rgb(159, 124, 115);
+}
+
+.row-prj-options .edit-btn,
+.row-prj-options .delete-btn,
+.row-exchanges-options .edit-btn,
+.row-exchanges-options .delete-btn {
+    color: rgba(42, 44, 65, 0.71);
+    background-color: rgba(73, 79, 96, 0.26);
+}
+
+.row-prj-options .join-btn {
+    margin: 20px 10px 10px -90px;
+}
+
+.row-prj-options .edit-btn {
+    margin-left: -90px;
+    margin-right: 10px;
+}
+
+.row-prj-option .delete-btn,
+.row-exchnages-option .delete-btn {
+    margin-right: 0;
+}
+
+[class *= "row-exchanges"] {
+    color: #1e3242;
+}
+
+.row-exchanges-movies {
+    padding-left: 180px;
+    padding-right: 0;
+}
+
+.row-exchanges-status {
+    padding-left: 45px;
+    padding-right: 20px;
+}
+
+.row-add-rating button {
+    margin-left: 195px;
+}
+
+.row-exchanges-rating {
+    padding-left: 205px;
+    padding-right: 20px;
+}
+
+.row-exchanges-options {
+    padding-right:20px;
+    padding-left: 20px;
+}
+
+.row-exchanges-options .request-btn {
+    margin: 50px 10px 10px -120px;
+}
+
+.row-exchanges-options .edit-btn {
+    margin-left: -80px;
+    margin-right: 10px;
+}
+
+.rating-btn,
+.add-rating-btn {
+    margin-top: 23px;
+    padding: 8px;
+    width: 100px;
+    border-radius: 8px;
+    font-family: Maven Pro, sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    outline: none;
+    border: none;
+    background-color: rgba(76, 49, 49, 0.22);
+    color: rgba(68, 53, 44, 0.86);
+}
+
+.add-rating-btn {
+    color: rgba(68, 53, 44, 0.77)
+}
+
+.more-btn,
+.change-movie-btn,
+.change-movie-btn a {
+    font-family: Maven Pro, sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    text-decoration: none;
+    color: rgba(42, 44, 65, 0.71);
+}
+
+.more-btn,
+.change-movie-btn,
+#projections-box button,
+#exchanges-box button {
+    border: none;
+    cursor: pointer;
+    outline: none;
+    border-radius: 8px;
+}
+
+.more-btn {
+    margin-top: 20px;
+    margin-left: -35px;
+    padding: 13px 35px;
+    width: 170px;
+    display: block;
+    outline: none;
+    background-color: rgba(76, 49, 49, 0.22);
+    color: rgba(68, 53, 44, 0.86);
+}
+
+.change-movie-btn {
+    margin-top: 8px;
+    margin-left: 0;
+    margin-right: 70px;
+    padding: 10px 30px;
+    outline: none;
+    color: rgba(42, 44, 65, 0.71);
+    background-color: rgba(73, 79, 96, 0.26);
+}
+
+#delete {
+    margin-left: -70px;
+    margin-right: 0;
+}
+
+#exchanges-box button button {
+    display: inline-block;
+}
+
+[id *= "projection"][id *= "btn"] {
+    margin-top: 110px;
+    margin-right: 575px;
+    float: right;
+    cursor: pointer;
+}
+
+#edit-projection-close-btn {
+    margin-top: 35px;
+}
+
+[id *= "share"][id *= "btn"] {
+    margin-top: 190px;
+    margin-right: 575px;
+    float: right;
+}
+
+#rating-close-btn,
+#rating-share-close-btn {
+    margin-top: 178px;
+    margin-right: 532px;
+    float: right;
+}
+
+#info-close-btn {
+    margin-top: 108px;
+    margin-right: 510px;
+    float: right;
+}
+
+#edit-share-close-btn {
+    margin-top: 150px;
+}
+
+[id *= "submit"]:not(#submit-details):not(#submit-password) {
+    color: rgba(34, 5, 10, 0.76);
+    background-color: #7b635e;
+}
+
+@media screen and (max-width: 500px) {
+
+    #movies a {
+        color: rgb(168, 138, 143);
+    }
+
+    #home a,
+    #add-a-post a,
+    #movie-festivals a {
+        color: rgba(133, 144, 175, 0.63);
+    }
+
+    #add-a-movie {
+        position: relative;
+        margin: 80px auto 40px;
+        padding: 0; !important;
+        display: block;
+        float: none;
+        text-align: center;
+    }
+
+    #add-a-movie a {
+        margin-left: auto;
+        float: none;
+    }
+
+    .movie-projections-title {
+        margin: 0 auto 15px;
+    }
+
+    .movie-exchanges-title {
+        margin: 30px auto 15px;
+    }
+
+    .users-watchlater-title,
+    .similar-movies-title {
+       margin: auto;
+    }
+
+    .movies-tbl-scroller {
+        margin-bottom: 30px;
+        height: 620px;
+    }
+
+    .info-scroller,
+    .projections-scroller,
+    .exchanges-scroller {
+        position: relative;
+        margin: auto;
+        width: 100%;
+        height: 400px;
+    }
+
+    .users-tbl-scroller,
+    .similar-tbl-scroller {
+        margin: 20px auto;
+        width: 85%;
+        height: 170px;
+    }
+
+    .projections-scroller {
+        margin: 30px auto auto;
+        width: 85%;
+    }
+
+    .exchanges-scroller {
+        margin: 30px auto 40px auto;
+        width: 85%;
+    }
+
+    #info-container,
+    #rating-box,
+    #rating-share-box {
+        width: 100%;
+    }
+
+    #edit-projection-container,
+    #edit-share-container,
+    #projections-box,
+    #exchanges-box {
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    #edit-projection-container p,
+    #edit-share-container p {
+        margin-left: auto;
+    }
+
+    #edit-projection-container li,
+    #edit-share-container li {
+        text-align: center;
+    }
+
+    #rating,
+    #info-box,
+    #share-rating {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        padding-right: 0;
+        width: 90%;
+        float: none;
+        border: none;
+        text-align: center;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+    #rating,
+    #share-rating {
+        padding: 30px 0 0;
+        width: 54%;
+        height: 230px;
+    }
+
+    #info {
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        padding: 10px 0 0;
+        width: 100%;
+    }
+
+    #edit-projection-box,
+    #edit-share-box {
+        position: unset;
+        left: 0;
+        margin-top: 0;
+        margin-left: 0;
+        z-index: 5;
+    }
+
+    #actors-text,
+    #lead-actors-text,
+    #description-text {
+        margin-top: 0;
+        padding: 0 15px 17px 15px;
+    }
+
+    #actors-text {
+        margin-top: 15px;
+        padding-bottom: 0;
+    }
+
+    #lead-actors-text {
+        padding-bottom: 0;
+    }
+
+    #edit-projection-form {
+        top: 45%;
+    }
+
+    #projection-watchers {
+      padding-bottom: 9px;
+    }
+
+    .tables {
+        margin: auto;
+    }
+
+    .movies-tbl,
+    .my-projections-tbl,
+    .my-exchanges-tbl,
+    .users-tbl,
+    .similar-movies-tbl {
+        margin: auto;
+        width: 100%;
+    }
+
+    .my-projections-tbl [class*="col"],
+    .my-exchanges-tbl [class*="col"] {
+        display: none;
+    }
+
+    [class*="col"] {
+        position: relative;
+        margin: 0 auto;
+        padding: 4px 0 15px 0;
+        width: 100%;
+        display: block;
+        float: none;
+        font-size: 22px;
+        text-align: center;
+        background-color: rgba(152, 117, 107, 0.91);
+    }
+
+    .col-category {
+        padding-top: 20px;
+    }
+
+    .col-poster,
+    .col-options {
+        display: none;
+    }
+
+    .arrow-down,
+    .arrow-up {
+        position: relative;
+        margin: auto;
+        padding: 6px;
+        display: inline-block;
+        float: none;
+    }
+
+    .arrow-down {
+        margin: auto;
+    }
+
+    .arrow-up {
+        margin-top: 13px;
+        margin-left: 23px;
+    }
+
+    .my-projections-tbl td {
+        background-color: #3b2c2c;
+    }
+
+    .row-category,
+    .row-rating,
+    .row-poster,
+    .row-name,
+    .row-options,
+    .my-projections-tbl [class*="row"],
+    .my-exchanges-tbl [class*="row"] {
+        position: relative;
+        margin: 0 auto;
+        padding: 10px 0 10px 0;
+        width: 100%;
+        display: block;
+        float: none;
+        font-size: 21px;
+        text-align: center;
+        background-color: transparent;
+    }
+
+    .more-btn {
+        margin: -6px auto 5px auto;
+        width: 120px;
+        color: rgba(61, 42, 31, 0.86);
+    }
+
+    .more-btn,
+    .change-movie-btn {
+        position: relative;
+        font-size: 21px;
+    }
+
+    .change-movie-btn {
+        margin: 5px auto;
+    }
+
+    #delete {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .row-category {
+        margin-top: 420px;
+    }
+
+    .rating-btn {
+        margin: 22px auto;
+        padding: 10px 20px;
+        display: block;
+        color: rgba(61, 42, 31, 0.86);
+    }
+
+    .row-poster {
+        margin-top: -640px;
+    }
+
+    .row-options {
+        margin-top: 203px;
+    }
+
+    .my-projections-tbl [class*="row"],
+    .my-exchanges-tbl [class*="row"] {
+        background-color: rgba(152, 117, 107, 0.91);
+    }
+
+    .row-prj-options {
+        padding-left: 0;
+        padding-right: 10px;
+        margin-left: 0;
+    }
+
+    .row-prj-options .join-btn,
+    .row-exchanges-options .join-btn {
+        margin: 20px auto auto;
+        background-color: rgb(136, 106, 98);
+    }
+
+    .row-prj-options .edit-btn,
+    .row-exchanges-options .edit-btn {
+        display: block;
+        margin: -15px auto auto;
+    }
+
+    .row-add-rating button {
+        margin-left: auto;
+    }
+
+    .row-exchanges-options .request-btn {
+       margin: auto;
+    }
+
+    .cancel-btn,
+    .delete-btn {
+        margin: 10px auto auto;
+        display: block;
+    }
+
+    .row-exchanges-options .request-btn,
+    .row-prj-options .cancel-btn,
+    .row-exchanges-options .cancel-btn {
+        background-color: rgb(136, 106, 98);
+    }
+
+    .username,
+    .moviename {
+        text-align: center;
+        padding: 10px 0 0;
+    }
+
+    .edit-btn {
+        margin-left: auto;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+
+    #rating-close-btn,
+    #rating-share-close-btn {
+        margin: 210px auto auto auto;
+    }
+
+    #info-close-btn {
+        margin: 265px auto auto auto;
+    }
+
+    #edit-projection-close-btn {
+        margin: 310px auto auto auto;
+    }
+
+    #edit-share-close-btn {
+        margin: 228px auto auto auto;
+        left: 0;
+        right: 0;
+    }
+}

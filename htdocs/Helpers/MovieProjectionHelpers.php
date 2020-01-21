@@ -57,6 +57,21 @@ class MovieProjectionHelpers {
         }, ARRAY_FILTER_USE_BOTH));
     }
 
+    public static function userIsOwnerOfProjection($projectionId, $userId) {
+        $res = DBOperations::prepareAndExecute("
+        SELECT * FROM `movieevents` WHERE MovieEventId={$projectionId} AND OwnerId={$userId}");
+
+        return $res->num_rows > 0;
+    }
+
+    public static function userHasRequestForProjection($projectionId, $userId) {
+        $res = DBOperations::prepareAndExecute("
+        SELECT * FROM `events_participants` WHERE ParticipantId={$userId} AND EventId={$projectionId}
+        ");
+
+        return $res->num_rows > 0;
+    }
+
     public static function getProjectionParticipants($projectionId) {
 
         $res = DBOperations::prepareAndExecute("
@@ -94,9 +109,30 @@ class MovieProjectionHelpers {
         WHERE MovieEventId = {$projectionId}");
     }
 
-    public static function alterParticipantStatus($projectionId, $participantId, $status) {
+    public static function requestJoin($byUser, $projectionId) {
+        $res = DBOperations::prepareAndExecute("
+        SELECT * FROM `events_participants` WHERE EventId={$projectionId} AND ParticipantId={$byUser}
+        ");
+        if ($res->num_rows > 0) {
+            return FALSE;
+        }
+        
         DBOperations::prepareAndExecute("
-        UPDATE `events_participants` SET `IsApproved`={$status} WHERE `ParticipantId`={$participantId} AND `EventId`={$projectionId}");    
+        INSERT INTO `events_participants`(`ParticipantId`, `EventId`, `IsApproved`) VALUES ({$byUser}, {$projectionId}, 0)
+        ");
+
+        return TRUE;
+    }
+
+    public static function deleteJoin($byUser, $projectionId) {
+        DBOperations::prepareAndExecute("
+        DELETE FROM `events_participants` WHERE EventId={$projectionId} AND ParticipantId={$byUser}
+        ");
+    }
+
+    public static function alterJoinStatus($byUser, $projectionId, $status) {
+        DBOperations::prepareAndExecute("
+        UPDATE `events_participants` SET `IsApproved`={$status} WHERE `ParticipantId`={$byUser} AND `EventId`={$projectionId}");    
     }
 }
 ?>

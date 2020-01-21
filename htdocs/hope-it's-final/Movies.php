@@ -1,178 +1,116 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Monoton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Maven+Pro:400,600,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/home.css">
-    <link rel="stylesheet" href="/newMovies.css">
-    <link rel="stylesheet" href="css/duplicated.css">
+    <script type="text/javascript" src="MoviesLogic.js"></script>
+    <link rel="stylesheet" href="HomeDesign.css">
+    <link rel="stylesheet" href="DuplicatedDesign.css">
+    <link rel="stylesheet" href="MoviesDesign.css">
 </head>
 
 <body>
-    <?php
-        include $_SERVER['DOCUMENT_ROOT'] . '/Header.php';
-    ?>
-
-    <button class="menu-btn" id="add-a-movie"> <a href="AddMovie.php">Add a movie </a></button>
-
-    <div class="movies-tbl-scroller">
-        <div class="movies-container">
-            <table class="movies-tbl">
-            <tr>
-                <th class = "movie-id"></th>
-                <th class = "col-category">
-                    Category
-                    <br><i class = "arrow-down"></i><i class = "arrow-up"></i>
-                </th>
-                <th class = "col-rating">
-                    Rating
-                    <br><i class = "arrow-down"></i><i class = "arrow-up"></i>
-                </th>
-                <th class = "col-poster"></th>
-                <th class = "col-name">
-                    Movie name
-                    <br><i class = "arrow-down"></i><i class = "arrow-up"></i>
-                </th>
-                <th class = "col-options">
-                    Options
-                </th>
-            </tr>
-                <?php
-                include $_SERVER['DOCUMENT_ROOT'] . '/Helpers/MovieHelpers.php';
-                include $_SERVER['DOCUMENT_ROOT'] . '/Helpers/UserHelpers.php';
-                
-                $movies = MovieHelpers::getMovies();
-                
-                foreach($movies as $movie) {
-                    
-                    echo
-                    '
-                    <tr>
-                        <td class="row-category">';
-                        $movieCategories = $movie->get("Categories");
-                        foreach($movieCategories as $category)
-                        {
-                            echo $category->get("Name") . ' ';
-                        }
-                        echo '</td>
-                        <td class="row-rating">
-                            ' . $movie->get("Rating") . '/5
-                            <br><button class="rating-btn" data-movieid="'. $movie->get("Id") . '" id="rating-btn">Give a rating</button>
-                        </td>
-                        <td class="row-poster">
-                            <img
-                                src="' . $movie->get("PosterImgSrc") . '">
-                        </td>
-                        <td class="row-name">
-                            '. $movie->get("Name") . '
-                        </td>
-                        <td class="row-options">
-                            <button class="more-btn" data-movieid="'. $movie->get("Id") . '">More</button>';
-                            
-
-                        if(
-                            (isset($_SESSION['username']) && in_array($movie->get('Id'), UserHelpers::getUserOwnedMovies($_SESSION['username'])))
-                            || 
-                            (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'])
-                            ) {
-                                echo '<button class = "change-movie-btn"><a href="EditMovie.php?id='. $movie->get("Id") .'">Edit</a></button><br>';
-                                echo '<button class = "change-movie-btn delete-btn" id="delete" data-movieid="'.$movie->get("Id").'">Delete</button>';
-                            }
-
-                        echo '</td>
-                    </tr>';
-                }
-                ?>
-            </table>
-        </div>
+       <div class="navigation">
+         <div class="logo"> Movie Time</div>
+         <div class="search">
+         <form action="/action_page.php" id = "search-box">
+            <input type="text" placeholder="Search movie, actor, director...">
+         </form>
+            <div class="advanced-search">
+                 <label class="checkbox-box">
+                     Advanced search
+                     <input type="checkbox">
+                     <span class="check-mark"></span>
+                 </label>
+             </div>
+         <button type="submit">Go!</button>
+         </div>
+    <div class="user-buttons">
+        <button class="entrance-btn" onclick="showSignIn()" id="sign-in-btn">Sign In</button>
+        <button class="entrance-btn" onclick="showLogIn()" id="log-in-btn">Log In</button>
+        <button class="profile-btn" id="admin-btn">Administration</button>
+        <button class="profile-btn" id="profile-btn">Profile</button>
+        <button class="profile-btn" id="log-out-btn">Log-out</button>
     </div>
-
-    <div id="rating-box">
-        <img class="close-btn" id="rating-close-btn" onclick="parentNode.style.display='none'" src="/images/xbutton.png">
-        <div id="rating">
-            <select id="ratingSelect" type="number">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-            </select>
-            <button id="rateSubmitBtn">Rate</button>
-        </div>
+    <div class = "menu">
+        <button class="menu-btn" id="home"> <a href = "Home.php">Home</a></button>
+        <button class="menu-btn" id="add-a-post"> <a href = "AddAPost.php">Add a post </a></button>
+        <button class="menu-btn" id="movies"><a href = "Movies.php">Movies </a></button>
+        <button class="menu-btn" id="movie-festivals"><a href = "Festivals.php">Festivals </a></button>
     </div>
+</div>
 
-    <div id="info-container">
-        <img class="close-btn" id="info-close-btn" src="/images/xbutton.png">
-        <div id="info-box">
-            <div class="info-scroller">
-                <div id="info">
-                    <div>
-                        <label for="director">Director</label><br><br>
-                        <div id="directorText"></div>
-                    </div>
-                    <div>
-                        <label for="awards">Awards</label><br><br>
-                        <div id="awardsText"></div>
-                    </div>
-                    <div>
-                        <label for="music">Music</label><br><br>
-                        <div id="musicText"></div>
-                    </div>
-                    <div>
-                        <label for="company">Movie company</label><br><br>
-                        <div id="companyText"></div>
-                    </div>
-                    <div>
-                        <label for="language">Language</label><br><br>
-                        <div id="languageText"></div>
-                    </div>
-                    <div>
-                        <label for="date">Release Date</label><br><br>
-                        <div id="releaseDateText"></div>
-                    </div>
-                    <div>
-                        <label for="trailer">Trailer</label><br><br>
-                        <div id="trailerText"></div>
-                    </div>
-                    <div>
-                        <label for="duration">Duration</label><br><br>
-                        <div id="durationText"></div>
-                    </div>
-                    <div>
-                        <label for="country">Country</label><br><br>
-                        <div id="countryText"></div>
-                    </div>
-                    <div>
-                        <label for="location">Filmed in</label><br><br>
-                    </div>
-                    <div>
-                        <label for="imdb-rating">IMDB rating</label><br><br>
-                        <div id="imdbRatingText"></div>
-                    </div>
-                    <div id="actors-text">
-                        <label for="actors">Actors</label><br><br>
-                        <div id="actorsText"></div>
-                    </div>
-                    <div id="lead-actors-text">
-                        <label for="lead-actors">Lead actors</label><br><br>
-                        <div id="mainActorsText"></div>
-                        </div>
-                    <div id="description-text">
-                        <label for="description">Description</label><br><br>
-                        <div id="descriptionText"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<button class="menu-btn" id="add-a-movie"> <a href = "AddAMovie.php">Add a movie </a></button>
 
-    <div class = "movie-projections-title">
+       <div class = "movies-tbl-scroller">
+          <div class = "movies-container">
+    <table class = "movies-tbl">
+        <tr>
+            <th class = "movie-id"></th>
+            <th class = "col-category">
+                Category
+                <br><i class = "arrow-down"></i><i class = "arrow-up"></i>
+            </th>
+            <th class = "col-rating">
+                Rating
+                <br><i class = "arrow-down"></i><i class = "arrow-up"></i>
+            </th>
+            <th class = "col-poster"></th>
+            <th class = "col-name">
+                Movie name
+                <br><i class = "arrow-down"></i><i class = "arrow-up"></i>
+            </th>
+            <th class = "col-options">
+                Options
+            </th>
+        </tr>
+        <tr>
+            <td class = "row-category">
+                Drama
+            </td>
+            <td class = "row-rating">
+                3.5/5
+                <br><button class = "rating-btn" onclick="showRating()">Give a rating</button>
+            </td>
+            <td class = "row-poster">
+                <img src = "https://upload.wikimedia.org/wikipedia/en/1/19/Titanic_%28Official_Film_Poster%29.png">
+            </td>
+            <td class = "row-name">
+                Titanic
+            </td>
+            <td class = "row-options">
+                <button class = "more-btn" onclick="showInfo()">More</button>
+                <button class = "change-movie-btn"><a href = "EditAMovie.php">Edit</a></button><br>
+                <button class = "change-movie-btn" id="delete">Delete</button>
+            </td>
+        </tr>
+        <tr>
+            <td class = "row-category">
+                Romance
+            </td>
+            <td class = "row-rating">
+                3.2/5
+                <br><button class = "rating-btn" onclick="showRating()">Give a rating</button>
+            </td>
+            <td class = "row-poster">
+                <img src = "https://upload.wikimedia.org/wikipedia/en/7/7f/PS_I_Love_You_%28film%29.jpg">
+            </td>
+            <td class = "row-name">
+                P.S I Love You
+            </td>
+            <td class = "row-options">
+                <button class = "more-btn" onclick="showInfo()">More</button>
+                <button class = "change-movie-btn"><a href = "EditAMovie.php">Edit</a></button><br>
+                <button class = "change-movie-btn" id="delete">Delete</button>
+            </td>
+        </tr>
+    </table>
+</div>
+       </div>
+
+       <div class = "movie-projections-title">
            Movie projections
        </div>
        <div class = "projections-scroller">
@@ -197,47 +135,6 @@ session_start();
                            Options
                        </th>
                    </tr>
-                   <?php
-                include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/MovieProjectionHelpers.php';
-                include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/UserHelpers.php';
-                
-                $projections = MovieProjectionHelpers::getMovieProjections();
-
-                foreach($projections as $projection) {
-                    
-                    echo'
-                    <tr>
-                       <td class = "row-prj-name">
-                           ' . $projection->get("Name") . '
-                       </td>
-                       <td class = "row-prj-location">
-                       ' . $projection->get("Location") . '
-                       </td>
-                       <td class = "row-prj-duration">
-                       ' . $projection->get("Duration") . '
-                       </td>
-                       <td class = "row-prj-date">
-                       ' . $projection->get("Date") . '
-                       </td>
-                       <td class = "row-prj-options">';
-                       $user = UserHelpers::getCurrentUser();
-                       if($user) {
-                            $userId =$user->get("UserId");
-                            if(MovieProjectionHelpers::userIsOwnerOfProjection($projection->get("Id"), $userId)){
-                                echo '<button class = "edit-btn" onclick="showEditProjectionForm('. $projection->get("Id") .')">Edit</button>
-                                <button class="delete-btn" onclick="deleteProjection('. $projection->get("Id") .')">Delete</button>';
-                            } else if(MovieProjectionHelpers::userHasRequestForProjection($projection->get("Id"), $userId)){
-                                echo '<button class="cancel-btn" onclick="deleteProjectionJoin('. $projection->get("Id") .')">Cancel</button>';
-                            } else {
-                                echo '<button class="join-btn" onclick="requestProjectionJoin('. $projection->get("Id") .')">Join</button>';
-                            }
-                       }
-                        
-                       echo '</td>
-                   </tr>
-                    ';
-                }
-                ?>
                    <tr>
                        <td class = "row-prj-name">
                            "Avatar" projection
@@ -389,6 +286,49 @@ session_start();
                </table>
            </div>
        </div>
+
+       <div id = "sign-in-container">
+    <img class = "close-btn" id="sign-close-btn" src="xbutton.png">
+    <div id ="sign-in-box">
+        <form action="#" id="popup-form" method="post" name="form">
+            <h2>Sign In</h2>
+            <hr>
+            <input id="sign-email" class="popup-field" placeholder="Email" type="text">
+            <input id="firstname" class="popup-field" placeholder="First Name" type="text">
+            <input id="lastname" class="popup-field" placeholder="Last Name" type="text">
+            <input id="sign-password" class="popup-field" placeholder="Password" type="password">
+            <input id="repeat" class="repeat" placeholder="Repeat Password" type="password">
+            <a href="javascript:%20validateSignIn()" id="submit">Send</a>
+        </form>
+    </div>
+</div>
+
+       <div id = "log-in-container">
+    <img class = "close-btn" id="log-close-btn" src="xbutton.png">
+    <div id="log-in-box">
+        <form action="#" id="popup-form" method="post" name="form">
+            <h2>Log In</h2>
+            <hr>
+            <input id="log-email" class="popup-field" placeholder="Email" type="text">
+            <input id="log-password" class="repeat" placeholder="Password" type="password">
+            <a href="javascript:%20validateLogIn()" id="submit">Send</a>
+        </form>
+    </div>
+</div>
+
+       <div id = "rating-box">
+    <img class="close-btn" id="rating-close-btn" src="xbutton.png">
+    <div id = "rating">
+        <select type = "number">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+        <button class="add-rating-btn">Rate</button>
+    </div>
+</div>
 
        <div id = "rating-share-box">
            <img class="close-btn" id="rating-share-close-btn" src="xbutton.png">
@@ -558,42 +498,48 @@ session_start();
 </div>
 
        <div id = "edit-projection-container">
-           <img class = "close-btn" id="edit-projection-close-btn" src="/images/xbutton.png" onclick="parentNode.style.display='none'">
+           <img class = "close-btn" id="edit-projection-close-btn" src="xbutton.png" onclick="hideEditProjForm()">
            <div id = "edit-projection-box">
                <form action="#" id="edit-projection-form">
                    <input type="text" id="projection-name" class="details-field" placeholder="Projection name . . .">
                    <input type="text" id="projection-time" class="details-field" placeholder="Date and time . . .">
                    <input type="text" id="projection-duration" class="details-field" placeholder="Duration . . . ">
                    <div class="fields" id="movie-category">
-                       <select id="projection-movies">
+                       <select id="test">
+                           <option>Titanic</option>
+                           <option>Avatar</option>
+                           <option>Mr.Nobody</option>
+                           <option>P.S. I love you</option>
+                           <option>Fame</option>
+                           <option>Wanted</option>
+                           <option>It's a wonderful life</option>
+                           <option>Selena</option>
                        </select>
                    </div>
                    <input type="text" id="projection-watchers" class="details-field" placeholder="Number of watchers . . . ">
                    <input type="text" id="projection-location" class="details-field" placeholder="Location . . . ">
                    <p>Users awaiting approval</p>
                    <div class = "users-scroller">
-                        <div id='projection-participants'>
-                            <label class="checkbox-box">
-                                4ver
-                                <input type="checkbox">
-                                <span class="check-mark"></span>
-                            </label>
-                            <label class="checkbox-box">
-                                lvr
-                                <input type="checkbox">
-                                <span class="check-mark"></span>
-                            </label>
-                            <label class="checkbox-box">
-                                maria5
-                                <input type="checkbox">
-                                <span class="check-mark"></span>
-                            </label>
-                            <label class="checkbox-box">
-                                flower_34
-                                <input type="checkbox">
-                                <span class="check-mark"></span>
-                            </label>
-                        </div>
+                       <label class="checkbox-box">
+                           4ver
+                           <input type="checkbox">
+                           <span class="check-mark"></span>
+                       </label>
+                       <label class="checkbox-box">
+                           lvr
+                           <input type="checkbox">
+                           <span class="check-mark"></span>
+                       </label>
+                       <label class="checkbox-box">
+                           maria5
+                           <input type="checkbox">
+                           <span class="check-mark"></span>
+                       </label>
+                       <label class="checkbox-box">
+                           flower_34
+                           <input type="checkbox">
+                           <span class="check-mark"></span>
+                       </label>
                    </div>
                    <a href="javascript:%20validateLogIn()" id="submit-projection-changes">Submit</a>
                </form>
@@ -632,10 +578,129 @@ session_start();
                </form>
            </div>
        </div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    jQuery('.entrance-btn').click(function () {
+        $('.entrance-btn').hide();
+
+        if (this.id === 'sign-in-btn') {
+            $('#log-out-btn').show();
+            $('#profile-btn').show();
+        } else if (this.id === 'log-in-btn') {
+            $('#profile-btn').show();
+            $('#log-out-btn').show();
+        } else if (this.id === 'admin-btn') {
+            $('#admin-btn').show();
+            $('#profile-btn').show();
+            $('#log-out-btn').show();
+        }
+
+        if ($('.mobile-headings').is(":hidden")) {
+            $('.watch-later').show();
+            $('.watch-later-tbl').show();
+        }else{
+            $('.watch-later-btn').show();
+        }
+    });
+
+    jQuery('.profile-btn').click(function () {
+
+        if (this.id === 'log-out-btn')  {
+            $('.profile-btn').hide();
+
+            $('.watch-later').hide();
+            $('.watch-later-tbl').hide();
+            $('.watch-later-btn').hide();
+            $('.entrance-btn').show();
+        }
+    });
+
+    jQuery('.close-btn').click(function () {
+        $('.close-btn').parent().hide();
+    });
 
 
-    <script src="js/movies.js"></script>
 
+
+    $(document).ready(function () {
+        $("#test").CreateMultiCheckBox({ width: '', defaultText : 'Movie name . . . ', height:'350px' });
+    });
+
+    $(document).ready(function () {
+        $(document).on("click", ".MultiCheckBox", function () {
+            let detail = $(this).next();
+            detail.show();
+        });
+
+        $(document).on("click", ".MultiCheckBoxDetail .cont input", function (e) {
+            e.stopPropagation();
+            $(this).closest(".MultiCheckBoxDetail").next().UpdateSelect();
+
+            let val = ($(".MultiCheckBoxDetailBody input:checked").length === $(".MultiCheckBoxDetailBody input").length)
+            $(".MultiCheckBoxDetailHeader input").prop("checked", val);
+        });
+
+        $(document).on("click", ".MultiCheckBoxDetail .cont", function (e) {
+            let inp = $(this).find("input");
+            let chk = inp.prop("checked");
+            inp.prop("checked", !chk);
+
+            let multiCheckBoxDetail = $(this).closest(".MultiCheckBoxDetail");
+            let multiCheckBoxDetailBody = $(this).closest(".MultiCheckBoxDetailBody");
+            multiCheckBoxDetail.next().UpdateSelect();
+
+            let val = ($(".MultiCheckBoxDetailBody input:checked").length === $(".MultiCheckBoxDetailBody input").length)
+            $(".MultiCheckBoxDetailHeader input").prop("checked", val);
+        });
+
+        $(document).mouseup(function (e) {
+            let container = $(".MultiCheckBoxDetail");
+            if (!container.is(e.target) && container.has(e.target).length === 0) {
+                container.hide();
+            }
+        });
+    });
+
+    let defaultMultiCheckBoxOption = { width: '160px', defaultText: 'Select Below', height: '200px' };
+
+    jQuery.fn.extend({
+        CreateMultiCheckBox: function (options) {
+
+            let localOption = {};
+            localOption.width = (options !== null && options.width !== null && options.width !== undefined) ? options.width : defaultMultiCheckBoxOption.width;
+            localOption.defaultText = (options !== null && options.defaultText !== null && options.defaultText !== undefined) ? options.defaultText : defaultMultiCheckBoxOption.defaultText;
+            localOption.height = (options !== null && options.height !== null && options.height !== undefined) ? options.height : defaultMultiCheckBoxOption.height;
+
+            this.hide();
+            this.attr("multiple", "multiple");
+            let divSel = $("<div class='MultiCheckBox'>" + localOption.defaultText + "<span class='k-icon k-i-arrow-60-down'><svg aria-hidden='true' focusable='false' data-prefix='fas' data-icon='sort-down' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512' class='svg-inline--fa fa-sort-down fa-w-10 fa-2x'><path fill='currentColor' d='M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41z' class=''></path></svg></span></div>").insertBefore(this);
+            divSel.css({ "width":''});
+
+            let detail = $("<div class='MultiCheckBoxDetail'><div class='MultiCheckBoxDetailHeader'><input type='checkbox' class='mulinput' value='-1982' /><div>Select All</div></div><div class='MultiCheckBoxDetailBody'></div></div>").insertAfter(divSel);
+            detail.css({ "width": '' });
+            let multiCheckBoxDetailBody = detail.find(".MultiCheckBoxDetailBody");
+
+            this.find("option").each(function () {
+                let val = $(this).attr("value");
+
+                if (val === undefined)
+                    val = '';
+
+                multiCheckBoxDetailBody.append("<div class='cont'><div><input type='checkbox' class='mulinput' value='" + val + "' /></div><div>" + $(this).text() + "</div></div>");
+            });
+
+            multiCheckBoxDetailBody.css("max-height", (parseInt($(".MultiCheckBoxDetail").css("max-height")) - 28) + "px");
+        },
+        UpdateSelect: function () {
+            let arr = [];
+
+            this.prev().find(".mulinput:checked").each(function () {
+                arr.push($(this).val());
+            });
+
+            this.val(arr);
+        },
+    });
+</script>
 </body>
-
 </html>

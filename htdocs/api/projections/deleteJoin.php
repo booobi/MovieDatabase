@@ -4,9 +4,9 @@
     include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/UserHelpers.php';
     include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/ValidatorHelpers.php';
     ValidatorHelpers::validateUserLoggedIn();
-    ValidatorHelpers::validateProjectionParticipantAlterFields();
 
-    MovieProjectionHelpers::alterJoinStatus($_POST['participantId'], $_POST['projectionId'], $_POST['status']);
+    $userId = UserHelpers::getCurrentUser()->get("UserId");
+    MovieProjectionHelpers::deleteJoin($userId, $_POST['projectionId']);
     
     echo json_encode(
         [

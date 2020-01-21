@@ -32,8 +32,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 
     public static function changeUserDetails($userId, $firstName, $lastName, $email) {
         //check if same user email exists
-        $existingUser = UserHelpers::checkUserExistence($email);
-        if($existingUser) {
+        if(!UserHelpers::isEmailAvailableForUser($userId, $email)) {
             echo json_encode(
             [
                 'status'=>'failure',
@@ -116,6 +115,13 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
             }
     
             return NULL;
+    }
+
+    public static function isEmailAvailableForUser($userId, $email) {
+        $res = DBOperations::prepareAndExecute(
+        "SELECT * FROM `users` WHERE Email = '{$email}' AND UserId != {$userId}");
+
+        return $res->num_rows == 0;
     }
     
     public static function checkUserExistence($userName) {

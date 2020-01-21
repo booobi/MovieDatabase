@@ -253,25 +253,28 @@ $("#new-projection-form").validate({
         });
   }
 
-  $("#details-form").validate({
-    submitHandler: function() {
-        $.ajax({
-            url: '/api/users/changeDetails.php',
-            type: 'POST',
-            dataType: 'json',
-            data: { 
-                email: $('#details-email').val(),
-                firstName: $('#details-firstname').val(),
-                lastName: $('#details-lastname').val()
-            },
-            success: (data) => {
-                    alert(data["description"]);
-                    $("#details-form").trigger('reset');
-                    location.reload();
-                    }
-            });
-    }
-  });
+
+$(document).ready( () => {
+    $("#details-form").validate({
+        submitHandler: function() {
+            $.ajax({
+                url: '/api/users/changeDetails.php',
+                type: 'POST',
+                dataType: 'json',
+                data: { 
+                    email: $('#details-email').val(),
+                    firstName: $('#details-firstname').val(),
+                    lastName: $('#details-lastname').val()
+                },
+                success: (data) => {
+                        alert(data["description"]);
+                        $("#details-form").trigger('reset');
+                        // location.reload();
+                        }
+                });
+            }
+      });  
+});
 
 $("#password-form").validate({
     submitHandler: function() {

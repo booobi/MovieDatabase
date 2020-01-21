@@ -24,9 +24,16 @@ session_start()
         <div id="edit-details-box">
             <form id="details-form">
                 <h2>Edit details</h2>
-                <input required id="details-email" class="details-field" placeholder="Email . . ." type="email">
-                <input required id="details-firstname" class="details-field" placeholder="First name . . ." type="text">
-                <input required id="details-lastname" class="details-field" placeholder="Last name . . . " type="text">
+                <?php
+                include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/UserHelpers.php';
+                $currentUser=UserHelpers::getCurrentUser();
+                echo '
+                <input required id="details-email" class="details-field" value="' . $currentUser->get("Username") . '" type="email">
+                <input required id="details-firstname" class="details-field" value="' . $currentUser->get("FirstName") . '" type="text">
+                <input required id="details-lastname" class="details-field" value="' . $currentUser->get("LastName") . '" type="text">
+                '
+                ?>
+                
                 <button type="submit" id="submit-details">Save changes</button>
             </form>
         </div>
@@ -101,9 +108,9 @@ session_start()
                     </tr>
 
                     <?php
-                        include $_SERVER['DOCUMENT_ROOT'] . '/Helpers/PostHelpers.php';
-                        include $_SERVER['DOCUMENT_ROOT'] . '/Helpers/UserHelpers.php';
-                        include $_SERVER['DOCUMENT_ROOT'] . '/Helpers/CommentHelpers.php';
+                        include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/PostHelpers.php';
+                        include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/UserHelpers.php';
+                        include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/CommentHelpers.php';
 
                         $userId = UserHelpers::getCurrentUser()->get("UserId");
                         

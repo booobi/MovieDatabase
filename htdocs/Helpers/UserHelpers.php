@@ -171,5 +171,9 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
             die();
         }
     }
+
+    public static function currentUserIsAdmin() {
+        return (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']);
+    }
 }
 ?>

@@ -321,12 +321,10 @@ session_start()
         <div id="new-projection-box">
             <form action="#" id="new-projection-form">
                 <input type="text" id="projection-name" class="details-field" placeholder="Projection name . . .">
-                <input type="text" id="projection-time" class="details-field" placeholder="Date and time . . .">
+                <input type="date" id="projection-time" class="details-field" placeholder="Date and time . . .">
                 <input type="text" id="projection-duration" class="details-field" placeholder="Duration . . . ">
                 <select id="projection-movieId">
                 </select>
-                <input type="text" id="projection-watchers" class="details-field"
-                    placeholder="Number of watchers . . . ">
                 <input type="text" id="projection-location" class="details-field" placeholder="Location . . . ">
                 <button type="submit" id="submit-new-projection">Submit</button>
             </form>
@@ -338,12 +336,10 @@ session_start()
         <div id="edit-projection-box">
             <form action="#" id="edit-projection-form">
                 <input type="text" id="edit-projection-name" class="details-field" placeholder="Projection name . . .">
-                <input type="text" id="edit-projection-time" class="details-field" placeholder="Date and time . . .">
+                <input type="date" id="edit-projection-time" class="details-field" placeholder="Date and time . . .">
                 <input type="text" id="edit-projection-duration" class="details-field" placeholder="Duration . . . ">
                 <select id="edit-projection-movieId">
                 </select>
-                <input type="text" id="edit-projection-watchers" class="details-field"
-                    placeholder="Number of watchers . . . ">
                 <input type="text" id="edit-projection-location" class="details-field" placeholder="Location . . . ">
                 <p>Users awaiting approval</p>
                 <div class="users-scroller" id="projection-participants">

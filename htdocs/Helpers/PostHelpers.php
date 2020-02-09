@@ -123,6 +123,13 @@ class PostHelpers {
 		}
 		
 		return [];
-	}
+    }
+    
+    public static function userIsOwnerOfPost($userId, $postId) {
+        $res = DBOperations::prepareAndExecute("
+        SELECT * FROM `posts` WHERE PostId={$postId} AND OwnerId={$userId}");
+
+        return $res->num_rows > 0;
+    }
 }
 ?>

@@ -15,8 +15,6 @@ session_start();
 <body>
     <?php
         include $_SERVER['DOCUMENT_ROOT'] . '/Header.php';
-        echo !isset($_SESSION['isAdmin']);
-        echo $_SESSION['isAdmin'] == FALSE;
         if(!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] == FALSE)
         {
             echo "You need to be an admin to view this page!";

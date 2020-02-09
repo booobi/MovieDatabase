@@ -366,3 +366,17 @@ $('.request-share').click((event) => {
         
     });
 }
+
+$('#submit-share-changes').click(()=> {
+
+	$.ajax({
+		url: '/api/shares/edit.php',
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			shareId: $("#edit-share-container").data('shareId'),
+			movieId: $("#share-movies").val()
+		},
+		success: (data) => {alert(data.description); location.reload() }
+	});
+})

@@ -24,28 +24,42 @@ session_start();
             <tr>
             <th class = "col-top-rating">
                 Rating
-                <p class = "new-line"><i class="arrow-down"></i><i class = "arrow-up"> </i></p>
+                <p class = "new-line">
+                    <i onclick="window.location='/Home.php?sortBy=MovieRating&direction=DESC'" class="arrow-down"></i>
+                    <i onclick="window.location='/Home.php?sortBy=MovieRating&direction=ASC'" class = "arrow-up"></i>
+                </p>
             </th>
             <th class = "col-top-date">
                 Date
-                <p class = "new-line"><i class="arrow-down"></i><i class = "arrow-up"> </i></p>
+                <p class = "new-line">
+                    <i onclick="window.location='/Home.php?sortBy=ReleaseDate&direction=DESC'" class="arrow-down"></i>
+                    <i onclick="window.location='/Home.php?sortBy=ReleaseDate&direction=ASC'" class="arrow-up"></i>
+                </p>
             </th>
             <th class = "col-top-poster">
 
             </th>
             <th class = "col-top-name">
                 Movie name
-                <p class = "new-line"><i class="arrow-down"></i><i class = "arrow-up"> </i></p>
+                <p class = "new-line">
+                    <i onclick="window.location='/Home.php?sortBy=MovieName&direction=DESC'" class="arrow-down"></i>
+                    <i onclick="window.location='/Home.php?sortBy=MovieName&direction=ASC'" class="arrow-up"> </i>
+                </p>
             </th>
             <th class = "col-top-category">
                 Category
-                <p class = "new-line"><i class="arrow-down"></i><i class = "arrow-up"> </i></p>
+                <!-- <p class = "new-line"><i class="arrow-down"></i><i class = "arrow-up"> </i></p> -->
             </th>
         </tr>
         <?php
                 include $_SERVER['DOCUMENT_ROOT'] . '/Helpers/MovieHelpers.php';
+                $moviesThisWeek = [];
+                if (isset($_GET['sortBy']) && isset($_GET['direction'])) {
+                    $moviesThisWeek = MovieHelpers::getHomeRecentMovies($_GET['sortBy'], $_GET['direction']);
+                } else {
+                    $moviesThisWeek = MovieHelpers::getHomeRecentMovies('CreatedOn', 'DESC');
+                }
                 
-                $moviesThisWeek = MovieHelpers::getHomeRecentMovies();
                 if(count($moviesThisWeek) > 0) {
                 
                     foreach ($moviesThisWeek as $movie) {

@@ -41,7 +41,7 @@ function showEditProjForm(projectionId) {
         });
 
         $('#edit-projection-name').val(projectionsResponse.data.name);
-        $('#edit-projection-time').val(projectionsResponse.data.date);
+        $('#edit-projection-time').val(projectionsResponse.data.date.substring(0,10));
         $('#edit-projection-location').val(projectionsResponse.data.location);
         $('#edit-projection-duration').val(projectionsResponse.data.duration);
         

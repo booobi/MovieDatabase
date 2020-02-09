@@ -22,7 +22,11 @@ session_start();
 <div class = "festival-title">
     Festivals
 </div>
-<button class = "add-festival-btn" onclick="showFestForm()">Add a festival</button>
+<?php
+    if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']) {
+        echo '<button class = "add-festival-btn" onclick="showFestForm()">Add a festival</button>';
+    }
+?>
 <div class = "fest-scroller">
   <div id = "festival-box">
     <table class="fest-tbl">
@@ -51,10 +55,14 @@ session_start();
                         </td>
                         <th class = "col-fest-options">
                         </th>
-                        <td class = "row-fest-options">
-                            <button class = "edit-fest-btn" onclick="showEditFestForm('. $festival->get("Id") .')">Edit</button>
-                            <button onclick="deleteFestival('. $festival->get("Id") .')" class = "delete-fest-btn">Delete</button>
-                        </td>
+                        <td class = "row-fest-options">';
+                        
+                        if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']) {
+                            echo '<button class = "edit-fest-btn" onclick="showEditFestForm('. $festival->get("Id") .')">Edit</button>
+                            <button onclick="deleteFestival('. $festival->get("Id") .')" class = "delete-fest-btn">Delete</button>';
+                        }
+
+                        echo '</td>
                     </tr>';
                 }
             ?>

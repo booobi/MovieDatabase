@@ -30,16 +30,21 @@ session_start();
                 <th class = "movie-id"></th>
                 <th class = "col-category">
                     Category
-                    <br><i class = "arrow-down"></i><i class = "arrow-up"></i>
+                    <br>
+                    <i onclick="window.location='/Movies.php' + $.query.set('moviesSortBy', 'Categories').set('moviesDirection','DESC').toString();" class="arrow-down" class = "arrow-down"></i>
+                    <i onclick="window.location='/Movies.php' + $.query.set('moviesSortBy', 'Categories').set('moviesDirection','ASC').toString();" class = "arrow-up"></i>
                 </th>
                 <th class = "col-rating">
                     Rating
-                    <br><i class = "arrow-down"></i><i class = "arrow-up"></i>
+                    <br>
+                    <i onclick="window.location='/Movies.php' + $.query.set('moviesSortBy', 'Rating').set('moviesDirection','DESC').toString();" class = "arrow-down"></i>
+                    <i onclick="window.location='/Movies.php' + $.query.set('moviesSortBy', 'Rating').set('moviesDirection','ASC').toString();" class = "arrow-up"></i>
                 </th>
                 <th class = "col-poster"></th>
                 <th class = "col-name">
                     Movie name
-                    <br><i class = "arrow-down"></i><i class = "arrow-up"></i>
+                    <br><i onclick="window.location='/Movies.php' + $.query.set('moviesSortBy', 'MovieName').set('moviesDirection','DESC').toString();" class = "arrow-down"></i>
+                    <i onclick="window.location='/Movies.php' + $.query.set('moviesSortBy', 'MovieName').set('moviesDirection','ASC').toString();" class = "arrow-up"></i>
                 </th>
                 <th class = "col-options">
                     Options
@@ -56,6 +61,26 @@ session_start();
                 }
                 else {
                     $movies = MovieHelpers::getMovies();
+                }
+
+                //if movie sort
+                if(isset($_GET['moviesSortBy']) && isset($_GET['moviesDirection'])) {
+                    $moviesSortBy = $_GET['moviesSortBy'];
+                    $moviesDirection = $_GET['moviesDirection'];
+                    
+                    if ($moviesSortBy === 'Categories') {
+                        usort($movies, function($a, $b) use ($moviesSortBy, $moviesDirection) {
+                            return strcmp(implode($a->get($moviesSortBy)), implode($b->get($moviesSortBy)));
+                        });
+                    } else {
+                        usort($movies, function($a, $b) use ($moviesSortBy, $moviesDirection) {
+                            return strcmp($a->get($moviesSortBy), $b->get($moviesSortBy));
+                        });
+                    }
+                   
+                    if($moviesDirection === 'DESC') {
+                        $movies = array_reverse($movies);
+                    }
                 }
                
                 
@@ -191,14 +216,20 @@ session_start();
                    <tr>
                        <th class = "col-prj-name">
                            Name
-                           <p class = "new-line"><i class="arrow-down"></i><i class = "arrow-up"> </i></p>
+                           <p class = "new-line">
+                            <i onclick="window.location='/Movies.php' + $.query.set('projectionsSortBy', 'Name').set('projectionsDirection','DESC').toString();" class="arrow-down"></i>
+                            <i onclick="window.location='/Movies.php' + $.query.set('projectionsSortBy', 'Name').set('projectionsDirection','ASC').toString();" class = "arrow-up"> </i>
+                           </p>
                        </th>
                        <th class = "col-prj-location">
                            Location
                        </th>
                        <th class = "col-prj-duration">
                            Duration
-                           <p class = "new-line"><i class="arrow-down"></i><i class = "arrow-up"> </i></p>
+                           <p class = "new-line">
+                            <i onclick="window.location='/Movies.php' + $.query.set('projectionsSortBy', 'Duration').set('projectionsDirection','DESC').toString();" class="arrow-down"></i>
+                            <i onclick="window.location='/Movies.php' + $.query.set('projectionsSortBy', 'Duration').set('projectionsDirection','ASC').toString();" class = "arrow-up"> </i>
+                           </p>
                        </th>
                        <th class = "col-prj-date">
                            Date
@@ -212,6 +243,27 @@ session_start();
                 include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/UserHelpers.php';
                 
                 $projections = MovieProjectionHelpers::getMovieProjections();
+
+                //if projections sort
+                if(isset($_GET['projectionsSortBy']) && isset($_GET['projectionsDirection'])) {
+                    $projectionsSortBy = $_GET['projectionsSortBy'];
+                    $projectionsDirection = $_GET['projectionsDirection'];
+                    
+                    
+                    if ($projectionsSortBy === 'Duration') {
+                        usort($projections, function($a, $b) use ($projectionsSortBy, $projectionsDirection) {
+                            return $a->get($projectionsSortBy) > $b->get($projectionsSortBy);
+                        });
+                    } else {
+                        usort($projections, function($a, $b) use ($projectionsSortBy, $projectionsDirection) {
+                            return strcmp($a->get($projectionsSortBy), $b->get($projectionsSortBy));
+                        });
+                    }
+                    
+                    if($projectionsDirection === 'DESC') {
+                        $projections = array_reverse($projections);
+                    }
+                }
 
                 foreach($projections as $projection) {
                     
@@ -261,7 +313,10 @@ session_start();
                    <tr>
                        <th class = "col-exchanges-movies">
                            Movies
-                           <p class = "new-line"><i class="arrow-down"></i><i class = "arrow-up"> </i></p>
+                           <p class = "new-line">
+                            <i onclick="window.location='/Movies.php' + $.query.set('sharesSortBy', 'Movie').set('sharesDirection','DESC').toString();" class="arrow-down"></i>
+                            <i onclick="window.location='/Movies.php' + $.query.set('sharesSortBy', 'Movie').set('sharesDirection','ASC').toString();" class="arrow-up"></i>
+                           </p>
                        </th>
                        <th class = "col-exchanges-status">
                            Status
@@ -270,7 +325,10 @@ session_start();
                        </th>
                        <th class = "col-exchanges-rating">
                            User
-                           <p class = "new-line"><i class="arrow-down"></i><i class = "arrow-up"> </i></p>
+                           <p class="new-line">
+                            <i onclick="window.location='/Movies.php' + $.query.set('sharesSortBy', 'User').set('sharesDirection','DESC').toString();" class="arrow-down"></i>
+                            <i onclick="window.location='/Movies.php' + $.query.set('sharesSortBy', 'User').set('sharesDirection','ASC').toString();" class="arrow-up"></i>
+                           </p>
                        </th>
                        <th class = "col-exchanges-options">
                            Options
@@ -280,6 +338,31 @@ session_start();
             include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/ShareHelpers.php';
             include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/UserHelpers.php';
             $mainShares = ShareHelpers::getMainShares();
+
+            //if shares sort
+            if(isset($_GET['sharesSortBy']) && isset($_GET['sharesDirection'])) {
+                $sharesSortBy = $_GET['sharesSortBy'];
+                $sharesDirection = $_GET['sharesDirection'];
+                
+                if ($sharesSortBy === 'User') {
+                    usort($mainShares, function($a, $b) {
+                        return $a->get('Owner')->get('Username') > $b->get('Owner')->get('Username');
+                    });
+                } else {
+                    usort($mainShares, function($a, $b) use ($sharesSortBy, $sharesDirection) {
+                        return $a->get('Movie')->get("Name") > $b->get($sharesSortBy);
+                    });
+                }
+                
+                
+                
+                if($sharesDirection === 'DESC') {
+                    $mainShares = array_reverse($mainShares);
+                }
+            }
+            
+            
+
             foreach($mainShares as $mainShare) {
                 echo '
                 <tr>
@@ -297,14 +380,15 @@ session_start();
                     </td>
                     <td class = "row-exchanges-options">';
                     
-                    if (!(UserHelpers::getCurrentUser()->get("UserId") == $mainShare->get("RequestBy"))) {
+                    $currentUser = UserHelpers::getCurrentUser();
+                    if ($currentUser && !($currentUser->get("UserId") == $mainShare->get("RequestBy"))) {
                         echo ShareHelpers::userHasRequestToShare(UserHelpers::getCurrentUser()->get("UserId"), $mainShare->get("Id")) ? 
                         '<button class="cancel-btn cancel-request-share" data-shareId="' . $mainShare->get("Id") . '">Cancel</buttton>' : 
                         '<button class="request-btn request-share" data-shareId="' . $mainShare->get("Id") . '">Request</buttton>' ;
                         
                     }
                     
-                    if($_SESSION['isAdmin'] || UserHelpers::getCurrentUser()->get("UserId") == $mainShare->get("RequestBy"))
+                    if($currentUser && ($_SESSION['isAdmin'] || UserHelpers::getCurrentUser()->get("UserId") == $mainShare->get("RequestBy")))
                     {
                         echo '<button onclick="editShare(' . $mainShare->get("Id") .')" class="edit-btn edit-share" data-shareId="' . $mainShare->get("Id") .'" data-shareId="' . $mainShare->get("Id") . '">Edit</button>';
                         echo '<button class="delete-btn delete-share" data-shareId="' . $mainShare->get("Id") . '">Delete</button>';
@@ -555,13 +639,18 @@ session_start();
                        </label>
                     </div>
                    </div>
-                   <a href="javascript:%20validateLogIn()" id="submit-share-changes">Submit</a>
+                   <a id="submit-share-changes">Submit</a>
                </form>
            </div>
        </div>
 
 
     <script src="js/movies.js"></script>
+    <script src="js/jquery.query-object.js"></script>
+    <script>
+
+    </script>
+
 
 </body>
 

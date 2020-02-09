@@ -42,8 +42,10 @@ session_start();
                     </th>
                 </tr>
                 <?php
-                include $_SERVER['DOCUMENT_ROOT'] . '/Helpers/PostHelpers.php';
-                include $_SERVER['DOCUMENT_ROOT'] . '/Helpers/MovieHelpers.php';
+                
+                include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/UserHelpers.php';
+                include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/PostHelpers.php';
+                include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/MovieHelpers.php';
                 $posts = PostHelpers::getPosts();
 
                 foreach($posts as $post) {
@@ -59,11 +61,26 @@ session_start();
                         <td class = "row-public-rating">
                         ' . $post->get("Rating") . '
                         </td>
-                        <td class = "row-public-options">
-                            <button class = "add-rating-btn" onclick="showRatingForm(' . ($post->get("Id")) . ')">Give a rating</button>
+                        <td class = "row-public-options">';
+                        $currentUser = UserHelpers::getCurrentUser();
+
+                        if($currentUser) {
+                            $isOwner = PostHelpers::userIsOwnerOfPost(UserHelpers::getCurrentUser()->get('UserId'), $post->get('Id'));
+            
+                            if($isOwner || UserHelpers::currentUserIsAdmin()) {
+                                echo '
+                                <button class = "edit-post-btn" onclick="showEditPostForm(' . ($post->get("Id")) . ')">Edit</button>
+                                <button onclick="deletePost(' . ($post->get("Id")) . ')" class = "delete-post-btn">Delete</button>
+                                ';
+                            } else {
+                                echo '
+                                <button class = "add-rating-btn" onclick="showRatingForm(' . ($post->get("Id")) . ')">Give a rating</button>
+                                ';
+                            }
+                        }
+                       
+                        echo '
                             <button class = "details-post-btn"><a href = "/PostDetails.php?id='. $post->get("Id") .'">Details </a></button>
-                            <button class = "edit-post-btn" onclick="showEditPostForm(' . ($post->get("Id")) . ')">Edit</button>
-                            <button onclick="deletePost(' . ($post->get("Id")) . ')" class = "delete-post-btn">Delete</button>
                         </td>
                     </tr>
                     ';
@@ -90,8 +107,8 @@ session_start();
         <form action="#" id="edit-post-form">
             <textarea id = "edit-post-text" placeholder="Description . . . " maxlength="540"></textarea>
             <?php
-                include $_SERVER['DOCUMENT_ROOT'] . '/Helpers/UserHelpers.php';
-                if(UserHelpers::getCurrentUser()->get("Role") == 'admin'){
+                include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/UserHelpers.php';
+                if(isset($_SESSION['userLoggedIn']) && UserHelpers::getCurrentUser()->get("Role") == 'admin'){
                     echo '
                     <label for="post-movie">Select a movie for the post:</label>
                     <select name="post-movie" id="post-movie"></select>

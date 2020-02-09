@@ -58,7 +58,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 		CategoryHelpers::applyCategoriesToMovie($movieId, $movie->get("Categories"));
 	}
 
-	public static function getMovies($size=20, $orderByColumn="Name") {
+	public static function getMovies($size=20, $orderByColumn="CreatedOn", $direction="DESC") {
 		$result = DBOperations::prepareAndExecute(
 			"SELECT movies.MovieId as MovieId,
 			movies.Name AS MovieName,
@@ -72,7 +72,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 			movies.UpdatedOn,
 			movies.CreatedOn
 			FROM movies
-			ORDER BY movies." . $orderByColumn . " LIMIT " . $size);
+			ORDER BY movies." . $orderByColumn . " " . $direction . " LIMIT " . $size);
 
 		$movieList = [];
 
@@ -227,8 +227,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 	return $operation;
 	}
 	
-	public static function getHomeRecentMovies() {
-
+	public static function getHomeRecentMovies($orderByColumn, $order) {
 		$lastWeekStart = Date("Y-m-d",time() - (7 * 24 * 60 * 60));
 		//+ 1 day to include today
 		$today = Date("Y-m-d", time() + (48*60*60));
@@ -241,7 +240,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 			PosterImgSrc
 			FROM movies
 			WHERE movies.CreatedOn BETWEEN '" . $lastWeekStart . "' AND '" . $today .
-			"' ORDER BY CreatedOn DESC LIMIT 4;");
+			"' ORDER BY {$orderByColumn} {$order} LIMIT 4;");
 
         $movieList = [];
 
@@ -258,7 +257,11 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 			}
 		}
         
-        return $movieList;
+		// return $movieList;
+		// usort($movieList, function($a, $b) {
+		// 	return strcmp($a->get("Name"), $b->get("Name"));
+		// });
+		return $movieList;
 	}
 
 	public static function getWatchLaterMoviesForUser($username) 

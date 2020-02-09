@@ -20,6 +20,11 @@
 			}
 		}
 		
+		public function __toString()
+		{
+			return $this->Name;
+		}
+
 		public function jsonSerialize() {
 			return [
 				'id' => $this->Id,

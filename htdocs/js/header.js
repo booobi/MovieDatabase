@@ -28,12 +28,15 @@ function login() {
 
 
 function signup() {
+	var emailRegex = /\S+@\S+\.\S+/;
 	if (document.getElementById('sign-email').value == "" ||
 		document.getElementById('firstname').value == "" ||
 		document.getElementById('lastname').value == "" ||
 		document.getElementById('sign-password').value == "" ||
 		document.getElementById('repeat').value == "") {
 		alert("Please fill all the fields!");
+	} else if (!emailRegex.test(document.getElementById('sign-email').value)) {
+		alert("Enter a valid email!");
 	} else if (document.getElementById('sign-password').value.length < 6) {
 		alert("Password should be at least 6 symbols!");
 	} else if (document.getElementById('sign-password').value != document.getElementById('repeat').value) {

@@ -52,7 +52,7 @@
         <form action="#" id="popup-form" method="post" name="signup-form">
             <h2>Sign In</h2>
             <hr>
-            <input id="sign-email" name="email" class="popup-field" placeholder="Email . . ." type="text">
+            <input id="sign-email" name="email" class="popup-field" placeholder="Email . . ." type="email">
             <input id="firstname" name="first_name" class="popup-field" placeholder="First name . . ." type="text">
             <input id="lastname" name="last_name" class="popup-field" placeholder="Last name . . ." type="text">
             <input id="sign-password" name="password" class="popup-field" placeholder="Password" type="password">

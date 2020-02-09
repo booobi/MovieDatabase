@@ -1,5 +1,6 @@
 
 #add-a-movie {
+    position: absolute;
     margin: 80px 0 0 590px;
     padding: 15px 50px 15px 60px; !important;
 }
@@ -38,7 +39,7 @@
 }
 
 .movies-tbl-scroller {
-    margin-top: 42px;
+    margin-top: 174px;
     margin-bottom: 40px;
     height: 500px;
 }
@@ -78,8 +79,9 @@
 }
 
 .users-scroller {
-    width: 217px;
+    width: 190px;
     height: 100px;
+    margin-left: 20px;
 }
 
 #info-container,
@@ -213,7 +215,7 @@
 }
 
 #info div {
-    margin: 15px auto auto auto;
+    margin: -12px auto 50px auto;
 }
 
 #info label {
@@ -236,6 +238,7 @@
 
 #exchanges-box {
    margin-left: 50px;
+    height: 300px;
 }
 
 #projections-exchanges button {
@@ -253,9 +256,10 @@ input {
 div:not(.advanced-search) > .checkbox-box > .check-mark, input[type=checkbox] {
     position: unset;
     margin-top: 4px;
+    margin-right: 12px;
     width: 23px;
     height: 23px;
-    float: right;
+    float: left;
 }
 
 .advanced-search input[type=checkbox] {
@@ -277,6 +281,9 @@ div:not(.advanced-search) > .checkbox-box > input:checked ~ .check-mark::after {
     font-family: Lato, sans-serif;
     font-size: 20px;
     text-align: center;
+}
+
+.my-projections-tbl td {
     background-color: rgba(125, 79, 68, 0.19);
 }
 
@@ -295,6 +302,12 @@ div:not(.advanced-search) > .checkbox-box > input:checked ~ .check-mark::after {
     margin-right: auto;
     width: 100%;
     border-collapse: collapse;
+}
+
+.my-exchanges-tbl {
+    display: inline-block;
+    min-height: 300px;
+    background-color: rgba(125, 79, 68, 0.19);
 }
 
 .my-projections-tbl .new-line,
@@ -356,7 +369,7 @@ div:not(.advanced-search) > .checkbox-box > input:checked ~ .check-mark::after {
 
 [class *= "col-prj"] {
     width: 80px;
-    color: rgb(68, 44, 43);
+    color: rgb(82, 58, 48);
 }
 
 .col-prj-name {
@@ -386,6 +399,7 @@ div:not(.advanced-search) > .checkbox-box > input:checked ~ .check-mark::after {
 [class *= "col-exchanges"] {
     width: 128px;
     color: rgb(68, 44, 43);
+    background-color: transparent;
 }
 
 .col-exchanges-movies {
@@ -398,13 +412,13 @@ div:not(.advanced-search) > .checkbox-box > input:checked ~ .check-mark::after {
 }
 
 .col-exchanges-add-rating {
-    padding-right: 0;
-    padding-left: 0;
+    padding-right: 90px;
+    padding-left: 90px;
 }
 
 .col-exchanges-rating {
     padding-right: 0;
-    padding-left: 190px;
+    padding-left: 180px;
     padding-top: 15px
 }
 
@@ -422,7 +436,7 @@ div:not(.advanced-search) > .checkbox-box > input:checked ~ .check-mark::after {
     font-size: 21px;
     text-align: center;
     color: rgba(9, 2, 0, 0.76);
-    background-color: rgba(66, 37, 26, 0.2);
+    background-color: rgba(148, 111, 100, 0.6);
 }
 
 .row-category {
@@ -432,7 +446,7 @@ div:not(.advanced-search) > .checkbox-box > input:checked ~ .check-mark::after {
 
 .row-poster {
     padding-top: 40px;
-    padding-right: 117px;
+    padding-right: 111px;
 }
 
 .row-poster img {
@@ -467,7 +481,7 @@ div:not(.advanced-search) > .checkbox-box > input:checked ~ .check-mark::after {
 }
 
 [class *= "row-prj"] {
-    color: #213648;
+    color: rgba(53, 62, 75, 0.9);
 }
 
 .row-prj-name {
@@ -506,20 +520,29 @@ div:not(.advanced-search) > .checkbox-box > input:checked ~ .check-mark::after {
 .row-prj-options .cancel-btn,
 .row-exchanges-options .request-btn,
 .row-exchanges-options .cancel-btn{
-    color: rgba(65, 44, 42, 0.71);
+    color: rgb(49, 62, 78);
     background-color: rgb(159, 124, 115);
+}
+
+.row-prj-options .cancel-btn,
+.row-exchanges-options .cancel-btn {
+    margin-bottom: 10px;
 }
 
 .row-prj-options .edit-btn,
 .row-prj-options .delete-btn,
 .row-exchanges-options .edit-btn,
 .row-exchanges-options .delete-btn {
-    color: rgba(42, 44, 65, 0.71);
+    color: rgba(48, 54, 72, 0.86);
     background-color: rgba(73, 79, 96, 0.26);
 }
 
 .row-prj-options .join-btn {
-    margin: 20px 10px 10px -90px;
+    margin: 0 10px 10px -100px;
+}
+
+.row-prj-options .cancel-btn {
+    margin-left: -110px;
 }
 
 .row-prj-options .edit-btn {
@@ -533,7 +556,7 @@ div:not(.advanced-search) > .checkbox-box > input:checked ~ .check-mark::after {
 }
 
 [class *= "row-exchanges"] {
-    color: #1e3242;
+    color: rgba(62, 75, 93, 0.93);
 }
 
 .row-exchanges-movies {
@@ -551,8 +574,8 @@ div:not(.advanced-search) > .checkbox-box > input:checked ~ .check-mark::after {
 }
 
 .row-exchanges-rating {
-    padding-left: 205px;
-    padding-right: 20px;
+    padding-right: 0;
+    padding-left: 75px;
 }
 
 .row-exchanges-options {
@@ -561,7 +584,11 @@ div:not(.advanced-search) > .checkbox-box > input:checked ~ .check-mark::after {
 }
 
 .row-exchanges-options .request-btn {
-    margin: 50px 10px 10px -120px;
+    margin: 10px 10px 10px -90px;
+}
+
+.row-exchanges-options .cancel-btn {
+    margin: 10px 0 10px -100px;
 }
 
 .row-exchanges-options .edit-btn {
@@ -569,7 +596,24 @@ div:not(.advanced-search) > .checkbox-box > input:checked ~ .check-mark::after {
     margin-right: 10px;
 }
 
+.row-exchanges-options .edit-btn {
+    margin-right: 10px;
+    display: block;
+    margin-left: 60px;
+    margin-bottom: 8px;
+}
+
+.row-exchanges-options .delete-btn {
+    display: block;
+    margin-left: 47px;
+}
+
+select[type=number] {
+ margin-left: 0;
+}
+
 .rating-btn,
+#rateSubmitBtn,
 .add-rating-btn {
     margin-top: 23px;
     padding: 8px;
@@ -609,20 +653,20 @@ div:not(.advanced-search) > .checkbox-box > input:checked ~ .check-mark::after {
 }
 
 .more-btn {
-    margin-top: 20px;
+    margin-top: 0;
     margin-left: -35px;
     padding: 13px 35px;
     width: 170px;
     display: block;
     outline: none;
-    background-color: rgba(76, 49, 49, 0.22);
+    background-color: rgba(86, 55, 55, 0.22);
     color: rgba(68, 53, 44, 0.86);
 }
 
 .change-movie-btn {
     margin-top: 8px;
-    margin-left: 0;
-    margin-right: 70px;
+    margin-left: -24px;
+    margin-right: 60px;
     padding: 10px 30px;
     outline: none;
     color: rgba(42, 44, 65, 0.71);
@@ -630,7 +674,7 @@ div:not(.advanced-search) > .checkbox-box > input:checked ~ .check-mark::after {
 }
 
 #delete {
-    margin-left: -70px;
+    margin-left: -90px;
     margin-right: 0;
 }
 
@@ -690,7 +734,9 @@ div:not(.advanced-search) > .checkbox-box > input:checked ~ .check-mark::after {
     }
 
     #add-a-movie {
-        position: relative;
+        position: absolute;
+        right: 25px;
+        left: 25px;
         margin: 80px auto 40px;
         padding: 0; !important;
         display: block;
@@ -717,6 +763,7 @@ div:not(.advanced-search) > .checkbox-box > input:checked ~ .check-mark::after {
     }
 
     .movies-tbl-scroller {
+        margin-top: 150px;
         margin-bottom: 30px;
         height: 620px;
     }
@@ -897,6 +944,10 @@ div:not(.advanced-search) > .checkbox-box > input:checked ~ .check-mark::after {
         background-color: #3b2c2c;
     }
 
+    .my-exchanges-tbl {
+       display: table;
+    }
+
     .row-category,
     .row-rating,
     .row-poster,
@@ -916,7 +967,7 @@ div:not(.advanced-search) > .checkbox-box > input:checked ~ .check-mark::after {
     }
 
     .more-btn {
-        margin: -6px auto 5px auto;
+        margin: 2px auto 5px auto;
         width: 120px;
         color: rgba(61, 42, 31, 0.86);
     }
@@ -928,7 +979,7 @@ div:not(.advanced-search) > .checkbox-box > input:checked ~ .check-mark::after {
     }
 
     .change-movie-btn {
-        margin: 5px auto;
+        margin: 8px auto;
     }
 
     #delete {

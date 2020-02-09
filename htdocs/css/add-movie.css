@@ -1,7 +1,7 @@
 
 #up-header {
     position: absolute;
-    padding-right: 0;
+    padding: 0 10px 20px 0;
     width: 1509px;
     height: 80px;
     align-content: center;
@@ -9,7 +9,7 @@
 }
 
 #up-header ::placeholder {
-    color: rgba(42, 47, 77, 0.73);
+    color: rgb(78, 75, 89);
 }
 
 #up-header input {
@@ -20,12 +20,11 @@
 .movie-content {
     margin-top: 150px;
     width: 1519px;
-    height: 1130px;
+    height: 1511px;
     background-color: rgba(125, 79, 68, 0.19);
 }
 
 .movie-content ::placeholder {
-    font-weight: lighter;
     color: rgba(64, 43, 42, 0.65);
 }
 
@@ -44,7 +43,7 @@
     display: inline-block;
     float: left;
     font-size: 22px;
-    text-align: left;
+    text-align: center;
     border: solid medium rgba(106, 79, 82, 0.68);
     color: rgba(64, 43, 42, 0.65);
     background-color: transparent;
@@ -63,7 +62,7 @@
 
 #down-header {
     position: absolute;
-    margin-top: 39px;
+    margin-top: 420px;
     width: 1519px;
     height: 100px;
     background-color: rgba(54, 66, 96, 0.2);
@@ -86,8 +85,15 @@
     background-color: transparent;
 }
 
+#title-field,
+#poster-field {
+    margin-top: 17px;
+    color: rgb(78, 75, 89);
+    border: solid medium rgba(72, 74, 99, 0.77);
+}
+
 #title-field {
-    margin-left: 322px;
+    margin-left: 332px;
 }
 
 #poster-field {
@@ -130,8 +136,28 @@
     display: block;
 }
 
+#movie-director .MultiCheckBox,
+#movie-actors .MultiCheckBox,
+#movie-stars .MultiCheckBox {
+   margin-left: 12px;
+}
+
+#movie-actors .MultiCheckBoxDetail:after{
+    margin-bottom: 90px;
+}
+
+#movie-director .MultiCheckBoxDetail,
+#movie-actors .MultiCheckBoxDetail,
+#movie-stars .MultiCheckBoxDetail {
+  margin-left: 29px;
+}
+
 #movie-category {
   padding-left: 22px;
+}
+
+#movie-category .MultiCheckBoxDetail {
+    margin-left: 15px;
 }
 
 #movie-category option {
@@ -149,7 +175,10 @@
 }
 
 #language-field {
+    position: absolute;
+    margin-left: 640px;
     margin-top: 224px;
+    left: 0;
 }
 
 #movie-release {
@@ -175,8 +204,8 @@
 
 #movie-release input[type=date] {
     position: relative;
-    top: -8px;
-    margin-left: 52px;
+    margin-top: -12px;
+    margin-left: 12px;
     font-family: Lato, sans-serif;
     font-size: 17px;
     text-align: center;
@@ -233,7 +262,7 @@
 }
 
 .duration-mins {
-    margin-top: 83px;
+    margin-top: 89px;
     margin-left: 68px;
     width: 87%;
     font-family: Lato, sans-serif;

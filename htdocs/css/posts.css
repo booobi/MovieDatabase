@@ -12,11 +12,12 @@
     font-size: 24px;
     border: none;
     color: rgba(195, 165, 157, 0.75);
-    background-color: rgba(49, 66, 90, 0.71);
+    background-color: rgba(49, 66, 90, 0.64);
 }
 
 .public-posts-scroller {
     width: 1506px;
+    height: 400px;
 }
 
 .movies-scroller {
@@ -62,7 +63,6 @@
 }
 
 #public-posts-box {
-    height: 500px;
     margin-left: 12px;
 }
 
@@ -77,7 +77,7 @@
 }
 
 #edit-post-box {
-    margin: 190px auto  auto 555px;
+    margin: 180px auto  auto 555px;
 }
 
 #add-rating-box {
@@ -129,8 +129,21 @@
 }
 
 #edit-post-form {
-    height: 443px;
+    height: 343px;
     background-color: #8e6e66;
+}
+
+#edit-post-form label {
+    margin-left: 75px;
+}
+
+#post-movie {
+    margin-left: 55px;
+    margin-top: 20px;
+    margin-right: auto;
+    width: 80%;
+    padding-bottom: 10px;
+    padding-top: 10px;
 }
 
 ::placeholder {
@@ -141,8 +154,14 @@
     background-color: rgba(179, 154, 147, 0.55);
 }
 
+#edit-post-form label {
+    padding-left: 0;
+}
+
 .public-posts-tbl {
     display: inline-block;
+    height: 432px;
+    background-color: rgba(148, 111, 100, 0.6);
     border-collapse: collapse;
 }
 
@@ -153,7 +172,6 @@ table th {
     font-size: 24px;
     font-weight: bold;
     color: #213648;
-    background-color: rgba(66, 37, 26, 0.2)
 }
 
 [class *= "col"] {
@@ -188,7 +206,6 @@ table td {
     font-size: 20px;
     text-align: center;
     color: rgb(62, 72, 84);
-    background-color: rgba(66, 37, 26, 0.2);
 }
 
 .row-public-post {
@@ -199,13 +216,12 @@ table td {
     padding-left: 35px;
 }
 
-.row-public-option {
-    padding-left: 0;
-    padding-right: 0;
+.row-public-options {
+   padding-top: 15px;
 }
 
 .row-public-options button {
-    margin-bottom: 5px;
+    margin-bottom: 0;
     font-family: Maven Pro, sans-serif;
     font-size: 22px;
     font-weight: 600;
@@ -215,12 +231,12 @@ table td {
 }
 
 .add-rating-btn {
-    margin-top: 96px;
+    margin-top: 55px;
     margin-left: 0;
     padding: 13px 18px;
     display: block;
     color: rgba(68, 53, 44, 0.86);
-    background-color: rgba(85, 55, 55, 0.2);
+    background-color: rgba(76, 49, 49, 0.22);
 }
 
 .details-post-btn {
@@ -230,7 +246,7 @@ table td {
     padding: 12px 15px;
     display: block;
     color: rgba(68, 53, 44, 0.86);
-    background-color: rgba(85, 55, 55, 0.2);
+    background-color: rgba(76, 49, 49, 0.22);
 }
 
 .details-post-btn a {
@@ -247,8 +263,8 @@ table td {
     margin-left: -342px;
     margin-right: 3px;
     padding: 10px 14px;
-    background-color: rgba(73, 79, 96, 0.26);
     color: rgba(42, 44, 65, 0.71);
+    background-color: rgba(73, 79, 96, 0.26);
 }
 
 .delete-post-btn {
@@ -273,10 +289,20 @@ table td {
 }
 
 #edit-post-close-btn {
-    margin-top: 120px;
+    margin-top: 110px;
 }
 
 @media screen and (max-width: 500px) {
+
+    #add-a-post a {
+        color: rgb(168, 138, 143);
+    }
+
+    #home a,
+    #movies a,
+    #movie-festivals a {
+        color: rgba(133, 144, 175, 0.63);
+    }
 
     .public-posts-title {
         margin-top: 70px;
@@ -368,13 +394,18 @@ table td {
         margin: auto;
         padding: 10px 0;
         width: 90%;
-        height: 250px;
         float: none;
         text-align: center;
     }
 
-    #edit-post-form {
-        height: 425px;
+    #edit-post-form label {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #post-movie {
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .public-posts-tbl {
@@ -407,7 +438,7 @@ table td {
     }
 
     .row-public-post {
-       padding-top: 20px;
+       padding-top: 0;
     }
 
     .row-public-movie {

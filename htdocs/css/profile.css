@@ -68,8 +68,10 @@
 }
 
 .users-scroller {
+    margin-left: 20px;
     width: 217px;
     height: 100px;
+    overflow-x: scroll;
 }
 
 [id *= "container"]:not(#users-watchlater-container):not(#posts-container):not(#projections-exchanges-container) {
@@ -105,10 +107,11 @@
     display: inline-block;
 }
 
+.watch-later-btn,
 #posts-container button,
 #projections-exchanges-container button {
     margin-bottom: 4px;
-    padding: 8px;
+    padding: 8px 15px;
     font-family: Lato, sans-serif;
     font-size: 20px;
     font-weight: bold;
@@ -116,12 +119,20 @@
     outline: none;
     border-radius: 8px;
     color: #262a3ad9;
-    background-color: rgba(113, 84, 74, 0.63);
+    background-color: rgba(55, 63, 84, 0.2);
+}
+
+.watch-later-btn {
+    margin-top: 10px;
+    margin-left: 73px;
+    display: block;
+    float: unset;
 }
 
 #posts-container button {
-    color: #23394cc7;
-    background-color: rgba(137, 103, 97, 0.68);
+    padding: 10px 23px;
+    color: rgba(42, 44, 65, 0.84);
+    background-color: rgba(73, 79, 96, 0.26);
 }
 
 #projections-exchanges button {
@@ -187,31 +198,33 @@
 
 #new-projection-box {
     margin-top: 180px;
-    margin-left: 650px;
+    margin-left: 639px;
 }
 
 #edit-projection-box {
     margin-top: 100px;
-    margin-left: 650px;
+    margin-left: 627px;
 }
 
 #exchanges-box {
     width: 678px;
+    height: 300px;
 }
 
 #new-share-box {
     margin-top: 260px;
-    margin-left: 650px;
+    margin-left: 640px;
 }
 
 #edit-share-box {
     margin-top: 220px;
-    margin-left: 650px;
+    margin-left: 627px;
 }
 
 div:not(.advanced-search) > .checkbox-box > .check-mark, input[type=checkbox] {
      position: unset;
      margin-top: 4px;
+     margin-right: 12px;
      width: 23px;
      height: 23px;
      float: right;
@@ -245,6 +258,24 @@ div:not(.advanced-search) > .checkbox-box > input:checked ~ .check-mark::after {
     background-color: #8e6e66;
 }
 
+[id *= "edit"][id *= "form"] {
+    width: 204px;
+}
+
+[id *= "edit"][id *= "form"] input,
+[id *= "edit"][id *= "form"] select {
+    margin-left: 24px;
+}
+
+#edit-projection-form #projection-participants {
+ margin-left: 19px;
+}
+
+#projection-participants .check-mark,
+#shareParticipants .check-mark {
+    float: left;
+}
+
 #details-form h2,
 #password-form h2 {
     position: relative;
@@ -266,6 +297,9 @@ div:not(.advanced-search) > .checkbox-box > input:checked ~ .check-mark::after {
 #users-watchlater-container input,
 #users-watchlater-container ::placeholder {
     color: #3f485b;
+}
+
+#users-watchlater-container input {
     border: solid medium #505868;
 }
 
@@ -273,7 +307,7 @@ input {
     border: solid medium rgba(105, 81, 81, 0.92);
 }
 
-table:not(.watch-later-tbl) {
+table {
     display: inline-block;
     border-collapse: collapse;
 }
@@ -286,7 +320,6 @@ table th {
     font-size: 21px;
     font-weight: bold;
     color: #213648;
-    background-color: rgba(64, 28, 28, 0.34);
 }
 
 table td {
@@ -301,10 +334,28 @@ table td {
     display: inline-block;
 }
 
+table {
+    height: auto;
+    min-height: 400px;
+}
+
 .watch-later-tbl {
     width: 94%;
+    min-width: 742px;
+    display: inline-block;
     z-index: 1;
-    background-color: rgba(78, 43, 40, 0.39);
+    background-color: rgba(64, 28, 28, 0.34);
+}
+
+.posts-tbl {
+    min-width: 1447px;
+    background-color: #7e696d54;
+}
+
+.my-projections-tbl,
+.my-exchanges-tbl {
+    min-width: 600px;
+    background-color: rgba(64, 28, 28, 0.34);
 }
 
 .watch-later-tbl th, td {
@@ -318,10 +369,15 @@ table td {
 
 .watch-later-tbl td {
     padding-top: 20px;
-    padding-left: 5px;
+    padding-left: 240px;
+    padding-right: 0;
     height: 50px;
     color: #23394c;
-    background-color: rgba(78, 43, 40, 0.1);
+}
+
+.comments-tbl {
+    height: 400px;
+    background-color: #997870;
 }
 
 .posts-tbl td {
@@ -338,7 +394,6 @@ table td {
     padding: 0;
     width: 200px;
     color: rgba(3, 6, 34, 0.73);
-    background-color: rgba(69, 78, 117, 0.26);
 }
 
 .col-posts-posts {
@@ -359,12 +414,15 @@ table td {
 
 .col-comments-btn {
     width: 175px;
-    background-color: rgba(69, 78, 117, 0.26);
 }
 
 .comments-tbl [class *= "col-post"] {
     color: rgba(34, 4, 8, 0.73);
     background-color: rgb(153, 120, 112);
+}
+
+.col-post-comment {
+    width: 432px;
 }
 
 .col-post-rating {
@@ -375,7 +433,6 @@ table td {
 [class *= "col-prj"] {
     width: 80px;
     color: #213648;
-    background-color: rgba(64, 28, 28, 0.34);
 }
 
 .col-prj-name {
@@ -397,7 +454,6 @@ table td {
 [class *= "col-exchanges"] {
     width: 128px;
     color: #213648;
-    background-color: rgba(64, 28, 28, 0.34);
 }
 
 .col-exchanges-movies,
@@ -414,7 +470,7 @@ table td {
 }
 
 [class *= "row-posts"] {
-    color: rgb(68, 77, 93);
+    color: rgb(54, 61, 72);
 }
 
 .row-posts-posts {
@@ -453,13 +509,25 @@ table td {
 
 [class *= "row-prj"] {
     color: #213648;
-    background-color: rgba(64, 28, 28, 0.34);
 }
 
 [class *= "row-exchanges"] {
     padding: 20px;
-    background-color: rgba(64, 28, 28, 0.34);
     color: #1e3242;
+}
+
+label[for="newShareMovie"],
+label[for="editShareMovie"] {
+    color: #3c2c29;
+    font-size: 18px;
+    margin-left: 60px;
+    position: absolute;
+    margin-top: 10px;
+}
+
+#newShareMovie,
+#editShareMovie {
+   margin-top: 46px;
 }
 
 #comments-close-btn {
@@ -471,18 +539,19 @@ table td {
 
 [id *= "projection"][id *= "btn"] {
     margin-top: 110px;
-    margin-right: 575px;
+    margin-right: 590px;
     float: right;
     cursor: pointer;
 }
 
 #edit-projection-close-btn {
     margin-top: 35px;
+    margin-right: 575px;
 }
 
 [id *= "share"][id *= "btn"] {
     margin-top: 190px;
-    margin-right: 575px;
+    margin-right: 555px;
     float: right;
 }
 
@@ -535,18 +604,18 @@ table td {
     }
 
     .posts-title {
-        margin: 452px auto auto;
+        margin: 422px auto auto;
         width: 50px;
     }
 
     .projections-title {
         position: relative;
-        margin: 30px auto auto;
+        margin: 0 auto auto;
         width: 108px;
     }
 
     .exchanges-title {
-        margin: 362px auto auto;
+        margin: 348px auto auto;
         width: 108px;
     }
 
@@ -568,16 +637,17 @@ table td {
     }
 
     .watchlater-scroller {
-        margin-top: 442px;
+        margin-top: 422px;
     }
 
     .posts-scroller {
-        margin: 35px auto;
+        margin: 25px auto;
     }
 
     .comments-scroller {
         padding: 0;
         width: 100%;
+        height: 230px;
     }
 
     .users-scroller {
@@ -585,11 +655,11 @@ table td {
     }
 
     .projections-scroller {
-        margin-top: -494px;
+        margin-top: -490px;
     }
 
     .exchanges-scroller {
-        margin: 32px auto auto auto;
+        margin: 22px auto auto auto;
     }
 
     [id *= "container"]:not(#users-watchlater-container):not(#posts-container):not(#projections-exchanges-container) {
@@ -633,7 +703,7 @@ table td {
     #exchanges-box {
         padding: 0;
         width: 100%;
-        height: 370px;
+        height: 300px;
         text-align: center;
     }
 
@@ -642,7 +712,7 @@ table td {
     }
 
     #edit-password-box {
-        margin-top: -705px;
+        margin-top: -685px;
     }
 
     #watchlater-box {
@@ -674,6 +744,10 @@ table td {
         z-index: 5;
     }
 
+    [id*="edit"][id*="form"] {
+        width: 85%;
+    }
+
     #details-form,
     #password-form {
         transform: none;
@@ -688,8 +762,21 @@ table td {
         top: 48%;
     }
 
+    #edit-projection-form #projection-participants {
+        margin-left: 0;
+    }
+
+    [id*="edit"][id*="form"] input,
+    [id*="edit"][id*="form"] select {
+        margin-left: 0;
+    }
+
     #new-share-box {
         margin-top: 270px;
+    }
+
+    div:not(.advanced-search) > .checkbox-box > .check-mark, input[type="checkbox"] {
+        margin-left: 15px;
     }
 
     .posts-tbl .new-line,
@@ -701,10 +788,15 @@ table td {
         height: 21px;
     }
 
-    table:not(.watch-later-tbl) {
+    .posts-tbl tr:first-child,
+    .my-projections-tbl tr:first-child {
+        height: 40px;
+    }
+
+    table {
         margin: auto;
         width: 100%;
-        display: inline-table;
+        display: table;
         border-collapse: collapse;
         border-spacing: 0;
     }
@@ -720,16 +812,24 @@ table td {
     }
 
     .watch-later-tbl {
+        min-width: 90%;
         width: 100%;
     }
 
     .watch-later-tbl td {
         width: 10%;
+        padding-left: 0;
         font-size: 20px;
     }
 
+    .watch-later-btn {
+        margin-left: auto;
+        margin-right: auto;
+        padding: 12px 20px;
+    }
+
     .posts-tbl {
-        display: block;
+        min-width: 90%;
         text-align: center;
     }
 
@@ -744,13 +844,20 @@ table td {
         right: 0;
         left: 0;
         padding: 0;
+        min-width: 90%;
         width: 100%;
+        height: auto;
         float: none;
     }
 
     .comments-tbl th,
     .comments-tbl td {
         background-color: rgb(153, 120, 112);
+    }
+
+    .my-projections-tbl,
+    .my-exchanges-tbl {
+        min-width: 90%;
     }
 
     .arrow-up,
@@ -813,7 +920,7 @@ table td {
 
     .row-comments-btn {
         display: block;
-        padding: 0;
+        padding: 0 0 18px 0;
         margin-left: auto;
         margin-right: auto;
         width: 100%;

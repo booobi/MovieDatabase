@@ -59,6 +59,10 @@ body {
     margin-bottom: 0;
 }
 
+button {
+  border: none;
+}
+
 .search button {
     margin: -60px 10px 5px 10px;
     padding: 10px 12px;
@@ -203,6 +207,10 @@ body {
     margin: 10px -50px;
     border: 0;
     border-top: 1px solid #de9f97;
+}
+
+input {
+    filter: none;
 }
 
 #popup-form input[type=text],
@@ -355,6 +363,7 @@ body {
     margin-left: 172px;
     width: 358px;
     height: 300px;
+    background-color: #978083;
 }
 
 .festivals-tbl-scroller{
@@ -362,6 +371,7 @@ body {
     margin-left: 589px;
     height: 300px;
     width: 328px;
+    background-color: #978083;
 }
 
 .projections-tbl-scroller {
@@ -369,6 +379,11 @@ body {
     margin-left: 971px;
     height: 300px;
     width: 358px;
+    background-color: #978083;
+}
+
+table {
+    height: auto;
 }
 
 .tables {
@@ -378,8 +393,11 @@ body {
 }
 
 .top-week-tbl {
+    display: inline-block;
     margin-left: 160px;
+    height: 470px;
     border-collapse: collapse;
+    background-color: rgba(148, 111, 100, 0.6);
 }
 
 .down-tables {
@@ -390,6 +408,7 @@ body {
 .projections-tbl,
 .festivals-tbl {
     display: inline-block;
+    height: 300px;
     border-collapse: collapse;
 }
 
@@ -419,7 +438,6 @@ body {
     padding-left: 2px;
     height: 60px;
     font-family: Lato, sans-serif;
-    background-color: rgba(204, 106, 106, 0.47);
 }
 
 .col-top-rating,
@@ -434,7 +452,6 @@ body {
     font-weight: bold;
     text-align: center;
     color: rgba(34, 4, 8, 0.73);
-    background-color: rgba(101, 61, 51, 0.26);
 }
 
 .col-top-rating {
@@ -448,15 +465,18 @@ body {
     padding-right: 0;
 }
 
+.col-top-poster {
+    padding-left: 135px;
+    padding-right: 135px;
+}
+
 .col-top-name {
     padding-top: 20px;
-    padding-left: 110px;
+    padding-left: 65px;
 }
 
 .col-top-category {
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 0;
+    padding: 0 42px 28px 20px;
 }
 
 .arrow-down {
@@ -487,7 +507,10 @@ i {
 
 .top-week-tbl td {
     color: #442b24;
-    background-color: rgba(101, 61, 51, 0.26);
+}
+
+.top-week-tbl td:empty{
+ background-color: beige;
 }
 
 .down-tables td {
@@ -495,7 +518,6 @@ i {
     padding-left: 8px;
     text-align: center;
     font-family: Lato, sans-serif;
-    background-color: rgba(69, 78, 117, 0.26);
 }
 
 .row-top-rating,
@@ -523,7 +545,7 @@ i {
 
 .row-top-poster img {
     padding-top: 0;
-    padding-left: 138px;
+    padding-left: 134px;
     padding-bottom: 60px;
     width: 220px;
     height: 320px;
@@ -531,7 +553,7 @@ i {
 
 .row-top-name {
     padding-top: 0;
-    padding-left: 135px;
+    padding-left: 90px;
     padding-right: 15px;
     text-align: center;
 }
@@ -542,8 +564,8 @@ i {
 
 .row-top-category {
     padding-top: 0;
-    padding-left: 92px;
-    padding-right: 0;
+    padding-left: 62px;
+    padding-right: 23px;
     width: 120px;
     text-align: left;
 }
@@ -564,7 +586,27 @@ body ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+}
+
 @media screen and (max-width: 500px) {
+
+    #home a {
+        color: rgb(168, 138, 143);
+    }
+
+    #movies a,
+    #add-a-post a,
+    #movie-festivals a {
+        color: rgba(133, 144, 175, 0.63);
+    }
 
     button {
       -webkit-tap-highlight-color: transparent;
@@ -580,10 +622,6 @@ body ::-webkit-scrollbar-thumb:hover {
 
     .navigation.responsive {
        position: relative;
-    }
-
-    .navigation {
-   //    height: 744px;
     }
 
     .logo {
@@ -919,7 +957,7 @@ body ::-webkit-scrollbar-thumb:hover {
         width: unset;
         display: block;
         float: none;
-        font-size: 22px;
+        font-size: 21px;
         text-align: center;
     }
 

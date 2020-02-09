@@ -24,7 +24,7 @@
 		}
 
 		else {
-			echo json_encode([ 'status' => 'error', 'description' => 'Please check your username and password!']);
+			echo json_encode([ 'status' => 'error', 'description' => 'Please check your username and password or wait for activation!']);
 		}
 	}
 ?>

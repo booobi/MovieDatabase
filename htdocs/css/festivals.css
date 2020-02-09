@@ -20,7 +20,7 @@
     font-size: 24px;
     border: none;
     color: rgba(195, 165, 157, 0.75);
-    background-color: rgba(49, 66, 90, 0.71);
+    background-color: rgba(49, 66, 90, 0.64);
 }
 
 .fest-scroller {
@@ -52,7 +52,7 @@
 #festival-box {
     margin-top: 0;
     margin-left: 358px;
-    height: 650px;
+    height: 550px;
 }
 
 #new-fest-box,
@@ -132,7 +132,7 @@ table td {
 .fest-tbl td {
     width: 750px;
     display: block;
-    background-color: rgba(66, 37, 26, 0.2);
+    background-color: #7e696d54;
 }
 
 .row-fest-poster {
@@ -140,7 +140,7 @@ table td {
 }
 
 .row-fest-poster img {
-    padding-left: 10px;
+    padding-left: 5px;
     width: 300px;
     height: 300px;
 }
@@ -205,6 +205,16 @@ table td {
 }
 
 @media screen and (max-width: 500px) {
+
+    #movie-festivals a {
+        color: rgb(168, 138, 143);
+    }
+
+    #home a,
+    #movies a,
+    #add-a-post a {
+        color: rgba(133, 144, 175, 0.63);
+    }
 
     .festival-title {
         position: relative;

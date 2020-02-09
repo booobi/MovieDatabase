@@ -118,7 +118,7 @@ session_start();
                         
                         $user = UserHelpers::getCurrentUser();
                         if($user && !MovieHelpers::hasWatchlater($user->get('UserId'), $movie->get('Id'))) {
-                            echo '<button class = "change-movie-btn" id="delete" onclick="addWatchLater('.$movie->get("Id").')">Watch Later</button>';
+                            echo '<button class = "change-movie-btn" onclick="addWatchLater('.$movie->get("Id").')">Watch Later</button>';
                         }
                         
                         echo '</td>

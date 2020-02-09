@@ -147,7 +147,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 			'ssss', 
             [$firstName, $lastName, $passwordHashed, $email]);
         
-        return json_encode([ 'status' => 'success', 'description' => 'Registration was successful! \nPlease check your email for confirmation!']);
+        return json_encode([ 'status' => 'success', 'description' => 'Registration was successful! Please wait for an admin to activate your account!']);
     }
 
     public static function validateUserLoggedIn() {

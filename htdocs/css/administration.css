@@ -36,17 +36,22 @@
 
 .festivals-btn {
     margin-top: 170px;
-    margin-left: 682px;
+    margin-left: 681px;
 }
 
-[class *= "users-scroller"] {
-    width: 181px;
-    height: 100px;
+.active-users-scroller,
+.awaiting-users-scroller {
+    width: 220px;
+    height: 182px;
+}
+
+.awaiting-users-scroller {
+    height: 181px;
 }
 
 .categories-scroller {
-    width: 819px;
-    height: 218px;
+    width: 802px;
+    height: 258px;
 }
 
 .users-scroller {
@@ -114,12 +119,15 @@
     color: #272d39;
 }
 
-#active-users-box p {
-    margin-top: 20px;
+#active-users-box p,
+#awaiting-users-box p {
+    margin-top: -6px;
+    margin-bottom: 12px;
 }
 
-#awaiting-users-box p {
-    margin-top: 1px;
+#active-users-box .check-mark,
+#awaiting-users-box .check-mark {
+    float: left;
 }
 
 #participants-container {
@@ -138,7 +146,7 @@
 
 [id *= "users"][id *= "box"] {
     padding: 25px;
-    width: 180px;
+    width: 220px;
     display: inline-block;
     float: left;
     font-family: Lato, sans-serif;
@@ -150,11 +158,13 @@
 
 #active-users-box {
     margin-left: 32px;
+    height: 203px;
 }
 
 #awaiting-users-box {
-    margin-top: -220px;
+    margin-top: -258px;
     margin-right: 32px;
+    height: 204px;
     padding: 25px 25px 23px;
     float: right;
 }
@@ -184,7 +194,7 @@ div:not(.advanced-search) > .checkbox-box > .check-mark, input[type="checkbox"] 
 }
 
 #categories-box {
-    margin-left: 165px;
+    margin-left: 105px;
     height: 218px;
     width: 690px;
 }
@@ -202,7 +212,7 @@ div:not(.advanced-search) > .checkbox-box > .check-mark, input[type="checkbox"] 
 [id *= "category"][id *= "box"],
 [id *= "participant"][id *= "box"]:not(#participants-box){
     margin-top: 260px;
-    margin-left: 650px;
+    margin-left: 642px;
 }
 
 [id *= "festival"][id *= "box"]:not(#festivals-box) {
@@ -222,7 +232,7 @@ div:not(.advanced-search) > .checkbox-box > .check-mark, input[type="checkbox"] 
     outline: none;
     border-radius: 8px;
     color: #262a3ad9;
-    background-color: rgba(113, 84, 74, 0.63);
+    background-color: rgba(55, 63, 84, 0.2);
 }
 
 [id *= "new"][id *= "form"] {
@@ -269,7 +279,7 @@ table td {
 }
 
 .movie-categories-tbl {
-    width: 94%;
+    width: 100%;
     z-index: 1;
     background-color: rgba(78, 43, 40, 0.39);
 }
@@ -285,15 +295,16 @@ table td {
 }
 
 .edit-category-btn {
-     margin-left: 40px;
+     margin-left: 50px;
 }
 
 .delete-category-btn {
-    margin-left: 30px;
+    margin-left: 20px;
 }
 
 .col-category {
-    padding-left: 100px;
+    padding-left: 50px;
+    padding-right: 10px;
 }
 
 .col-category-options {
@@ -303,7 +314,7 @@ table td {
 [class *= "col-participants"] {
     width: 200px;
     color: rgba(3, 6, 34, 0.73);
-    background-color: rgba(69, 78, 117, 0.26);
+    background-color: #7e696d54;
 }
 
 .col-participants-name {
@@ -348,7 +359,7 @@ table td {
 }
 
 .row-category {
-    padding-left: 100px;
+    padding-left: 40px;
 }
 
 .row-category-options {
@@ -409,7 +420,7 @@ table td {
 [id *= "category"][id *= "btn"],
 [id *= "participant"][id *= "btn"] {
     margin-top: 190px;
-    margin-right: 570px;
+    margin-right: 580px;
     float: right;
 }
 
@@ -445,7 +456,7 @@ table td {
 
     [class *= "title"] {
         position: relative;
-        margin-top: 584px;
+        margin-top: 674px;
         margin-left: auto;
         margin-right: auto;
         display: block;
@@ -453,11 +464,11 @@ table td {
     }
 
     .participants-title {
-        margin-top: 585px;
+        margin-top: 538px;
     }
 
     .festivals-title {
-        margin-top: 50px;
+        margin-top: 30px;
     }
 
     .categories-btn,
@@ -476,6 +487,12 @@ table td {
         border-radius: 0;
     }
 
+    .active-users-scroller,
+    .awaiting-users-scroller {
+        height: 175px;
+        width: 90%;
+    }
+
     .categories-scroller,
     .participants-scroller,
     .festivals-scroller {
@@ -488,7 +505,7 @@ table td {
     }
 
     .categories-scroller {
-        margin: 505px auto auto auto;
+        margin: 515px auto auto auto;
         width: 85%;
     }
 
@@ -498,7 +515,7 @@ table td {
     }
 
     .festivals-scroller {
-        margin: 32px auto auto auto;
+        margin: 22px auto auto auto;
         width: 95%;
     }
 
@@ -516,6 +533,10 @@ table td {
         z-index: 5;
     }
 
+    #users-categories-container {
+        margin-top: 15px;
+    }
+
     #participants-container,
     #festivals-container {
         position: relative;
@@ -528,11 +549,15 @@ table td {
     }
 
     #active-users-box {
-        margin-top: -706px;
+        margin-top: -776px;
+        width: 70%;
+        height: auto;
     }
 
     #awaiting-users-box {
-        margin-top: -770px;
+        margin-top: -780px;
+        width: 70%;
+        height: auto;
     }
 
     #active-users-box p,

@@ -111,15 +111,16 @@ session_start();
                             <button class="more-btn" data-movieid="'. $movie->get("Id") . '">More</button>';
                             
 
-                        if(
-                            // (isset($_SESSION['username']) && in_array($movie->get('Id'), UserHelpers::getUserOwnedMovies($_SESSION['username'])))
-                            // || 
-                            (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'])
-                            ) {
-                                echo '<button class = "change-movie-btn"><a href="EditMovie.php?id='. $movie->get("Id") .'">Edit</a></button><br>';
-                                echo '<button class = "change-movie-btn delete-btn" id="delete" data-movieid="'.$movie->get("Id").'">Delete</button>';
-                            }
-
+                        if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']) {
+                            echo '<button class = "change-movie-btn"><a href="EditMovie.php?id='. $movie->get("Id") .'">Edit</a></button><br>';
+                            echo '<button class = "change-movie-btn delete-btn" id="delete" data-movieid="'.$movie->get("Id").'">Delete</button>';
+                        }
+                        
+                        $user = UserHelpers::getCurrentUser();
+                        if($user && !MovieHelpers::hasWatchlater($user->get('UserId'), $movie->get('Id'))) {
+                            echo '<button class = "change-movie-btn" id="delete" onclick="addWatchLater('.$movie->get("Id").')">Watch Later</button>';
+                        }
+                        
                         echo '</td>
                     </tr>';
                 }
@@ -646,7 +647,6 @@ session_start();
 
 
     <script src="js/movies.js"></script>
-    <script src="js/jquery.query-object.js"></script>
     <script>
 
     </script>

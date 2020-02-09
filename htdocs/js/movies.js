@@ -145,6 +145,21 @@ const deleteProjectionJoin = (projectionId) => {
 		});
 }
 
+const addWatchLater = (movieId) => {
+	$.ajax({
+		url: '/api/watchlater/add.php',
+		type: 'POST',
+		dataType: 'json',
+		data: { movieId },
+		success: function(data) {
+				alert(data["description"]);
+				if(data["status"]=="success") {
+					location.reload();
+				}
+		}
+	});
+}
+
 const deleteProjection = (projectionId) => {
 	$.ajax({
 		url: '/api/projections/delete.php',

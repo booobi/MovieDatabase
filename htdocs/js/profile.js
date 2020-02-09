@@ -11,9 +11,23 @@ function showComments(postId) {
         })
         
     });
-
-    
 }
+
+const removeWatchLater = (movieId) => {
+	$.ajax({
+		url: '/api/watchlater/delete.php',
+		type: 'POST',
+		dataType: 'json',
+		data: { movieId },
+		success: function(data) {
+				alert(data["description"]);
+				if(data["status"]=="success") {
+					location.reload();
+				}
+		}
+	});
+}
+
 function showProjectionForm() {
     $('.checkbox-box, .check-mark').off();
     document.getElementById("new-projection-container").style.display = "block";

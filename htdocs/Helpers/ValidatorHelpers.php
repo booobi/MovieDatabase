@@ -237,6 +237,11 @@ class ValidatorHelpers {
         ValidatorHelpers::validatePostFields(['shareId']);
     }
 
+    public static function validateWatchLaterFields()
+    {
+        ValidatorHelpers::validatePostFields(['movieId']);
+    }
+
     public static function validateSearchFields() {
         ValidatorHelpers::validatePostFields(['searchString']);
     }

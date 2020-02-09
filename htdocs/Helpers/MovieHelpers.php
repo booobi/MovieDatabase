@@ -257,31 +257,54 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/DBOperations.php';
 			}
 		}
         
-		// return $movieList;
-		// usort($movieList, function($a, $b) {
-		// 	return strcmp($a->get("Name"), $b->get("Name"));
-		// });
 		return $movieList;
 	}
 
-	public static function getWatchLaterMoviesForUser($username) 
+	public static function getWatchLaterMoviesForUser($userId) 
 	{
 		$result = DBOperations::prepareAndExecute(
-			"SELECT movies.Name AS MovieName FROM movies INNER JOIN watchlateritems 
-			WHERE movies.MovieId = watchlateritems.WatchLaterItemId");
+			"SELECT * FROM `watchlateritems`, `movies` WHERE
+			 watchlateritems.MovieId = movies.MovieId AND watchlateritems.UserId = {$userId}");
 
         $movieList = [];
 
 		if ($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {
 				$movie = new Movie();
-				$movie->set('Name', $row['MovieName']);
-				// $movieList [] = new Movie( $row["MovieName"], NULL, NULL, NULL, NULL, NULL);
+				$movie->set('Id', $row['MovieId']);
+				$movie->set('Name', $row['Name']);
 				$movieList[] = $movie;
 			}
         }
         
         return $movieList;
+	}
+
+	public static function addWatchLater($userId, $movieId) {
+		if (MovieHelpers::hasWatchLater($userId, $movieId)) {
+			return "EXIST";
+		}
+		
+		DBOperations::prepareAndExecute("
+		INSERT INTO `watchlateritems`(`UserId`, `MovieId`) VALUES ({$userId},{$movieId})");
+		
+		return "CREATE";
+	}
+
+	public static function removeWatchLater($userId, $movieId) {
+		DBOperations::prepareAndExecute("DELETE FROM watchlateritems WHERE MovieId = {$movieId} AND UserId={$userId}");
+	}
+
+	public static function hasWatchLater($userId, $movieId) {
+		$existingWatchLater = DBOperations::prepareAndExecute("
+			SELECT * FROM `watchlateritems` WHERE MovieId = {$movieId} AND UserId={$userId}
+		");
+
+		if ($existingWatchLater->num_rows > 0) {
+			return TRUE;
+		}
+
+		return FALSE;
 	}
 
 	public static function getSharedMovies() {

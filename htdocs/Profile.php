@@ -26,7 +26,9 @@ session_start()
                 <h2>Edit details</h2>
                 <?php
                 include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/UserHelpers.php';
-                $currentUser=UserHelpers::getCurrentUser();
+                $currentUser = UserHelpers::getCurrentUser();
+                $currentUserId = UserHelpers::getCurrentUser()->get('UserId');
+                
                 echo '
                 <input required id="details-email" class="details-field" value="' . $currentUser->get("Username") . '" type="email">
                 <input required id="details-firstname" class="details-field" value="' . $currentUser->get("FirstName") . '" type="text">
@@ -40,31 +42,22 @@ session_start()
         <div class="watchlater-scroller">
             <div id="watchlater-box">
                 <table class="watch-later-tbl" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td>
-                            Going on 30
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            It's A Wonderful Life
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Never Backdown
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Avatar
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Manhattan
-                        </td>
-                    </tr>
+                    <?php
+                        include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/MovieHelpers.php';
+
+                        $watchLaterMovies = MovieHelpers::getWatchLaterMoviesForUser($currentUserId);
+
+                        foreach($watchLaterMovies as $movie) {
+                            echo '
+                            <tr>
+                                <td>
+                                    ' . $movie->get('Name') . '
+                                    <button class="watch-later-btn" onclick="removeWatchLater(' . $movie->get("Id") . ')">Remove</button>
+                                </td>
+                            </tr>        
+                            ';
+                        }
+                    ?>
                 </table>
             </div>
         </div>
@@ -91,14 +84,20 @@ session_start()
                     <tr>
                         <th class="col-posts-posts">
                             Post
-                            <p class="new-line"><i class="arrow-down"></i><i class="arrow-up"> </i></p>
+                            <p class="new-line">
+                                <i class="arrow-down" onclick="window.location='/Profile.php' + $.query.set('postsSortBy', 'Content').set('postsDirection','DESC').toString();"></i>
+                                <i class="arrow-up" onclick="window.location='/Profile.php' + $.query.set('postsSortBy', 'Content').set('postsDirection','ASC').toString();"> </i>
+                            </p>
                         </th>
                         <th class="col-posts-comments">
                             Comments count
                         </th>
                         <th class="col-posts-rating">
                             Rating
-                            <p class="new-line"><i class="arrow-down"></i><i class="arrow-up"> </i></p>
+                            <p class="new-line">
+                                <i class="arrow-down" onclick="window.location='/Profile.php' + $.query.set('postsSortBy', 'Rating').set('postsDirection','DESC').toString();"></i>
+                                <i class="arrow-up" onclick="window.location='/Profile.php' + $.query.set('postsSortBy', 'Rating').set('postsDirection','ASC').toString();"> </i>
+                            </p>
                         </th>
                         <th class="col-posts-date">
                             Date
@@ -116,6 +115,19 @@ session_start()
                         
                         $posts = PostHelpers::getPostsByUser($userId);
 
+                        //if posts sort
+                        if(isset($_GET['postsSortBy']) && isset($_GET['postsDirection'])) {
+                            $postsSortBy = $_GET['postsSortBy'];
+                            $postsDirection = $_GET['postsDirection'];
+                            
+                            usort($posts, function($a, $b) use ($postsSortBy, $postsDirection) {
+                                return strcmp($a->get($postsSortBy), $b->get($postsSortBy));
+                            });
+                        
+                            if($postsDirection === 'DESC') {
+                                $posts = array_reverse($posts);
+                            }
+                        }
                         foreach($posts as $post) {
                             $postComments = CommentHelpers::getCommentsForPost($post->get("Id"));
 
@@ -156,14 +168,14 @@ session_start()
                         </th>
                         <th class="col-post-post">
                             Post
-                            <p class="new-line"><i class="arrow-down"></i><i class="arrow-up"> </i></p>
+                            <!-- <p class="new-line"><i class="arrow-down"></i><i class="arrow-up"> </i></p> -->
                         </th>
                         <th class="col-post-username">
                             Username
                         </th>
                         <th class="col-post-rating">
                             User rating
-                            <p class="new-line"><i class="arrow-down"></i><i class="arrow-up"> </i></p>
+                            <!-- <p class="new-line"><i class="arrow-down"></i><i class="arrow-up"> </i></p> -->
                         </th>
                         <th class="col-post-date">
                             Date
@@ -226,14 +238,20 @@ session_start()
                     <tr>
                         <th class="col-prj-name">
                             Name
-                            <p class="new-line"><i class="arrow-down"></i><i class="arrow-up"> </i></p>
+                            <p class = "new-line">
+                                <i onclick="window.location='/Profile.php' + $.query.set('projectionsSortBy', 'Name').set('projectionsDirection','DESC').toString();" class="arrow-down"></i>
+                                <i onclick="window.location='/Profile.php' + $.query.set('projectionsSortBy', 'Name').set('projectionsDirection','ASC').toString();" class = "arrow-up"> </i>
+                           </p>
                         </th>
                         <th class="col-prj-location">
                             Location
                         </th>
                         <th class="col-prj-duration">
                             Duration
-                            <p class="new-line"><i class="arrow-down"></i><i class="arrow-up"> </i></p>
+                            <p class = "new-line">
+                                <i onclick="window.location='/Profile.php' + $.query.set('projectionsSortBy', 'Duration').set('projectionsDirection','DESC').toString();" class="arrow-down"></i>
+                                <i onclick="window.location='/Profile.php' + $.query.set('projectionsSortBy', 'Duration').set('projectionsDirection','ASC').toString();" class = "arrow-up"> </i>
+                           </p>
                         </th>
                         <th class="col-prj-date">
                             Date
@@ -247,6 +265,28 @@ session_start()
                         include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/MovieProjectionHelpers.php';
                         $userId = UserHelpers::getCurrentUser()->get("UserId");
                         $projections = MovieProjectionHelpers::getProjectionsByUser($userId);
+
+
+                        //if projections sort
+                        if(isset($_GET['projectionsSortBy']) && isset($_GET['projectionsDirection'])) {
+                            $projectionsSortBy = $_GET['projectionsSortBy'];
+                            $projectionsDirection = $_GET['projectionsDirection'];
+                            
+                            
+                            if ($projectionsSortBy === 'Duration') {
+                                usort($projections, function($a, $b) use ($projectionsSortBy, $projectionsDirection) {
+                                    return $a->get($projectionsSortBy) > $b->get($projectionsSortBy);
+                                });
+                            } else {
+                                usort($projections, function($a, $b) use ($projectionsSortBy, $projectionsDirection) {
+                                    return strcmp($a->get($projectionsSortBy), $b->get($projectionsSortBy));
+                                });
+                            }
+                            
+                            if($projectionsDirection === 'DESC') {
+                                $projections = array_reverse($projections);
+                            }
+                        }
 
                         foreach($projections as $projection) {
                             echo '
@@ -280,14 +320,20 @@ session_start()
                     <tr>
                         <th class="col-exchanges-movies">
                             Movies
-                            <p class="new-line"><i class="arrow-down"></i><i class="arrow-up"> </i></p>
+                            <p class = "new-line">
+                                <i onclick="window.location='/Profile.php' + $.query.set('sharesSortBy', 'Movie').set('sharesDirection','DESC').toString();" class="arrow-down"></i>
+                                <i onclick="window.location='/Profile.php' + $.query.set('sharesSortBy', 'Movie').set('sharesDirection','ASC').toString();" class="arrow-up"></i>
+                           </p>
                         </th>
                         <th class="col-exchanges-status">
                             Status
                         </th>
                         <th class="col-exchanges-rating">
                             Share rating
-                            <p class="new-line"><i class="arrow-down"></i><i class="arrow-up"> </i></p>
+                            <p class="new-line">
+                                <i onclick="window.location='/Profile.php' + $.query.set('sharesSortBy', 'ApprovalRating').set('sharesDirection','DESC').toString();" class="arrow-down"></i>
+                                <i onclick="window.location='/Profile.php' + $.query.set('sharesSortBy', 'ApprovalRating').set('sharesDirection','ASC').toString();" class="arrow-up"></i>
+                           </p>
                         </th>
                         <th class="col-exchanges-options">
                             Options
@@ -298,6 +344,27 @@ session_start()
                         include_once $_SERVER['DOCUMENT_ROOT'] . '/Helpers/UserHelpers.php';
                         $currentUserId = UserHelpers::getCurrentUser()->get("UserId");
                         $mainShares = ShareHelpers::getSharesByUserId($currentUserId);
+
+                        //if shares sort
+                        if(isset($_GET['sharesSortBy']) && isset($_GET['sharesDirection'])) {
+                            $sharesSortBy = $_GET['sharesSortBy'];
+                            $sharesDirection = $_GET['sharesDirection'];
+                            
+                            if ($sharesSortBy === 'User') {
+                                usort($mainShares, function($a, $b) {
+                                    return $a->get('Owner')->get('Username') > $b->get('Owner')->get('Username');
+                                });
+                            } else {
+                                usort($mainShares, function($a, $b) use ($sharesSortBy, $sharesDirection) {
+                                    return $a->get('Movie')->get("Name") > $b->get($sharesSortBy);
+                                });
+                            }
+                            
+                            if($sharesDirection === 'DESC') {
+                                $mainShares = array_reverse($mainShares);
+                            }
+                        }
+
                         foreach($mainShares as $mainShare) {
                           echo '
                         </tr>

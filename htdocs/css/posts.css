@@ -160,7 +160,7 @@
 
 .public-posts-tbl {
     display: inline-block;
-    height: 432px;
+    min-height: 432px;
     background-color: rgba(148, 111, 100, 0.6);
     border-collapse: collapse;
 }
